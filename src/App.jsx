@@ -15,25 +15,26 @@ import "./App.scss";
 function App() {
 	const [vacanciesData, setVacanciesData] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-
-	const handleVacanciesData = async () => {
-		setIsLoading(true);
-		try {
-			const response = await axios(
-				"https://flovas-crud.onrender.com/api/vacancies"
-			);
-
-			setVacanciesData(response.data);
-			// setTimeout(() => {
-			setIsLoading(false);
-			// }, 3000);
-		} catch (error) {
-			console.log(error);
-			setIsLoading(false);
-		}
-	};
+	const [error, setError] = useState(null);
 
 	useEffect(() => {
+		const handleVacanciesData = async () => {
+			setIsLoading(true);
+			try {
+				const response = await axios(
+					"https://flovas-crud.onrender.com/api/vacancies"
+				);
+
+				setVacanciesData(response.data);
+				setIsLoading(false);
+			} catch (error) {
+				console.log(error);
+				setError(error);
+			} finally {
+				setIsLoading(false);
+			}
+		};
+
 		handleVacanciesData();
 	}, []);
 
@@ -44,7 +45,13 @@ function App() {
 			<Routes>
 				<Route
 					path="/"
-					element={<Home vacanciesData={vacanciesData} isLoading={isLoading} />}
+					element={
+						<Home
+							vacanciesData={vacanciesData}
+							isLoading={isLoading}
+							error={error}
+						/>
+					}
 				/>
 				<Route
 					path="/vacancy-page/:id"

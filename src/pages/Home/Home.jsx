@@ -7,7 +7,7 @@ import Contacts from "../../components/Contacts/Contacts";
 import AddToHomeScreen from "../../components/AddToHomeScreen/AddToHomeScreen";
 import "./Home.scss";
 
-const Home = ({ vacanciesData, isLoading }) => {
+const Home = ({ vacanciesData, isLoading, error }) => {
 	const { t, i18n } = useTranslation();
 	const [text, setText] = useState(t("home.title1"));
 
@@ -124,7 +124,11 @@ const Home = ({ vacanciesData, isLoading }) => {
 								</a>
 							</div>
 						</div>
-						<Vacancies vacanciesData={vacanciesData} isLoading={isLoading} />
+						<Vacancies
+							vacanciesData={vacanciesData}
+							isLoading={isLoading}
+							error={error}
+						/>
 					</div>
 					<About />
 					<Contacts />

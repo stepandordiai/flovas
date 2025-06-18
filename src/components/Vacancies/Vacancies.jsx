@@ -3,7 +3,7 @@ import Vacancy from "../Vacancy/Vacancy";
 import "./Vacancies.scss";
 import { useEffect } from "react";
 
-const Vacancies = ({ vacanciesData, isLoading }) => {
+const Vacancies = ({ vacanciesData, isLoading, error }) => {
 	const { t } = useTranslation();
 
 	useEffect(() => {
@@ -39,11 +39,22 @@ const Vacancies = ({ vacanciesData, isLoading }) => {
 					</div>
 					<span>{t("vacancies_r_loading")}</span>
 				</div>
+			) : error ? (
+				<div className="vacancies-error">
+					<span>Вакансії зараз недоступні</span>
+				</div>
+			) : vacanciesData.length > 0 ? (
+				<div className="vacancies-container">
+					{vacanciesData
+						.slice() // avoid mutating original array with reverse()
+						.reverse()
+						.map((vacancy, index) => (
+							<Vacancy key={index} vacancy={vacancy} />
+						))}
+				</div>
 			) : (
-				<div className={"vacancies-container"}>
-					{vacanciesData.reverse().map((vacancy, index) => {
-						return <Vacancy key={index} vacancy={vacancy} />;
-					})}
+				<div className="vacancies-empty">
+					<span>{t("vacancies_r_empty")}</span>
 				</div>
 			)}
 		</div>
