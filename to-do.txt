@@ -1,1 +1,2 @@
 update whatsapp link
+add helmet for each page with title and desc
