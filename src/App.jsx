@@ -10,7 +10,7 @@ import ScrollToTop from "./utils/ScrollToTop";
 import phoneIcon from "/icons/phone.png";
 import whatsappIcon from "/icons/whatsapp.png";
 import telegramIcon from "/icons/telegram.png";
-import "./App.scss";
+import "./scss/App.scss";
 
 function App() {
 	const [vacanciesData, setVacanciesData] = useState([]);
