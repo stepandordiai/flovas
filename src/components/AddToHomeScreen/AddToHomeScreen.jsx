@@ -1,4 +1,4 @@
-import img from "/iphone.png";
+import img from "/Home Screen Widgets - iPhone.png";
 import shareIcon from "/icons/share.png";
 import "./AddToHomeScreen.scss";
 
