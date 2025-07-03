@@ -11,17 +11,7 @@
 	min-height: 75px;
 	padding: 0 25px;
 	background: var(--bg-clr);
-	// opacity: 0;
-	// filter: blur(10px);
-	// animation: animateHeader 0.5s forwards;
 }
-
-// @keyframes animateHeader {
-// 	to {
-// 		opacity: 1;
-// 		filter: blur(0);
-// 	}
-// }
 
 .header::before {
 	content: "";
@@ -64,7 +54,7 @@
 
 .header__logo {
 	color: #000;
-	font-size: 1.5rem;
+	font-size: 1.25rem;
 	font-weight: 500;
 	align-self: center;
 	//
@@ -72,7 +62,6 @@
 	//
 
 	span {
-		// font-weight: 200;
 		font-weight: 300;
 	}
 }

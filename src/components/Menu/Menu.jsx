@@ -45,7 +45,8 @@ const Menu = ({ vacanciesData }) => {
 				<div className="dot-link-container">
 					<div className="dot"></div>
 					<HashLink className="menu__link" to="/#about">
-						{t("about_title")} Flovas
+						{t("about_title")}{" "}
+						<span className="menu__link-extra">flovas s.r.o.</span>
 					</HashLink>
 				</div>
 				<div className="dot-link-container">

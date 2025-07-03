@@ -7,7 +7,7 @@ const AddToHomeScreen = () => {
 		<>
 			<div className="add-to-home-screen">
 				<h2 className="add-to-home-screen__title">
-					Flovas агенція у вашому смартфоні
+					flovas агенція у вашому смартфоні
 				</h2>
 				<div className="add-to-home-screen__container">
 					<img width={200} src={img} alt="Flovas app sample on mobile" />

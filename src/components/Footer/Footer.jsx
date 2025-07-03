@@ -16,7 +16,7 @@ const Footer = () => {
 		<div className="footer">
 			<div className="footer-inner">
 				<div className="footer-top">
-					<p className="footer__logo">Flovas</p>
+					<p className="footer__logo">flovas</p>
 					<div className="footer__socials">
 						<a href={instagramUrl} title="Instagram" target="_blank">
 							<img width={40} height={40} src={instagramIcon} alt="Instagram" />
@@ -71,7 +71,7 @@ const Footer = () => {
 			>
 				<div className="footer-bottom__list">
 					<div className="footer-bottom__item" style={{ "--position": "1" }}>
-						<p>&copy; 2025 Flovas</p>
+						<p>&copy; 2025 flovas s.r.o.</p>
 					</div>
 					<div className="footer-bottom__item" style={{ "--position": "2" }}>
 						<p>Всі права захищені</p>
@@ -85,7 +85,7 @@ const Footer = () => {
 						</p>
 					</div>
 					<div className="footer-bottom__item" style={{ "--position": "4" }}>
-						<p>&copy; 2025 Flovas</p>
+						<p>&copy; 2025 flovas s.r.o.</p>
 					</div>
 					<div className="footer-bottom__item" style={{ "--position": "5" }}>
 						<p>Всі права захищені</p>

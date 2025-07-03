@@ -94,7 +94,7 @@ const Header = ({ vacanciesData }) => {
 			<div className="header-top">
 				<MenuBtn />
 				<HashLink to={"/#home"} className={"header__logo"}>
-					Flovas <span>{t("logo_title")}</span>
+					flovas <span>{t("logo_title")}</span>
 				</HashLink>
 				<nav ref={navRef} className="header__nav">
 					<HashLink className={"nav-link active"} to={"/#home"}>
