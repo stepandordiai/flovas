@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import ContactUs from "../../components/ContactUs/ContactUs";
@@ -81,6 +82,13 @@ const Home = ({ vacanciesData, isLoading, error }) => {
 
 	return (
 		<>
+			<Helmet>
+				{/* <meta name="description" content="" /> */}
+				<title>
+					Працевлаштування по всій Чехії &bull; flovas {t("logo_title")}
+				</title>
+				{/* <link rel="canonical" href="" /> */}
+			</Helmet>
 			<div className={"home"} id="home">
 				<div className={"home-inner"}>
 					<div className="home-inner-container">
