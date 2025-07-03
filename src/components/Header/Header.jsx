@@ -52,6 +52,7 @@ const Header = ({ vacanciesData }) => {
 			document.querySelector(".vacancies"),
 			document.querySelector(".about"),
 			document.querySelector(".contacts"),
+			document.querySelector(".add-to-home-screen"),
 		];
 		const navLinks = document.querySelectorAll(".nav-link");
 		const menuDots = document.querySelectorAll(".dot");
@@ -111,6 +112,9 @@ const Header = ({ vacanciesData }) => {
 					</HashLink>
 					<HashLink className={"nav-link"} to={"/#contacts"}>
 						{t("contacts_title")}
+					</HashLink>
+					<HashLink className={"nav-link"} to={"/#add-to-home-screen"}>
+						Додаток
 					</HashLink>
 					<div
 						className={"nav-link-indicator"}

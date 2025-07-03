@@ -45,14 +45,19 @@ const Menu = ({ vacanciesData }) => {
 				<div className="dot-link-container">
 					<div className="dot"></div>
 					<HashLink className="menu__link" to="/#about">
-						{t("about_title")}{" "}
-						<span className="menu__link-extra">flovas s.r.o.</span>
+						{t("about_title")} <span className="menu__link-extra">flovas</span>
 					</HashLink>
 				</div>
 				<div className="dot-link-container">
 					<div className="dot"></div>
 					<HashLink className="menu__link" to="/#contacts">
 						{t("contacts_title")}
+					</HashLink>
+				</div>
+				<div className="dot-link-container">
+					<div className="dot"></div>
+					<HashLink className="menu__link" to="/#add-to-home-screen">
+						Додаток
 					</HashLink>
 				</div>
 			</div>

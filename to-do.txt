@@ -1,0 +1,2 @@
+update ss
+check speed
