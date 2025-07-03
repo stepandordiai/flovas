@@ -13,7 +13,9 @@
 	"close": "zavřít",
 	"contact_info": "Kontaktní údaje",
 	"map_title": "Naši kancelář najdete v Kolíně",
-	"vacancies_r_loading": "Volná místa se načítají, čekejte prosím...",
+	"vacancies_r_loading": "Volná místa se načítají, čekejte prosím",
+	"follow_us": "Sledujte nás",
+	"all_rights_reserved": "Všechna práva vyhrazena",
 
 	"home": {
 		"title1": "Zaměstnanost ve městě",
@@ -29,12 +31,7 @@
 	},
 
 	"footer": {
-		"nav": "Navigace",
-		"follow_us": "Sledujte nás"
-	},
-
-	"contact_us": {
-		"follow_us": "Sledujte nás"
+		"nav": "Navigace"
 	},
 
 	"contacts": {

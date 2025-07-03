@@ -31,9 +31,7 @@
 }
 
 .lng-select-banner__header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	@include flex-between-center;
 	margin-bottom: 10px;
 }
 
@@ -53,7 +51,6 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 5px;
-	margin-top: 10px;
 }
 
 .lng-select__list--visible {

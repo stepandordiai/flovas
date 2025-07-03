@@ -47,7 +47,7 @@ const Footer = () => {
 						</div>
 					</div>
 					<div className="footer__nav">
-						<p className="footer__nav-title">{t("footer.follow_us")}</p>
+						<p className="footer__nav-title">{t("follow_us")}</p>
 						<div className="footer__nav-list">
 							<a href={instagramUrl} target="_blank">
 								Instagram
@@ -74,7 +74,7 @@ const Footer = () => {
 						<p>&copy; 2025 flovas s.r.o.</p>
 					</div>
 					<div className="footer-bottom__item" style={{ "--position": "2" }}>
-						<p>Всі права захищені</p>
+						<p>{t("all_rights_reserved")}</p>
 					</div>
 					<div className="footer-bottom__item" style={{ "--position": "3" }}>
 						<p>
@@ -88,7 +88,7 @@ const Footer = () => {
 						<p>&copy; 2025 flovas s.r.o.</p>
 					</div>
 					<div className="footer-bottom__item" style={{ "--position": "5" }}>
-						<p>Всі права захищені</p>
+						<p>{t("all_rights_reserved")}</p>
 					</div>
 					<div className="footer-bottom__item" style={{ "--position": "6" }}>
 						<p>

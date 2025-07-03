@@ -1,4 +1,0 @@
-update whatsapp link
-update contact links
-zindex lower for contact banners
-update lng dd

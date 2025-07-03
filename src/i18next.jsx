@@ -4,6 +4,7 @@ import { initReactI18next } from "react-i18next";
 
 import uk from "./translations/uk/translation.json";
 import cs from "./translations/cs/translation.json";
+import sk from "./translations/sk/translation.json";
 import en from "./translations/en/translation.json";
 
 i18next
@@ -16,6 +17,9 @@ i18next
 			},
 			cs: {
 				translation: cs,
+			},
+			sk: {
+				translation: sk,
 			},
 			en: {
 				translation: en,

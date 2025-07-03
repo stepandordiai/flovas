@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import Vacancy from "../Vacancy/Vacancy";
-import "./Vacancies.scss";
 import { useEffect } from "react";
+import "./Vacancies.scss";
 
 const Vacancies = ({ vacanciesData, isLoading, error }) => {
 	const { t } = useTranslation();
@@ -37,7 +37,7 @@ const Vacancies = ({ vacanciesData, isLoading, error }) => {
 					<div className="vacancies-loading__circle">
 						<span></span>
 					</div>
-					<span>{t("vacancies_r_loading")}</span>
+					<span>{t("vacancies_r_loading")}...</span>
 				</div>
 			) : error ? (
 				<div className="vacancies-error">

@@ -1,0 +1,58 @@
+{
+	"logo_title": "agentúra",
+	"menu": "menu",
+	"choose_lng_title": "Vyberte si preferovaný jazyk",
+	"home_title": "Domov",
+	"vacancies_title": "Voľné pracovné miesta",
+	"about_title": "O",
+	"contacts_title": "Kontakty",
+	"more_info_btn": "Viac informácií",
+	"contact_us_title": "Kontaktujte nás",
+	"tel": "Telefónne číslo",
+	"address": "Adresa",
+	"close": "zavrieť",
+	"contact_info": "Kontaktné informácie",
+	"map_title": "Našu kanceláriu nájdete v Kolíne",
+	"vacancies_r_loading": "Úlohy sa načítavajú, čakajte prosím",
+	"follow_us": "Sledujte nás",
+	"all_rights_reserved": "Všetky práva vyhradené",
+
+	"home": {
+		"title1": "Zamestnanosť v meste",
+		"title2": "s agentúrou flovas",
+		"place1": "Praha",
+		"place2": "Kolín",
+		"place3": "Brno",
+		"place4": "Pardubice",
+		"place5": "Cheb",
+		"place6": "Hvaletice",
+		"place7": "Kuřim",
+		"place8": "Chelčice"
+	},
+
+	"footer": {
+		"nav": "Navigácia"
+	},
+
+	"contacts": {
+		"socials": "Sociálne siete"
+	},
+
+	"about": {
+		"our_advantages_title": "Naše výhody",
+		"our_advantages1": "Zamestnanie v celej Českej republike",
+		"our_advantages2": "Pre mužov, ženy a páry",
+		"our_advantages3": "Pravidelné vyplácanie záloh na mzdu",
+		"our_advantages4": "Poskytujeme bývanie",
+		"our_advantages5": "Oficiálne zamestnanie",
+		"our_advantages6": "Pomoc pri získaní víz a ďalších dokumentov",
+		"our_advantages7": "Platíme sociálne poistenie",
+		"our_advantages8": "Platíme za zdravotné poistenie",
+		"our_advantages9": "Voľné pracovné miesta",
+		"our_advantages10": "Schopnosť pracovať nadčas",
+		"our_advantages11": "Zabezpečujeme dopravu z domu do práce",
+		"our_advantages12": "Sme tu pre vás v prípade problémov",
+		"our_advantages13": "Pomôžeme vám prekonať jazykovú bariéru",
+		"our_advantages14": "Pomôžeme vám s vaším sťahovaním"
+	}
+}

@@ -42,9 +42,7 @@ const ContactUs = () => {
 						</div>
 					</div>
 					<div className="contact-us__socials">
-						<p className="contact-us__socials-title">
-							{t("contact_us.follow_us")}
-						</p>
+						<p className="contact-us__socials-title">{t("follow_us")}</p>
 						<div>
 							<a href={instagramUrl} title="Instagram" target="_blank">
 								<img

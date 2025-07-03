@@ -13,7 +13,9 @@
 	"close": "close",
 	"contact_info": "Contact information",
 	"map_title": "You can find our office in Kolin",
-	"vacancies_r_loading": "Vacancies are loading, please wait...",
+	"vacancies_r_loading": "Vacancies are loading, please wait",
+	"follow_us": "Follow us",
+	"all_rights_reserved": "All rights reserved",
 
 	"home": {
 		"title1": "Employment in the city",
@@ -29,12 +31,7 @@
 	},
 
 	"footer": {
-		"nav": "Navigation",
-		"follow_us": "Follow us"
-	},
-
-	"contact_us": {
-		"follow_us": "Follow us"
+		"nav": "Navigation"
 	},
 
 	"contacts": {
