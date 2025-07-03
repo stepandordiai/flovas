@@ -7,9 +7,7 @@ import "./i18next";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ScrollToTop from "./utils/ScrollToTop";
-import phoneIcon from "/icons/phone.png";
-import whatsappIcon from "/icons/whatsapp.png";
-import telegramIcon from "/icons/telegram.png";
+import FloatingContact from "./components/FloatingContact/FloatingContact";
 import "./scss/App.scss";
 
 function App() {
@@ -60,23 +58,7 @@ function App() {
 			</Routes>
 			<div className="empty-div"></div>
 			<Footer />
-			<a
-				className="fixed-contact-link"
-				href="https://t.me/Robota_1cz"
-				target="_blank"
-			>
-				<img width={50} height={50} src={telegramIcon} alt="Telegram" />
-			</a>
-			<a
-				className="fixed-contact-link"
-				href="https://wa.me/420777957290"
-				target="_blank"
-			>
-				<img width={50} height={50} src={whatsappIcon} alt="WhatsApp" />
-			</a>
-			<a className="fixed-contact-link" href="tel:+420777957290">
-				<img width={50} height={50} src={phoneIcon} alt="Phone" />
-			</a>
+			<FloatingContact />
 		</Router>
 	);
 }
