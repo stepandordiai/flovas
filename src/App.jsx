@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import ScrollToTop from "./utils/ScrollToTop";
 import FloatingContact from "./components/FloatingContact/FloatingContact";
 import "./scss/App.scss";
+import AppWrapper from "./AppWrapper";
 // import Loading from "./components/Loading/Loading";
 
 function App() {
@@ -39,28 +40,29 @@ function App() {
 
 	return (
 		<Router>
-			{/* <Loading /> */}
-			<ScrollToTop />
-			<Header vacanciesData={vacanciesData} />
-			<Routes>
-				<Route
-					path="/"
-					element={
-						<Home
-							vacanciesData={vacanciesData}
-							isLoading={isLoading}
-							error={error}
-						/>
-					}
-				/>
-				<Route
-					path="/vacancy-page/:id"
-					element={<VacancyPage vacanciesData={vacanciesData} />}
-				/>
-			</Routes>
-			<div className="empty-div"></div>
-			<Footer />
-			<FloatingContact />
+			<AppWrapper>
+				<ScrollToTop />
+				<Header vacanciesData={vacanciesData} />
+				<Routes>
+					<Route
+						path="/"
+						element={
+							<Home
+								vacanciesData={vacanciesData}
+								isLoading={isLoading}
+								error={error}
+							/>
+						}
+					/>
+					<Route
+						path="/vacancy-page/:id"
+						element={<VacancyPage vacanciesData={vacanciesData} />}
+					/>
+				</Routes>
+				<div className="empty-div"></div>
+				<Footer />
+				<FloatingContact />
+			</AppWrapper>
 		</Router>
 	);
 }

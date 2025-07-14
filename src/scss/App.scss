@@ -6,6 +6,7 @@
 html {
 	scroll-behavior: smooth;
 	overscroll-behavior: none;
+	background: var(--bg-clr);
 }
 
 body {
@@ -19,6 +20,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
+	background: var(--bg-clr);
 }
 
 @media screen and (width <= 896px) {
