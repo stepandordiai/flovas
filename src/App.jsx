@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import ScrollToTop from "./utils/ScrollToTop";
 import FloatingContact from "./components/FloatingContact/FloatingContact";
 import "./scss/App.scss";
+// import Loading from "./components/Loading/Loading";
 
 function App() {
 	const [vacanciesData, setVacanciesData] = useState([]);
@@ -38,6 +39,7 @@ function App() {
 
 	return (
 		<Router>
+			{/* <Loading /> */}
 			<ScrollToTop />
 			<Header vacanciesData={vacanciesData} />
 			<Routes>

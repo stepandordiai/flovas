@@ -18,11 +18,13 @@ const Home = ({ vacanciesData, isLoading, error }) => {
 	}, [i18n.language]);
 
 	useEffect(() => {
+		// setTimeout(() => {
 		document.querySelectorAll(".blur-char").forEach((char, index) => {
 			setTimeout(() => {
 				char.classList.add("blur-char--active");
 			}, index * 50);
 		});
+		// }, 2000);
 	}, [text]);
 
 	function rotateWord() {
