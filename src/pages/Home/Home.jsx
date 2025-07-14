@@ -6,6 +6,7 @@ import Vacancies from "../../components/Vacancies/Vacancies";
 import About from "../../components/About/About";
 import Contacts from "../../components/Contacts/Contacts";
 import AddToHomeScreen from "../../components/AddToHomeScreen/AddToHomeScreen";
+import placesData from "./../../assets/data/places-data.json";
 import "./Home.scss";
 
 const Home = ({ vacanciesData, isLoading, error }) => {
@@ -15,17 +16,6 @@ const Home = ({ vacanciesData, isLoading, error }) => {
 	useEffect(() => {
 		setText(t("home.title1"));
 	}, [i18n.language]);
-
-	const placesData = [
-		t("home.place1"),
-		t("home.place2"),
-		t("home.place3"),
-		t("home.place4"),
-		t("home.place5"),
-		t("home.place6"),
-		t("home.place7"),
-		t("home.place8"),
-	];
 
 	useEffect(() => {
 		document.querySelectorAll(".blur-char").forEach((char, index) => {
@@ -105,7 +95,7 @@ const Home = ({ vacanciesData, isLoading, error }) => {
 								</p>
 								<div className="home__rotate-container">
 									{placesData.map((place, index) => (
-										<span key={index}>{place}</span>
+										<span key={index}>{t(place)}</span>
 									))}
 								</div>
 								<p>
@@ -138,7 +128,7 @@ const Home = ({ vacanciesData, isLoading, error }) => {
 							error={error}
 						/>
 					</div>
-					<About />
+					<About placesData={placesData} />
 					<Contacts />
 					<AddToHomeScreen />
 				</div>

@@ -5,14 +5,6 @@
 	display: flex;
 	flex-direction: column;
 	row-gap: 10px;
-	filter: blur(10px);
-	opacity: 0;
-	transition: all 0.5s;
-}
-
-.vacancy--active {
-	opacity: 1;
-	filter: blur(0);
 }
 
 .vacancy__no-img {

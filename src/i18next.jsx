@@ -2,10 +2,10 @@ import i18next from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
-import uk from "./translations/uk/translation.json";
-import cs from "./translations/cs/translation.json";
-import sk from "./translations/sk/translation.json";
-import en from "./translations/en/translation.json";
+import uk from "./assets/translations/uk/translation.json";
+import cs from "./assets/translations/cs/translation.json";
+import sk from "./assets/translations/sk/translation.json";
+import en from "./assets/translations/en/translation.json";
 
 i18next
 	.use(initReactI18next)

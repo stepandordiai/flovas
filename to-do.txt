@@ -1,0 +1,6 @@
+maybe update floating contact icons later
+maybe add loading with logo with animation effect
+update map in contactsus
+add btn to vacancy to open contactsus not call
+translate app
+update footer copyright width
