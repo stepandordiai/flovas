@@ -35,7 +35,7 @@ const Footer = () => {
 						<div className="footer__nav-list">
 							<HashLink to="/#home">{t("home_title")}</HashLink>
 							<HashLink to="/#vacancies">{t("vacancies_title")}</HashLink>
-							<HashLink to="/#about">{t("about_title")} Flovas</HashLink>
+							<HashLink to="/#about">{t("about_title")} flovas s.r.o.</HashLink>
 							<HashLink to="/#contacts">{t("contacts_title")}</HashLink>
 						</div>
 					</div>
@@ -44,6 +44,17 @@ const Footer = () => {
 						<div className="footer__nav-list">
 							<a href="tel:+420777957290">+420 777 957 290</a>
 							<a href="mailto:work1agency@seznam.cz">work1agency@seznam.cz</a>
+						</div>
+					</div>
+					<div className="footer__nav">
+						<p className="footer__nav-title">{t("footer.working_hours")}</p>
+						<div className="footer__nav-list">
+							<p>
+								{t("footer.mon")} - {t("footer.sat")}: 8:00 - 17:00
+							</p>
+							<p>
+								{t("footer.sunday")}: {t("footer.closed")}
+							</p>
 						</div>
 					</div>
 					<div className="footer__nav">

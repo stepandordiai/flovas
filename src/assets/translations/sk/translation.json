@@ -31,7 +31,12 @@
 	},
 
 	"footer": {
-		"nav": "Navigácia"
+		"nav": "Navigácia",
+		"working_hours": "Pracovná doba",
+		"mon": "Pon",
+		"sat": "Sob",
+		"sunday": "Nedeľa",
+		"closed": "Zatvorené"
 	},
 
 	"contacts": {

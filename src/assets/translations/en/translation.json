@@ -31,7 +31,12 @@
 	},
 
 	"footer": {
-		"nav": "Navigation"
+		"nav": "Navigation",
+		"working_hours": "Working hours",
+		"mon": "Mon",
+		"sat": "Sat",
+		"sunday": "Sunday",
+		"closed": "Closed"
 	},
 
 	"contacts": {
