@@ -1,45 +1,10 @@
 @use "./../../scss/mixins" as *;
 
-// .loading {
-// 	width: 100px;
-// 	height: 100px;
-// 	border-radius: 50%;
-// 	display: grid;
-// 	place-content: center;
-// 	background: conic-gradient(
-// 		var(--secondary-clr),
-// 		var(--accent-clr),
-// 		var(--secondary-clr)
-// 	);
-// 	animation: animateLoading 2s linear infinite;
-
-// 	div {
-// 		height: 80px;
-// 		aspect-ratio: 1/1;
-// 		background: #fff;
-// 		border-radius: 50%;
-// 	}
-// }
-
-// @keyframes animateLoading {
-// 	to {
-// 		rotate: 360deg;
-// 	}
-// }
-
 .home {
 	position: relative;
 	z-index: 1;
 	border-radius: 25px;
 }
-
-// @keyframes animateHome {
-// 	to {
-// 		top: 75px;
-// 		right: 25px;
-// 		left: 25px;
-// 	}
-// }
 
 .home-inner {
 	display: flex;
@@ -172,14 +137,6 @@
 		min-height: calc(100vh - 50px);
 		width: 100%;
 	}
-
-	// @keyframes animateHome {
-	// 	to {
-	// 		top: 50px;
-	// 		right: 10px;
-	// 		left: 10px;
-	// 	}
-	// }
 
 	.title-container {
 		padding: 50px 10px 0;

@@ -50,8 +50,18 @@
 	&:hover {
 		background: var(--sec-accent-clr);
 	}
+}
 
-	&:nth-child(2):hover {
+.vacancy__btn {
+	@include grid-center;
+	background: #fff;
+	color: #000;
+	height: 40px;
+	width: 100%;
+	padding: 0 10px;
+	transition: background-color 0.2s, color 0.2s;
+
+	&:hover {
 		background: #000;
 		color: #fff;
 	}

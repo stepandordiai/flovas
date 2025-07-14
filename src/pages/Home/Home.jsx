@@ -117,7 +117,7 @@ const Home = ({ vacanciesData, isLoading, error }) => {
 									{t("contact_us_title")}
 								</button>
 								<a className={"home__link"} href="#vacancies">
-									{t("vacancies_title")}{" "}
+									{t("vacancies_title")}
 									<span className="home__link-vacancies-qty">
 										{vacanciesData.length}
 									</span>

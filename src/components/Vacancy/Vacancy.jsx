@@ -1,11 +1,21 @@
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
 import "./Vacancy.scss";
 
 const Vacancy = ({ vacancy }) => {
 	const { t } = useTranslation();
 
 	const { _id, img, place, title, updatedAt } = vacancy;
+
+	useEffect(() => {
+		document.querySelector(".vacancy__btn").addEventListener("click", () => {
+			document.querySelector(".contact-us").classList.add("contact-us--active");
+			document
+				.querySelector(".contact-us__curtain")
+				.classList.add("contact-us__curtain--active");
+		});
+	}, []);
 
 	return (
 		<div className={"vacancy"}>
@@ -27,9 +37,7 @@ const Vacancy = ({ vacancy }) => {
 				<NavLink className={"vacancy__link"} to={`/vacancy-page/${_id}`}>
 					{t("more_info_btn")}
 				</NavLink>
-				<a className={"vacancy__link"} href="tel:+420777957290">
-					{t("contact_us_title")}
-				</a>
+				<button className={"vacancy__btn"}>{t("contact_us_title")}</button>
 			</div>
 		</div>
 	);
