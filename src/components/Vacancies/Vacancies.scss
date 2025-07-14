@@ -7,7 +7,8 @@
 .vacancies__title {
 	padding-top: 100px;
 	padding-bottom: 25px;
-	font-size: clamp(1.5rem, 4vw, 3rem);
+	font-size: clamp(1.5rem, 4vw, 2.5rem);
+
 	font-weight: 500;
 }
 
@@ -73,7 +74,6 @@
 	}
 
 	.vacancies__title {
-		padding-top: 60px;
-		padding-bottom: 10px;
+		padding-top: 75px;
 	}
 }
