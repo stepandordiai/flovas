@@ -6,6 +6,7 @@
 	"vacancies_title": "Vacancies",
 	"about_title": "About",
 	"contacts_title": "Contacts",
+	"web_app_title": "Web app",
 	"more_info_btn": "More info",
 	"contact_us_title": "Contact us",
 	"tel": "Phone number",
@@ -60,5 +61,16 @@
 		"our_advantages12": "We are there for you in case of problems",
 		"our_advantages13": "We will help you overcome the language barrier",
 		"our_advantages14": "We will help you with your move"
+	},
+
+	"web_app": {
+		"title": "agency in your smartphone",
+		"item_1_start": "Open",
+		"item_1_end": "in Safari or Chrome browser (Android)",
+		"item_2_start": "Click on the icon",
+		"item_2_end": "'Share' at the bottom of the window or three dots in the upper right corner (Android)",
+		"item_3": "Scroll down, select 'To Home Screen' and tap 'Add'",
+		"item_4_start": "Done! Web application",
+		"item_4_end": "will appear alongside other programs"
 	}
 }

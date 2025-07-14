@@ -5,8 +5,8 @@ import ContactUs from "../../components/ContactUs/ContactUs";
 import Vacancies from "../../components/Vacancies/Vacancies";
 import About from "../../components/About/About";
 import Contacts from "../../components/Contacts/Contacts";
-import AddToHomeScreen from "../../components/AddToHomeScreen/AddToHomeScreen";
 import placesData from "./../../assets/data/places-data.json";
+import WebApp from "../../components/WebApp/WebApp";
 import "./Home.scss";
 
 const Home = ({ vacanciesData, isLoading, error }) => {
@@ -132,7 +132,7 @@ const Home = ({ vacanciesData, isLoading, error }) => {
 					</div>
 					<About placesData={placesData} />
 					<Contacts />
-					<AddToHomeScreen />
+					<WebApp />
 				</div>
 			</div>
 			<ContactUs />

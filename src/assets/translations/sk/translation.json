@@ -6,6 +6,7 @@
 	"vacancies_title": "Voľné pracovné miesta",
 	"about_title": "O",
 	"contacts_title": "Kontakty",
+	"web_app_title": "Webová aplikácia",
 	"more_info_btn": "Viac informácií",
 	"contact_us_title": "Kontaktujte nás",
 	"tel": "Telefónne číslo",
@@ -60,5 +61,16 @@
 		"our_advantages12": "Sme tu pre vás v prípade problémov",
 		"our_advantages13": "Pomôžeme vám prekonať jazykovú bariéru",
 		"our_advantages14": "Pomôžeme vám s vaším sťahovaním"
+	},
+
+	"web_app": {
+		"title": "agentúra vo vašom smartfóne",
+		"item_1_start": "Otvoriť",
+		"item_1_end": "v prehliadači Safari alebo Chrome (Android)",
+		"item_2_start": "Kliknite na ikonu",
+		"item_2_end": "„Zdieľať“ v dolnej časti okna alebo tri bodky v pravom hornom rohu (Android)",
+		"item_3": "Posuňte sa nadol, vyberte možnosť „Na domovskú obrazovku“ a klepnite na „Pridať“.",
+		"item_4_start": "Hotovo! Webová aplikácia",
+		"item_4_end": "sa objaví popri iných programoch"
 	}
 }

@@ -113,8 +113,8 @@ const Header = ({ vacanciesData }) => {
 					<HashLink className={"nav-link"} to={"/#contacts"}>
 						{t("contacts_title")}
 					</HashLink>
-					<HashLink className={"nav-link"} to={"/#add-to-home-screen"}>
-						Додаток
+					<HashLink className={"nav-link"} to={"/#web-app"}>
+						{t("web_app_title")}
 					</HashLink>
 					<div
 						className={"nav-link-indicator"}

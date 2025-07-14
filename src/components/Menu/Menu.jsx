@@ -56,8 +56,8 @@ const Menu = ({ vacanciesData }) => {
 				</div>
 				<div className="dot-link-container">
 					<div className="dot"></div>
-					<HashLink className="menu__link" to="/#add-to-home-screen">
-						Додаток
+					<HashLink className="menu__link" to="/#web-app">
+						{t("web_app_title")}
 					</HashLink>
 				</div>
 			</div>

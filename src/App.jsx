@@ -8,9 +8,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ScrollToTop from "./utils/ScrollToTop";
 import FloatingContact from "./components/FloatingContact/FloatingContact";
-import "./scss/App.scss";
 import AppWrapper from "./AppWrapper";
-// import Loading from "./components/Loading/Loading";
+import "./scss/App.scss";
 
 function App() {
 	const [vacanciesData, setVacanciesData] = useState([]);
