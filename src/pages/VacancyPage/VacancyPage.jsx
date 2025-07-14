@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
@@ -20,7 +20,7 @@ const VacancyPage = ({ vacanciesData }) => {
 				<title>
 					{vacancy.title} &bull; flovas {t("logo_title")}
 				</title>
-				{/* <link rel="canonical" href="" /> */}
+				<link rel="canonical" href={`https://flovas.cz/vacancy-page/${id}`} />
 			</Helmet>
 			<div className="vacancy-page">
 				<div className="vacancy-page__container">

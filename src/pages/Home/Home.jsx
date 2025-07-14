@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import ContactUs from "../../components/ContactUs/ContactUs";
@@ -79,7 +79,7 @@ const Home = ({ vacanciesData, isLoading, error }) => {
 				<title>
 					Працевлаштування по всій Чехії &bull; flovas {t("logo_title")}
 				</title>
-				{/* <link rel="canonical" href="" /> */}
+				<link rel="canonical" href="https://flovas.cz/" />
 			</Helmet>
 			<div className={"home"} id="home">
 				<div className={"home-inner"}>
