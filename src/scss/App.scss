@@ -23,6 +23,16 @@ body {
 	background: var(--bg-clr);
 }
 
+a {
+	align-self: flex-start;
+	color: rgba(0, 0, 0, 0.5);
+	transition: all 0.2s;
+
+	&:hover {
+		color: #000;
+	}
+}
+
 @media screen and (width <= 896px) {
 	body {
 		padding: 0 10px;

@@ -52,16 +52,6 @@
 	row-gap: 5px;
 }
 
-a {
-	align-self: flex-start;
-	color: rgba(0, 0, 0, 0.5);
-	transition: all 0.2s;
-
-	&:hover {
-		color: #000;
-	}
-}
-
 .footer-bottom__slider {
 	position: absolute;
 	bottom: 25px;
