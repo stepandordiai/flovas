@@ -18,13 +18,11 @@ const Home = ({ vacanciesData, isLoading, error }) => {
 	}, [i18n.language]);
 
 	useEffect(() => {
-		// setTimeout(() => {
 		document.querySelectorAll(".blur-char").forEach((char, index) => {
 			setTimeout(() => {
 				char.classList.add("blur-char--active");
 			}, index * 50);
 		});
-		// }, 2000);
 	}, [text]);
 
 	function rotateWord() {
@@ -75,7 +73,10 @@ const Home = ({ vacanciesData, isLoading, error }) => {
 	return (
 		<>
 			<Helmet>
-				{/* <meta name="description" content="" /> */}
+				<meta
+					name="description"
+					content="Робота в Чехії для українців 2025. flovas s.r.o. – кадрова агенція, яка надає легальне працевлаштування, житло та допомогу з документами по всій Чехії."
+				/>
 				<title>
 					Працевлаштування по всій Чехії &bull; flovas {t("logo_title")}
 				</title>
