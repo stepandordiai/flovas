@@ -1,1 +1,3 @@
 add to google maps flovas s.r.o. business and update map on site
+add sitemap
+update helmet titles with canonical and description
