@@ -65,7 +65,7 @@ const Footer = () => {
 			<div
 				className="footer-bottom__slider"
 				style={{
-					"--width": "200px",
+					"--width": "300px",
 					"--quantity": "6",
 				}}
 			>
