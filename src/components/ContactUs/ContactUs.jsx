@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import handleCopy from "../../utils/handleCopy";
 import instagramIcon from "/icons/instagram.png";
 import tiktokIcon from "/icons/tik-tok.png";
 import facebookIcon from "/icons/facebook.png";
@@ -39,6 +40,18 @@ const ContactUs = () => {
 							<a href="https://maps.app.goo.gl/g5t8zBqjSifGmSWR9">
 								Pod Hroby 271 Kolín IV
 							</a>
+							<div>
+								<p>IČO</p>
+								<button
+									onClick={(e) =>
+										handleCopy(e, ".contact-us__info-btn", t("copied"))
+									}
+									title={t("click_to_copy")}
+									className="contact-us__info-btn"
+								>
+									17430089
+								</button>
+							</div>
 						</div>
 					</div>
 					<div className="contact-us__socials">

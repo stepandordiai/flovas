@@ -54,6 +54,17 @@
 	}
 }
 
+.contact-us__info-btn {
+	position: relative;
+	width: max-content;
+	color: rgba(0, 0, 0, 0.5);
+	transition: all 0.2s;
+
+	&:hover {
+		color: #000;
+	}
+}
+
 .contact-us__socials {
 	display: flex;
 	flex-direction: column;
