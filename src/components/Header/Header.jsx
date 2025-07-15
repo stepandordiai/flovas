@@ -52,7 +52,7 @@ const Header = ({ vacanciesData }) => {
 			document.querySelector(".vacancies"),
 			document.querySelector(".about"),
 			document.querySelector(".contacts"),
-			document.querySelector(".add-to-home-screen"),
+			document.querySelector(".web-app"),
 		];
 		const navLinks = document.querySelectorAll(".nav-link");
 		const menuDots = document.querySelectorAll(".dot");
