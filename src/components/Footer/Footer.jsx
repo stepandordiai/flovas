@@ -33,10 +33,18 @@ const Footer = () => {
 					<div className="footer__nav">
 						<p className="footer__nav-title">{t("footer.nav")}</p>
 						<div className="footer__nav-list">
-							<HashLink to="/#home">{t("home_title")}</HashLink>
-							<HashLink to="/#vacancies">{t("vacancies_title")}</HashLink>
-							<HashLink to="/#about">{t("about_title")} flovas s.r.o.</HashLink>
-							<HashLink to="/#contacts">{t("contacts_title")}</HashLink>
+							<HashLink to="/#home" smooth>
+								{t("home_title")}
+							</HashLink>
+							<HashLink to="/#vacancies" smooth>
+								{t("vacancies_title")}
+							</HashLink>
+							<HashLink to="/#about" smooth>
+								{t("about_title")} flovas s.r.o.
+							</HashLink>
+							<HashLink to="/#contacts" smooth>
+								{t("contacts_title")}
+							</HashLink>
 						</div>
 					</div>
 					<div className="footer__nav">

@@ -91,29 +91,29 @@ const Header = ({ vacanciesData }) => {
 	}, [pathname]);
 
 	return (
-		<header className={"header"}>
+		<header className="header">
 			<div className="header-top">
 				<MenuBtn />
-				<HashLink to={"/#home"} className={"header__logo"}>
+				<HashLink to={"/#home"} className="header__logo" smooth>
 					flovas <span>{t("logo_title")}</span>
 				</HashLink>
 				<nav ref={navRef} className="header__nav">
-					<HashLink className={"nav-link active"} to={"/#home"}>
+					<HashLink className="nav-link active" to="/#home" smooth>
 						{t("home_title")}
 					</HashLink>
-					<HashLink className={"nav-link"} to={"/#vacancies"}>
+					<HashLink className="nav-link" to="/#vacancies" smooth>
 						{t("vacancies_title")}
 						<span className="nav-link__vacancies-qty">
 							{vacanciesData.length}
 						</span>
 					</HashLink>
-					<HashLink className={"nav-link"} to={"/#about"}>
+					<HashLink className="nav-link" to="/#about" smooth>
 						{t("about_title")} Flovas
 					</HashLink>
-					<HashLink className={"nav-link"} to={"/#contacts"}>
+					<HashLink className="nav-link" to="/#contacts" smooth>
 						{t("contacts_title")}
 					</HashLink>
-					<HashLink className={"nav-link"} to={"/#web-app"}>
+					<HashLink className="nav-link" to="/#web-app" smooth>
 						{t("web_app_title")}
 					</HashLink>
 					<div

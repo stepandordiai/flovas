@@ -29,13 +29,13 @@ const Menu = ({ vacanciesData }) => {
 			<div className="menu__inner">
 				<div className="dot-link-container">
 					<div className="dot dot--active"></div>
-					<HashLink className="menu__link" to="/#home">
+					<HashLink className="menu__link" to="/#home" smooth>
 						{t("home_title")}
 					</HashLink>
 				</div>
 				<div className="dot-link-container">
 					<div className="dot"></div>
-					<HashLink className="menu__link" to="/#vacancies">
+					<HashLink className="menu__link" to="/#vacancies" smooth>
 						{t("vacancies_title")}
 						<span className="menu__link-vacancies-qty">
 							{vacanciesData.length}
@@ -44,19 +44,19 @@ const Menu = ({ vacanciesData }) => {
 				</div>
 				<div className="dot-link-container">
 					<div className="dot"></div>
-					<HashLink className="menu__link" to="/#about">
+					<HashLink className="menu__link" to="/#about" smooth>
 						{t("about_title")} <span className="menu__link-extra">flovas</span>
 					</HashLink>
 				</div>
 				<div className="dot-link-container">
 					<div className="dot"></div>
-					<HashLink className="menu__link" to="/#contacts">
+					<HashLink className="menu__link" to="/#contacts" smooth>
 						{t("contacts_title")}
 					</HashLink>
 				</div>
 				<div className="dot-link-container">
 					<div className="dot"></div>
-					<HashLink className="menu__link" to="/#web-app">
+					<HashLink className="menu__link" to="/#web-app" smooth>
 						{t("web_app_title")}
 					</HashLink>
 				</div>
