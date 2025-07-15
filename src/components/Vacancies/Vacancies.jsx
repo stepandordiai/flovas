@@ -13,12 +13,12 @@ const Vacancies = ({ vacanciesData, isLoading, error }) => {
 					<div className="vacancies-loading__circle">
 						<span></span>
 					</div>
-					<span>{t("vacancies_r_loading")}...</span>
+					<p>
+						{t("vacancies_r_loading")}. (~30 {t("sec")}.)
+					</p>
 				</div>
 			) : error ? (
-				<div className="vacancies-error">
-					<span>Вакансії зараз недоступні</span>
-				</div>
+				<p style={{ textAlign: "center" }}>{t("unavailable")}.</p>
 			) : vacanciesData.length > 0 ? (
 				<div className="vacancies-container">
 					{vacanciesData
@@ -29,9 +29,7 @@ const Vacancies = ({ vacanciesData, isLoading, error }) => {
 						))}
 				</div>
 			) : (
-				<div className="vacancies-empty">
-					<span>{t("vacancies_r_empty")}</span>
-				</div>
+				<p style={{ textAlign: "center" }}>{t("vacancies_r_empty")}.</p>
 			)}
 		</div>
 	);

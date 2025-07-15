@@ -18,6 +18,9 @@
 	"follow_us": "Sledujte nás",
 	"click_to_copy": "Kliknutím zkopírujete",
 	"copied": "Zkopírováno",
+	"sec": "sek",
+	"unavailable": "Pracovní místa jsou dočasně nedostupná. Zkuste to prosím později",
+	"vacancies_r_empty": "Bohužel momentálně nejsou k dispozici žádná volná místa. Doporučujeme se podívat později",
 	"all_rights_reserved": "Všechna práva vyhrazena",
 
 	"home": {

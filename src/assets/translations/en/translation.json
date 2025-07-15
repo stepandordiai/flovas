@@ -18,6 +18,9 @@
 	"follow_us": "Follow us",
 	"click_to_copy": "Click to copy",
 	"copied": "Copied",
+	"sec": "sec",
+	"unavailable": "Jobs are temporarily unavailable. Please check back later",
+	"vacancies_r_empty": "Unfortunately, there are currently no vacancies available. We recommend checking back later",
 	"all_rights_reserved": "All rights reserved",
 
 	"home": {
