@@ -80,12 +80,12 @@ const ContactUs = () => {
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d329.5935177795711!2d15.214144089939822!3d50.02410476646222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470c1551f5cf6ff7%3A0xf2d6322ddcdffd0!2sflovas%20s.r.o.!5e1!3m2!1sen!2scz!4v1752502315664!5m2!1sen!2scz"
 							width={"100%"}
 							loading="lazy"
-							style={{ borderRadius: "0 0 15px 15px" }}
+							style={{ borderRadius: "15px" }}
 						></iframe>
 					</div>
 				</div>
 			</div>
-			<div className="contact-us__curtain"></div>
+			<div onClick={removeContactUs} className="contact-us__curtain"></div>
 		</>
 	);
 };
