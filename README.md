@@ -1,3 +1,3 @@
-# Flovas
+# flovas
 
-<img src="./public/screenshot/flovas-ss-v4-c.png" alt="" />
+<img src="./public/ss/flovas-ss-v4-c.png" alt="" />
