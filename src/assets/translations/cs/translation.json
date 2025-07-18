@@ -39,9 +39,9 @@
 	"footer": {
 		"nav": "Navigace",
 		"working_hours": "Pracovní doba",
-		"mon": "pon",
-		"sat": "Sob",
-		"sunday": "Neděle",
+		"mon": "Po",
+		"sat": "So",
+		"sunday": "Ne",
 		"closed": "Zavřeno"
 	},
 

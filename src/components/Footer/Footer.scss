@@ -38,7 +38,7 @@
 	width: 100%;
 	display: flex;
 	justify-content: space-evenly;
-	gap: 50px;
+	gap: 20px;
 	flex-wrap: wrap;
 }
 
@@ -76,7 +76,6 @@
 	width: var(--width);
 	position: absolute;
 	left: 100%;
-	// width: max-content;
 	@include grid-center;
 	animation: autoRun 20s linear infinite;
 	//
@@ -124,16 +123,15 @@
 
 	.footer-top {
 		width: 100%;
-		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
+		flex-direction: row;
 		gap: 10px;
 		flex-wrap: wrap;
 	}
 
 	.footer__nav-container {
 		justify-content: space-between;
-		gap: 50px;
 	}
 
 	.footer-bottom__slider {
