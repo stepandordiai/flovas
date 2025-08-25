@@ -6,7 +6,7 @@ import "./Vacancy.scss";
 const Vacancy = ({ vacancy }) => {
 	const { t } = useTranslation();
 
-	const { _id, img, place, title, updatedAt } = vacancy;
+	const { _id, img, place, title, updatedAt, isActive } = vacancy;
 
 	useEffect(() => {
 		document.querySelector(".vacancy__btn").addEventListener("click", () => {
@@ -18,7 +18,7 @@ const Vacancy = ({ vacancy }) => {
 	}, []);
 
 	return (
-		<div className={"vacancy"}>
+		<div className={`${isActive ? "vacancy" : "vacancy vacancy--inactive"}`}>
 			{img ? (
 				<img src={img} alt={title} loading="lazy" />
 			) : (
