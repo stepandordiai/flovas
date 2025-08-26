@@ -21,8 +21,8 @@
 	"sec": "sec",
 	"unavailable": "Jobs are temporarily unavailable. Please check back later",
 	"vacancies_r_empty": "Unfortunately, there are currently no vacancies available. We recommend checking back later",
-	"active_vacancy": "Pozice je aktivní",
-	"inactive_vacancy": "Pozice je neaktivní",
+	"active_vacancy": "Vacancy is active",
+	"inactive_vacancy": "Vacancy is inactive",
 	"send": "Send",
 	"all_rights_reserved": "All rights reserved",
 

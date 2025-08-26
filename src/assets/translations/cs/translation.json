@@ -21,8 +21,8 @@
 	"sec": "sek",
 	"unavailable": "Pracovní místa jsou dočasně nedostupná. Zkuste to prosím později",
 	"vacancies_r_empty": "Bohužel momentálně nejsou k dispozici žádná volná místa. Doporučujeme se podívat později",
-	"active_vacancy": "Vacancy is active",
-	"inactive_vacancy": "Vacancy is inactive",
+	"active_vacancy": "Pozice je aktivní",
+	"inactive_vacancy": "Pozice je neaktivní",
 	"send": "Poslat",
 	"all_rights_reserved": "Všechna práva vyhrazena",
 
