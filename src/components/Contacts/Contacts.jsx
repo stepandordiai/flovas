@@ -22,7 +22,7 @@ const Contacts = () => {
 						<p>{t("tel")}</p>
 						<a href="tel:+420777957290">+420 777 957 290</a>
 						<p>E-mail</p>
-						<a href="mailto:work1agency@seznam.cz">work1agency@seznam.cz</a>
+						<a href="mailto:info@neresen.cz">info@neresen.cz</a>
 						<p>{t("address")}</p>
 						<a href="https://maps.app.goo.gl/BfeYpMKrLn5XpkmCA">
 							Pod Hroby 271 Kolín IV

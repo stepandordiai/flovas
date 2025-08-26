@@ -51,7 +51,7 @@ const Footer = () => {
 						<p className="footer__nav-title">{t("contact_us_title")}</p>
 						<div className="footer__nav-list">
 							<a href="tel:+420777957290">+420 777 957 290</a>
-							<a href="mailto:work1agency@seznam.cz">work1agency@seznam.cz</a>
+							<a href="mailto:info@neresen.cz">info@neresen.cz</a>
 						</div>
 					</div>
 					<div className="footer__nav">
