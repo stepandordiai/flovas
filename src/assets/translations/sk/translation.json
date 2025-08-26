@@ -21,6 +21,9 @@
 	"sec": "sek",
 	"unavailable": "Pracovné ponuky sú dočasne nedostupné. Skúste to znova neskôr",
 	"vacancies_r_empty": "Momentálne bohužiaľ nie sú k dispozícii žiadne voľné miesta. Odporúčame vám skontrolovať neskôr",
+	"active_vacancy": "Ponuka je aktívna",
+	"inactive_vacancy": "Ponuka je neaktívna",
+	"send": "Odoslať",
 	"all_rights_reserved": "Všetky práva vyhradené",
 
 	"home": {
@@ -81,5 +84,9 @@
 		"item_3": "Posuňte sa nadol, vyberte možnosť „Na domovskú obrazovku“ a klepnite na „Pridať“.",
 		"item_4_start": "Hotovo! Webová aplikácia",
 		"item_4_end": "sa objaví popri iných programoch"
+	},
+
+	"tel_form_banner": {
+		"title": "Ako vás kontaktovať"
 	}
 }

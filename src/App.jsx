@@ -9,12 +9,19 @@ import { useEffect, useState } from "react";
 import ScrollToTop from "./utils/ScrollToTop";
 import FloatingContact from "./components/FloatingContact/FloatingContact";
 import AppWrapper from "./AppWrapper";
+import TelFormBanner from "./components/TelFormBanner/TelFormBanner";
 import "./scss/App.scss";
 
 function App() {
 	const [vacanciesData, setVacanciesData] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState(null);
+
+	// TelFormBanner
+	const [active, setActive] = useState(false);
+	const handleTelFormBanner = () => {
+		setActive(true);
+	};
 
 	useEffect(() => {
 		const handleVacanciesData = async () => {
@@ -50,6 +57,7 @@ function App() {
 								vacanciesData={vacanciesData}
 								isLoading={isLoading}
 								error={error}
+								handleTelFormBanner={handleTelFormBanner}
 							/>
 						}
 					/>
@@ -61,6 +69,7 @@ function App() {
 				<div className="empty-div"></div>
 				<Footer />
 				<FloatingContact />
+				<TelFormBanner active={active} setActive={setActive} />
 			</AppWrapper>
 		</Router>
 	);

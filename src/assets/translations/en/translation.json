@@ -21,6 +21,9 @@
 	"sec": "sec",
 	"unavailable": "Jobs are temporarily unavailable. Please check back later",
 	"vacancies_r_empty": "Unfortunately, there are currently no vacancies available. We recommend checking back later",
+	"active_vacancy": "Pozice je aktivní",
+	"inactive_vacancy": "Pozice je neaktivní",
+	"send": "Send",
 	"all_rights_reserved": "All rights reserved",
 
 	"home": {
@@ -81,5 +84,9 @@
 		"item_3": "Scroll down, select 'To Home Screen' and tap 'Add'",
 		"item_4_start": "Done! Web application",
 		"item_4_end": "will appear alongside other programs"
+	},
+
+	"tel_form_banner": {
+		"title": "How to contact you"
 	}
 }

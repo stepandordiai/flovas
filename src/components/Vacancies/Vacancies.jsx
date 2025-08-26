@@ -2,7 +2,12 @@ import { useTranslation } from "react-i18next";
 import Vacancy from "../Vacancy/Vacancy";
 import "./Vacancies.scss";
 
-const Vacancies = ({ vacanciesData, isLoading, error }) => {
+const Vacancies = ({
+	vacanciesData,
+	isLoading,
+	error,
+	handleTelFormBanner,
+}) => {
 	const { t } = useTranslation();
 
 	return (
@@ -25,7 +30,11 @@ const Vacancies = ({ vacanciesData, isLoading, error }) => {
 						.slice() // avoid mutating original array with reverse()
 						.reverse()
 						.map((vacancy, index) => (
-							<Vacancy key={index} vacancy={vacancy} />
+							<Vacancy
+								key={index}
+								vacancy={vacancy}
+								handleTelFormBanner={handleTelFormBanner}
+							/>
 						))}
 				</div>
 			) : (

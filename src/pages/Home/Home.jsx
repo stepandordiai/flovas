@@ -10,7 +10,7 @@ import WebApp from "../../components/WebApp/WebApp";
 import { HashLink } from "react-router-hash-link";
 import "./Home.scss";
 
-const Home = ({ vacanciesData, isLoading, error }) => {
+const Home = ({ vacanciesData, isLoading, error, handleTelFormBanner }) => {
 	const { t, i18n } = useTranslation();
 	const [text, setText] = useState(t("home.title1"));
 
@@ -130,6 +130,7 @@ const Home = ({ vacanciesData, isLoading, error }) => {
 							vacanciesData={vacanciesData}
 							isLoading={isLoading}
 							error={error}
+							handleTelFormBanner={handleTelFormBanner}
 						/>
 					</div>
 					<About placesData={placesData} />
