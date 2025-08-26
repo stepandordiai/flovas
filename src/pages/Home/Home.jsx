@@ -7,6 +7,7 @@ import About from "../../components/About/About";
 import Contacts from "../../components/Contacts/Contacts";
 import placesData from "./../../assets/data/places-data.json";
 import WebApp from "../../components/WebApp/WebApp";
+import { HashLink } from "react-router-hash-link";
 import "./Home.scss";
 
 const Home = ({ vacanciesData, isLoading, error }) => {
@@ -117,12 +118,12 @@ const Home = ({ vacanciesData, isLoading, error }) => {
 								<button className={"home__link home__contact-us-link"}>
 									{t("contact_us_title")}
 								</button>
-								<a className={"home__link"} href="#vacancies">
+								<HashLink className="home__link" to="/#vacancies" smooth>
 									{t("vacancies_title")}
 									<span className="home__link-vacancies-qty">
 										{vacanciesData.length}
 									</span>
-								</a>
+								</HashLink>
 							</div>
 						</div>
 						<Vacancies
