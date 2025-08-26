@@ -17,7 +17,7 @@
 }
 
 .about__desc {
-	font-size: 1.25rem;
+	font-size: clamp(1rem, 2vw, 1.25rem);
 	text-align: center;
 }
 
@@ -50,7 +50,7 @@
 }
 
 .about__goal-desc {
-	font-size: 1.25rem;
+	font-size: clamp(1rem, 2vw, 1.25rem);
 	text-align: center;
 }
 
@@ -61,7 +61,7 @@
 }
 
 .about__places-desc {
-	font-size: 1.25rem;
+	font-size: clamp(1rem, 2vw, 1.25rem);
 	text-align: center;
 }
 

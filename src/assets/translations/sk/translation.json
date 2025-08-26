@@ -31,10 +31,10 @@
 		"place3": "Brno",
 		"place4": "Pardubice",
 		"place5": "Cheb",
-		"place6": "Hvaletice",
+		"place6": "Chvaletice",
 		"place7": "Kuřim",
 		"place8": "Chelčice",
-		"place9": "Хрудім"
+		"place9": "Chrudim"
 	},
 
 	"footer": {
@@ -51,6 +51,7 @@
 	},
 
 	"about": {
+		"desc": "FLOVAS s.r.o. je personálna agentúra, ktorá sa špecializuje na zamestnávanie na celom území Českej republiky. Ponúkame prácu v rôznych odvetviach — výroba, logistika, stavebníctvo, skladové procesy a ďalšie oblasti.",
 		"our_advantages_title": "Naše výhody",
 		"our_advantages1": "Zamestnanie v celej Českej republike",
 		"our_advantages2": "Pre mužov, ženy a páry",
@@ -64,7 +65,11 @@
 		"our_advantages11": "Zabezpečujeme dopravu z domu do práce",
 		"our_advantages12": "Sme tu pre vás v prípade problémov",
 		"our_advantages13": "Pomôžeme vám prekonať jazykovú bariéru",
-		"our_advantages14": "Pomôžeme vám s vaším sťahovaním"
+		"our_advantages14": "Pomôžeme vám s vaším sťahovaním",
+		"goal_title": "Náš cieľ",
+		"goal_desc": "Zabezpečiť každému klientovi stabilnú prácu, komfortné ubytovanie a plnú právnu podporu pre istý štart v Českej republike.",
+		"employment_place_title": "Zamestnávame po celom Česku",
+		"employment_place_desc": "a ďalšie mestá."
 	},
 
 	"web_app": {
