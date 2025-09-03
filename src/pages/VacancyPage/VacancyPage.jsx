@@ -1,7 +1,8 @@
-import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
+import backIcon from "/icons/back.png";
 import "./VacancyPage.scss";
 
 const VacancyPage = ({ vacanciesData }) => {
@@ -9,7 +10,7 @@ const VacancyPage = ({ vacanciesData }) => {
 
 	const { id } = useParams(null);
 
-	const vacancy = vacanciesData.find((vacancy) => vacancy._id == id);
+	const vacancy = vacanciesData.find((vacancy) => vacancy._id === id);
 
 	if (!vacancy) return;
 
@@ -25,25 +26,35 @@ const VacancyPage = ({ vacanciesData }) => {
 				</title>
 				<link rel="canonical" href={`https://flovas.cz/vacancy-page/${id}`} />
 			</Helmet>
-			<div className="vacancy-page">
-				<div className="vacancy-page__container">
-					<img className="vacancy-page__img" src={vacancy.img} alt="" />
-					<div className="vacancy-page__details">
-						<div>
-							<p className="vacancy-page__place">Місто: {vacancy.place}</p>
-							<p className="vacancy-page__title">{vacancy.title}</p>
-						</div>
-						<div className="vacancy-page__link-container">
-							<a className="vacancy-page__link" href="tel:+420777957290">
-								{t("contact_us_title")}
-							</a>
-							<HashLink className="vacancy-page__link" href="/#vacancies">
-								{t("vacancies_title")}
-							</HashLink>
-						</div>
+			<main className="vacancy-page">
+				<div className="vacancy-page__top">
+					<HashLink className="vacancy-page__top-link" to="/#vacancies">
+						<img src={backIcon} width={25} height={25} alt="" />
+						<span>Всі вакансії</span>
+					</HashLink>
+				</div>
+				<div className="vacancy-page__details">
+					{vacancy.img ? (
+						<img
+							className="vacancy-page__img"
+							src={vacancy.img}
+							alt=""
+							loading="lazy"
+						/>
+					) : (
+						<div className="vacancy__no-img"></div>
+					)}
+					<div>
+						<p className="vacancy-page__place">📍 {vacancy.place}</p>
+						<p className="vacancy-page__title">{vacancy.title}</p>
+					</div>
+					<div className="vacancy-page__link-container">
+						<a className="vacancy-page__link" href="tel:+420777957290">
+							{t("contact_us_title")}
+						</a>
 					</div>
 				</div>
-			</div>
+			</main>
 		</>
 	);
 };
