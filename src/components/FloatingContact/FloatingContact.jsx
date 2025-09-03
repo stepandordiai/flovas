@@ -6,7 +6,7 @@ import "./FloatingContact.scss";
 const FloatingContact = () => {
 	return (
 		<div className="floating-contact">
-			<a href="https://t.me/Robota_1cz" target="_blank">
+			<a href="https://t.me/flovas_agency" target="_blank">
 				<img
 					title="Telegram"
 					width={50}
