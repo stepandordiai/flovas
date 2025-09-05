@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
 import "./Vacancy.scss";
 
 const Vacancy = ({ vacancy, handleTelFormBanner }) => {
@@ -7,10 +8,18 @@ const Vacancy = ({ vacancy, handleTelFormBanner }) => {
 
 	const { _id, img, place, title, updatedAt, isActive } = vacancy;
 
+	const [imgError, setImgError] = useState(false);
+
 	return (
 		<div className="vacancy">
-			{img ? (
-				<img src={img} alt={title} loading="lazy" />
+			{img && !imgError ? (
+				// I can do with fallback.png also src={imgError ? "/fallback.png" : img}
+				<img
+					onError={() => setImgError(true)}
+					src={img}
+					alt={title}
+					loading="lazy"
+				/>
 			) : (
 				<div className="vacancy__no-img"></div>
 			)}
