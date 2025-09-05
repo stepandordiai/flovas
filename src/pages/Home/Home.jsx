@@ -86,7 +86,7 @@ const Home = ({ vacanciesData, isLoading, error, handleTelFormBanner }) => {
 			<main className="home" id="home">
 				<div className="home-inner">
 					<div className="home-inner-container">
-						<div className="title-container">
+						<div className="home-top">
 							<div className="home__title">
 								<p>
 									{text.split("").map((char, index) => {

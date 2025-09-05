@@ -48,7 +48,7 @@ const Header = ({ vacanciesData }) => {
 
 	useEffect(() => {
 		const sections = [
-			document.querySelector(".homie"),
+			document.querySelector(".home-top"),
 			document.querySelector(".vacancies"),
 			document.querySelector(".about"),
 			document.querySelector(".contacts"),
