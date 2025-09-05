@@ -29,7 +29,7 @@ const VacancyPage = ({ vacanciesData }) => {
 			<main className="vacancy-page">
 				<div className="vacancy-page__top">
 					<HashLink className="vacancy-page__top-link" to="/#vacancies">
-						<img src={backIcon} width={25} height={25} alt="" />
+						<img src={backIcon} width={20} height={20} alt="" />
 						<span>Всі вакансії</span>
 					</HashLink>
 				</div>
@@ -42,17 +42,19 @@ const VacancyPage = ({ vacanciesData }) => {
 							loading="lazy"
 						/>
 					) : (
-						<div className="vacancy__no-img"></div>
+						<div className="vacancy-page__no-img"></div>
 					)}
-					<div>
-						<p className="vacancy-page__place">📍 {vacancy.place}</p>
-						<p className="vacancy-page__title">{vacancy.title}</p>
+					<div style={{ display: "flex", flexDirection: "column", rowGap: 10 }}>
+						<p className="vacancy__date">
+							Опубліковано: {vacancy.updatedAt.slice(0, 10)}
+						</p>
+						<p>📍 {vacancy.place}</p>
+						<p style={{ fontWeight: 500 }}>{vacancy.title}</p>
+						<p style={{ whiteSpace: "pre-wrap" }}>{vacancy.desc}</p>
 					</div>
-					<div className="vacancy-page__link-container">
-						<a className="vacancy-page__link" href="tel:+420777957290">
-							{t("contact_us_title")}
-						</a>
-					</div>
+					<a className="vacancy-page__link" href="tel:+420777957290">
+						{t("contact_us_title")}
+					</a>
 				</div>
 			</main>
 		</>

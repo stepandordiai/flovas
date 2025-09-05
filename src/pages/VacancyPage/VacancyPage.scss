@@ -33,7 +33,13 @@
 .vacancy-page__img {
 	width: 100%;
 	max-width: 500px;
-	margin-bottom: 10px;
+}
+
+.vacancy-page__no-img {
+	width: 100%;
+	max-width: 500px;
+	aspect-ratio: 1/1;
+	background: var(--bg-lighter-clr);
 }
 
 .vacancy-page__details {
@@ -41,20 +47,6 @@
 	flex-direction: column;
 	row-gap: 10px;
 	max-width: 500px;
-}
-
-.vacancy-page__place {
-	margin-bottom: 10px;
-}
-
-.vacancy-page__title {
-	white-space: pre-wrap;
-}
-
-.vacancy-page__link-container {
-	display: flex;
-	gap: 5px;
-	margin-top: auto;
 }
 
 .vacancy-page__link {

@@ -25,10 +25,8 @@ const Vacancy = ({ vacancy, handleTelFormBanner }) => {
 					</p>
 				)}
 				<p className="vacancy__date">Опубліковано: {updatedAt.slice(0, 10)}</p>
-				<p>
-					<span style={{ fontWeight: 500 }}>Місто</span>: {place}
-				</p>
-				<p className="vacancy__title">{title}</p>
+				<p>📍 {place}</p>
+				<p style={{ fontWeight: 500 }}>{title}</p>
 			</div>
 			<div className="vacancy__link-container">
 				<NavLink className={"vacancy__link"} to={`/vacancy-page/${_id}`}>
