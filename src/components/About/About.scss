@@ -21,6 +21,30 @@
 	text-align: center;
 }
 
+.about-milestones {
+	background: var(--sec-accent-clr);
+	padding: 25px;
+	border-radius: 20px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	column-gap: 100px;
+	row-gap: 25px;
+	flex-wrap: wrap;
+
+	div {
+		display: flex;
+		justify-content: flex-start;
+		align-items: flex-start;
+		flex-direction: column;
+	}
+
+	span:nth-child(1) {
+		font-weight: 500;
+		font-size: 2.5rem;
+	}
+}
+
 .about__benefits-title {
 	font-size: 1.25rem;
 	font-weight: 500;
@@ -41,6 +65,10 @@
 	text-align: center;
 	gap: 10px;
 	min-height: 150px;
+
+	span {
+		font-weight: 500;
+	}
 }
 
 .about__goal-title {

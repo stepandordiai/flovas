@@ -14,13 +14,34 @@ import misunderstandingIcon from "/icons/misunderstanding.png";
 import movingIcon from "/icons/moving.png";
 import "./About.scss";
 
-const About = ({ placesData }) => {
+const About = ({ placesData, vacanciesData }) => {
 	const { t } = useTranslation();
 
 	return (
 		<div className="about" id="about">
 			<h2 className="about__title">{t("about_title")} FLOVAS s.r.o.</h2>
 			<p className="about__desc">{t("about.desc")}</p>
+			<div className="about-milestones">
+				<div>
+					<span>{vacanciesData.length}</span>
+					<span>Вакансій</span>
+				</div>
+				<div>
+					<span>20+</span>
+					<span>Років досвіду</span>
+				</div>
+				<div>
+					<span>1000+</span>
+					<span>Українцям допомогли працевлаштуватись</span>
+				</div>
+			</div>
+			<h3 className="about__places-title">
+				{t("about.employment_place_title")}
+			</h3>
+			<p className="about__places-desc">
+				{placesData.map((place) => t(place)).join(", ")}{" "}
+				{t("about.employment_place_desc")}
+			</p>
 			<h3 className="about__benefits-title">
 				{t("about.our_advantages_title")}
 			</h3>
@@ -80,13 +101,6 @@ const About = ({ placesData }) => {
 			</ul>
 			<h3 className="about__goal-title">{t("about.goal_title")}</h3>
 			<p className="about__goal-desc">{t("about.goal_desc")}</p>
-			<h3 className="about__places-title">
-				{t("about.employment_place_title")}
-			</h3>
-			<p className="about__places-desc">
-				{placesData.map((place) => t(place)).join(", ")}{" "}
-				{t("about.employment_place_desc")}
-			</p>
 		</div>
 	);
 };

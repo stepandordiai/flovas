@@ -135,7 +135,7 @@ const Home = ({ vacanciesData, isLoading, error, handleTelFormBanner }) => {
 							handleTelFormBanner={handleTelFormBanner}
 						/>
 					</div>
-					<About placesData={placesData} />
+					<About placesData={placesData} vacanciesData={vacanciesData} />
 					<Contacts />
 					<WebApp />
 				</div>
