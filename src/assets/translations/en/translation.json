@@ -47,7 +47,9 @@
 		"mon": "Mon",
 		"sat": "Sat",
 		"sunday": "Sun",
-		"closed": "Closed"
+		"closed": "Closed",
+		"all_rights_reserved": "All rights reserved",
+		"website_created_by": "Website created by"
 	},
 
 	"contacts": {

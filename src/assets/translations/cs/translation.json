@@ -24,7 +24,6 @@
 	"active_vacancy": "Pozice je aktivní",
 	"inactive_vacancy": "Pozice je neaktivní",
 	"send": "Poslat",
-	"all_rights_reserved": "Všechna práva vyhrazena",
 
 	"home": {
 		"title1": "Zaměstnanost ve městě",
@@ -47,7 +46,9 @@
 		"mon": "Po",
 		"sat": "So",
 		"sunday": "Ne",
-		"closed": "Zavřeno"
+		"closed": "Zavřeno",
+		"all_rights_reserved": "Všechna práva vyhrazena",
+		"website_created_by": "Website created by"
 	},
 
 	"contacts": {

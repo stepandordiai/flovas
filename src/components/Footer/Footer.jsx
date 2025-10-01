@@ -93,11 +93,11 @@ const Footer = () => {
 						<p>&copy; 2025 FLOVAS s.r.o.</p>
 					</div>
 					<div className="footer-bottom__item" style={{ "--position": "2" }}>
-						<p>{t("all_rights_reserved")}</p>
+						<p>{t("footer.all_rights_reserved")}</p>
 					</div>
 					<div className="footer-bottom__item" style={{ "--position": "3" }}>
 						<p>
-							Site by{" "}
+							{t("footer.website_created_by")}{" "}
 							<a href="https://heeeyooo.studio/" target="_blank">
 								heeeyooo studio
 							</a>
@@ -107,11 +107,11 @@ const Footer = () => {
 						<p>&copy; 2025 FLOVAS s.r.o.</p>
 					</div>
 					<div className="footer-bottom__item" style={{ "--position": "5" }}>
-						<p>{t("all_rights_reserved")}</p>
+						<p>{t("footer.all_rights_reserved")}</p>
 					</div>
 					<div className="footer-bottom__item" style={{ "--position": "6" }}>
 						<p>
-							Site by{" "}
+							{t("footer.website_created_by")}{" "}
 							<a href="https://heeeyooo.studio/" target="_blank">
 								heeeyooo studio
 							</a>

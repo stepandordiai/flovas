@@ -24,7 +24,6 @@
 	"active_vacancy": "Вакансія активна",
 	"inactive_vacancy": "Вакансія неактивна",
 	"send": "Відправити",
-	"all_rights_reserved": "Всі права захищені",
 
 	"home": {
 		"title1": "Працевлаштування в місті",
@@ -47,7 +46,9 @@
 		"mon": "Пон",
 		"sat": "Суб",
 		"sunday": "Нед",
-		"closed": "Зачинено"
+		"closed": "Зачинено",
+		"all_rights_reserved": "Всі права захищені",
+		"website_created_by": "Сайт створено"
 	},
 
 	"contacts": {
