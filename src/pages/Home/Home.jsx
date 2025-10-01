@@ -81,7 +81,7 @@ const Home = ({ vacanciesData, isLoading, error, handleTelFormBanner }) => {
 				<title>
 					Працевлаштування по всій Чехії &bull; flovas {t("logo_title")}
 				</title>
-				<link rel="canonical" href="https://flovas.cz/" />
+				<link rel="canonical" href="https://www.flovas.cz/" />
 			</Helmet>
 			<main className="home" id="home">
 				<div className="home-inner">

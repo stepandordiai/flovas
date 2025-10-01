@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://flovas.cz/sitemap.xml
+Sitemap: https://www.flovas.cz/sitemap.xml

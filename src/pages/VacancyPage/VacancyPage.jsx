@@ -24,7 +24,6 @@ const VacancyPage = ({ vacanciesData }) => {
 				<title>
 					{vacancy.title} &bull; flovas {t("logo_title")}
 				</title>
-				<link rel="canonical" href={`https://flovas.cz/vacancy-page/${id}`} />
 			</Helmet>
 			<main className="vacancy-page">
 				<div className="vacancy-page__top">
