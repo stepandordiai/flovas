@@ -27,10 +27,7 @@ function App() {
 		const handleVacanciesData = async () => {
 			setIsLoading(true);
 			try {
-				const response = await axios(
-					"https://flovas-crud.onrender.com/api/vacancies"
-				);
-
+				const response = await axios(import.meta.env.VITE_API_URL);
 				setVacanciesData(response.data);
 				setIsLoading(false);
 			} catch (error) {
