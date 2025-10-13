@@ -97,7 +97,7 @@ const Footer = () => {
 					</div>
 					<div className="footer-bottom__item" style={{ "--position": "3" }}>
 						<p>
-							{t("footer.website_created_by")}{" "}
+							Website created by{" "}
 							<a href="https://www.heeeyooo.studio/" target="_blank">
 								heeeyooo studio
 							</a>
@@ -111,7 +111,7 @@ const Footer = () => {
 					</div>
 					<div className="footer-bottom__item" style={{ "--position": "6" }}>
 						<p>
-							{t("footer.website_created_by")}{" "}
+							Website created by{" "}
 							<a href="https://www.heeeyooo.studio/" target="_blank">
 								heeeyooo studio
 							</a>

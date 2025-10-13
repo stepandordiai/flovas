@@ -80,7 +80,7 @@
 	animation: autoRun 20s linear infinite;
 	//
 	animation-delay: calc(
-		(20s / var(--quantity)) * (var(--position) - 1)
+		(20s / var(--quantity)) * (var(--position) - 10)
 	) !important;
 	//
 
