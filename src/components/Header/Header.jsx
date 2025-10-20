@@ -1,8 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useEffect, useRef, useState } from "react";
 import LngSelect from "../LngSelect/LngSelect";
-import MenuBtn from "../MenuBtn/MenuBtn";
-import Menu from "../Menu/Menu";
 import { useLocation } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import "./Header.scss";
@@ -14,7 +12,9 @@ const Header = ({ vacanciesData }) => {
 
 	const indicatorRef = useRef(null);
 	const navRef = useRef(null);
+
 	const [indicatorStyle, setIndicatorStyle] = useState({});
+	const [menuActive, setMenuActive] = useState(false);
 
 	const updateIndicator = () => {
 		const activeLink = navRef.current?.querySelector(".nav-link.active");
@@ -90,11 +90,44 @@ const Header = ({ vacanciesData }) => {
 		resetActiveStates();
 	}, [pathname]);
 
+	// menu-btn
+
+	function toggleMenuBtn() {
+		setMenuActive((prev) => !prev);
+	}
+
+	// menu
+
+	useEffect(() => {
+		const closeMenuOnScroll = () => setMenuActive(false);
+
+		const closeMenuOnEsc = (e) => {
+			if (e.key === "Escape") {
+				setMenuActive((prev) => (prev ? false : prev));
+			}
+		};
+
+		document.addEventListener("keydown", closeMenuOnEsc);
+		document.addEventListener("scroll", closeMenuOnScroll);
+
+		return () => {
+			document.removeEventListener("scroll", closeMenuOnScroll);
+			document.removeEventListener("keydown", closeMenuOnEsc);
+		};
+	}, []);
+
 	return (
 		<header className="header">
 			<div className="header-top">
-				<MenuBtn />
-				<HashLink to={"/#home"} className="header__logo" smooth>
+				<button onClick={toggleMenuBtn} className="menu-btn">
+					<div className="menu-btn__title">{t("menu")}</div>
+					<div
+						className={`menu-btn__dot ${
+							menuActive ? "menu-btn__dot--active" : ""
+						}`}
+					></div>
+				</button>
+				<HashLink to="/#home" className="header__logo" smooth>
 					flovas <span>{t("logo_title")}</span>
 				</HashLink>
 				<nav ref={navRef} className="header__nav">
@@ -117,14 +150,54 @@ const Header = ({ vacanciesData }) => {
 						{t("web_app_title")}
 					</HashLink>
 					<div
-						className={"nav-link-indicator"}
+						className="nav-link-indicator"
 						ref={indicatorRef}
 						style={indicatorStyle}
 					></div>
 				</nav>
 				<LngSelect />
 			</div>
-			<Menu vacanciesData={vacanciesData} />
+
+			{/* menu */}
+
+			<div className={`menu ${menuActive ? "menu--active" : ""}`}>
+				<div className="menu__inner">
+					<div className="dot-link-container">
+						<div className="dot dot--active"></div>
+						<HashLink className="menu__link" to="/#home" smooth>
+							{t("home_title")}
+						</HashLink>
+					</div>
+					<div className="dot-link-container">
+						<div className="dot"></div>
+						<HashLink className="menu__link" to="/#vacancies" smooth>
+							{t("vacancies_title")}
+							<span className="menu__link-vacancies-qty">
+								{vacanciesData.length}
+							</span>
+						</HashLink>
+					</div>
+					<div className="dot-link-container">
+						<div className="dot"></div>
+						<HashLink className="menu__link" to="/#about" smooth>
+							{t("about_title")}{" "}
+							<span className="menu__link-extra">flovas</span>
+						</HashLink>
+					</div>
+					<div className="dot-link-container">
+						<div className="dot"></div>
+						<HashLink className="menu__link" to="/#contacts" smooth>
+							{t("contacts_title")}
+						</HashLink>
+					</div>
+					<div className="dot-link-container">
+						<div className="dot"></div>
+						<HashLink className="menu__link" to="/#web-app" smooth>
+							{t("web_app_title")}
+						</HashLink>
+					</div>
+				</div>
+			</div>
 		</header>
 	);
 };

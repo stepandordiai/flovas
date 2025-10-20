@@ -15,18 +15,14 @@ const FloatingContact = () => {
 	return (
 		<div className="floating-contact">
 			<div
-				className={
-					isActive
-						? "floating-contact-container floating-contact-container--active"
-						: "floating-contact-container"
-				}
+				className={`floating-contact-container ${
+					isActive ? "floating-contact-container--active" : ""
+				}`}
 			>
 				<div
-					className={
-						isActive
-							? "floating-contact-container-inner floating-contact-container-inner--active"
-							: "floating-contact-container-inner"
-					}
+					className={`floating-contact-container-inner ${
+						isActive ? "floating-contact-container-inner--active" : ""
+					}`}
 				>
 					<a
 						href="https://t.me/flovas_agency"
