@@ -13,6 +13,7 @@ import "./Home.scss";
 const Home = ({ vacanciesData, isLoading, error, handleTelFormBanner }) => {
 	const { t, i18n } = useTranslation();
 	const [text, setText] = useState(t("home.title1"));
+	const [contactUsActive, setContactUsActive] = useState(false);
 
 	useEffect(() => {
 		setText(t("home.title1"));
@@ -54,17 +55,6 @@ const Home = ({ vacanciesData, isLoading, error, handleTelFormBanner }) => {
 				.setAttribute("data-show", "");
 			customInterval = setInterval(rotateWord, 3000);
 		}, 1000);
-
-		document
-			.querySelector(".home__contact-us-link")
-			.addEventListener("click", () => {
-				document
-					.querySelector(".contact-us")
-					.classList.add("contact-us--active");
-				document
-					.querySelector(".contact-us__curtain")
-					.classList.add("contact-us__curtain--active");
-			});
 
 		return () => {
 			clearInterval(customInterval);
@@ -117,7 +107,12 @@ const Home = ({ vacanciesData, isLoading, error, handleTelFormBanner }) => {
 								</p>
 							</div>
 							<div className="home__link-container">
-								<button className="home__link home__contact-us-link">
+								<button
+									onClick={() => {
+										setContactUsActive(true);
+									}}
+									className="home__link home__contact-us-link"
+								>
 									{t("contact_us_title")}
 								</button>
 								<HashLink className="home__link" to="/#vacancies" smooth>
@@ -140,7 +135,10 @@ const Home = ({ vacanciesData, isLoading, error, handleTelFormBanner }) => {
 					<WebApp />
 				</div>
 			</main>
-			<ContactUs />
+			<ContactUs
+				contactUsActive={contactUsActive}
+				setContactUsActive={setContactUsActive}
+			/>
 		</>
 	);
 };

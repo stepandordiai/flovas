@@ -5,17 +5,8 @@ import tiktokIcon from "/icons/tik-tok.png";
 import facebookIcon from "/icons/facebook.png";
 import "./ContactUs.scss";
 
-const ContactUs = () => {
+const ContactUs = ({ contactUsActive, setContactUsActive }) => {
 	const { t } = useTranslation();
-
-	function removeContactUs() {
-		document
-			.querySelector(".contact-us")
-			.classList.remove("contact-us--active");
-		document
-			.querySelector(".contact-us__curtain")
-			.classList.remove("contact-us__curtain--active");
-	}
 
 	const instagramUrl = "https://www.instagram.com/flovas.agency/";
 	const tiktokUrl = "https://www.tiktok.com/@flovas.agency";
@@ -23,10 +14,18 @@ const ContactUs = () => {
 
 	return (
 		<>
-			<div className={"contact-us"}>
-				<div className={"contact-us__header"}>
-					<p className={"contact-us__title"}>{t("contact_us_title")}</p>
-					<button onClick={removeContactUs}>{t("close")}</button>
+			<div
+				className={`contact-us ${contactUsActive ? "contact-us--active" : ""}`}
+			>
+				<div className="contact-us__header">
+					<p className="contact-us__title">{t("contact_us_title")}</p>
+					<button
+						onClick={() => {
+							setContactUsActive(false);
+						}}
+					>
+						{t("close")}
+					</button>
 				</div>
 				<div className="contact-us__inner">
 					<div className="contact-us__info">
@@ -78,14 +77,21 @@ const ContactUs = () => {
 						<iframe
 							title="flovas agency location on Google Maps"
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d329.5935177795711!2d15.214144089939822!3d50.02410476646222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470c1551f5cf6ff7%3A0xf2d6322ddcdffd0!2sflovas%20s.r.o.!5e1!3m2!1sen!2scz!4v1752502315664!5m2!1sen!2scz"
-							width={"100%"}
+							width="100%"
 							loading="lazy"
 							style={{ borderRadius: "15px" }}
 						></iframe>
 					</div>
 				</div>
 			</div>
-			<div onClick={removeContactUs} className="contact-us__curtain"></div>
+			<div
+				onClick={() => {
+					setContactUsActive(false);
+				}}
+				className={`contact-us__curtain ${
+					contactUsActive ? "contact-us__curtain--active" : ""
+				}`}
+			></div>
 		</>
 	);
 };
