@@ -11,9 +11,7 @@ const TelFormBanner = ({ active, setActive }) => {
 	return (
 		<>
 			<div
-				className={
-					active ? "tel-form-banner tel-form-banner--active" : "tel-form-banner"
-				}
+				className={`tel-form-banner ${active ? "tel-form-banner--active" : ""}`}
 			>
 				<div
 					style={{
@@ -61,11 +59,9 @@ const TelFormBanner = ({ active, setActive }) => {
 			</div>
 			<div
 				onClick={closeTelFormBanner}
-				className={
-					active
-						? "tel-form-banner__curtain tel-form-banner__curtain--active"
-						: "tel-form-banner__curtain"
-				}
+				className={`tel-form-banner__curtain ${
+					active ? "tel-form-banner__curtain--active" : ""
+				}`}
 			></div>
 		</>
 	);

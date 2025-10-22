@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import linksData from "./../../assets/data/links-data.json";
 import { HashLink } from "react-router-hash-link";
 import instagramIcon from "/icons/instagram.png";
 import tiktokIcon from "/icons/tik-tok.png";
@@ -33,18 +34,13 @@ const Footer = () => {
 					<div className="footer__nav">
 						<p className="footer__nav-title">{t("footer.nav")}</p>
 						<div className="footer__nav-list">
-							<HashLink to="/#home" smooth>
-								{t("home_title")}
-							</HashLink>
-							<HashLink to="/#vacancies" smooth>
-								{t("vacancies_title")}
-							</HashLink>
-							<HashLink to="/#about" smooth>
-								{t("about_title")} flovas s.r.o.
-							</HashLink>
-							<HashLink to="/#contacts" smooth>
-								{t("contacts_title")}
-							</HashLink>
+							{linksData.map((link, index) => {
+								return (
+									<HashLink key={index} to={link.path} smooth>
+										{link.name}
+									</HashLink>
+								);
+							})}
 						</div>
 					</div>
 					<div className="footer__nav">

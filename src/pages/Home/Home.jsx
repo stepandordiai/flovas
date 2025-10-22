@@ -19,6 +19,7 @@ const Home = ({ vacanciesData, isLoading, error, handleTelFormBanner }) => {
 		setText(t("home.title1"));
 	}, [i18n.language]);
 
+	// FIXME:
 	useEffect(() => {
 		document.querySelectorAll(".blur-char").forEach((char, index) => {
 			setTimeout(() => {
@@ -47,6 +48,7 @@ const Home = ({ vacanciesData, isLoading, error, handleTelFormBanner }) => {
 		dataNext.setAttribute("data-show", "");
 	}
 
+	// FIXME:
 	useEffect(() => {
 		let customInterval;
 		setTimeout(() => {

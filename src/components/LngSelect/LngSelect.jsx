@@ -10,6 +10,13 @@ import "./LngSelect.scss";
 const LanguageSelect = () => {
 	const { t } = useTranslation();
 
+	const lngData = [
+		{ code: "uk", name: "Українська", flagIcon: ukIcon },
+		{ code: "cs", name: "Čeština", flagIcon: csIcon },
+		{ code: "sk", name: "Slovak", flagIcon: skIcon },
+		{ code: "en", name: "English", flagIcon: enIcon },
+	];
+
 	let lngSelectBtnTxt = "Українська";
 	let lngSelectBtnIcon = ukIcon;
 	useEffect(() => {
@@ -83,9 +90,6 @@ const LanguageSelect = () => {
 			break;
 	}
 
-	const inactiveLngOption = "lng-select__option";
-	const activeLngOption = "lng-select__option lng-select__option--active";
-
 	return (
 		<>
 			<div className="lng-select">
@@ -101,42 +105,22 @@ const LanguageSelect = () => {
 				</div>
 				<div className="lng-select-list-container">
 					<ul className="lng-select__list">
-						<li
-							className={
-								getLngStorage() === "uk" ? activeLngOption : inactiveLngOption
-							}
-							data-value="uk"
-						>
-							<span>Українська</span>
-							<img width={25} height={25} src={ukIcon} alt="" />
-						</li>
-						<li
-							className={
-								getLngStorage() === "cs" ? activeLngOption : inactiveLngOption
-							}
-							data-value="cs"
-						>
-							<span>Čeština</span>
-							<img width={25} height={25} src={csIcon} alt="" />
-						</li>
-						<li
-							className={
-								getLngStorage() === "sk" ? activeLngOption : inactiveLngOption
-							}
-							data-value="sk"
-						>
-							<span>Slovak</span>
-							<img width={25} height={25} src={skIcon} alt="" />
-						</li>
-						<li
-							className={
-								getLngStorage() === "en" ? activeLngOption : inactiveLngOption
-							}
-							data-value="en"
-						>
-							<span>English</span>
-							<img width={25} height={25} src={enIcon} alt="" />
-						</li>
+						{lngData.map((lng) => {
+							return (
+								<li
+									key={lng.code}
+									className={`lng-select__option ${
+										getLngStorage() === lng.code
+											? "lng-select__option--active"
+											: ""
+									}`}
+									data-value={lng.code}
+								>
+									<span>{lng.name}</span>
+									<img width={25} height={25} src={lng.flagIcon} alt="" />
+								</li>
+							);
+						})}
 					</ul>
 				</div>
 			</div>

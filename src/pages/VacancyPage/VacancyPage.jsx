@@ -8,7 +8,7 @@ import "./VacancyPage.scss";
 const VacancyPage = ({ vacanciesData }) => {
 	const { t } = useTranslation();
 
-	const { id } = useParams(null);
+	const { id } = useParams();
 
 	const vacancy = vacanciesData.find((vacancy) => vacancy._id === id);
 

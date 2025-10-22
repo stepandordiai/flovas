@@ -1,7 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useEffect, useRef, useState } from "react";
-import LngSelect from "../LngSelect/LngSelect";
 import { useLocation } from "react-router-dom";
+import linksData from "./../../assets/data/links-data.json";
+import LngSelect from "../LngSelect/LngSelect";
 import { HashLink } from "react-router-hash-link";
 import "./Header.scss";
 
@@ -46,6 +47,7 @@ const Header = ({ vacanciesData }) => {
 		updateIndicator();
 	}
 
+	// FIXME:
 	useEffect(() => {
 		const sections = [
 			document.querySelector(".home-top"),
@@ -103,12 +105,12 @@ const Header = ({ vacanciesData }) => {
 
 		const closeMenuOnEsc = (e) => {
 			if (e.key === "Escape") {
-				setMenuActive((prev) => (prev ? false : prev));
+				setMenuActive(false);
 			}
 		};
 
-		document.addEventListener("keydown", closeMenuOnEsc);
 		document.addEventListener("scroll", closeMenuOnScroll);
+		document.addEventListener("keydown", closeMenuOnEsc);
 
 		return () => {
 			document.removeEventListener("scroll", closeMenuOnScroll);
@@ -131,24 +133,23 @@ const Header = ({ vacanciesData }) => {
 					flovas <span>{t("logo_title")}</span>
 				</HashLink>
 				<nav ref={navRef} className="header__nav">
-					<HashLink className="nav-link active" to="/#home" smooth>
-						{t("home_title")}
-					</HashLink>
-					<HashLink className="nav-link" to="/#vacancies" smooth>
-						{t("vacancies_title")}
-						<span className="nav-link__vacancies-qty">
-							{vacanciesData.length}
-						</span>
-					</HashLink>
-					<HashLink className="nav-link" to="/#about" smooth>
-						{t("about_title")} Flovas
-					</HashLink>
-					<HashLink className="nav-link" to="/#contacts" smooth>
-						{t("contacts_title")}
-					</HashLink>
-					<HashLink className="nav-link" to="/#web-app" smooth>
-						{t("web_app_title")}
-					</HashLink>
+					{linksData.map((link, index) => {
+						return (
+							<HashLink
+								key={index}
+								className="nav-link active"
+								to={link.path}
+								smooth
+							>
+								{t(link.name)}
+								{link.vacanciesQty && (
+									<span className="nav-link__vacancies-qty">
+										{vacanciesData.length}
+									</span>
+								)}
+							</HashLink>
+						);
+					})}
 					<div
 						className="nav-link-indicator"
 						ref={indicatorRef}
@@ -162,40 +163,21 @@ const Header = ({ vacanciesData }) => {
 
 			<div className={`menu ${menuActive ? "menu--active" : ""}`}>
 				<div className="menu__inner">
-					<div className="dot-link-container">
-						<div className="dot dot--active"></div>
-						<HashLink className="menu__link" to="/#home" smooth>
-							{t("home_title")}
-						</HashLink>
-					</div>
-					<div className="dot-link-container">
-						<div className="dot"></div>
-						<HashLink className="menu__link" to="/#vacancies" smooth>
-							{t("vacancies_title")}
-							<span className="menu__link-vacancies-qty">
-								{vacanciesData.length}
-							</span>
-						</HashLink>
-					</div>
-					<div className="dot-link-container">
-						<div className="dot"></div>
-						<HashLink className="menu__link" to="/#about" smooth>
-							{t("about_title")}{" "}
-							<span className="menu__link-extra">flovas</span>
-						</HashLink>
-					</div>
-					<div className="dot-link-container">
-						<div className="dot"></div>
-						<HashLink className="menu__link" to="/#contacts" smooth>
-							{t("contacts_title")}
-						</HashLink>
-					</div>
-					<div className="dot-link-container">
-						<div className="dot"></div>
-						<HashLink className="menu__link" to="/#web-app" smooth>
-							{t("web_app_title")}
-						</HashLink>
-					</div>
+					{linksData.map((link, index) => {
+						return (
+							<div key={index} className="dot-link-container">
+								<div className="dot dot--active"></div>
+								<HashLink className="menu__link" to={link.path} smooth>
+									{t(link.name)}
+									{link.vacanciesQty && (
+										<span className="menu__link-vacancies-qty">
+											{vacanciesData.length}
+										</span>
+									)}
+								</HashLink>
+							</div>
+						);
+					})}
 				</div>
 			</div>
 		</header>

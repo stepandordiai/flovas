@@ -17,6 +17,22 @@ import "./About.scss";
 const About = ({ placesData, vacanciesData }) => {
 	const { t } = useTranslation();
 
+	const benefitsData = [
+		{ img: mapIcon, title: "about.our_advantages1" },
+		{ img: peopleIcon, title: "about.our_advantages2" },
+		{ img: moneyIcon, title: "about.our_advantages3" },
+		{ img: accommodationIcon, title: "about.our_advantages4" },
+		{ img: hiringIcon, title: "about.our_advantages5" },
+		{ img: documentsIcon, title: "about.our_advantages6" },
+		{ img: insuranceIcon, title: "about.our_advantages7" },
+		{ img: freeIcon, title: "about.our_advantages8" },
+		{ img: hourIcon, title: "about.our_advantages9" },
+		{ img: busIcon, title: "about.our_advantages10" },
+		{ img: supportIcon, title: "about.our_advantages11" },
+		{ img: misunderstandingIcon, title: "about.our_advantages12" },
+		{ img: movingIcon, title: "about.our_advantages13" },
+	];
+
 	return (
 		<div className="about" id="about">
 			<h2 className="about__title">{t("about_title")} FLOVAS s.r.o.</h2>
@@ -46,58 +62,14 @@ const About = ({ placesData, vacanciesData }) => {
 				{t("about.our_advantages_title")}
 			</h3>
 			<ul className="about__benefits-list">
-				<li className="about__benefits-item">
-					<img src={mapIcon} width={50} height={50} alt="" />
-					<span>{t("about.our_advantages1")}</span>
-				</li>
-				<li className="about__benefits-item">
-					<img src={peopleIcon} width={50} height={50} alt="" />
-					<span>{t("about.our_advantages2")}</span>
-				</li>
-				<li className="about__benefits-item">
-					<img src={moneyIcon} width={50} height={50} alt="" />
-					<span>{t("about.our_advantages3")}</span>
-				</li>
-				<li className="about__benefits-item">
-					<img src={accommodationIcon} width={50} height={50} alt="" />
-					<span>{t("about.our_advantages4")}</span>
-				</li>
-				<li className="about__benefits-item">
-					<img src={hiringIcon} width={50} height={50} alt="" />
-					<span>{t("about.our_advantages5")}</span>
-				</li>
-				<li className="about__benefits-item">
-					<img src={documentsIcon} width={50} height={50} alt="" />
-					<span>{t("about.our_advantages6")}</span>
-				</li>
-				<li className="about__benefits-item">
-					<img src={insuranceIcon} width={50} height={50} alt="" />
-					<span>{t("about.our_advantages7")}</span>
-				</li>
-				<li className="about__benefits-item">
-					<img src={freeIcon} width={50} height={50} alt="" />
-					<span>{t("about.our_advantages9")}</span>
-				</li>
-				<li className="about__benefits-item">
-					<img src={hourIcon} width={50} height={50} alt="" />
-					<span>{t("about.our_advantages10")}</span>
-				</li>
-				<li className="about__benefits-item">
-					<img src={busIcon} width={50} height={50} alt="" />
-					<span>{t("about.our_advantages11")}</span>
-				</li>
-				<li className="about__benefits-item">
-					<img src={supportIcon} width={50} height={50} alt="" />
-					<span>{t("about.our_advantages12")}</span>
-				</li>
-				<li className="about__benefits-item">
-					<img src={misunderstandingIcon} width={50} height={50} alt="" />
-					<span>{t("about.our_advantages13")}</span>
-				</li>
-				<li className="about__benefits-item">
-					<img src={movingIcon} width={50} height={50} alt="" />
-					<span>{t("about.our_advantages14")}</span>
-				</li>
+				{benefitsData.map((benefit) => {
+					return (
+						<li className="about__benefits-item">
+							<img src={benefit.img} width={50} height={50} alt="" />
+							<span>{t(benefit.title)}</span>
+						</li>
+					);
+				})}
 			</ul>
 			<h3 className="about__goal-title">{t("about.goal_title")}</h3>
 			<p className="about__goal-desc">{t("about.goal_desc")}</p>
