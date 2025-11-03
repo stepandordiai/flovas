@@ -10,11 +10,6 @@
 	justify-content: center;
 	align-items: center;
 	animation: animateLoading 0.5s 1.5s forwards;
-
-	p {
-		font-size: 1.25rem;
-		font-weight: 500;
-	}
 }
 
 @keyframes animateLoading {
@@ -23,13 +18,17 @@
 	}
 }
 
-.loading__char {
-	filter: blur(10px);
+.loading__title {
+	font-size: 1.25rem;
+	font-weight: 500;
 	opacity: 0;
-	transition: all 0.3s;
+	filter: blur(10px);
+	animation: animateLoadingTitle 0.5s 0.5s forwards;
 }
 
-.loading__char--active {
-	opacity: 1 !important;
-	filter: blur(0) !important;
+@keyframes animateLoadingTitle {
+	to {
+		opacity: 1;
+		filter: blur(0);
+	}
 }

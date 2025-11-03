@@ -5,9 +5,10 @@ export default function AppWrapper({ children }) {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
+		// TODO:
 		const load = async () => {
 			// Load global config, auth, etc.
-			await new Promise((resolve) => setTimeout(resolve, 2000));
+			await new Promise((resolve) => setTimeout(resolve, 3000));
 			setLoading(false);
 		};
 

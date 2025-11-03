@@ -94,9 +94,7 @@ const Header = ({ vacanciesData }) => {
 
 	// menu-btn
 
-	function toggleMenuBtn() {
-		setMenuActive((prev) => !prev);
-	}
+	const toggleMenuBtn = () => setMenuActive((prev) => !prev);
 
 	// menu
 
@@ -104,9 +102,7 @@ const Header = ({ vacanciesData }) => {
 		const closeMenuOnScroll = () => setMenuActive(false);
 
 		const closeMenuOnEsc = (e) => {
-			if (e.key === "Escape") {
-				setMenuActive(false);
-			}
+			if (e.key === "Escape") setMenuActive(false);
 		};
 
 		document.addEventListener("scroll", closeMenuOnScroll);

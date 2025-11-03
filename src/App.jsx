@@ -19,26 +19,23 @@ function App() {
 
 	// TelFormBanner
 	const [active, setActive] = useState(false);
-	const handleTelFormBanner = () => {
-		setActive(true);
-	};
+	const handleTelFormBanner = () => setActive(true);
 
 	useEffect(() => {
-		const handleVacanciesData = async () => {
+		const getVacanciesData = async () => {
 			setIsLoading(true);
 			try {
 				const response = await axios(import.meta.env.VITE_API_URL);
 				setVacanciesData(response.data);
-				setIsLoading(false);
 			} catch (error) {
-				console.log(error);
 				setError(error);
+				console.log(error);
 			} finally {
 				setIsLoading(false);
 			}
 		};
 
-		handleVacanciesData();
+		getVacanciesData();
 	}, []);
 
 	return (

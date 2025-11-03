@@ -1,0 +1,17 @@
+[
+	{
+		"title": "Telegram",
+		"contactUrl": "https://t.me/flovas_agency",
+		"contactImg": "/icons/telegram.png"
+	},
+	{
+		"title": "WhatsApp",
+		"contactUrl": "https://wa.me/420777957290",
+		"contactImg": "/icons/whatsapp.png"
+	},
+	{
+		"title": "Viber",
+		"contactUrl": "viber://chat?number=+420777957290",
+		"contactImg": "/icons/viber.png"
+	}
+]

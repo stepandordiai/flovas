@@ -4,10 +4,6 @@ import "./TelFormBanner.scss";
 const TelFormBanner = ({ active, setActive }) => {
 	const { t } = useTranslation();
 
-	const closeTelFormBanner = () => {
-		setActive(false);
-	};
-
 	return (
 		<>
 			<div
@@ -22,7 +18,7 @@ const TelFormBanner = ({ active, setActive }) => {
 					}}
 				>
 					<p className="tel-form-banner__title">{t("tel_form_banner.title")}</p>
-					<button onClick={closeTelFormBanner}>{t("close")}</button>
+					<button onClick={() => setActive(false)}>{t("close")}</button>
 				</div>
 				<form
 					className="tel-form-banner__form"
@@ -58,7 +54,7 @@ const TelFormBanner = ({ active, setActive }) => {
 				</form>
 			</div>
 			<div
-				onClick={closeTelFormBanner}
+				onClick={() => setActive(false)}
 				className={`tel-form-banner__curtain ${
 					active ? "tel-form-banner__curtain--active" : ""
 				}`}

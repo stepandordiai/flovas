@@ -1,0 +1,20 @@
+[
+	{
+		"id": 1,
+		"title": "Instagram",
+		"socialUrl": "https://www.instagram.com/flovas.agency/",
+		"socialImg": "/icons/instagram.png"
+	},
+	{
+		"id": 2,
+		"title": "TikTok",
+		"socialUrl": "https://www.tiktok.com/@flovas.agency",
+		"socialImg": "/icons/tik-tok.png"
+	},
+	{
+		"id": 3,
+		"title": "Facebook",
+		"socialUrl": "https://www.facebook.com/profile.php?id=61565186673220",
+		"socialImg": "/icons/facebook.png"
+	}
+]

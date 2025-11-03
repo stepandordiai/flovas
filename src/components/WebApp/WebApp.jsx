@@ -14,7 +14,7 @@ const WebApp = () => {
 				<ul className="web-app__list">
 					<li>
 						{t("web_app.item_1_start")}{" "}
-						<a href="https://flovas.cz/" target="_blank">
+						<a href="https://www.flovas.cz/" target="_blank">
 							www.flovas.cz
 						</a>{" "}
 						{t("web_app.item_1_end")}
@@ -26,7 +26,7 @@ const WebApp = () => {
 					<li>{t("web_app.item_3")}</li>
 					<li>
 						{t("web_app.item_4_start")}{" "}
-						<a href="https://flovas.cz/" target="_blank">
+						<a href="https://www.flovas.cz/" target="_blank">
 							www.flovas.cz
 						</a>{" "}
 						{t("web_app.item_4_end")}

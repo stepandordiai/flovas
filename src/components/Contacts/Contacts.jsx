@@ -1,16 +1,10 @@
 import { useTranslation } from "react-i18next";
 import handleCopy from "../../utils/handleCopy";
-import instagramIcon from "/icons/instagram.png";
-import tiktokIcon from "/icons/tik-tok.png";
-import facebookIcon from "/icons/facebook.png";
+import socialsData from "./../../assets/data/socials-data.json";
 import "./Contacts.scss";
 
 const Contacts = () => {
 	const { t } = useTranslation();
-
-	const instagramUrl = "https://www.instagram.com/flovas.agency/";
-	const tiktokUrl = "https://www.tiktok.com/@flovas.agency";
-	const facebookUrl = "https://www.facebook.com/profile.php?id=61565186673220";
 
 	return (
 		<div className="contacts" id="contacts">
@@ -42,15 +36,23 @@ const Contacts = () => {
 					</div>
 					<h3 className="contacts__details-title">{t("contacts.socials")}</h3>
 					<div className="contacts__socials-container">
-						<a href={instagramUrl} target="_blank" title="Instagram">
-							<img width={40} height={40} src={instagramIcon} alt="Instagram" />
-						</a>
-						<a href={tiktokUrl} target="_blank" title="TikTok">
-							<img width={40} height={40} src={tiktokIcon} alt="TikTok" />
-						</a>
-						<a href={facebookUrl} target="_blank" title="Facebook">
-							<img width={40} height={40} src={facebookIcon} alt="Facebook" />
-						</a>
+						{socialsData.map((social) => {
+							return (
+								<a
+									key={social.id}
+									href={social.socialUrl}
+									target="_blank"
+									title={social.title}
+								>
+									<img
+										width={40}
+										height={40}
+										src={social.socialImg}
+										alt={social.title}
+									/>
+								</a>
+							);
+						})}
 					</div>
 				</div>
 				<div className="contacts__map">
