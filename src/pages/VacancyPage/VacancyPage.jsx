@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
+import NotFound from "../NotFound/NotFound";
 import backIcon from "/icons/back.png";
 import "./VacancyPage.scss";
 
@@ -12,7 +13,9 @@ const VacancyPage = ({ vacanciesData }) => {
 
 	const vacancy = vacanciesData.find((vacancy) => vacancy._id === id);
 
-	if (!vacancy) return;
+	if (!vacancy) {
+		return <NotFound />;
+	}
 
 	return (
 		<>

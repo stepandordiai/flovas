@@ -10,6 +10,7 @@ import ScrollToTop from "./utils/ScrollToTop";
 import FloatingContact from "./components/FloatingContact/FloatingContact";
 import AppWrapper from "./AppWrapper";
 import TelFormBanner from "./components/TelFormBanner/TelFormBanner";
+import NotFound from "./pages/NotFound/NotFound";
 import "./scss/App.scss";
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
 						path="/vacancy-page/:id"
 						element={<VacancyPage vacanciesData={vacanciesData} />}
 					/>
+					<Route path="*" element={<NotFound />} />
 				</Routes>
 				<div className="empty-div"></div>
 				<Footer />
