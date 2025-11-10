@@ -9,6 +9,7 @@ const NotFound = () => {
 		<>
 			<Helmet>
 				<title>Сторінку не знайдено &bull; flovas {t("logo_title")}</title>
+				<meta name="robots" content="noindex, nofollow" />
 			</Helmet>
 			<div className="not-found">
 				<span style={{ fontWeight: 500, fontSize: "3rem" }}>404</span>
