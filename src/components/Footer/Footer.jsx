@@ -39,7 +39,7 @@ const Footer = () => {
 							{linksData.map((link, index) => {
 								return (
 									<HashLink key={index} to={link.path} smooth>
-										{link.name}
+										{t(link.name)}
 									</HashLink>
 								);
 							})}
