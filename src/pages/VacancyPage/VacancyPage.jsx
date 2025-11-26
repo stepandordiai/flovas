@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import NotFound from "../NotFound/NotFound";
-import backIcon from "/icons/back.png";
 import "./VacancyPage.scss";
 
 const VacancyPage = ({ vacanciesData }) => {
@@ -31,7 +30,19 @@ const VacancyPage = ({ vacanciesData }) => {
 			<main className="vacancy-page">
 				<div className="vacancy-page__top">
 					<HashLink className="vacancy-page__top-link" to="/#vacancies">
-						<img src={backIcon} width={20} height={20} alt="" />
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="20"
+							height="20"
+							fill="currentColor"
+							className="bi bi-arrow-left"
+							viewBox="0 0 16 16"
+						>
+							<path
+								fillRule="evenodd"
+								d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
+							/>
+						</svg>
 						<span>Всі вакансії</span>
 					</HashLink>
 				</div>

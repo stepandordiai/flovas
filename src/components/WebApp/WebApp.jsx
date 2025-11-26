@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import img from "/Home Screen Widgets - iPhone.png";
-import shareIcon from "/icons/share.png";
+import shareIcon from "/icons/share.svg";
 import "./WebApp.scss";
 
 const WebApp = () => {
@@ -21,7 +21,8 @@ const WebApp = () => {
 					</li>
 					<li>
 						{t("web_app.item_2_start")}{" "}
-						<img width={20} src={shareIcon} alt="" /> {t("web_app.item_2_end")}
+						<img width={20} height={20} src={shareIcon} alt="" />{" "}
+						{t("web_app.item_2_end")}
 					</li>
 					<li>{t("web_app.item_3")}</li>
 					<li>

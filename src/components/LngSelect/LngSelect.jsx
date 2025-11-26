@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import i18n from "i18next";
-import ukIcon from "/lng-icons/ukraine.png";
-import csIcon from "/lng-icons/czech-republic.png";
-import skIcon from "/lng-icons/slovakia.png";
-import enIcon from "/lng-icons/united-states.png";
+import ukIcon from "/lng-icons/uk.svg";
+import csIcon from "/lng-icons/cs.svg";
+import skIcon from "/lng-icons/sk.svg";
+import enIcon from "/lng-icons/en.svg";
 import "./LngSelect.scss";
 
 const lngData = [
@@ -67,7 +67,7 @@ const LanguageSelect = () => {
 									}`}
 								>
 									<span>{lng.name}</span>
-									<img width={25} height={25} src={lng.flagIcon} alt="" />
+									<img width={24} height={24} src={lng.flagIcon} alt="" />
 								</li>
 							);
 						})}

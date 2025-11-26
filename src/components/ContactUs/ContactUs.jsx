@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import handleCopy from "../../utils/handleCopy";
-import socialsData from "./../../assets/data/socials-data.json";
+// import socialsData from "./../../assets/data/socials-data.json";
+import socialsData from "../../assets/data/socialsData";
 import "./ContactUs.scss";
 
 const ContactUs = ({ contactUsActive, setContactUsActive }) => {
@@ -51,6 +52,7 @@ const ContactUs = ({ contactUsActive, setContactUsActive }) => {
 						<p className="contact-us__socials-title">{t("follow_us")}</p>
 						<div>
 							{socialsData.map((social) => {
+								const Icon = social.socialImg;
 								return (
 									<a
 										key={social.id}
@@ -58,12 +60,7 @@ const ContactUs = ({ contactUsActive, setContactUsActive }) => {
 										title={social.title}
 										target="_blank"
 									>
-										<img
-											width={40}
-											height={40}
-											src={social.socialImg}
-											alt={social.title}
-										/>
+										<Icon />
 									</a>
 								);
 							})}

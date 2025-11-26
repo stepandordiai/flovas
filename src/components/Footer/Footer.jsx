@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import linksData from "./../../assets/data/links-data.json";
-import socialsData from "./../../assets/data/socials-data.json";
+import socialsData from "../../assets/data/socialsData";
 import { HashLink } from "react-router-hash-link";
 import "./Footer.scss";
 
@@ -14,6 +14,7 @@ const Footer = () => {
 					<p className="footer__logo">flovas</p>
 					<div className="footer__socials">
 						{socialsData.map((social) => {
+							const Icon = social.socialImg;
 							return (
 								<a
 									key={social.id}
@@ -21,12 +22,7 @@ const Footer = () => {
 									title={social.title}
 									target="_blank"
 								>
-									<img
-										width={40}
-										height={40}
-										src={social.socialImg}
-										alt={social.title}
-									/>
+									<Icon />
 								</a>
 							);
 						})}

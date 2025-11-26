@@ -1,6 +1,6 @@
 import { useState } from "react";
-import contactsData from "./../../assets/data/contacts-data.json";
-import messageIcon from "/icons/message.png";
+import contactsData from "../../assets/data/contactsData";
+import messageIcon from "/icons/message.svg";
 import "./FloatingContact.scss";
 
 const FloatingContact = () => {
@@ -21,6 +21,7 @@ const FloatingContact = () => {
 					}`}
 				>
 					{contactsData.map((contact, index) => {
+						const Icon = contact.contactImg;
 						return (
 							<a
 								key={index}
@@ -28,13 +29,7 @@ const FloatingContact = () => {
 								target="_blank"
 								data-value={contact.title}
 							>
-								<img
-									title={contact.title}
-									width={40}
-									height={40}
-									src={contact.contactImg}
-									alt={contact.title}
-								/>
+								<Icon />
 							</a>
 						);
 					})}

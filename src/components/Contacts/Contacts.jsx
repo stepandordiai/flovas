@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import handleCopy from "../../utils/handleCopy";
-import socialsData from "./../../assets/data/socials-data.json";
+// import socialsData from "./../../assets/data/socials-data.json";
+import socialsData from "../../assets/data/socialsData";
 import "./Contacts.scss";
 
 const Contacts = () => {
@@ -37,6 +38,7 @@ const Contacts = () => {
 					<h3 className="contacts__details-title">{t("contacts.socials")}</h3>
 					<div className="contacts__socials-container">
 						{socialsData.map((social) => {
+							const Icon = social.socialImg;
 							return (
 								<a
 									key={social.id}
@@ -44,12 +46,7 @@ const Contacts = () => {
 									target="_blank"
 									title={social.title}
 								>
-									<img
-										width={40}
-										height={40}
-										src={social.socialImg}
-										alt={social.title}
-									/>
+									<Icon />
 								</a>
 							);
 						})}
