@@ -102,14 +102,16 @@ const Header = ({ vacanciesData }) => {
 		const closeMenuOnScroll = () => setMenuActive(false);
 
 		const closeMenuOnEsc = (e) => {
-			if (e.key === "Escape") setMenuActive(false);
+			// TODO: code is better than key
+			if (e.code === "Escape") setMenuActive(false);
 		};
 
-		document.addEventListener("scroll", closeMenuOnScroll);
+		// TODO: window is better than document for scroll
+		window.addEventListener("scroll", closeMenuOnScroll);
 		document.addEventListener("keydown", closeMenuOnEsc);
 
 		return () => {
-			document.removeEventListener("scroll", closeMenuOnScroll);
+			window.removeEventListener("scroll", closeMenuOnScroll);
 			document.removeEventListener("keydown", closeMenuOnEsc);
 		};
 	}, []);
@@ -118,12 +120,12 @@ const Header = ({ vacanciesData }) => {
 		<header className="header">
 			<div className="header-top">
 				<button onClick={toggleMenuBtn} className="menu-btn">
-					<div className="menu-btn__title">{t("menu")}</div>
-					<div
+					<span className="menu-btn__title">{t("menu")}</span>
+					<span
 						className={`menu-btn__dot ${
 							menuActive ? "menu-btn__dot--active" : ""
 						}`}
-					></div>
+					></span>
 				</button>
 				<HashLink to="/#home" className="header__logo" smooth>
 					flovas <span>{t("logo_title")}</span>
