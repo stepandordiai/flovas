@@ -38,7 +38,7 @@ const Vacancy = ({ vacancy, handleTelFormBanner }) => {
 				<p style={{ fontWeight: 500 }}>{title}</p>
 			</div>
 			<div className="vacancy__link-container">
-				<NavLink className={"vacancy__link"} to={`/vacancy-page/${_id}`}>
+				<NavLink className="vacancy__link" to={`/vacancy-page/${_id}`}>
 					{t("more_info_btn")}
 				</NavLink>
 				<button onClick={handleTelFormBanner} className="vacancy__btn">

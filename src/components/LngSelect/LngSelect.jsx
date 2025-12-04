@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import i18n from "i18next";
+import classNames from "classnames";
 import ukIcon from "/lng-icons/uk.svg";
 import csIcon from "/lng-icons/cs.svg";
 import skIcon from "/lng-icons/sk.svg";
@@ -33,19 +34,11 @@ const LanguageSelect = () => {
 
 	return (
 		<>
-			<div className="lng-select">
-				<button
-					onClick={() => setLngSelectActive(true)}
-					className="lng-select__btn"
-				>
-					<span className="lng-select__btn-value">{selectedLng.name}</span>
-					<img width={25} height={25} src={selectedLng.flagIcon} alt="" />
-				</button>
-			</div>
+			{/* lng-select__banner */}
 			<div
-				className={`lng-select-banner ${
-					lngSelectActive ? "lng-select__list--visible" : ""
-				}`}
+				className={classNames("lng-select-banner", {
+					"lng-select__list--visible": lngSelectActive,
+				})}
 			>
 				<div className="lng-select-banner__header">
 					<p className="lng-select-banner__title">{t("choose_lng_title")}</p>
@@ -60,11 +53,9 @@ const LanguageSelect = () => {
 								<li
 									onClick={() => handleLngOption(lng)}
 									key={lng.code}
-									className={`lng-select__option ${
-										selectedLng.code === lng.code
-											? "lng-select__option--active"
-											: ""
-									}`}
+									className={classNames("lng-select__option", {
+										"lng-select__option--active": selectedLng.code === lng.code,
+									})}
 								>
 									<span>{lng.name}</span>
 									<img width={24} height={24} src={lng.flagIcon} alt="" />
@@ -74,12 +65,23 @@ const LanguageSelect = () => {
 					</ul>
 				</div>
 			</div>
+			{/* lng-select__curtain */}
 			<div
 				onClick={() => setLngSelectActive(false)}
-				className={`lng-select__curtain ${
-					lngSelectActive ? "lng-select__curtain--active" : ""
-				}`}
+				className={classNames("lng-select__curtain", {
+					"lng-select__curtain--active": lngSelectActive,
+				})}
 			></div>
+			{/* lng-select */}
+			<div className="lng-select">
+				<button
+					onClick={() => setLngSelectActive(true)}
+					className="lng-select__btn"
+				>
+					<span className="lng-select__btn-value">{selectedLng.name}</span>
+					<img width={25} height={25} src={selectedLng.flagIcon} alt="" />
+				</button>
+			</div>
 		</>
 	);
 };

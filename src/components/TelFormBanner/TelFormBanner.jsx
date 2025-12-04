@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 import "./TelFormBanner.scss";
 
 const TelFormBanner = ({ active, setActive }) => {
@@ -7,7 +8,9 @@ const TelFormBanner = ({ active, setActive }) => {
 	return (
 		<>
 			<div
-				className={`tel-form-banner ${active ? "tel-form-banner--active" : ""}`}
+				className={classNames("tel-form-banner", {
+					"tel-form-banner--active": active,
+				})}
 			>
 				<div
 					style={{
@@ -55,9 +58,9 @@ const TelFormBanner = ({ active, setActive }) => {
 			</div>
 			<div
 				onClick={() => setActive(false)}
-				className={`tel-form-banner__curtain ${
-					active ? "tel-form-banner__curtain--active" : ""
-				}`}
+				className={classNames("tel-form-banner__curtain", {
+					"tel-form-banner__curtain--active": active,
+				})}
 			></div>
 		</>
 	);

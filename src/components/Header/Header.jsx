@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import linksData from "./../../assets/data/links-data.json";
 import LngSelect from "../LngSelect/LngSelect";
 import { HashLink } from "react-router-hash-link";
+import classNames from "classnames";
 import "./Header.scss";
 
 const Header = ({ vacanciesData }) => {
@@ -122,9 +123,9 @@ const Header = ({ vacanciesData }) => {
 				<button onClick={toggleMenuBtn} className="menu-btn">
 					<span className="menu-btn__title">{t("menu")}</span>
 					<span
-						className={`menu-btn__dot ${
-							menuActive ? "menu-btn__dot--active" : ""
-						}`}
+						className={classNames("menu-btn__dot", {
+							"menu-btn__dot--active": menuActive,
+						})}
 					></span>
 				</button>
 				<HashLink to="/#home" className="header__logo" smooth>
@@ -159,7 +160,11 @@ const Header = ({ vacanciesData }) => {
 
 			{/* menu */}
 
-			<div className={`menu ${menuActive ? "menu--active" : ""}`}>
+			<div
+				className={classNames("menu", {
+					"menu--active": menuActive,
+				})}
+			>
 				<div className="menu__inner">
 					{linksData.map((link, index) => {
 						return (

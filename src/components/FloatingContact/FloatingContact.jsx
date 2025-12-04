@@ -1,5 +1,6 @@
 import { useState } from "react";
 import contactsData from "../../assets/data/contactsData";
+import classNames from "classnames";
 import messageIcon from "/icons/message.svg";
 import "./FloatingContact.scss";
 
@@ -11,14 +12,14 @@ const FloatingContact = () => {
 	return (
 		<div className="floating-contact">
 			<div
-				className={`floating-contact-container ${
-					isActive ? "floating-contact-container--active" : ""
-				}`}
+				className={classNames("floating-contact-container", {
+					"floating-contact-container--active": isActive,
+				})}
 			>
 				<div
-					className={`floating-contact-container-inner ${
-						isActive ? "floating-contact-container-inner--active" : ""
-					}`}
+					className={classNames("floating-contact-container-inner", {
+						"floating-contact-container-inner--active": isActive,
+					})}
 				>
 					{contactsData.map((contact, index) => {
 						const Icon = contact.contactImg;

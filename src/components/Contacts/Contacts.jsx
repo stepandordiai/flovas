@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import handleCopy from "../../utils/handleCopy";
-// import socialsData from "./../../assets/data/socials-data.json";
 import socialsData from "../../assets/data/socialsData";
 import "./Contacts.scss";
 

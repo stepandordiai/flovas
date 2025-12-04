@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import handleCopy from "../../utils/handleCopy";
-// import socialsData from "./../../assets/data/socials-data.json";
 import socialsData from "../../assets/data/socialsData";
+import classNames from "classnames";
 import "./ContactUs.scss";
 
 const ContactUs = ({ contactUsActive, setContactUsActive }) => {
@@ -10,7 +10,9 @@ const ContactUs = ({ contactUsActive, setContactUsActive }) => {
 	return (
 		<>
 			<div
-				className={`contact-us ${contactUsActive ? "contact-us--active" : ""}`}
+				className={classNames("contact-us", {
+					"contact-us--active": contactUsActive,
+				})}
 			>
 				<div className="contact-us__header">
 					<p className="contact-us__title">{t("contact_us_title")}</p>
@@ -82,9 +84,9 @@ const ContactUs = ({ contactUsActive, setContactUsActive }) => {
 				onClick={() => {
 					setContactUsActive(false);
 				}}
-				className={`contact-us__curtain ${
-					contactUsActive ? "contact-us__curtain--active" : ""
-				}`}
+				className={classNames("contact-us__curtain", {
+					"contact-us__curtain--active": contactUsActive,
+				})}
 			></div>
 		</>
 	);
