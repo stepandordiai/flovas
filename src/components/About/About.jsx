@@ -34,7 +34,7 @@ const About = ({ placesData, vacanciesData }) => {
 	const { t } = useTranslation();
 
 	return (
-		<div className="about" id="about">
+		<section className="about" id="about">
 			<h2 className="about__title">{t("about_title")} FLOVAS s.r.o.</h2>
 			<p className="about__desc">{t("about.desc")}</p>
 			<div className="about-milestones">
@@ -73,7 +73,7 @@ const About = ({ placesData, vacanciesData }) => {
 			</ul>
 			<h3 className="about__goal-title">{t("about.goal_title")}</h3>
 			<p className="about__goal-desc">{t("about.goal_desc")}</p>
-		</div>
+		</section>
 	);
 };
 

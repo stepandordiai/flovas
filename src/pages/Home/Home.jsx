@@ -75,10 +75,11 @@ const Home = ({ vacanciesData, isLoading, error, handleTelFormBanner }) => {
 				</title>
 				<link rel="canonical" href="https://www.flovas.cz/" />
 			</Helmet>
+
 			<main className="home" id="home">
 				<div className="home-inner">
 					<div className="home-inner-container">
-						<div className="home-top">
+						<section className="home-top">
 							<div className="home__title">
 								<p>
 									{text.split("").map((char, index) => {
@@ -124,7 +125,7 @@ const Home = ({ vacanciesData, isLoading, error, handleTelFormBanner }) => {
 									</span>
 								</HashLink>
 							</div>
-						</div>
+						</section>
 						<Vacancies
 							vacanciesData={vacanciesData}
 							isLoading={isLoading}
@@ -137,6 +138,7 @@ const Home = ({ vacanciesData, isLoading, error, handleTelFormBanner }) => {
 					<WebApp />
 				</div>
 			</main>
+
 			<ContactUs
 				contactUsActive={contactUsActive}
 				setContactUsActive={setContactUsActive}

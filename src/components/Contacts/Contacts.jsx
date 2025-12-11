@@ -7,7 +7,7 @@ const Contacts = () => {
 	const { t } = useTranslation();
 
 	return (
-		<div className="contacts" id="contacts">
+		<section className="contacts" id="contacts">
 			<h2 className="contacts__title">{t("contacts_title")}</h2>
 			<div className="contacts__inner">
 				<div className="contacts__details">
@@ -61,7 +61,7 @@ const Contacts = () => {
 					></iframe>
 				</div>
 			</div>
-		</div>
+		</section>
 	);
 };
 

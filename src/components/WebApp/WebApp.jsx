@@ -7,7 +7,7 @@ const WebApp = () => {
 	const { t } = useTranslation();
 
 	return (
-		<div className="web-app" id="web-app">
+		<section className="web-app" id="web-app">
 			<h2 className="web-app__title">flovas {t("web_app.title")}</h2>
 			<div className="web-app__container">
 				<img width={200} src={img} alt="Flovas app sample on mobile" />
@@ -34,7 +34,7 @@ const WebApp = () => {
 					</li>
 				</ul>
 			</div>
-		</div>
+		</section>
 	);
 };
 

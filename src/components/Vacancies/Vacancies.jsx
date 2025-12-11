@@ -11,7 +11,7 @@ const Vacancies = ({
 	const { t } = useTranslation();
 
 	return (
-		<div className="vacancies" id="vacancies">
+		<section className="vacancies" id="vacancies">
 			<h2 className="vacancies__title">{t("vacancies_title")}</h2>
 			{isLoading ? (
 				<div className="vacancies-loading">
@@ -40,7 +40,7 @@ const Vacancies = ({
 			) : (
 				<p style={{ textAlign: "center" }}>{t("vacancies_r_empty")}.</p>
 			)}
-		</div>
+		</section>
 	);
 };
 
