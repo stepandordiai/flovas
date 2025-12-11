@@ -16,7 +16,7 @@ const Header = ({ vacanciesData }) => {
 	const navRef = useRef(null);
 
 	const [indicatorStyle, setIndicatorStyle] = useState({});
-	const [menuActive, setMenuActive] = useState(false);
+	const [menuOpen, setMenuOpen] = useState(false);
 
 	const updateIndicator = () => {
 		const activeLink = navRef.current?.querySelector(".nav-link.active");
@@ -75,6 +75,7 @@ const Header = ({ vacanciesData }) => {
 		};
 	}, [pathname, i18n.language]);
 
+	// FIXME:
 	useEffect(() => {
 		const navLinks = document.querySelectorAll(".nav-link");
 		const menuDots = document.querySelectorAll(".dot");
@@ -93,18 +94,13 @@ const Header = ({ vacanciesData }) => {
 		resetActiveStates();
 	}, [pathname]);
 
-	// menu-btn
-
-	const toggleMenuBtn = () => setMenuActive((prev) => !prev);
-
 	// menu
 
 	useEffect(() => {
-		const closeMenuOnScroll = () => setMenuActive(false);
+		const closeMenuOnScroll = () => setMenuOpen(false);
 
 		const closeMenuOnEsc = (e) => {
-			// TODO: code is better than key
-			if (e.code === "Escape") setMenuActive(false);
+			if (e.key === "Escape") setMenuOpen(false);
 		};
 
 		// TODO: window is better than document for scroll
@@ -117,14 +113,21 @@ const Header = ({ vacanciesData }) => {
 		};
 	}, []);
 
+	const toggleMenu = () => setMenuOpen((prev) => !prev);
+
 	return (
 		<header className="header">
 			<div className="header-top">
-				<button onClick={toggleMenuBtn} className="menu-btn">
+				<button
+					onClick={toggleMenu}
+					className="menu-btn"
+					aria-expanded={menuOpen}
+					aria-controls="menu"
+				>
 					<span className="menu-btn__title">{t("menu")}</span>
 					<span
 						className={classNames("menu-btn__dot", {
-							"menu-btn__dot--active": menuActive,
+							"menu-btn__dot--active": menuOpen,
 						})}
 					></span>
 				</button>
@@ -160,10 +163,12 @@ const Header = ({ vacanciesData }) => {
 
 			{/* menu */}
 
-			<div
+			<nav
 				className={classNames("menu", {
-					"menu--active": menuActive,
+					"menu--active": menuOpen,
 				})}
+				id="menu"
+				aria-hidden={!menuOpen}
 			>
 				<div className="menu__inner">
 					{linksData.map((link, index) => {
@@ -182,7 +187,7 @@ const Header = ({ vacanciesData }) => {
 						);
 					})}
 				</div>
-			</div>
+			</nav>
 		</header>
 	);
 };
