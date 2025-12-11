@@ -15,6 +15,8 @@ const FloatingContact = () => {
 				className={classNames("floating-contact-container", {
 					"floating-contact-container--active": isActive,
 				})}
+				id="floating-contact-menu"
+				aria-hidden={!isActive}
 			>
 				<div
 					className={classNames("floating-contact-container-inner", {
@@ -36,7 +38,12 @@ const FloatingContact = () => {
 					})}
 				</div>
 			</div>
-			<button className="floating-contact__btn" onClick={toggleFloatingContact}>
+			<button
+				className="floating-contact__btn"
+				onClick={toggleFloatingContact}
+				aria-expanded={isActive}
+				aria-controls="floating-contact-menu"
+			>
 				<img src={messageIcon} width={40} height={40} alt="" />
 			</button>
 		</div>
