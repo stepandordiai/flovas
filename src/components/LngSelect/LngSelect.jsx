@@ -20,8 +20,7 @@ const getLngStorage = () => localStorage.getItem("i18nextLng") || "uk";
 const LanguageSelect = () => {
 	const { t } = useTranslation();
 
-	const [lngSelectActive, setLngSelectActive] = useState(false);
-	// TODO:
+	const [lngSelectVisible, setLngSelectVisible] = useState(false);
 	const [selectedLng, setSelectedLng] = useState(
 		lngData.find((lng) => lng.code === getLngStorage())
 	);
@@ -29,7 +28,7 @@ const LanguageSelect = () => {
 	const handleLngOption = (lng) => {
 		i18n.changeLanguage(lng.code);
 		setSelectedLng(lng);
-		setLngSelectActive(false);
+		setLngSelectVisible(false);
 	};
 
 	return (
@@ -37,12 +36,14 @@ const LanguageSelect = () => {
 			{/* lng-select__banner */}
 			<div
 				className={classNames("lng-select-banner", {
-					"lng-select__list--visible": lngSelectActive,
+					"lng-select-banner--visible": lngSelectVisible,
 				})}
+				id="lng-select-banner"
+				aria-hidden={!lngSelectVisible}
 			>
 				<div className="lng-select-banner__header">
 					<p className="lng-select-banner__title">{t("choose_lng_title")}</p>
-					<button onClick={() => setLngSelectActive(false)}>
+					<button onClick={() => setLngSelectVisible(false)}>
 						{t("close")}
 					</button>
 				</div>
@@ -67,16 +68,18 @@ const LanguageSelect = () => {
 			</div>
 			{/* lng-select__curtain */}
 			<div
-				onClick={() => setLngSelectActive(false)}
+				onClick={() => setLngSelectVisible(false)}
 				className={classNames("lng-select__curtain", {
-					"lng-select__curtain--active": lngSelectActive,
+					"lng-select__curtain--active": lngSelectVisible,
 				})}
 			></div>
 			{/* lng-select */}
 			<div className="lng-select">
 				<button
-					onClick={() => setLngSelectActive(true)}
+					onClick={() => setLngSelectVisible(true)}
 					className="lng-select__btn"
+					aria-expanded={lngSelectVisible}
+					aria-controls="lng-select-banner"
 				>
 					<span className="lng-select__btn-value">{selectedLng.name}</span>
 					<img width={25} height={25} src={selectedLng.flagIcon} alt="" />

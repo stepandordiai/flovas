@@ -7,11 +7,6 @@
 .lng-select__btn {
 	@include flex-center;
 	column-gap: 5px;
-
-	span,
-	img {
-		pointer-events: none;
-	}
 }
 
 .lng-select-banner {
@@ -21,13 +16,19 @@
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%) scale(0.9);
 	z-index: 101;
 	width: 500px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	opacity: 0;
 	pointer-events: none;
+	transform: translate(-50%, -50%) scale(0.9);
+	opacity: 0;
 	transition: transform 0.5s, opacity 0.5s;
+}
+
+.lng-select-banner--visible {
+	pointer-events: auto;
+	transform: translate(-50%, -50%) scale(1);
+	opacity: 1;
 }
 
 .lng-select-banner__header {
@@ -51,12 +52,6 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 10px;
-}
-
-.lng-select__list--visible {
-	transform: translate(-50%, -50%) scale(1);
-	opacity: 1;
-	pointer-events: all;
 }
 
 .lng-select__option {
@@ -92,7 +87,7 @@
 }
 
 .lng-select__curtain--active {
-	pointer-events: all;
+	pointer-events: auto;
 	-webkit-backdrop-filter: blur(10px);
 	backdrop-filter: blur(10px);
 }
