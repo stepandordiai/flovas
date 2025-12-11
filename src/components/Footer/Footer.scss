@@ -60,6 +60,28 @@
 	height: 50px;
 	border-radius: 25px;
 	overflow: hidden;
+
+	// TODO: learn this
+	&::before,
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		z-index: 100;
+		width: 25px;
+		pointer-events: none;
+	}
+
+	&::before {
+		left: 0;
+		background: linear-gradient(to right, #000, transparent);
+	}
+
+	&::after {
+		right: 0;
+		background: linear-gradient(to left, #000, transparent);
+	}
 }
 
 .footer-bottom__list {

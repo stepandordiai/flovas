@@ -8,7 +8,7 @@ const Footer = () => {
 	const { t } = useTranslation();
 
 	return (
-		<div className="footer">
+		<footer className="footer">
 			<div className="footer-inner">
 				<div className="footer-top">
 					<p className="footer__logo">flovas</p>
@@ -73,6 +73,7 @@ const Footer = () => {
 					</div>
 				</div>
 			</div>
+			{/* FIXME: */}
 			<div
 				className="footer-bottom__slider"
 				style={{
@@ -111,7 +112,7 @@ const Footer = () => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</footer>
 	);
 };
 
