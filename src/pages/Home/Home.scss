@@ -14,13 +14,9 @@
 	border-radius: 25px;
 	overflow: hidden;
 	margin-top: 75px;
-	min-height: calc(100vh - 100px);
-	padding-bottom: 50px;
-	transition: all 0.5s;
 }
 
 .home-inner-container {
-	min-height: calc(100vh - 75px);
 	width: 100%;
 }
 
@@ -33,9 +29,9 @@
 }
 
 .blur-char {
-	filter: blur(10px);
 	opacity: 0;
-	transition: all 0.3s;
+	filter: blur(10px);
+	transition: opacity 0.3s, filter 0.3s;
 }
 
 .blur-char--active {
@@ -82,17 +78,17 @@
 	display: flex;
 	border: 1px solid var(--bg-clr);
 	border-radius: 25px;
-	filter: blur(10px);
 	opacity: 0;
+	filter: blur(10px);
 	pointer-events: none;
 	animation: animateLinkContainer 1s 2s forwards;
 }
 
 @keyframes animateLinkContainer {
 	to {
-		pointer-events: all;
 		opacity: 1;
 		filter: blur(0);
+		pointer-events: auto;
 	}
 }
 
@@ -123,9 +119,7 @@
 }
 
 .empty-div {
-	//
 	height: 100dvh;
-	//
 	pointer-events: none;
 }
 
@@ -138,11 +132,9 @@
 
 	.home-inner {
 		margin-top: 50px;
-		min-height: calc(100vh - 100px);
 	}
 
 	.home-inner-container {
-		min-height: calc(100vh - 50px);
 		width: 100%;
 	}
 

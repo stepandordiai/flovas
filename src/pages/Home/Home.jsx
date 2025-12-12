@@ -8,6 +8,7 @@ import Contacts from "../../components/Contacts/Contacts";
 import placesData from "./../../assets/data/places-data.json";
 import WebApp from "../../components/WebApp/WebApp";
 import { HashLink } from "react-router-hash-link";
+import ScrollToTopBtn from "../../components/ScrollToTopBtn/ScrollToTopBtn";
 import "./Home.scss";
 
 const Home = ({ vacanciesData, isLoading, error, handleTelFormBanner }) => {
@@ -75,7 +76,6 @@ const Home = ({ vacanciesData, isLoading, error, handleTelFormBanner }) => {
 				</title>
 				<link rel="canonical" href="https://www.flovas.cz/" />
 			</Helmet>
-
 			<main className="home" id="home">
 				<div className="home-inner">
 					<div className="home-inner-container">
@@ -136,9 +136,9 @@ const Home = ({ vacanciesData, isLoading, error, handleTelFormBanner }) => {
 					<About placesData={placesData} vacanciesData={vacanciesData} />
 					<Contacts />
 					<WebApp />
+					<ScrollToTopBtn />
 				</div>
 			</main>
-
 			<ContactUs
 				contactUsActive={contactUsActive}
 				setContactUsActive={setContactUsActive}
