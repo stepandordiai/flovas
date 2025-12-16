@@ -1,9 +1,10 @@
 # flovas
 
-April 2025
+![flovas hero screenshot](./docs/screenshots/flovas-ss-v6-c.png)
 
-## Description
+Service website for a recruitment agency providing job vacancy listings and employment opportunities. The platform connects candidates with employers by presenting open positions, outlining job requirements, and facilitating initial contact as part of the recruitment process.
 
-flovas is a modern, responsive website developed for an employment and recruitment agency based in the Czech Republic. The site is designed to help job seekers and employers connect seamlessly, with clear information about available services, job types, and contact options.
+## Tech stack
 
-![flovas hero screenshot](./public/ss/flovas-ss-v6-c.png)
+- React (JavaScript)
+- SCSS
