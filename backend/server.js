@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const proudctRoute = require("./routes/vacancyRoute");
+const dotenv = require("dotenv");
+dotenv.config();
 const errorMiddleware = require("./middleware/errorMiddleware");
 var cors = require("cors");
 const app = express();
@@ -44,9 +46,7 @@ app.use(errorMiddleware);
 
 mongoose.set("strictQuery", false);
 mongoose
-	.connect(
-		"mongodb+srv://stepandordiaiBdWcumZOkcl:Overwatch1@stepandordiaiapi.1ocur.mongodb.net/FlovasAPI?retryWrites=true&w=majority&appName=StepanDordiaiAPI"
-	)
+	.connect(process.env.MONGO_URI)
 	.then(() => {
 		console.log("Connected to MongoDB database");
 		app.listen(3000, () => {
