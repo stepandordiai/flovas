@@ -71,9 +71,7 @@ const Home = ({ vacanciesData, isLoading, error, handleTelFormBanner }) => {
 					name="description"
 					content="Робота в Чехії для українців 2025. flovas s.r.o. – кадрова агенція, яка надає легальне працевлаштування, житло та допомогу з документами по всій Чехії."
 				/>
-				<title>
-					Працевлаштування по всій Чехії &bull; flovas {t("logo_title")}
-				</title>
+				<title>Працевлаштування по всій Чехії | flovas {t("logo_title")}</title>
 				<link rel="canonical" href="https://www.flovas.cz/" />
 			</Helmet>
 			<main className="home" id="home">

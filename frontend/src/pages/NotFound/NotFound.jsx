@@ -8,7 +8,7 @@ const NotFound = () => {
 	return (
 		<>
 			<Helmet>
-				<title>Сторінку не знайдено &bull; flovas {t("logo_title")}</title>
+				<title>Сторінку не знайдено | flovas {t("logo_title")}</title>
 				<meta name="robots" content="noindex, nofollow" />
 			</Helmet>
 			<div className="not-found">
