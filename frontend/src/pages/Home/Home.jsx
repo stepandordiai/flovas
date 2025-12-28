@@ -69,9 +69,9 @@ const Home = ({ vacanciesData, isLoading, error, handleTelFormBanner }) => {
 			<Helmet>
 				<meta
 					name="description"
-					content="Робота в Чехії для українців 2025. flovas s.r.o. – кадрова агенція, яка надає легальне працевлаштування, житло та допомогу з документами по всій Чехії."
+					content="Робота в Чехії для українців. FLOVAS s.r.o. — кадрова агенція з легальним працевлаштуванням, житлом і допомогою з документами по всій Чехії."
 				/>
-				<title>Працевлаштування по всій Чехії | flovas {t("logo_title")}</title>
+				<title>Працевлаштування в Чехії для українців | flovas</title>
 				<link rel="canonical" href="https://www.flovas.cz/" />
 			</Helmet>
 			<main className="home" id="home">
