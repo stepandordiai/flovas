@@ -15,7 +15,6 @@
 	"contact_info": "Kontaktní údaje",
 	"map_title": "Naši kancelář najdete v Kolíně",
 	"vacancies_r_loading": "Volná místa se načítají, čekejte prosím",
-	"follow_us": "Sledujte nás",
 	"click_to_copy": "Kliknutím zkopírujete",
 	"copied": "Zkopírováno",
 	"sec": "sek",
@@ -49,10 +48,6 @@
 		"sunday": "Ne",
 		"closed": "Zavřeno",
 		"all_rights_reserved": "Všechna práva vyhrazena"
-	},
-
-	"contacts": {
-		"socials": "Sociální sítě"
 	},
 
 	"about": {

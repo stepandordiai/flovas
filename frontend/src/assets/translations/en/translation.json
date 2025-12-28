@@ -15,7 +15,6 @@
 	"contact_info": "Contact information",
 	"map_title": "You can find our office in Kolin",
 	"vacancies_r_loading": "Vacancies are loading, please wait",
-	"follow_us": "Follow us",
 	"click_to_copy": "Click to copy",
 	"copied": "Copied",
 	"sec": "sec",
@@ -49,10 +48,6 @@
 		"sunday": "Sun",
 		"closed": "Closed",
 		"all_rights_reserved": "All rights reserved"
-	},
-
-	"contacts": {
-		"socials": "Social networks"
 	},
 
 	"about": {

@@ -15,7 +15,6 @@
 	"contact_info": "Kontaktné informácie",
 	"map_title": "Našu kanceláriu nájdete v Kolíne",
 	"vacancies_r_loading": "Úlohy sa načítavajú, čakajte prosím",
-	"follow_us": "Sledujte nás",
 	"click_to_copy": "Kliknite pre kopírovanie",
 	"copied": "Skopírované",
 	"sec": "sek",
@@ -49,10 +48,6 @@
 		"sunday": "Ne",
 		"closed": "Zatvorené",
 		"all_rights_reserved": "Všetky práva vyhradené"
-	},
-
-	"contacts": {
-		"socials": "Sociálne siete"
 	},
 
 	"about": {

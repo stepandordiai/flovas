@@ -30,7 +30,7 @@ const ContactUs = ({ contactUsActive, setContactUsActive }) => {
 						<div>
 							<p>{t("tel")}</p>
 							<a href="tel:+420777957290">+420 777 957 290</a>
-							<p>E-mail</p>
+							<p>Email</p>
 							<a href="mailto:info@neresen.cz">info@neresen.cz</a>
 							<p>{t("address")}</p>
 							<a href="https://maps.app.goo.gl/g5t8zBqjSifGmSWR9">
@@ -51,7 +51,10 @@ const ContactUs = ({ contactUsActive, setContactUsActive }) => {
 						</div>
 					</div>
 					<div className="contact-us__socials">
-						<p className="contact-us__socials-title">{t("follow_us")}</p>
+						<p>
+							Підписуйтесь на наші соціальні мережі, щоб не пропустити нові
+							вакансії в Чехії.
+						</p>
 						<div>
 							{socialsData.map((social) => {
 								const Icon = social.socialImg;
