@@ -35,7 +35,7 @@ const About = ({ placesData, vacanciesData }) => {
 
 	return (
 		<section className="about" id="about">
-			<h2 className="about__title">{t("about_title")} FLOVAS s.r.o.</h2>
+			<h2 className="about__title">{t("about_title")}</h2>
 			<p className="about__desc">{t("about.desc")}</p>
 			<div className="about-milestones">
 				<div>
