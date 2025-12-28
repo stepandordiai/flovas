@@ -26,6 +26,7 @@ const VacancyPage = ({ vacanciesData }) => {
 				<title>
 					{vacancy.title} | flovas {t("logo_title")}
 				</title>
+				<meta name="robots" content="noindex, nofollow" />
 			</Helmet>
 			<main className="vacancy-page">
 				<div className="vacancy-page__top">
