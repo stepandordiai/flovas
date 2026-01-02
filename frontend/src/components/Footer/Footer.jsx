@@ -83,7 +83,7 @@ const Footer = () => {
 			>
 				<div className="footer-bottom__list">
 					<div className="footer-bottom__item" style={{ "--position": "1" }}>
-						<p>&copy; 2025 FLOVAS s.r.o.</p>
+						<p>&copy; 2025&ndash;{new Date().getFullYear()} FLOVAS s.r.o.</p>
 					</div>
 					<div className="footer-bottom__item" style={{ "--position": "2" }}>
 						<p>{t("footer.all_rights_reserved")}</p>
@@ -97,7 +97,7 @@ const Footer = () => {
 						</p>
 					</div>
 					<div className="footer-bottom__item" style={{ "--position": "4" }}>
-						<p>&copy; 2025 FLOVAS s.r.o.</p>
+						<p>&copy; 2025&ndash;{new Date().getFullYear()} FLOVAS s.r.o.</p>
 					</div>
 					<div className="footer-bottom__item" style={{ "--position": "5" }}>
 						<p>{t("footer.all_rights_reserved")}</p>
