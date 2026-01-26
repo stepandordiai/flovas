@@ -13,7 +13,7 @@ const allowedOrigins = [
 	"http://localhost:5173",
 	"http://localhost:5174",
 	"https://flovas-admin.netlify.app",
-	"https://flovas.netlify.app",
+	"https://flovas.vercel.app/",
 	"https://flovas.cz",
 	"https://www.flovas.cz",
 ];
@@ -25,7 +25,7 @@ app.use(
 				callback(null, true);
 			}
 		},
-	})
+	}),
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
