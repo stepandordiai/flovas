@@ -1,0 +1,93 @@
+@use "./../../scss/mixins" as *;
+
+.vacancy {
+	background: var(--bg-lighter-clr);
+	display: flex;
+	flex-direction: column;
+	row-gap: 10px;
+	border-radius: 0 0 30px 30px;
+	padding: 10px;
+}
+
+.vacancy__no-img {
+	width: 100%;
+	aspect-ratio: 1/1;
+	background: #fff;
+}
+
+.vacancy__inactive {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	column-gap: 5px;
+
+	span:nth-child(1) {
+		width: 10px;
+		height: 10px;
+		background: #ff0000;
+		border-radius: 50%;
+	}
+}
+
+.vacancy__active {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	column-gap: 5px;
+
+	span:nth-child(1) {
+		width: 10px;
+		height: 10px;
+		background: #00ff00;
+		border-radius: 50%;
+	}
+}
+
+.vacancy__details {
+	display: flex;
+	flex-direction: column;
+	row-gap: 10px;
+}
+
+.vacancy__date {
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.vacancy__link-container {
+	margin-top: auto;
+	display: flex;
+	flex-direction: column;
+	row-gap: 5px;
+}
+
+.vacancy__link {
+	@include grid-center;
+	color: #000;
+	height: 50px;
+	border-radius: 25px;
+	width: 100%;
+	padding: 0 10px;
+	background: var(--sec-accent-clr);
+	transition: background-color 0.2s, color 0.2s;
+
+	&:hover {
+		background: #000;
+		color: #fff;
+	}
+}
+
+.vacancy__btn {
+	@include grid-center;
+	background: #fff;
+	color: #000;
+	height: 50px;
+	border-radius: 25px;
+	width: 100%;
+	padding: 0 10px;
+	transition: background-color 0.2s, color 0.2s;
+
+	&:hover {
+		background: #000;
+		color: #fff;
+	}
+}

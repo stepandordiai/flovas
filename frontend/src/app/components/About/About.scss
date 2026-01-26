@@ -1,0 +1,114 @@
+@use "./../../scss/mixins" as *;
+
+.about {
+	background: var(--bg-lighter-clr);
+	width: 100%;
+	padding: 0 25px 25px;
+	display: flex;
+	flex-direction: column;
+	row-gap: 25px;
+}
+
+.about__title {
+	font-size: clamp(1.5rem, 4vw, 2.5rem);
+	font-weight: 500;
+	padding-top: 100px;
+	text-align: center;
+}
+
+.about__desc {
+	font-size: clamp(1rem, 2vw, 1.25rem);
+	text-align: center;
+}
+
+.about-milestones {
+	background: var(--sec-accent-clr);
+	padding: 25px;
+	border-radius: 20px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	column-gap: 100px;
+	row-gap: 25px;
+	flex-wrap: wrap;
+
+	div {
+		display: flex;
+		justify-content: flex-start;
+		align-items: flex-start;
+		flex-direction: column;
+	}
+
+	span:nth-child(1) {
+		font-weight: 500;
+		font-size: 2.5rem;
+	}
+}
+
+.about__benefits-title {
+	font-size: 1.25rem;
+	font-weight: 500;
+	text-align: center;
+}
+
+.about__benefits-list {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 25px;
+}
+
+.about__benefits-item {
+	background: #fff;
+	padding: 10px;
+	@include flex-center;
+	flex-direction: column;
+	text-align: center;
+	gap: 10px;
+	min-height: 150px;
+
+	span {
+		font-weight: 500;
+	}
+}
+
+.about__goal-title {
+	font-size: 1.25rem;
+	font-weight: 500;
+	text-align: center;
+}
+
+.about__goal-desc {
+	font-size: clamp(1rem, 2vw, 1.25rem);
+	text-align: center;
+}
+
+.about__places-title {
+	font-size: 1.25rem;
+	font-weight: 500;
+	text-align: center;
+}
+
+.about__places-desc {
+	font-size: clamp(1rem, 2vw, 1.25rem);
+	text-align: center;
+}
+
+@media screen and (width <= 896px) {
+	.about {
+		padding: 0 10px 25px;
+	}
+
+	.about__title {
+		padding-top: 75px;
+	}
+	.about__benefits-list {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 10px;
+	}
+}
+
+@media screen and (width < 700px) {
+	.about__benefits-list {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}

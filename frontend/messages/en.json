@@ -1,0 +1,89 @@
+{
+	"logo_title": "agency",
+	"menu": "menu",
+	"choose_lng_title": "Choose your preferred language",
+	"home_title": "Home",
+	"vacancies_title": "Vacancies",
+	"about_title": "About us",
+	"contacts_title": "Contacts",
+	"web_app_title": "Web app",
+	"more_info_btn": "More info",
+	"contact_us_title": "Contact us",
+	"tel": "Phone number",
+	"address": "Address",
+	"close": "close",
+	"contact_info": "Contact information",
+	"map_title": "You can find our office in Kolin",
+	"vacancies_r_loading": "Vacancies are loading, please wait",
+	"click_to_copy": "Click to copy",
+	"copied": "Copied",
+	"sec": "sec",
+	"unavailable": "Jobs are temporarily unavailable. Please check back later",
+	"vacancies_r_empty": "Unfortunately, there are currently no vacancies available. We recommend checking back later",
+	"active_vacancy": "Vacancy is active",
+	"inactive_vacancy": "Vacancy is inactive",
+	"send": "Send",
+
+	"home": {
+		"title1": "Employment in the city",
+		"title2": "with flovas agency",
+		"place1": "Prague",
+		"place2": "Kolín",
+		"place3": "Brno",
+		"place4": "Pardubice",
+		"place5": "Cheb",
+		"place6": "Chvaletice",
+		"place7": "Kuřim",
+		"place8": "Chelčice",
+		"place9": "Chrudim",
+		"place10": "Vysoké Mýto",
+		"backToTop": "Back to top"
+	},
+
+	"footer": {
+		"nav": "Navigation",
+		"working_hours": "Working hours",
+		"mon": "Mon",
+		"sat": "Sat",
+		"sunday": "Sun",
+		"closed": "Closed",
+		"all_rights_reserved": "All rights reserved"
+	},
+
+	"about": {
+		"desc": "FLOVAS s.r.o. is a recruitment agency specializing in employment across the entire territory of the Czech Republic. We offer jobs in various industries — manufacturing, logistics, construction, warehouse operations, and other sectors.",
+		"our_advantages_title": "Our advantages",
+		"our_advantages1": "Employment throughout the Czech Republic",
+		"our_advantages2": "For men, women and couples",
+		"our_advantages3": "Regular payment of salary advances",
+		"our_advantages4": "We provide housing",
+		"our_advantages5": "Official employment",
+		"our_advantages6": "Support in obtaining a visa and other documents",
+		"our_advantages7": "We pay social and medical insurance",
+		"our_advantages8": "Free vacancies",
+		"our_advantages9": "Ability to work overtime",
+		"our_advantages10": "We organize transportation from home to work",
+		"our_advantages11": "We are there for you in case of problems",
+		"our_advantages12": "We will help you overcome the language barrier",
+		"our_advantages13": "We will help you with your move",
+		"goal_title": "Our goal",
+		"goal_desc": "To provide every client with stable employment, comfortable living conditions, and full legal support for a confident start in the Czech Republic.",
+		"employment_place_title": "We provide employment throughout the Czech Republic",
+		"employment_place_desc": "and other cities."
+	},
+
+	"web_app": {
+		"title": "agency in your smartphone",
+		"item_1_start": "Open",
+		"item_1_end": "in Safari or Chrome browser (Android)",
+		"item_2_start": "Click on the icon",
+		"item_2_end": "'Share' at the bottom of the window or three dots in the upper right corner (Android)",
+		"item_3": "Scroll down, select 'To Home Screen' and tap 'Add'",
+		"item_4_start": "Done! Web application",
+		"item_4_end": "will appear alongside other programs"
+	},
+
+	"tel_form_banner": {
+		"title": "How to contact you"
+	}
+}

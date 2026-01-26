@@ -1,0 +1,107 @@
+@use "./../../scss/mixins" as *;
+
+.lng-select {
+	position: relative;
+}
+
+.lng-select__btn {
+	@include flex-center;
+	column-gap: 5px;
+}
+
+.lng-select-banner {
+	padding: 25px;
+	background: var(--bg-clr);
+	border-radius: 25px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	z-index: 101;
+	width: 500px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	pointer-events: none;
+	transform: translate(-50%, -50%) scale(0.9);
+	opacity: 0;
+	transition: transform 0.5s, opacity 0.5s;
+}
+
+.lng-select-banner--visible {
+	pointer-events: auto;
+	transform: translate(-50%, -50%) scale(1);
+	opacity: 1;
+}
+
+.lng-select-banner__header {
+	@include flex-between-center;
+	margin-bottom: 10px;
+}
+
+.lng-select-banner__title {
+	font-size: clamp(1rem, 2vw, 1.25rem);
+	font-weight: 600;
+}
+
+.lng-select-list-container {
+	background: #fff;
+	border-radius: 20px;
+	height: 100%;
+	padding: 10px;
+}
+
+.lng-select__list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.lng-select__option {
+	@include flex-center;
+	column-gap: 5px;
+	background: var(--bg-lighter-clr);
+	color: #000;
+	border-radius: 17.5px;
+	padding: 5px 5px 5px 8.75px;
+	cursor: pointer;
+
+	&:hover {
+		background: var(--sec-accent-clr);
+	}
+}
+
+.lng-select__option--active {
+	background: var(--sec-accent-clr);
+}
+
+// Curtain
+.lng-select__curtain {
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	z-index: 100;
+	pointer-events: none;
+	-webkit-backdrop-filter: blur(0px);
+	backdrop-filter: blur(0px);
+	transition: backdrop-filter 0.5s;
+}
+
+.lng-select__curtain--active {
+	pointer-events: auto;
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+}
+
+@media screen and (width <= 896px) {
+	.lng-select__btn {
+		span {
+			display: none;
+		}
+	}
+}
+
+@media screen and (width <= 540px) {
+	.lng-select-banner {
+		width: calc(100% - 40px);
+	}
+}

@@ -1,0 +1,77 @@
+.vacancy-page {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	row-gap: 25px;
+	margin-top: 75px;
+	min-height: calc(100vh - 100px);
+	background: #fff;
+	border-radius: 25px;
+	padding: 25px;
+}
+
+.vacancy-page__top {
+	width: 100%;
+}
+
+.vacancy-page__top-link {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	column-gap: 5px;
+	padding: 12.5px;
+	max-width: max-content;
+	color: #000;
+	height: 50px;
+	border-radius: 25px;
+	background: var(--sec-accent-clr);
+}
+
+.vacancy-page__img {
+	width: 100%;
+	max-width: 500px;
+}
+
+.vacancy-page__no-img {
+	width: 100%;
+	max-width: 500px;
+	aspect-ratio: 1/1;
+	background: var(--bg-lighter-clr);
+}
+
+.vacancy-page__details {
+	display: flex;
+	flex-direction: column;
+	row-gap: 10px;
+	max-width: 500px;
+}
+
+.vacancy-page__link {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 12.5px;
+	color: #000;
+	width: 100%;
+	height: 50px;
+	border-radius: 25px;
+	background: var(--sec-accent-clr);
+	transition: all 0.3s;
+
+	&:hover {
+		background: #000;
+		color: #fff;
+	}
+}
+
+@media screen and (width <= 896px) {
+	.vacancy-page {
+		margin-top: 50px;
+		padding: 10px;
+		min-height: calc(100vh - 60px);
+		row-gap: 10px;
+	}
+}

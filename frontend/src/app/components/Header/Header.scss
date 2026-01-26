@@ -1,0 +1,230 @@
+@use "./../../scss/mixins" as *;
+
+.header {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 2;
+	min-height: 75px;
+	padding: 0 25px;
+	background: var(--bg-clr);
+}
+
+.header::before {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	transform: translateY(100%);
+	left: 25px;
+	width: 50px;
+	z-index: -1;
+	aspect-ratio: 1/1;
+	border-radius: 25px;
+	background: transparent;
+	box-shadow: -25px -25px var(--bg-clr);
+	pointer-events: none;
+}
+
+.header::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	transform: translateY(100%);
+	right: 25px;
+	width: 50px;
+	z-index: -1;
+	aspect-ratio: 1/1;
+	border-radius: 25px;
+	background: transparent;
+	box-shadow: 25px -25px var(--bg-clr);
+	pointer-events: none;
+}
+
+.header-top {
+	position: relative;
+	height: 75px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
+.header__logo {
+	color: #000;
+	font-size: 1.25rem;
+	font-weight: 500;
+	align-self: center;
+	//
+	width: max-content;
+	//
+
+	span {
+		font-weight: 300;
+	}
+}
+
+.header__nav {
+	position: relative;
+	z-index: 0;
+	height: 50px;
+	border-radius: 25px;
+	background: #fff;
+	@include flex-center;
+}
+
+.nav-link {
+	position: relative;
+	height: 50px;
+	color: #000;
+	display: grid;
+	place-content: center;
+	padding: 0 12.5px;
+	border-radius: 25px;
+}
+
+.nav-link-indicator {
+	position: absolute;
+	z-index: -1;
+	border-radius: 25px;
+	background: var(--accent-clr);
+	height: 100%;
+}
+
+.nav-link__vacancies-qty {
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translate(25%, -25%);
+	border-radius: 10px;
+	padding: 2.5px 7.5px;
+	background: var(--sec-accent-clr);
+	@include grid-center;
+	font-size: 0.8rem;
+}
+
+// menu-btn
+
+.menu-btn {
+	display: none;
+	justify-content: center;
+	align-items: center;
+	column-gap: 5px;
+}
+
+.menu-btn__dot {
+	width: 7.5px;
+	aspect-ratio: 1/1;
+	border-radius: 50%;
+	transition: background-color 0.3s;
+}
+
+.menu-btn__dot--active {
+	background: #000;
+}
+
+// menu
+
+.menu {
+	display: grid;
+	grid-template-rows: 0fr;
+	overflow: hidden;
+	transition: all 0.5s;
+	padding: 0;
+}
+
+.menu--active {
+	grid-template-rows: 1fr;
+	padding: 10px 0;
+}
+
+.menu__inner {
+	overflow: hidden;
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.dot-link-container {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 5px;
+	width: 100%;
+}
+
+.dot {
+	width: 10px;
+	aspect-ratio: 1/1;
+	border-radius: 50%;
+}
+
+.dot--active {
+	font-size: 2rem;
+	width: 10px;
+	aspect-ratio: 1/1;
+	background: #000;
+	border-radius: 50%;
+}
+
+.menu__link {
+	position: relative;
+	display: inline-block;
+	font-size: 1.5rem;
+	color: #000;
+}
+
+.menu__link-extra {
+	font-weight: 500;
+}
+
+.menu__link-vacancies-qty {
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translate(100%, -40%);
+	background: var(--sec-accent-clr);
+	border-radius: 10px;
+	padding: 2.5px 7.5px;
+	font-size: 0.8rem;
+	@include grid-center;
+}
+
+@media screen and (width <= 896px) {
+	.menu-btn {
+		display: flex;
+	}
+}
+
+@media screen and (width <= 896px) {
+	.header {
+		min-height: 50px;
+		padding: 0 10px;
+	}
+
+	.header::before {
+		left: 10px;
+	}
+
+	.header::after {
+		right: 10px;
+	}
+
+	.header-top {
+		height: 50px;
+	}
+
+	.header__logo {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.header__nav {
+		display: none;
+	}
+}

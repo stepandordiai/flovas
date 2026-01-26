@@ -1,0 +1,46 @@
+@use "reset";
+@use "mixins";
+@use "variables";
+@use "fonts";
+
+// FIXME:
+html {
+	// TODO:
+	overscroll-behavior: none;
+	background: var(--bg-clr);
+}
+
+body {
+	position: relative;
+	font-family: "Montserrat", sans-serif;
+	background: var(--bg-clr);
+	padding: 0 25px;
+}
+
+#root {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	background: var(--bg-clr);
+}
+
+a {
+	align-self: flex-start;
+	color: rgba(0, 0, 0, 0.5);
+	transition: all 0.2s;
+
+	&:hover {
+		color: #000;
+	}
+}
+
+.empty-div {
+	height: 100dvh;
+	pointer-events: none;
+}
+
+@media screen and (width <= 896px) {
+	body {
+		padding: 0 10px;
+	}
+}

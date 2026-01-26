@@ -1,0 +1,67 @@
+.floating-contact {
+	position: fixed;
+	right: 25px;
+	bottom: 85px;
+	z-index: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding: 10px;
+	background: var(--sec-accent-clr);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	border-radius: 30px;
+}
+
+@media screen and (width <= 896px) {
+	.floating-contact {
+		right: 10px;
+		bottom: 65px;
+	}
+}
+
+.floating-contact-container {
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: all 0.3s;
+}
+
+.floating-contact-container--active {
+	grid-template-rows: 1fr;
+	padding-bottom: 5px;
+}
+
+.floating-contact-container-inner {
+	display: flex;
+	flex-direction: column;
+	row-gap: 5px;
+	overflow: hidden;
+
+	a {
+		position: relative;
+
+		&::after {
+			content: attr(data-value);
+			position: absolute;
+			left: 0;
+			top: 50%;
+			transform: translate(calc(-100% - 15px), -50%);
+			background: #fff;
+			padding: 7.5px;
+			border-radius: 15px;
+			pointer-events: none;
+			opacity: 0;
+			transition: opacity 0.3s;
+		}
+
+		&:hover::after {
+			opacity: 1 !important;
+		}
+	}
+}
+
+.floating-contact-container-inner--active {
+	overflow: visible;
+	transition: all 0.3s;
+}

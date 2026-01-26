@@ -1,0 +1,49 @@
+.web-app {
+	width: 100%;
+	padding: 0 25px;
+}
+
+.web-app__title {
+	font-size: clamp(1.5rem, 4vw, 2.5rem);
+	font-weight: 500;
+	padding-top: 100px;
+	padding-bottom: 25px;
+}
+
+.web-app__container {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	flex-direction: row-reverse;
+	gap: 25px;
+}
+
+.web-app__list {
+	display: flex;
+	flex-direction: column;
+	row-gap: 10px;
+
+	li {
+		font-size: clamp(1rem, 2vw, 1.25rem);
+		list-style: disc !important;
+		list-style-position: inside !important;
+	}
+}
+
+@media screen and (width <= 896px) {
+	.web-app {
+		padding: 0 10px;
+	}
+
+	.web-app__title {
+		padding-top: 75px;
+		padding-bottom: 25px;
+	}
+
+	.web-app__container {
+		justify-content: space-evenly;
+		align-items: center;
+		flex-direction: column;
+		gap: 25px;
+	}
+}

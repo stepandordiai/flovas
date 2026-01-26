@@ -1,0 +1,53 @@
+.edit-page__banner {
+	position: fixed;
+	top: 25px;
+	left: 50%;
+	z-index: 1;
+	transform: translate(-50%, calc(-100% - 50px));
+	background: var(--accent-clr);
+	padding: 10px;
+	box-shadow: 0 0 25px rgb(0, 0, 0, 0.1);
+	transition: transform 0.3s;
+	width: max-content;
+	text-align: center;
+}
+
+.edit-page__banner--active {
+	transform: translate(-50%, 0);
+}
+
+.edit-vacancy-inner {
+	width: 100%;
+	max-width: 500px;
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+	gap: 10px;
+}
+
+.edit-vacancy__thumb-img-container {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 5px;
+
+	img {
+		width: 100%;
+	}
+}
+
+.edit-page__title {
+	font-size: 1.5rem;
+	font-weight: 500;
+}
+
+.edit-vacancy__no-img {
+	width: 100%;
+	aspect-ratio: 1/1;
+	background: var(--bg-lighter-clr);
+}
+
+.text-area {
+	min-height: 300px;
+	resize: vertical;
+	font-size: 1rem;
+}

@@ -1,0 +1,166 @@
+@use "./../scss/mixins" as *;
+
+.home {
+	position: relative;
+	z-index: 1;
+	border-radius: 25px;
+}
+
+.home-inner {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	background: #fff;
+	border-radius: 25px;
+	overflow: hidden;
+	margin-top: 75px;
+}
+
+.home-inner-container {
+	width: 100%;
+}
+
+.home-top {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	row-gap: 25px;
+	padding: 50px 25px 0;
+}
+
+.blur-char {
+	opacity: 0;
+	filter: blur(10px);
+	transition:
+		opacity 0.3s,
+		filter 0.3s;
+}
+
+.blur-char--active {
+	opacity: 1 !important;
+	filter: blur(0) !important;
+}
+
+.home__title {
+	text-align: center;
+	font-size: clamp(1.5rem, 4vw, 2.5rem);
+	font-weight: 500;
+}
+
+.home__rotate-wrapper {
+	border-radius: 30px;
+	overflow: hidden;
+}
+
+.home__rotate-container {
+	position: relative;
+	@include flex-center;
+	height: 60px;
+	background: var(--accent-clr);
+
+	span {
+		position: absolute;
+		height: 60px;
+		@include flex-center;
+		transform: translateY(60px);
+	}
+
+	span[data-show] {
+		transform: translateY(0);
+		transition: transform 0.5s;
+	}
+
+	span[data-up] {
+		transform: translateY(-60px);
+		transition: transform 0.5s;
+	}
+}
+
+.home__link-container {
+	display: flex;
+	border: 1px solid var(--bg-clr);
+	border-radius: 25px;
+	opacity: 0;
+	filter: blur(10px);
+	pointer-events: none;
+	animation: animateLinkContainer 1s 2s forwards;
+}
+
+@keyframes animateLinkContainer {
+	to {
+		opacity: 1;
+		filter: blur(0);
+		pointer-events: auto;
+	}
+}
+
+.home__link {
+	position: relative;
+	color: #000;
+	padding: 0 12.5px;
+	height: 50px;
+	border-radius: 25px;
+	@include grid-center;
+
+	&:nth-child(2) {
+		background: var(--accent-clr);
+	}
+}
+
+.home__link-vacancies-qty {
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translate(50%, -25%);
+	background: var(--sec-accent-clr);
+	@include flex-center;
+	min-width: 25px;
+	aspect-ratio: 1/1;
+	border-radius: 15px;
+	font-size: 0.8rem;
+}
+
+@media screen and (width <= 896px) {
+	.home {
+		position: relative;
+		z-index: 1;
+		border-radius: 25px;
+	}
+
+	.home-inner {
+		margin-top: 50px;
+	}
+
+	.home-inner-container {
+		width: 100%;
+	}
+
+	.home-top {
+		padding: 50px 10px 0;
+	}
+
+	.home__rotate-wrapper {
+		border-radius: 25px;
+	}
+
+	.home__rotate-container {
+		height: 50px;
+
+		span {
+			position: absolute;
+			height: 50px;
+			@include flex-center;
+			transform: translateY(50px);
+		}
+
+		span[data-show] {
+			transform: translateY(0);
+			transition: transform 0.5s;
+		}
+
+		span[data-up] {
+			transform: translateY(-50px);
+			transition: transform 0.5s;
+		}
+	}
+}
