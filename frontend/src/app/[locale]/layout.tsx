@@ -8,17 +8,39 @@ import Footer from "../components/Footer/Footer";
 import "@/app/scss/globals.scss";
 import { getVacanciesData } from "../lib/api/api";
 import { VacancyInterface } from "../interfaces/Vacancy";
+import { Locale } from "../interfaces/Locale";
 
 const montserrat = Montserrat({
 	variable: "--font-montserrat",
 	subsets: ["latin", "cyrillic"],
 });
 
-export const metadata: Metadata = {
-	title: "Працевлаштування в Чехії для українців | flovas",
-	description:
-		"Робота в Чехії для українців. FLOVAS s.r.o. — кадрова агенція з легальним працевлаштуванням, житлом і допомогою з документами по всій Чехії.",
-};
+// TODO: LEARN THIS
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+	const { locale } = await params;
+	const baseUrl = "https://www.flovas.cz";
+
+	const lngUrls: Record<Locale, string> = {
+		uk: `${baseUrl}/uk`,
+		cs: `${baseUrl}/cs`,
+		sk: `${baseUrl}/sk`,
+		en: `${baseUrl}/en`,
+	};
+
+	return {
+		alternates: {
+			canonical: `${baseUrl}/${locale}`,
+			languages: {
+				...lngUrls,
+				"x-default": `${baseUrl}/uk`,
+			},
+		},
+	};
+}
 
 type LocaleLayoutProps = {
 	children: React.ReactNode;

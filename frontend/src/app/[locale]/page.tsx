@@ -10,16 +10,23 @@ import { getVacanciesData } from "@/app/lib/api/api";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import VacanciesSection from "../components/Vacancies";
+import type { Locale } from "../interfaces/Locale";
 import "./Vacancies.scss";
 
-export const metadata: Metadata = {
-	title: "Працевлаштування в Чехії для українців | flovas",
-	description:
-		"Робота в Чехії для українців. FLOVAS s.r.o. — кадрова агенція з легальним працевлаштуванням, житлом і допомогою з документами по всій Чехії.",
-	alternates: {
-		canonical: "https://www.flovas.cz/",
-	},
-};
+// TODO: LEARN THIS
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+	const { locale } = await params;
+	const t = await getTranslations({ locale });
+
+	return {
+		title: `${t("homeMetaTitle")} | flovas`,
+		description: t("homeMetaDesc"),
+	};
+}
 
 // TODO: learn this
 function VacanciesLoading({ text }: { text: string }) {
