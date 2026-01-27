@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import "./ScrollToTopBtn.scss";
 
-const scrollToTopOnClick = () => {
+const handleScrollToTop = () => {
 	window.scrollTo({
 		top: 0,
 		behavior: "smooth",
@@ -14,7 +14,7 @@ const ScrollToTopBtn = () => {
 	const t = useTranslations();
 
 	return (
-		<button className="scroll-to-top-btn" onClick={scrollToTopOnClick}>
+		<button className="scroll-to-top-btn" onClick={handleScrollToTop}>
 			{t("home.backToTop")}
 		</button>
 	);

@@ -4,23 +4,26 @@ import { useTranslations } from "next-intl";
 import { useState, useEffect, useRef } from "react";
 import placesData from "@/app/lib/data/places-data.json";
 import { Link } from "@/i18n/navigation";
-import { VacancyInterface } from "../interfaces/Vacancy";
 import ContactUs from "../components/ContactUs/ContactUs";
+import { VacancyInterface } from "@/app/interfaces/Vacancy";
+import { fetchVacancies } from "../lib/api/vacancies";
 import "./Home.scss";
 
-type HomeClientTypes = {
-	vacancies: VacancyInterface[];
-};
-
-const HomeClient = ({ vacancies }: HomeClientTypes) => {
+const HomeClient = () => {
 	const t = useTranslations();
 
-	const [text, setText] = useState(t("home.title1"));
 	const [contactUsActive, setContactUsActive] = useState(false);
 
+	const [vacancies, setVacancies] = useState<VacancyInterface[]>([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+
 	useEffect(() => {
-		setText(t("home.title1"));
-	}, [t]);
+		fetchVacancies()
+			.then(setVacancies)
+			.catch((err) => setError(err.response?.data.message))
+			.finally(() => setLoading(false));
+	}, []);
 
 	// FIXME:
 	useEffect(() => {
@@ -29,7 +32,7 @@ const HomeClient = ({ vacancies }: HomeClientTypes) => {
 				char.classList.add("blur-char--active");
 			}, index * 50);
 		});
-	}, [text]);
+	}, []);
 
 	// FIXME:
 	const rotateRef = useRef<HTMLDivElement | null>(null);
@@ -69,13 +72,15 @@ const HomeClient = ({ vacancies }: HomeClientTypes) => {
 			<section className="home-top">
 				<div className="home__title">
 					<p>
-						{text.split("").map((char, index) => {
-							return (
-								<span key={index} className="blur-char">
-									{char}
-								</span>
-							);
-						})}
+						{t("home.title1")
+							.split("")
+							.map((char, index) => {
+								return (
+									<span key={index} className="blur-char">
+										{char}
+									</span>
+								);
+							})}
 					</p>
 					<div className="home__rotate-wrapper">
 						<div ref={rotateRef} className="home__rotate-container">

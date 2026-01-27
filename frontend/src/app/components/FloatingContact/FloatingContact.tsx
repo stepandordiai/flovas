@@ -1,7 +1,8 @@
+"use client";
+
 import { useState } from "react";
-import contactsData from "../../assets/data/contactsData";
+import contactsData from "@/app/lib/data/contactsData";
 import classNames from "classnames";
-import messageIcon from "/icons/message.svg";
 import "./FloatingContact.scss";
 
 const FloatingContact = () => {
@@ -44,7 +45,7 @@ const FloatingContact = () => {
 				aria-expanded={isActive}
 				aria-controls="floating-contact-menu"
 			>
-				<img src={messageIcon} width={40} height={40} alt="" />
+				<img src="/icons/message.svg" width={40} height={40} alt="" />
 			</button>
 		</div>
 	);

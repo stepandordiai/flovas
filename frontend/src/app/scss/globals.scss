@@ -7,6 +7,7 @@
 html {
 	// TODO:
 	overscroll-behavior: none;
+	scroll-behavior: smooth;
 	background: var(--bg-clr);
 }
 
@@ -37,6 +38,45 @@ a {
 .empty-div {
 	height: 100dvh;
 	pointer-events: none;
+}
+
+// not-found
+
+.not-found {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	row-gap: 25px;
+	margin-top: 75px;
+	min-height: calc(100vh - 100px);
+	background: #fff;
+	border-radius: 25px;
+	padding: 25px;
+}
+
+.not-found__link {
+	align-self: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 12.5px;
+	color: #000;
+	height: 50px;
+	border-radius: 25px;
+	background: var(--sec-accent-clr);
+	font-weight: 500;
+}
+
+@media screen and (width <= 896px) {
+	.not-found {
+		margin-top: 50px;
+		padding: 10px;
+		min-height: calc(100vh - 60px);
+		row-gap: 10px;
+	}
 }
 
 @media screen and (width <= 896px) {

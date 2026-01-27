@@ -1,9 +1,9 @@
 import { getTranslations } from "next-intl/server";
 import socialsData from "@/app/lib/data/socialsData";
-import "./Contacts.scss";
 import ContactsClient from "./Contacts.client";
+import "./Contacts.scss";
 
-const Contacts = async () => {
+export default async function Contacts() {
 	const t = await getTranslations();
 
 	return (
@@ -58,6 +58,4 @@ const Contacts = async () => {
 			</div>
 		</section>
 	);
-};
-
-export default Contacts;
+}

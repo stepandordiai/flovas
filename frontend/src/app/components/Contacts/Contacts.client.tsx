@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import handleCopy from "../../utils/handleCopy";
 
-const ContactsClient = () => {
+export default function ContactsClient() {
 	const t = useTranslations();
 
 	return (
@@ -15,6 +15,4 @@ const ContactsClient = () => {
 			17430089
 		</button>
 	);
-};
-
-export default ContactsClient;
+}

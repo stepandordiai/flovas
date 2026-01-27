@@ -1,13 +1,11 @@
 import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
-import { getVacanciesData } from "@/app/lib/api/api";
-import { VacancyInterface } from "@/app/interfaces/Vacancy";
+import { fetchVacancies } from "@/app/lib/api/vacancies";
 import "./VacancyPage.scss";
 
 // TODO: LEARN THIS
 export async function generateStaticParams() {
-	const vacancies =
-		await getVacanciesData<VacancyInterface[]>("/api/vacancies");
+	const vacancies = await fetchVacancies();
 
 	const locales = ["uk", "cs", "sk", "en"];
 
@@ -26,12 +24,9 @@ type VacancyPageProps = {
 export default async function VacancyPage({ params }: VacancyPageProps) {
 	const { id } = await params;
 
-	const vacancies =
-		await getVacanciesData<VacancyInterface[]>("/api/vacancies");
+	const vacancies = await fetchVacancies();
 
-	const vacancy = vacancies.find(
-		(vacancy: VacancyInterface) => vacancy._id === String(id),
-	);
+	const vacancy = vacancies.find((vacancy) => vacancy._id === String(id));
 
 	if (!vacancy) {
 		return notFound();
@@ -77,9 +72,7 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 						<p style={{ fontWeight: 500 }}>{vacancy.title}</p>
 						<p style={{ whiteSpace: "pre-wrap" }}>{vacancy.desc}</p>
 					</div>
-					<a className="vacancy-page__link" href="tel:+420777957290">
-						{/* {t("contact_us_title")} */}
-					</a>
+					<a className="vacancy-page__link" href="tel:+420777957290"></a>
 				</div>
 			</main>
 		</>

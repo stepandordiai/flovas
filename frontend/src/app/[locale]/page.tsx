@@ -4,8 +4,6 @@ import Contacts from "../components/Contacts/Contacts";
 import WebApp from "../components/WebApp/WebApp";
 import ScrollToTopBtn from "@/app/components/ScrollToTopBtn/ScrollToTopBtn";
 import HomeClient from "./Home.client";
-import { VacancyInterface } from "@/app/interfaces/Vacancy";
-import { getVacanciesData } from "@/app/lib/api/api";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import VacanciesSection from "../components/Vacancies";
@@ -43,15 +41,12 @@ function VacanciesLoading({ text }: { text: string }) {
 
 export default async function Home() {
 	const t = await getTranslations();
-	const vacancies =
-		await getVacanciesData<VacancyInterface[]>("/api/vacancies");
-
 	return (
 		<>
 			<main className="home" id="home">
 				<div className="home-inner">
 					<div className="home-inner-container">
-						<HomeClient vacancies={vacancies} />
+						<HomeClient />
 						<section className="vacancies" id="vacancies">
 							<h2 className="vacancies__title">{t("vacancies_title")}</h2>
 							<Suspense

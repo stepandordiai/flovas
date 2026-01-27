@@ -10,8 +10,7 @@ const app = express();
 
 // List of allowed origins (admin + public site)
 const allowedOrigins = [
-	"http://localhost:5173",
-	"http://localhost:5174",
+	"http://localhost:3000",
 	"https://flovas-admin.netlify.app",
 	"https://flovas.vercel.app/",
 	"https://flovas.cz",

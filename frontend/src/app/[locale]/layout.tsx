@@ -1,19 +1,11 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
-import "@/app/scss/globals.scss";
-import { getVacanciesData } from "../lib/api/api";
-import { VacancyInterface } from "../interfaces/Vacancy";
 import { Locale } from "../interfaces/Locale";
-
-const montserrat = Montserrat({
-	variable: "--font-montserrat",
-	subsets: ["latin", "cyrillic"],
-});
+import FloatingContact from "../components/FloatingContact/FloatingContact";
 
 // TODO: LEARN THIS
 export async function generateMetadata({
@@ -56,18 +48,13 @@ export default async function LocaleLayout({
 		notFound();
 	}
 
-	const vacancies =
-		await getVacanciesData<VacancyInterface[]>("/api/vacancies");
 	return (
-		<html lang={locale}>
-			<body className={montserrat.variable}>
-				<NextIntlClientProvider>
-					<Header vacancies={vacancies} />
-					{children}
-					<div className="empty-div"></div>
-					<Footer />
-				</NextIntlClientProvider>
-			</body>
-		</html>
+		<NextIntlClientProvider locale={locale}>
+			<FloatingContact />
+			<Header />
+			{children}
+			<div className="empty-div"></div>
+			<Footer />
+		</NextIntlClientProvider>
 	);
 }
