@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import placesData from "@/app/lib/data/places-data.json";
 import { Link } from "@/i18n/navigation";
 import { VacancyInterface } from "../interfaces/Vacancy";
@@ -33,43 +33,33 @@ const HomeClient = ({ vacancies }: HomeClientTypes) => {
 			});
 	}, [text]);
 
+	// FIXME:
+	const rotateRef = useRef<HTMLDivElement | null>(null);
+
 	function rotateWord() {
-		const dataShow = document.querySelector(
-			".home__rotate-container span[data-show]",
-		) as HTMLSpanElement | null;
+		if (!rotateRef.current) return;
+
+		const container = rotateRef.current;
+		const dataShow = container.querySelector("span[data-show]");
 		const dataNext =
 			dataShow?.nextElementSibling ||
-			(document.querySelector(
-				".home__rotate-container span:first-child",
-			) as HTMLSpanElement | null);
-		const dataUp = document.querySelector(
-			".home__rotate-container span[data-up]",
-		);
+			container.querySelector("span:first-child");
+		const dataUp = container.querySelector("span[data-up]");
 
-		if (dataUp) {
-			dataUp.removeAttribute("data-up");
-		}
-
+		dataUp?.removeAttribute("data-up");
 		dataShow?.removeAttribute("data-show");
 		dataShow?.setAttribute("data-up", "");
 		dataNext?.setAttribute("data-show", "");
 	}
 
-	// FIXME:
 	useEffect(() => {
-		let customInterval: any;
-		setTimeout(() => {
-			const spen = document.querySelector(
-				".home__rotate-container span",
-			) as HTMLSpanElement | null;
+		const spans = rotateRef.current?.querySelectorAll("span");
+		if (!spans || spans.length === 0) return;
 
-			spen?.setAttribute("data-show", "");
-			customInterval = setInterval(rotateWord, 3000);
-		}, 1000);
+		spans[0].setAttribute("data-show", "");
 
-		return () => {
-			clearInterval(customInterval);
-		};
+		const interval = setInterval(rotateWord, 3000);
+		return () => clearInterval(interval);
 	}, []);
 
 	return (
@@ -90,7 +80,7 @@ const HomeClient = ({ vacancies }: HomeClientTypes) => {
 						})}
 					</p>
 					<div className={styles["home__rotate-wrapper"]}>
-						<div className={styles["home__rotate-container"]}>
+						<div ref={rotateRef} className={styles["home__rotate-container"]}>
 							{placesData.map((place, index) => (
 								<span key={index}>{t(place)}</span>
 							))}
