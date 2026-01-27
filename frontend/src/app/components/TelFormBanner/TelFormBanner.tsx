@@ -1,9 +1,17 @@
-import { useTranslation } from "react-i18next";
+"use client";
+
+import { useTranslations } from "next-intl";
 import classNames from "classnames";
+import { Dispatch, SetStateAction } from "react";
 import "./TelFormBanner.scss";
 
-const TelFormBanner = ({ active, setActive }) => {
-	const { t } = useTranslation();
+type TelFormBannerProps = {
+	active: boolean;
+	setActive: Dispatch<SetStateAction<boolean>>;
+};
+
+const TelFormBanner = ({ active, setActive }: TelFormBannerProps) => {
+	const t = useTranslations();
 
 	return (
 		<>
