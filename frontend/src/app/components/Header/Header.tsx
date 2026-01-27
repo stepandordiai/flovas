@@ -114,18 +114,18 @@ const Header = ({ vacancies }: HeaderProps) => {
 	// menu
 
 	useEffect(() => {
-		const closeMenuOnScroll = () => setMenuOpen(false);
+		const closeMenu = () => setMenuOpen(false);
 
 		const closeMenuOnEsc = (e: KeyboardEvent) => {
 			if (e.key === "Escape") setMenuOpen(false);
 		};
 
 		// TODO: window is better than document for scroll
-		window.addEventListener("scroll", closeMenuOnScroll);
+		window.addEventListener("scroll", closeMenu);
 		document.addEventListener("keydown", closeMenuOnEsc);
 
 		return () => {
-			window.removeEventListener("scroll", closeMenuOnScroll);
+			window.removeEventListener("scroll", closeMenu);
 			document.removeEventListener("keydown", closeMenuOnEsc);
 		};
 	}, []);
@@ -136,15 +136,15 @@ const Header = ({ vacancies }: HeaderProps) => {
 		<header className="header">
 			<div className="header-top">
 				<button
-					// onClick={toggleMenu}
+					onClick={toggleMenu}
 					className="menu-btn"
-					// aria-expanded={menuOpen}
+					aria-expanded={menuOpen}
 					aria-controls="menu"
 				>
 					<span className="menu-btn__title">{t("menu")}</span>
 					<span
 						className={classNames("menu-btn__dot", {
-							// "menu-btn__dot--active": menuOpen,
+							"menu-btn__dot--active": menuOpen,
 						})}
 					></span>
 				</button>
@@ -191,7 +191,7 @@ const Header = ({ vacancies }: HeaderProps) => {
 									{t(link.name)}
 									{link.vacanciesQty && (
 										<span className="menu__link-vacancies-qty">
-											{/* {vacanciesData.length} */}
+											{vacancies.length}
 										</span>
 									)}
 								</Link>

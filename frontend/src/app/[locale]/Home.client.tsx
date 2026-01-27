@@ -5,8 +5,8 @@ import { useState, useEffect, useRef } from "react";
 import placesData from "@/app/lib/data/places-data.json";
 import { Link } from "@/i18n/navigation";
 import { VacancyInterface } from "../interfaces/Vacancy";
-import styles from "./page.module.scss";
 import ContactUs from "../components/ContactUs/ContactUs";
+import "./Home.scss";
 
 type HomeClientTypes = {
 	vacancies: VacancyInterface[];
@@ -24,13 +24,11 @@ const HomeClient = ({ vacancies }: HomeClientTypes) => {
 
 	// FIXME:
 	useEffect(() => {
-		document
-			.querySelectorAll(`.${styles["blur-char"]}`)
-			.forEach((char, index) => {
-				setTimeout(() => {
-					char.classList.add(styles["blur-char--active"]);
-				}, index * 50);
-			});
+		document.querySelectorAll(".blur-char").forEach((char, index) => {
+			setTimeout(() => {
+				char.classList.add("blur-char--active");
+			}, index * 50);
+		});
 	}, [text]);
 
 	// FIXME:
@@ -68,19 +66,19 @@ const HomeClient = ({ vacancies }: HomeClientTypes) => {
 				contactUsActive={contactUsActive}
 				setContactUsActive={setContactUsActive}
 			/>
-			<section className={styles["home-top"]}>
-				<div className={styles["home__title"]}>
+			<section className="home-top">
+				<div className="home__title">
 					<p>
 						{text.split("").map((char, index) => {
 							return (
-								<span key={index} className={styles["blur-char"]}>
+								<span key={index} className="blur-char">
 									{char}
 								</span>
 							);
 						})}
 					</p>
-					<div className={styles["home__rotate-wrapper"]}>
-						<div ref={rotateRef} className={styles["home__rotate-container"]}>
+					<div className="home__rotate-wrapper">
+						<div ref={rotateRef} className="home__rotate-container">
 							{placesData.map((place, index) => (
 								<span key={index}>{t(place)}</span>
 							))}
@@ -91,27 +89,25 @@ const HomeClient = ({ vacancies }: HomeClientTypes) => {
 							.split("")
 							.map((char, index) => {
 								return (
-									<span key={index} className={styles["blur-char"]}>
+									<span key={index} className="blur-char">
 										{char}
 									</span>
 								);
 							})}
 					</p>
 				</div>
-				<div className={styles["home__link-container"]}>
+				<div className="home__link-container">
 					<button
 						onClick={() => {
 							setContactUsActive(true);
 						}}
-						className={`${styles["home__link"]} ${styles["home__contact-us-link"]}`}
+						className="home__link home__contact-us-link"
 					>
 						{t("contact_us_title")}
 					</button>
-					<Link className={styles["home__link"]} href="/#vacancies">
+					<Link className="home__link" href="/#vacancies">
 						{t("vacancies_title")}
-						<span className={styles["home__link-vacancies-qty"]}>
-							{vacancies.length}
-						</span>
+						<span className="home__link-vacancies-qty">{vacancies.length}</span>
 					</Link>
 				</div>
 			</section>
