@@ -11,10 +11,13 @@ export default async function VacanciesSection() {
 		await getVacanciesData<VacancyInterface[]>("/api/vacancies");
 
 	return (
-		<>
-			{vacancies.map((vacancy, index) => (
-				<Vacancy key={index} vacancy={vacancy} />
-			))}
-		</>
+		<div className="vacancies-container">
+			{vacancies
+				.slice()
+				.reverse()
+				.map((vacancy, index) => (
+					<Vacancy key={index} vacancy={vacancy} />
+				))}
+		</div>
 	);
 }

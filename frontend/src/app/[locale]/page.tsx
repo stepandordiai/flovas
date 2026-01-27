@@ -21,6 +21,7 @@ export const metadata: Metadata = {
 	},
 };
 
+// TODO: learn this
 function VacanciesLoading({ text }: { text: string }) {
 	return (
 		<div className="vacancies-loading">
@@ -46,17 +47,15 @@ export default async function Home() {
 						<HomeClient vacancies={vacancies} />
 						<section className="vacancies" id="vacancies">
 							<h2 className="vacancies__title">{t("vacancies_title")}</h2>
-							<div className="vacancies-container">
-								<Suspense
-									fallback={
-										<VacanciesLoading
-											text={`${t("vacancies_r_loading")}. (~30 ${t("sec")}.)`}
-										/>
-									}
-								>
-									<VacanciesSection />
-								</Suspense>
-							</div>
+							<Suspense
+								fallback={
+									<VacanciesLoading
+										text={`${t("vacancies_r_loading")}. (~30 ${t("sec")}.)`}
+									/>
+								}
+							>
+								<VacanciesSection />
+							</Suspense>
 						</section>
 					</div>
 					<About />
