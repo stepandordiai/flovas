@@ -10,7 +10,6 @@ import { getTranslations } from "next-intl/server";
 // import { Link } from "@/i18n/navigation";
 // import VacanciesSection from "../components/Vacancies";
 import type { Locale } from "../interfaces/Locale";
-import { fetchVacancies } from "../lib/api/vacancies";
 import "./Vacancies.scss";
 import "./Home.scss";
 
@@ -28,8 +27,6 @@ export async function generateMetadata({
 		description: t("homeMetaDesc"),
 	};
 }
-
-const vacancies = await fetchVacancies();
 
 // TODO: learn this
 // function VacanciesLoading({ text }: { text: string }) {

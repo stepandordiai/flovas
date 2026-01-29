@@ -1,7 +1,10 @@
 import { getTranslations } from "next-intl/server";
 import placesData from "@/app/lib/data/places-data.json";
-import { fetchVacancies } from "@/app/lib/api/vacancies";
+import vacanciesData from "./../../lib/data/vacancies-data.json";
+import { VacancyInterface } from "@/app/interfaces/Vacancy";
 import "./About.scss";
+
+const vacancies: VacancyInterface[] = vacanciesData;
 
 const benefitsData = [
 	{ img: "/icons/czech.png", title: "about.our_advantages1" },
@@ -21,7 +24,6 @@ const benefitsData = [
 
 export default async function About() {
 	const t = await getTranslations();
-	const vacancies = await fetchVacancies();
 
 	return (
 		<section className="about" id="about">

@@ -14,7 +14,7 @@ type VacancyProps = {
 const Vacancy = ({ vacancy }: VacancyProps) => {
 	const t = useTranslations();
 
-	const { _id, img, place, title, updatedAt, isActive } = vacancy;
+	const { id, img, isActive, createdAt, place, title } = vacancy;
 
 	const [imgError, setImgError] = useState(false);
 
@@ -47,14 +47,12 @@ const Vacancy = ({ vacancy }: VacancyProps) => {
 							<span></span> <span>{t("inactive_vacancy")}</span>
 						</p>
 					)}
-					<p className="vacancy__date">
-						Опубліковано: {updatedAt.slice(0, 10)}
-					</p>
+					<p className="vacancy__date">Опубліковано: {createdAt}</p>
 					<p>📍 {place}</p>
 					<p style={{ fontWeight: 500 }}>{title}</p>
 				</div>
 				<div className="vacancy__link-container">
-					<Link className="vacancy__link" href={`/${_id}`}>
+					<Link className="vacancy__link" href={`/${id}`} scroll={true}>
 						{t("more_info_btn")}
 					</Link>
 					<button onClick={handleTelFormBanner} className="vacancy__btn">

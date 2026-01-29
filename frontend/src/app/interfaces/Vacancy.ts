@@ -1,10 +1,9 @@
 export interface VacancyInterface {
-	_id: string;
-	title: string;
-	desc: string;
+	id: string;
 	img: string;
 	isActive: boolean;
+	createdAt: string;
 	place: string;
-	updatedAt: string;
-	createdAt?: string;
+	title: string;
+	desc: string;
 }

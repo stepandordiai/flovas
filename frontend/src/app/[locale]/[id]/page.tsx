@@ -1,18 +1,19 @@
 import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
-import { fetchVacancies } from "@/app/lib/api/vacancies";
+import vacanciesData from "./../../lib/data/vacancies-data.json";
+import { VacancyInterface } from "@/app/interfaces/Vacancy";
 import "./VacancyPage.scss";
+
+const vacancies: VacancyInterface[] = vacanciesData;
 
 // TODO: LEARN THIS
 export async function generateStaticParams() {
-	const vacancies = await fetchVacancies();
-
 	const locales = ["uk", "cs", "sk", "en"];
 
 	return locales.flatMap((locale) =>
 		vacancies.map((vacancy) => ({
 			locale,
-			id: String(vacancy._id),
+			id: String(vacancy.id),
 		})),
 	);
 }
@@ -24,9 +25,7 @@ type VacancyPageProps = {
 export default async function VacancyPage({ params }: VacancyPageProps) {
 	const { id } = await params;
 
-	const vacancies = await fetchVacancies();
-
-	const vacancy = vacancies.find((vacancy) => vacancy._id === String(id));
+	const vacancy = vacancies.find((vacancy) => vacancy.id === String(id));
 
 	if (!vacancy) {
 		return notFound();
@@ -65,9 +64,9 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 						<div className="vacancy-page__no-img"></div>
 					)}
 					<div style={{ display: "flex", flexDirection: "column", rowGap: 10 }}>
-						<p className="vacancy__date">
+						{/* <p className="vacancy__date">
 							Опубліковано: {vacancy.updatedAt.slice(0, 10)}
-						</p>
+						</p> */}
 						<p>📍 {vacancy.place}</p>
 						<p style={{ fontWeight: 500 }}>{vacancy.title}</p>
 						<p style={{ whiteSpace: "pre-wrap" }}>{vacancy.desc}</p>

@@ -4,16 +4,15 @@ import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import placesData from "@/app/lib/data/places-data.json";
 import { Link } from "@/i18n/navigation";
-import { fetchVacancies } from "../lib/api/vacancies";
+import vacanciesData from "./../lib/data/vacancies-data.json";
 import { VacancyInterface } from "../interfaces/Vacancy";
 import Vacancy from "../components/Vacancy/Vacancy";
 import "./Home.scss";
 
 const HomeClient = () => {
 	const t = useTranslations();
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(null);
-	const [vacancies, setVacancies] = useState<VacancyInterface[]>([]);
+
+	const vacancies: VacancyInterface[] = vacanciesData;
 
 	// FIXME:
 	useEffect(() => {
@@ -22,13 +21,6 @@ const HomeClient = () => {
 				char.classList.add("blur-char--active");
 			}, index * 50);
 		});
-	}, []);
-
-	useEffect(() => {
-		fetchVacancies()
-			.then(setVacancies)
-			.catch((err) => setError(err.message))
-			.finally(() => setLoading(false));
 	}, []);
 
 	// FIXME:
@@ -106,22 +98,11 @@ const HomeClient = () => {
 			</section>
 			<section className="vacancies" id="vacancies">
 				<h2 className="vacancies__title">{t("vacancies_title")}</h2>
-				{/* <Suspense
-					fallback={
-						<VacanciesLoading
-							text={`${t("vacancies_r_loading")}. (~30 ${t("sec")}.)`}
-						/>
-					}
-				> */}
 				<div className="vacancies-container">
-					{vacancies
-						.slice()
-						.reverse()
-						.map((vacancy, index) => (
-							<Vacancy key={index} vacancy={vacancy} />
-						))}
+					{vacancies.map((vacancy, index) => (
+						<Vacancy key={index} vacancy={vacancy} />
+					))}
 				</div>
-				{/* </Suspense> */}
 			</section>
 		</div>
 	);

@@ -8,8 +8,10 @@ import LngSelect from "../LngSelect/LngSelect";
 import classNames from "classnames";
 import { Link } from "@/i18n/navigation";
 import { VacancyInterface } from "@/app/interfaces/Vacancy";
-import { fetchVacancies } from "@/app/lib/api/vacancies";
+import vacanciesData from "./../../lib/data/vacancies-data.json";
 import "./Header.scss";
+
+const vacancies: VacancyInterface[] = vacanciesData;
 
 const Header = () => {
 	const t = useTranslations();
@@ -19,19 +21,6 @@ const Header = () => {
 
 	const [indicatorStyle, setIndicatorStyle] = useState({});
 	const [menuOpen, setMenuOpen] = useState(false);
-	const [vacancies, setVacancies] = useState<VacancyInterface[]>([]);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(null);
-
-	useEffect(() => {
-		fetchVacancies()
-			.then(setVacancies)
-			.catch((err) => setError(err.response?.data.message))
-			.finally(() => setLoading(false));
-	}, []);
-
-	console.log(error);
-	console.log(loading);
 
 	const updateIndicator = () => {
 		if (!navRef.current) return;
