@@ -2,6 +2,7 @@ import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import vacanciesData from "./../../lib/data/vacancies-data.json";
 import { VacancyInterface } from "@/app/interfaces/Vacancy";
+import type { Metadata } from "next";
 import "./VacancyPage.scss";
 
 const vacancies: VacancyInterface[] = vacanciesData;
@@ -18,6 +19,40 @@ export async function generateStaticParams() {
 	);
 }
 
+// TODO: LEARN THIS
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ locale: string; id: string }>;
+}): Promise<Metadata> {
+	const { locale, id } = await params;
+	const BASE_URL = "https://www.flovas.cz";
+	const locales = ["uk", "cs", "sk", "en"];
+
+	const vacancy = vacancies.find((vacancy) => vacancy.id === id);
+
+	if (!vacancy) {
+		return {};
+	}
+
+	const alternates = Object.fromEntries(
+		locales.map((l) => [l, `${BASE_URL}/${l}${id}`]),
+	);
+
+	return {
+		title: vacancy.title,
+		description: vacancy.desc.slice(0, 160),
+
+		alternates: {
+			canonical: `${BASE_URL}/${locale}/${id}`,
+			languages: {
+				...alternates,
+				"x-default": `${BASE_URL}/uk/${id}`,
+			},
+		},
+	};
+}
+
 type VacancyPageProps = {
 	params: Promise<{ id: string }>;
 };
@@ -25,7 +60,7 @@ type VacancyPageProps = {
 export default async function VacancyPage({ params }: VacancyPageProps) {
 	const { id } = await params;
 
-	const vacancy = vacancies.find((vacancy) => vacancy.id === String(id));
+	const vacancy = vacancies.find((vacancy) => vacancy.id === id);
 
 	if (!vacancy) {
 		return notFound();
