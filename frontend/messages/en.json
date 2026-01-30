@@ -1,5 +1,5 @@
 {
-	"logo_title": "agency",
+	"logoTitle": "flovas agency",
 	"menu": "menu",
 	"choose_lng_title": "Choose your preferred language",
 	"home_title": "Home",
@@ -26,20 +26,11 @@
 	"send": "Send",
 	"homeMetaTitle": "Employment in the Czech Republic for Ukrainians",
 	"homeMetaDesc": "Jobs in the Czech Republic for Ukrainians. FLOVAS s.r.o. — a recruitment agency offering legal employment, accommodation, and assistance with documents throughout the Czech Republic.",
+	"followUs": "Follow us",
 
 	"home": {
 		"title1": "Employment in the city",
 		"title2": "with flovas agency",
-		"place1": "Prague",
-		"place2": "Kolín",
-		"place3": "Brno",
-		"place4": "Pardubice",
-		"place5": "Cheb",
-		"place6": "Chvaletice",
-		"place7": "Kuřim",
-		"place8": "Chelčice",
-		"place9": "Chrudim",
-		"place10": "Vysoké Mýto",
 		"backToTop": "Back to top"
 	},
 
@@ -54,7 +45,7 @@
 	},
 
 	"about": {
-		"desc": "FLOVAS s.r.o. is a recruitment agency specializing in employment across the entire territory of the Czech Republic. We offer jobs in various industries — manufacturing, logistics, construction, warehouse operations, and other sectors.",
+		"desc": "FLOVAS, s.r.o. is a recruitment agency specializing in employment across the entire territory of the Czech Republic. We offer jobs in various industries — manufacturing, logistics, construction, warehouse operations, and other sectors.",
 		"our_advantages_title": "Our advantages",
 		"our_advantages1": "Employment throughout the Czech Republic",
 		"our_advantages2": "For men, women and couples",

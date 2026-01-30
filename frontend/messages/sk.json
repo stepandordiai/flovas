@@ -1,5 +1,5 @@
 {
-	"logo_title": "agentúra",
+	"logoTitle": "Agentúra flovas",
 	"menu": "menu",
 	"choose_lng_title": "Vyberte si preferovaný jazyk",
 	"home_title": "Domov",
@@ -26,20 +26,11 @@
 	"send": "Odoslať",
 	"homeMetaTitle": "Zamestnanie v Česku pre Ukrajincov",
 	"homeMetaDesc": "Práca v Česku pre Ukrajincov. FLOVAS s.r.o. — personálna agentúra s legálnym zamestnaním, ubytovaním a pomocou s dokumentmi po celom Česku.",
+	"followUs": "Sledujte nás",
 
 	"home": {
 		"title1": "Zamestnanosť v meste",
 		"title2": "s agentúrou flovas",
-		"place1": "Praha",
-		"place2": "Kolín",
-		"place3": "Brno",
-		"place4": "Pardubice",
-		"place5": "Cheb",
-		"place6": "Chvaletice",
-		"place7": "Kuřim",
-		"place8": "Chelčice",
-		"place9": "Chrudim",
-		"place10": "Vysoké Mýto",
 		"backToTop": "Späť nahor"
 	},
 
@@ -54,7 +45,7 @@
 	},
 
 	"about": {
-		"desc": "FLOVAS s.r.o. je personálna agentúra, ktorá sa špecializuje na zamestnávanie na celom území Českej republiky. Ponúkame prácu v rôznych odvetviach — výroba, logistika, stavebníctvo, skladové procesy a ďalšie oblasti.",
+		"desc": "FLOVAS, s.r.o. je personálna agentúra, ktorá sa špecializuje na zamestnávanie na celom území Českej republiky. Ponúkame prácu v rôznych odvetviach — výroba, logistika, stavebníctvo, skladové procesy a ďalšie oblasti.",
 		"our_advantages_title": "Naše výhody",
 		"our_advantages1": "Zamestnanie v celej Českej republike",
 		"our_advantages2": "Pre mužov, ženy a páry",

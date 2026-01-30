@@ -60,7 +60,7 @@ const Footer = async () => {
 						</div>
 					</div>
 					<div className="footer__nav">
-						{/* <p className="footer__nav-title">{t("follow_us")}</p> */}
+						<p className="footer__nav-title">{t("followUs")}</p>
 						<div className="footer__nav-list">
 							{socialsData.map((social) => {
 								return (

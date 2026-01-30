@@ -152,7 +152,7 @@ const Header = () => {
 					></span>
 				</button>
 				<Link href="/#home" className="header__logo">
-					flovas <span>{t("logo_title")}</span>
+					{t("logoTitle")}
 				</Link>
 				<nav ref={navRef} className="header__nav">
 					{linksData.map((link, index) => {

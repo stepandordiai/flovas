@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import placesData from "@/app/lib/data/places-data.json";
 import vacanciesData from "./../../lib/data/vacancies-data.json";
 import { VacancyInterface } from "@/app/interfaces/Vacancy";
 import "./About.scss";
@@ -47,7 +46,7 @@ export default async function About() {
 				{t("about.employment_place_title")}
 			</h3>
 			<p className="about__places-desc">
-				{placesData.map((place: string) => t(place)).join(", ")}{" "}
+				{[...new Set(vacancies.map((vacancy) => vacancy.place))].join(", ")}{" "}
 				{t("about.employment_place_desc")}
 			</p>
 			<h3 className="about__benefits-title">

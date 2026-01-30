@@ -6,19 +6,19 @@ const socialsData = [
 	{
 		id: 1,
 		title: "Facebook",
-		socialUrl: "https://www.facebook.com/profile.php?id=61565186673220",
+		socialUrl: "https://www.facebook.com/flovas.agency/",
 		socialImg: FacebookIcon,
 	},
 	{
 		id: 2,
 		title: "Instagram",
-		socialUrl: "https://www.instagram.com/flovas.agency/",
+		socialUrl: "https://www.instagram.com/flovas.cz/",
 		socialImg: InstagramIcon,
 	},
 	{
 		id: 3,
 		title: "TikTok",
-		socialUrl: "https://www.tiktok.com/@flovas.agency",
+		socialUrl: "https://www.tiktok.com/@flovas.cz",
 		socialImg: TiktokIcon,
 	},
 ];

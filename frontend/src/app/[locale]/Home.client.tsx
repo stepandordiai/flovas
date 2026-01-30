@@ -1,8 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useEffect, useRef, useState } from "react";
-import placesData from "@/app/lib/data/places-data.json";
+import { useEffect, useRef } from "react";
 import { Link } from "@/i18n/navigation";
 import vacanciesData from "./../lib/data/vacancies-data.json";
 import { VacancyInterface } from "../interfaces/Vacancy";
@@ -69,8 +68,8 @@ const HomeClient = () => {
 					</p>
 					<div className="home__rotate-wrapper">
 						<div ref={rotateRef} className="home__rotate-container">
-							{placesData.map((place, index) => (
-								<span key={index}>{t(place)}</span>
+							{[...new Set(vacancies.map((v) => v.place))].map((place, i) => (
+								<span key={i}>{place}</span>
 							))}
 						</div>
 					</div>
