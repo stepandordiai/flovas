@@ -131,6 +131,10 @@ const Header = () => {
 
 	const toggleMenu = () => setMenuOpen((prev) => !prev);
 
+	const hotVacanciesQty = vacancies.filter(
+		(vacancy) => vacancy.isActive,
+	).length;
+
 	return (
 		<header className="header">
 			<div className="header-top">
@@ -157,7 +161,7 @@ const Header = () => {
 								{t(link.name)}
 								{link.vacanciesQty && (
 									<span className="nav-link__vacancies-qty">
-										{vacancies.length}
+										{hotVacanciesQty}
 									</span>
 								)}
 							</Link>
@@ -190,7 +194,7 @@ const Header = () => {
 									{t(link.name)}
 									{link.vacanciesQty && (
 										<span className="menu__link-vacancies-qty">
-											{vacancies.length}
+											{hotVacanciesQty}
 										</span>
 									)}
 								</Link>

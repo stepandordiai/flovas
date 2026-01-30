@@ -52,7 +52,7 @@ const Vacancy = ({ vacancy }: VacancyProps) => {
 					<p style={{ fontWeight: 500 }}>{title}</p>
 				</div>
 				<div className="vacancy__link-container">
-					<Link className="vacancy__link" href={`/${id}`} scroll={true}>
+					<Link className="vacancy__link" href={`/prace/${id}`} scroll={true}>
 						{t("more_info_btn")}
 					</Link>
 					<button onClick={handleTelFormBanner} className="vacancy__btn">

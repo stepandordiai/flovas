@@ -1,6 +1,6 @@
 [
-	{ "name": "home_title", "path": "/#home" },
-	{ "name": "vacancies_title", "path": "/#vacancies", "vacanciesQty": true },
+	{ "name": "home_title", "path": "/#hero" },
+	{ "name": "hotVacanciesTitle", "path": "/#vacancies", "vacanciesQty": true },
 	{ "name": "about_title", "path": "/#about" },
 	{ "name": "contacts_title", "path": "/#contacts" },
 	{ "name": "web_app_title", "path": "/#web-app" }

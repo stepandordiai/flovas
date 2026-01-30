@@ -1,6 +1,6 @@
 import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
-import vacanciesData from "./../../lib/data/vacancies-data.json";
+import vacanciesData from "./../../../lib/data/vacancies-data.json";
 import { VacancyInterface } from "@/app/interfaces/Vacancy";
 import type { Metadata } from "next";
 import "./VacancyPage.scss";
@@ -70,7 +70,7 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 		<>
 			<main className="vacancy-page">
 				<div className="vacancy-page__top">
-					<Link className="vacancy-page__top-link" href="/#vacancies">
+					<Link className="vacancy-page__top-link" href="/prace">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="20"
@@ -98,15 +98,23 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 					) : (
 						<div className="vacancy-page__no-img"></div>
 					)}
-					<div style={{ display: "flex", flexDirection: "column", rowGap: 10 }}>
-						{/* <p className="vacancy__date">
-							Опубліковано: {vacancy.updatedAt.slice(0, 10)}
-						</p> */}
-						<p>📍 {vacancy.place}</p>
-						<p style={{ fontWeight: 500 }}>{vacancy.title}</p>
+					<div
+						style={{
+							display: "flex",
+							flexDirection: "column",
+							rowGap: 10,
+						}}
+					>
+						<h1 className="vacancy__title">{vacancy.title}</h1>
+						<p className="vacancy__created-at">
+							Опубліковано: {vacancy.createdAt}
+						</p>
+						<p style={{ fontWeight: 600 }}>📍 {vacancy.place}</p>
 						<p style={{ whiteSpace: "pre-wrap" }}>{vacancy.desc}</p>
+						<a className="vacancy-page__link" href="tel:+420777957290">
+							Дзвоніть зараз
+						</a>
 					</div>
-					<a className="vacancy-page__link" href="tel:+420777957290"></a>
 				</div>
 			</main>
 		</>

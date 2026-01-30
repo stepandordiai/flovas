@@ -5,6 +5,7 @@ import { VacancyInterface } from "./interfaces/Vacancy";
 const vacancies: VacancyInterface[] = vacanciesData;
 const BASE_URL = "https://www.flovas.cz";
 const locales = ["uk", "cs", "sk", "en"] as const;
+const pages = ["", "prace"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
 	const now = new Date();
@@ -15,20 +16,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
 			locales.map((locale) => [locale, `${BASE_URL}/${locale}${path}`]),
 		);
 
-	const localePages = locales.map((locale) => ({
-		url: `${BASE_URL}/${locale}`,
-		lastModified: now,
-		alternates: {
-			languages: alternates(""),
-		},
-	}));
+	const localePages = locales.flatMap((locale) =>
+		pages.map((page) => ({
+			url: `${BASE_URL}/${locale}/${page}`.replace(/\/$/, ""),
+			lastModified: now,
+			alternates: {
+				languages: alternates(page ? `/${page}` : ""),
+			},
+		})),
+	);
 
 	const vacanciesLocalePages = locales.flatMap((locale) =>
 		vacancies.map((vacancy) => ({
-			url: `${BASE_URL}/${locale}/${vacancy.id}`,
+			url: `${BASE_URL}/${locale}/prace/${vacancy.id}`,
 			lastModified: now,
 			alternates: {
-				languages: alternates(`/${vacancy.id}`),
+				languages: alternates(`/prace/${vacancy.id}`),
 			},
 		})),
 	);

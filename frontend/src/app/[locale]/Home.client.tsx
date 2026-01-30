@@ -54,7 +54,7 @@ const HomeClient = () => {
 
 	return (
 		<div className="home-inner-container">
-			<section className="home-top">
+			<section className="home-top" id="hero">
 				<div className="home__title">
 					<p>
 						{t("home.title1")
@@ -90,19 +90,24 @@ const HomeClient = () => {
 					<Link className="home__link" href="/#contacts">
 						{t("contact_us_title")}
 					</Link>
-					<Link className="home__link" href="/#vacancies">
+					<Link className="home__link" href="/prace">
 						{t("vacancies_title")}
 						<span className="home__link-vacancies-qty">{vacancies.length}</span>
 					</Link>
 				</div>
 			</section>
 			<section className="vacancies" id="vacancies">
-				<h2 className="vacancies__title">{t("vacancies_title")}</h2>
+				<h2 className="vacancies__title">{t("hotVacanciesTitle")} 🔥</h2>
 				<div className="vacancies-container">
-					{vacancies.map((vacancy, index) => (
-						<Vacancy key={index} vacancy={vacancy} />
-					))}
+					{vacancies
+						.filter((vacancy) => vacancy.isActive)
+						.map((vacancy, index) => (
+							<Vacancy key={index} vacancy={vacancy} />
+						))}
 				</div>
+				<Link className="vacancies__link" href="/prace">
+					Дивитись всі вакансії
+				</Link>
 			</section>
 		</div>
 	);

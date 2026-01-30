@@ -11,6 +11,10 @@ html {
 	background: var(--bg-clr);
 }
 
+::-webkit-scrollbar {
+	display: none;
+}
+
 body {
 	position: relative;
 	font-family: "Montserrat", sans-serif;
@@ -28,7 +32,6 @@ body {
 a {
 	align-self: flex-start;
 	color: rgba(0, 0, 0, 0.5);
-	transition: all 0.2s;
 
 	&:hover {
 		color: #000;

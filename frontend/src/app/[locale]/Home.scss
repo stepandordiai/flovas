@@ -164,3 +164,102 @@
 		}
 	}
 }
+
+.vacancies {
+	padding: 0 25px 25px;
+	width: 100%;
+	height: 100%;
+}
+
+.vacancies__title {
+	padding-top: 100px;
+	padding-bottom: 25px;
+	font-size: clamp(1.5rem, 4vw, 2.5rem);
+	font-weight: 500;
+}
+
+// Loading
+.vacancies-loading {
+	text-align: center;
+}
+
+.vacancies-loading__circle {
+	position: relative;
+	width: 50px;
+	aspect-ratio: 1/1;
+	background: conic-gradient(#000 25%, rgba(0, 0, 0, 0.1) 0%);
+	border-radius: 50%;
+	margin: auto;
+	animation: animateVacanciesLoadingCircle 1s infinite linear;
+
+	span {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: calc(100% - 5px);
+		aspect-ratio: 1/1;
+		background: #fff;
+		border-radius: inherit;
+	}
+}
+
+@keyframes animateVacanciesLoadingCircle {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.vacancies-container {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 10px;
+}
+
+.vacancies__link {
+	margin: 20px auto 0;
+	@include grid-center;
+	color: #000;
+	height: 50px;
+	border-radius: 25px;
+	width: max-content;
+	padding: 0 10px;
+	background: var(--sec-accent-clr);
+
+	&:hover {
+		background: #000;
+		color: #fff;
+	}
+}
+
+@media screen and (width <= 1400px) {
+	.vacancies-container {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media screen and (width <= 1100px) {
+	.vacancies-container {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media screen and (width <= 750px) {
+	.vacancies-container {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
+
+@media screen and (width <= 896px) {
+	.vacancies {
+		padding: 0 10px 10px;
+	}
+
+	.vacancies__link {
+		margin: 10px auto 0;
+	}
+
+	.vacancies__title {
+		padding-top: 75px;
+	}
+}
