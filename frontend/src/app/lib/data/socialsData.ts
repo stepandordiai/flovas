@@ -1,6 +1,6 @@
-import FacebookIcon from "../../Icons/FacebookIcon";
-import InstagramIcon from "../../Icons/InstagramIcon";
-import TiktokIcon from "../../Icons/TiktokIcon";
+import FacebookIcon from "../../icons/FacebookIcon";
+import InstagramIcon from "../../icons/InstagramIcon";
+import TiktokIcon from "../../icons/TiktokIcon";
 
 const socialsData = [
 	{

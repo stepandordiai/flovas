@@ -1,6 +1,6 @@
-import TelegramIcon from "../../Icons/TelegramIcon";
-import WhatsappIcon from "../../Icons/WhatsappIcon";
-import ViberIcon from "../../Icons/ViberIcon";
+import TelegramIcon from "../../icons/TelegramIcon";
+import WhatsappIcon from "../../icons/WhatsappIcon";
+import ViberIcon from "../../icons/ViberIcon";
 
 const contactsData = [
 	{

@@ -1,0 +1,29 @@
+.breadcrumbs {
+	align-self: flex-start;
+}
+
+.breadcrumbs-list {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
+
+	li {
+		list-style: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 10px;
+		font-size: 14px;
+
+		&:nth-last-child(1) {
+			color: hsl(0, 0%, 50%);
+		}
+	}
+}
+
+.breadcrumbs__link {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

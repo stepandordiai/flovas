@@ -13,28 +13,6 @@
 	padding: 25px;
 }
 
-.vacancy-page__top {
-	width: 100%;
-}
-
-.vacancy-page__top-link {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	column-gap: 5px;
-	padding: 12.5px;
-	max-width: max-content;
-	color: #000;
-	height: 50px;
-	border-radius: 25px;
-	background: var(--sec-accent-clr);
-
-	&:hover {
-		background: #000;
-		color: #fff;
-	}
-}
-
 .vacancy-page__img {
 	width: 100%;
 	max-width: 500px;

@@ -1,9 +1,10 @@
 import ScrollToTop from "@/app/utils/ScrollToTop";
-import { Link } from "@/i18n/navigation";
+import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import vacanciesData from "./../../../lib/data/vacancies-data.json";
 import { VacancyInterface } from "@/app/interfaces/Vacancy";
 import type { Metadata } from "next";
+import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import "./VacancyPage.scss";
 
 const vacancies: VacancyInterface[] = vacanciesData;
@@ -59,6 +60,8 @@ type VacancyPageProps = {
 };
 
 export default async function VacancyPage({ params }: VacancyPageProps) {
+	const t = await getTranslations();
+
 	const { id } = await params;
 
 	const vacancy = vacancies.find((vacancy) => vacancy.id === id);
@@ -71,24 +74,12 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 		<>
 			<ScrollToTop />
 			<main className="vacancy-page">
-				<div className="vacancy-page__top">
-					<Link className="vacancy-page__top-link" href="/prace">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="20"
-							height="20"
-							fill="currentColor"
-							className="bi bi-arrow-left"
-							viewBox="0 0 16 16"
-						>
-							<path
-								fillRule="evenodd"
-								d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
-							/>
-						</svg>
-						<span>Всі вакансії</span>
-					</Link>
-				</div>
+				<Breadcrumbs
+					links={[
+						{ label: t("vacancies_title"), href: "/prace" },
+						{ label: vacancy.title },
+					]}
+				/>
 				<div className="vacancy-page__details">
 					{vacancy.img ? (
 						<img

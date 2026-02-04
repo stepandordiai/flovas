@@ -4,7 +4,7 @@ import Vacancy from "@/app/components/Vacancy/Vacancy";
 import vacanciesData from "./../../lib/data/vacancies-data.json";
 import { VacancyInterface } from "@/app/interfaces/Vacancy";
 import ScrollToTopBtn from "@/app/components/ScrollToTopBtn/ScrollToTopBtn";
-import { Link } from "@/i18n/navigation";
+import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import "./Vacancies.scss";
 
 const vacancies: VacancyInterface[] = vacanciesData;
@@ -17,7 +17,7 @@ export default async function Vacancies() {
 			<ScrollToTop />
 			<main className="vacancies-page">
 				<div className="vacancies-page-inner">
-					<Link href="/">{t("home_title")}</Link>
+					<Breadcrumbs links={[{ label: t("vacancies_title") }]} />
 					<h2 className="vacancies-page__title">{t("vacancies_title")}</h2>
 					<div className="vacancies-page-container">
 						{vacancies.map((vacancy, index) => (
