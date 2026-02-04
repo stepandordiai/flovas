@@ -2,8 +2,9 @@
 
 import { useTranslations } from "next-intl";
 import classNames from "classnames";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import "./TelFormBanner.scss";
+import axios from "axios";
 
 type TelFormBannerProps = {
 	active: boolean;
@@ -12,6 +13,27 @@ type TelFormBannerProps = {
 
 const TelFormBanner = ({ active, setActive }: TelFormBannerProps) => {
 	const t = useTranslations();
+	const [error, setError] = useState(null);
+	const [loading, setLoading] = useState(false);
+	const [tel, setTel] = useState("");
+
+	const saveData = async (e: any) => {
+		e.preventDefault();
+		setLoading(true);
+		setError(null);
+
+		try {
+			const res = await axios.post(
+				`https://weekly-planner-backend.onrender.com/leads`,
+				tel,
+			);
+			console.log(res);
+		} catch (err: any) {
+			setError(err.response?.data.message);
+		} finally {
+			setLoading(false);
+		}
+	};
 
 	return (
 		<>
@@ -33,9 +55,11 @@ const TelFormBanner = ({ active, setActive }: TelFormBannerProps) => {
 				</div>
 				<form
 					className="tel-form-banner__form"
-					action="mailto:info@neresen.cz"
-					method="post"
-					encType="text/plain"
+					// action="mailto:info@neresen.cz"
+
+					// method="post"
+					// encType="text/plain"
+					onSubmit={saveData}
 				>
 					<div
 						style={{
@@ -53,6 +77,8 @@ const TelFormBanner = ({ active, setActive }: TelFormBannerProps) => {
 								height: 30,
 								borderRadius: 15,
 							}}
+							onChange={(e) => setTel(e.target.value)}
+							value={tel}
 							type="tel"
 							name="tel"
 							id="tel"
