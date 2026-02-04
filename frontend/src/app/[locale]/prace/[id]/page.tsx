@@ -1,3 +1,4 @@
+import ScrollToTop from "@/app/utils/ScrollToTop";
 import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import vacanciesData from "./../../../lib/data/vacancies-data.json";
@@ -68,6 +69,7 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 
 	return (
 		<>
+			<ScrollToTop />
 			<main className="vacancy-page">
 				<div className="vacancy-page__top">
 					<Link className="vacancy-page__top-link" href="/prace">
