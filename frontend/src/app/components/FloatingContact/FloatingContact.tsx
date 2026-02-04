@@ -33,7 +33,7 @@ const FloatingContact = () => {
 								target="_blank"
 								data-value={contact.title}
 							>
-								<Icon />
+								<Icon size={40} />
 							</a>
 						);
 					})}

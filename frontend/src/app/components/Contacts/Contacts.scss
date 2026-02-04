@@ -31,16 +31,6 @@
 	row-gap: 5px;
 }
 
-.contacts__details-btn {
-	position: relative;
-	color: rgba(0, 0, 0, 0.5);
-	transition: all 0.2s;
-
-	&:hover {
-		color: #000;
-	}
-}
-
 .contacts__socials-container {
 	display: flex;
 	gap: 10px;

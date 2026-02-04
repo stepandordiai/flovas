@@ -1,0 +1,12 @@
+.copy-btn {
+	color: hsl(0, 0%, 50%);
+
+	&:hover {
+		color: #000;
+	}
+}
+
+.copy-btn--copied {
+	cursor: not-allowed;
+	color: #000;
+}

@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import socialsData from "@/app/lib/data/socialsData";
-import ContactsClient from "./Contacts.client";
+import CopyBtn from "../CopyBtn/CopyBtn";
 import "./Contacts.scss";
 
 export default async function Contacts() {
@@ -23,7 +23,7 @@ export default async function Contacts() {
 						</a>
 						<div>
 							<p>IČO</p>
-							<ContactsClient />
+							<CopyBtn />
 						</div>
 					</div>
 					<h3>
@@ -40,7 +40,7 @@ export default async function Contacts() {
 									target="_blank"
 									title={social.title}
 								>
-									<Icon />
+									<Icon size={40} />
 								</a>
 							);
 						})}

@@ -22,7 +22,7 @@ const Footer = async () => {
 									title={social.title}
 									target="_blank"
 								>
-									<Icon />
+									<Icon size={40} />
 								</a>
 							);
 						})}
