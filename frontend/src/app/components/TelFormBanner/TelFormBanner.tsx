@@ -9,25 +9,35 @@ import axios from "axios";
 type TelFormBannerProps = {
 	active: boolean;
 	setActive: Dispatch<SetStateAction<boolean>>;
+	id: string;
 };
 
-const TelFormBanner = ({ active, setActive }: TelFormBannerProps) => {
+const TelFormBanner = ({ active, setActive, id }: TelFormBannerProps) => {
 	const t = useTranslations();
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(false);
+	const [success, setSuccess] = useState(false);
 	const [tel, setTel] = useState("");
+	const [inputTouched, setInputTouched] = useState(false);
 
 	const saveData = async (e: any) => {
 		e.preventDefault();
+
+		if (tel.trim() === "") {
+			return;
+		}
+
 		setLoading(true);
 		setError(null);
 
 		try {
 			const res = await axios.post(
 				`https://weekly-planner-backend.onrender.com/leads`,
-				tel,
+				{ tel: tel },
 			);
 			console.log(res);
+
+			setSuccess(true);
 		} catch (err: any) {
 			setError(err.response?.data.message);
 		} finally {
@@ -51,47 +61,79 @@ const TelFormBanner = ({ active, setActive }: TelFormBannerProps) => {
 					}}
 				>
 					<p className="tel-form-banner__title">{t("tel_form_banner.title")}</p>
-					<button onClick={() => setActive(false)}>{t("close")}</button>
-				</div>
-				<form
-					className="tel-form-banner__form"
-					// action="mailto:info@neresen.cz"
-
-					// method="post"
-					// encType="text/plain"
-					onSubmit={saveData}
-				>
-					<div
-						style={{
-							display: "flex",
-							flexDirection: "column",
-							textAlign: "center",
-							rowGap: 10,
+					<button
+						onClick={() => {
+							setActive(false);
+							setTimeout(() => {
+								setSuccess(false);
+								setError(null);
+								setInputTouched(false);
+								setTel("");
+							}, 500);
 						}}
 					>
-						<label htmlFor="tel">{t("tel")}</label>
-						<input
-							style={{
-								textAlign: "center",
-								border: "1px solid var(--bg-clr)",
-								height: 30,
-								borderRadius: 15,
-							}}
-							onChange={(e) => setTel(e.target.value)}
-							value={tel}
-							type="tel"
-							name="tel"
-							id="tel"
-							placeholder="+__(___)___-____"
-						/>
-					</div>
-					<button className="tel-form-banner__form-btn" type="submit">
-						{t("send")}
+						{t("close")}
 					</button>
-				</form>
+				</div>
+				<div
+					style={{ position: "relative", overflow: "hidden", borderRadius: 20 }}
+				>
+					{(success || loading || error !== null) && (
+						<div
+							className={`tel-form-banner__success-container ${loading ? "loading" : error !== null ? "error" : success ? "success" : ""}`.trim()}
+						>
+							{loading && <p>Зачекайте, будь ласка...</p>}
+							{success && (
+								<p>Дякуємо! Ми зв’яжемося з вами найближчим часом.</p>
+							)}
+							{error !== null && (
+								<p>Сталася помилка. Спробуйте ще раз пізніше.</p>
+							)}
+						</div>
+					)}
+					<form className="tel-form-banner__form" onSubmit={saveData}>
+						<div
+							style={{
+								display: "flex",
+								flexDirection: "column",
+								textAlign: "center",
+								rowGap: 10,
+							}}
+						>
+							<label htmlFor={id}>{t("tel")}</label>
+							<input
+								style={{}}
+								className={`input ${inputTouched && tel.trim() === "" ? "input--empty" : ""}`.trim()}
+								onChange={(e) => setTel(e.target.value)}
+								onBlur={() => setInputTouched(true)}
+								value={tel}
+								type="tel"
+								name="tel"
+								// TODO: ?
+								autoComplete="tel"
+								id={id}
+								placeholder="+__(___)___-____"
+							/>
+						</div>
+						{inputTouched && tel.trim() === "" && (
+							<p className="input-empty-message">Введіть номер телефону</p>
+						)}
+						<button className="tel-form-banner__form-btn" type="submit">
+							{t("send")}
+						</button>
+					</form>
+				</div>
 			</div>
 			<div
-				onClick={() => setActive(false)}
+				onClick={() => {
+					setActive(false);
+					setTimeout(() => {
+						setSuccess(false);
+						setError(null);
+						setTel("");
+						setInputTouched(false);
+					}, 500);
+				}}
 				className={classNames("tel-form-banner__curtain", {
 					"tel-form-banner__curtain--active": active,
 				})}

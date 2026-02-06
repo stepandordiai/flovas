@@ -24,7 +24,7 @@ const Vacancy = ({ vacancy }: VacancyProps) => {
 
 	return (
 		<>
-			<TelFormBanner active={active} setActive={setActive} />
+			<TelFormBanner active={active} setActive={setActive} id={id} />
 			<div className="vacancy">
 				{img && !imgError ? (
 					// I can do with fallback.png also src={imgError ? "/fallback.png" : img}
