@@ -52,13 +52,13 @@
 }
 
 .input {
-	text-align: center;
 	border: 1px solid var(--bg-clr);
 	height: 30px;
 	border-radius: 15px;
+	padding: 0 7.5px;
 }
 
-.input--empty {
+.input--invalid {
 	border: 1px solid rgb(247, 155, 141);
 }
 

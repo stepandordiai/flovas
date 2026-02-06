@@ -23,7 +23,7 @@ const TelFormBanner = ({ active, setActive, id }: TelFormBannerProps) => {
 	const saveData = async (e: any) => {
 		e.preventDefault();
 
-		if (tel.trim() === "") {
+		if (!validTel) {
 			return;
 		}
 
@@ -44,6 +44,8 @@ const TelFormBanner = ({ active, setActive, id }: TelFormBannerProps) => {
 			setLoading(false);
 		}
 	};
+
+	const validTel = tel.trim() !== "" && tel.length > 8;
 
 	return (
 		<>
@@ -86,9 +88,7 @@ const TelFormBanner = ({ active, setActive, id }: TelFormBannerProps) => {
 							{success && (
 								<p>Дякуємо! Ми зв’яжемося з вами найближчим часом.</p>
 							)}
-							{error !== null && (
-								<p>Сталася помилка. Спробуйте ще раз пізніше.</p>
-							)}
+							{error !== null && <p>{error}</p>}
 						</div>
 					)}
 					<form className="tel-form-banner__form" onSubmit={saveData}>
@@ -102,9 +102,10 @@ const TelFormBanner = ({ active, setActive, id }: TelFormBannerProps) => {
 						>
 							<label htmlFor={id}>{t("tel")}</label>
 							<input
-								style={{}}
-								className={`input ${inputTouched && tel.trim() === "" ? "input--empty" : ""}`.trim()}
-								onChange={(e) => setTel(e.target.value)}
+								className={`input ${inputTouched && !validTel ? "input--invalid" : ""}`.trim()}
+								onChange={(e) => {
+									setTel(e.target.value);
+								}}
 								onBlur={() => setInputTouched(true)}
 								value={tel}
 								type="tel"
@@ -112,13 +113,17 @@ const TelFormBanner = ({ active, setActive, id }: TelFormBannerProps) => {
 								// TODO: ?
 								autoComplete="tel"
 								id={id}
-								placeholder="+__(___)___-____"
+								required
 							/>
 						</div>
-						{inputTouched && tel.trim() === "" && (
+						{inputTouched && !validTel && (
 							<p className="input-empty-message">Введіть номер телефону</p>
 						)}
-						<button className="tel-form-banner__form-btn" type="submit">
+						<button
+							className="tel-form-banner__form-btn"
+							type="submit"
+							// disabled={tel.trim() === "" || tel.length < 9}
+						>
 							{t("send")}
 						</button>
 					</form>
