@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import About from "../components/About/About";
-import Contacts from "../components/Contacts/Contacts";
-import WebApp from "../components/WebApp/WebApp";
+import About from "../components/home/About/About";
+import Contacts from "../components/home/Contacts/Contacts";
+import WebApp from "../components/home/WebApp/WebApp";
 import ScrollToTopBtn from "@/app/components/ScrollToTopBtn/ScrollToTopBtn";
 import HomeClient from "./Home.client";
 import { getTranslations } from "next-intl/server";

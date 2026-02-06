@@ -8,7 +8,7 @@ import { VacancyInterface } from "../interfaces/Vacancy";
 import Vacancy from "../components/Vacancy/Vacancy";
 import "./Home.scss";
 
-const HomeClient = () => {
+export default function HomeClient() {
 	const t = useTranslations();
 
 	const vacancies: VacancyInterface[] = vacanciesData;
@@ -110,6 +110,4 @@ const HomeClient = () => {
 			</section>
 		</div>
 	);
-};
-
-export default HomeClient;
+}

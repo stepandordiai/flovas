@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import vacanciesData from "./../../lib/data/vacancies-data.json";
+import vacanciesData from "@/app/lib/data/vacancies-data.json";
 import { VacancyInterface } from "@/app/interfaces/Vacancy";
 import "./About.scss";
 

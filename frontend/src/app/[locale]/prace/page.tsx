@@ -4,7 +4,7 @@ import Vacancy from "@/app/components/Vacancy/Vacancy";
 import vacanciesData from "./../../lib/data/vacancies-data.json";
 import { VacancyInterface } from "@/app/interfaces/Vacancy";
 import ScrollToTopBtn from "@/app/components/ScrollToTopBtn/ScrollToTopBtn";
-import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "@/app/components/common/Breadcrumbs/Breadcrumbs";
 import "./Vacancies.scss";
 
 const vacancies: VacancyInterface[] = vacanciesData;

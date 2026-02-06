@@ -4,11 +4,11 @@ import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "@/i18n/navigation";
 import linksData from "@/app/lib/data/links-data.json";
-import LngSelect from "../LngSelect/LngSelect";
+import LngSelect from "../../LngSelect/LngSelect";
 import classNames from "classnames";
 import { Link } from "@/i18n/navigation";
 import { VacancyInterface } from "@/app/interfaces/Vacancy";
-import vacanciesData from "./../../lib/data/vacancies-data.json";
+import vacanciesData from "@/app/lib/data/vacancies-data.json";
 import "./Header.scss";
 
 const vacancies: VacancyInterface[] = vacanciesData;

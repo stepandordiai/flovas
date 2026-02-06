@@ -13,7 +13,7 @@ const lngData = [
 	{ code: "en", name: "English", flagIcon: "/lng-icons/en.svg" },
 ];
 
-const LanguageSelect = () => {
+const LngSelect = () => {
 	const locale = useLocale();
 	const router = useRouter();
 	const pathname = usePathname();
@@ -89,4 +89,4 @@ const LanguageSelect = () => {
 	);
 };
 
-export default LanguageSelect;
+export default LngSelect;

@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import socialsData from "@/app/lib/data/socialsData";
-import CopyBtn from "../CopyBtn/CopyBtn";
+import CopyBtn from "../../CopyBtn/CopyBtn";
 import "./Contacts.scss";
 
 export default async function Contacts() {
