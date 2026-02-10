@@ -1,38 +1,16 @@
-import type { Metadata } from "next";
 import { routing } from "@/i18n/routing";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import Header from "../components/layout/Header/Header";
 import Footer from "../components/layout/Footer/Footer";
-import { Locale } from "../interfaces/Locale";
 import FloatingContact from "../components/FloatingContact/FloatingContact";
+import { Montserrat } from "next/font/google";
+import "@/app/scss/globals.scss";
 
-// TODO: LEARN THIS
-export async function generateMetadata({
-	params,
-}: {
-	params: Promise<{ locale: Locale }>;
-}): Promise<Metadata> {
-	const { locale } = await params;
-	const baseUrl = "https://www.flovas.cz";
-
-	const lngUrls: Record<Locale, string> = {
-		uk: `${baseUrl}/uk`,
-		cs: `${baseUrl}/cs`,
-		sk: `${baseUrl}/sk`,
-		en: `${baseUrl}/en`,
-	};
-
-	return {
-		alternates: {
-			canonical: `${baseUrl}/${locale}`,
-			languages: {
-				...lngUrls,
-				"x-default": `${baseUrl}/uk`,
-			},
-		},
-	};
-}
+const montserrat = Montserrat({
+	variable: "--font-montserrat",
+	subsets: ["latin", "cyrillic"],
+});
 
 type LocaleLayoutProps = {
 	children: React.ReactNode;
@@ -49,12 +27,16 @@ export default async function LocaleLayout({
 	}
 
 	return (
-		<NextIntlClientProvider locale={locale}>
-			<FloatingContact />
-			<Header />
-			{children}
-			<div className="empty-div"></div>
-			<Footer />
-		</NextIntlClientProvider>
+		<html lang={locale}>
+			<body className={montserrat.variable}>
+				<NextIntlClientProvider locale={locale}>
+					<FloatingContact />
+					<Header />
+					{children}
+					<div className="empty-div"></div>
+					<Footer />
+				</NextIntlClientProvider>
+			</body>
+		</html>
 	);
 }
