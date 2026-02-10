@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { routing } from "@/i18n/routing";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
-import Header from "../components/common/Header/Header";
-import Footer from "../components/common/Footer/Footer";
+import Header from "../components/layout/Header/Header";
+import Footer from "../components/layout/Footer/Footer";
 import { Locale } from "../interfaces/Locale";
 import FloatingContact from "../components/FloatingContact/FloatingContact";
 
