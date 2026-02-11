@@ -15,17 +15,15 @@ export default async function Vacancies() {
 	return (
 		<>
 			<ScrollToTop />
-			<main className="vacancies-page">
-				<div className="vacancies-page-inner">
-					<Breadcrumbs links={[{ label: t("vacancies_title") }]} />
-					<h2 className="vacancies-page__title">{t("vacancies_title")}</h2>
-					<div className="vacancies-page-container">
-						{vacancies.map((vacancy, index) => (
-							<Vacancy key={index} vacancy={vacancy} />
-						))}
-					</div>
-					<ScrollToTopBtn />
+			<main className="main">
+				<Breadcrumbs links={[{ label: t("vacancies_title") }]} />
+				<h1 className="vacancies-page__title">{t("vacancies_title")}</h1>
+				<div className="vacancies-page-container">
+					{vacancies.map((vacancy, index) => (
+						<Vacancy key={index} vacancy={vacancy} />
+					))}
 				</div>
+				<ScrollToTopBtn />
 			</main>
 		</>
 	);

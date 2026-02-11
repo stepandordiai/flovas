@@ -1,5 +1,5 @@
 [
-	{ "name": "home_title", "path": "/#hero" },
+	{ "name": "home_title", "path": "/#home" },
 	{ "name": "hotVacanciesTitle", "path": "/#vacancies", "vacanciesQty": true },
 	{ "name": "about_title", "path": "/#about" },
 	{ "name": "contacts_title", "path": "/#contacts" },

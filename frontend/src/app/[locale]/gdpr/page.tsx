@@ -35,7 +35,7 @@ const Gdpr = () => {
 	return (
 		<>
 			<ScrollToTop />
-			<main className={styles.main}>
+			<main className={`main ${styles.gdpr}`}>
 				<Breadcrumbs links={[{ label: "Zásady ochrany osobních údajů" }]} />
 				<div className={styles.container}>
 					<h1 className={styles["gdpr__title"]}>

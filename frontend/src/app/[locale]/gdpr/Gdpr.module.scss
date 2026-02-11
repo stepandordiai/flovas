@@ -1,10 +1,4 @@
-.main {
-	position: relative;
-	z-index: 1;
-	background: #fff;
-	border-radius: 25px;
-	padding: 25px;
-	margin-top: 75px;
+.gdpr {
 	display: flex;
 	flex-direction: column;
 	gap: 25px;
@@ -59,9 +53,7 @@
 }
 
 @media screen and (width <= 896px) {
-	.main {
-		margin-top: 50px;
-		padding: 10px;
+	.gdpr {
 		gap: 10px;
 	}
 }

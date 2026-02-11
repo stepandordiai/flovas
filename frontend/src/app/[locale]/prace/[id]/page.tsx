@@ -73,7 +73,7 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 	return (
 		<>
 			<ScrollToTop />
-			<main className="vacancy-page">
+			<main className="main vacancy-page">
 				<Breadcrumbs
 					links={[
 						{ label: t("vacancies_title"), href: "/prace" },

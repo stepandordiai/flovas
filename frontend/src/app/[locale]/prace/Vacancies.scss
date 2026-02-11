@@ -1,16 +1,3 @@
-.vacancies-page {
-	position: relative;
-	z-index: 1;
-	border-radius: 25px;
-}
-
-.vacancies-page-inner {
-	background: #fff;
-	border-radius: 25px;
-	margin-top: 75px;
-	padding: 25px;
-}
-
 .vacancies-page__title {
 	padding: 25px 0;
 	font-size: clamp(1.5rem, 4vw, 2.5rem);
@@ -36,11 +23,6 @@
 }
 
 @media screen and (width <= 896px) {
-	.vacancies-page-inner {
-		margin-top: 50px;
-		padding: 10px;
-	}
-
 	.vacancies-page__title {
 		padding: 10px 0;
 	}

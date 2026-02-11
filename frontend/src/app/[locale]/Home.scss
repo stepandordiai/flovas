@@ -1,19 +1,10 @@
 @use "./../scss/mixins" as *;
 
-.home {
-	position: relative;
-	z-index: 1;
-	border-radius: 25px;
-}
-
 .home-inner {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	background: #fff;
-	border-radius: 25px;
 	overflow: hidden;
-	margin-top: 75px;
 }
 
 .home-inner-container {
@@ -26,6 +17,7 @@
 	flex-direction: column;
 	row-gap: 25px;
 	padding: 50px 25px 0;
+	scroll-margin-top: 150px;
 }
 
 .blur-char {
@@ -121,14 +113,6 @@
 }
 
 @media screen and (width <= 896px) {
-	.home {
-		border-radius: 25px;
-	}
-
-	.home-inner {
-		margin-top: 50px;
-	}
-
 	.home-inner-container {
 		width: 100%;
 	}
