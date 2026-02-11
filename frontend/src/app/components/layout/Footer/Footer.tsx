@@ -71,6 +71,12 @@ const Footer = async () => {
 							})}
 						</div>
 					</div>
+					<div className="footer__nav">
+						<p className="footer__nav-title">FLOVAS s.r.o.</p>
+						<div className="footer__nav-list">
+							<Link href="/gdpr">Zásady ochrany osobních údajů</Link>
+						</div>
+					</div>
 				</div>
 			</div>
 			{/* FIXME: */}

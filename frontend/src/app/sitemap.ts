@@ -5,7 +5,7 @@ import { VacancyInterface } from "./interfaces/Vacancy";
 const vacancies: VacancyInterface[] = vacanciesData;
 const BASE_URL = "https://www.flovas.cz";
 const locales = ["uk", "cs", "sk", "en"] as const;
-const pages = ["", "prace"];
+const pages = ["", "prace", "gdpr"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
 	const now = new Date();

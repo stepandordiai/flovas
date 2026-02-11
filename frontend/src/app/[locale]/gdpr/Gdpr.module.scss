@@ -1,0 +1,67 @@
+.main {
+	position: relative;
+	z-index: 1;
+	background: #fff;
+	border-radius: 25px;
+	padding: 25px;
+	margin-top: 75px;
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+}
+
+.gdpr__title {
+	font-size: clamp(1.4rem, 4vw, 2rem);
+	font-weight: 500;
+}
+
+.ol {
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+
+	li {
+		list-style: inside decimal;
+		font-size: clamp(1.2rem, 2vw, 1.8rem);
+		font-weight: 500;
+
+		p {
+			font-size: 1rem;
+			font-weight: 400;
+		}
+	}
+}
+
+.ol-inner {
+	li {
+		font-size: 1rem;
+		font-weight: 400;
+	}
+}
+
+.ul {
+	li {
+		list-style: inside disc;
+		font-size: 1rem;
+		font-weight: 400;
+
+		p {
+			font-size: 1rem;
+			font-weight: 400;
+		}
+	}
+}
+
+@media screen and (width <= 896px) {
+	.main {
+		margin-top: 50px;
+		padding: 10px;
+		gap: 10px;
+	}
+}
