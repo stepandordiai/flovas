@@ -34,7 +34,6 @@ body {
 	z-index: 1;
 	border-radius: 25px;
 	background: #fff;
-	padding: 100px 25px 25px;
 }
 
 a {
@@ -82,10 +81,6 @@ a {
 }
 
 @media screen and (width <= 896px) {
-	.main {
-		padding: 60px 10px 10px;
-	}
-
 	.not-found {
 		margin-top: 50px;
 		padding: 10px;

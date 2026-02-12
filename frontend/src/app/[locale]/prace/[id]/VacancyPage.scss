@@ -4,6 +4,7 @@
 	align-items: center;
 	row-gap: 25px;
 	min-height: calc(100svh - 85px);
+	padding: 100px 25px 25px;
 }
 
 .vacancy-page__img {
@@ -52,6 +53,7 @@
 @media screen and (width <= 896px) {
 	.vacancy-page {
 		row-gap: 10px;
+		padding: 60px 10px 10px;
 	}
 
 	.vacancy-page__details {

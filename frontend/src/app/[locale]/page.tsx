@@ -36,7 +36,7 @@ export async function generateMetadata({
 
 export default async function Home() {
 	return (
-		<main className="main" id="home">
+		<main className="main home" id="home">
 			<div className="home-inner">
 				<HomeClient />
 				<About />

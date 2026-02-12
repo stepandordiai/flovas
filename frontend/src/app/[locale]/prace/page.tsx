@@ -15,7 +15,7 @@ export default async function Vacancies() {
 	return (
 		<>
 			<ScrollToTop />
-			<main className="main">
+			<main className="main vacancies-page">
 				<Breadcrumbs links={[{ label: t("vacancies_title") }]} />
 				<h1 className="vacancies-page__title">{t("vacancies_title")}</h1>
 				<div className="vacancies-page-container">
