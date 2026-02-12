@@ -3,8 +3,9 @@
 import { useTranslations } from "next-intl";
 import classNames from "classnames";
 import { Dispatch, SetStateAction, useState } from "react";
-import "./TelFormBanner.scss";
 import axios from "axios";
+import { isValidTel } from "@/app/utils/validators";
+import "./TelFormBanner.scss";
 
 type TelFormBannerProps = {
 	active: boolean;
@@ -23,7 +24,7 @@ const TelFormBanner = ({ active, setActive, id }: TelFormBannerProps) => {
 	const saveData = async (e: any) => {
 		e.preventDefault();
 
-		if (!validTel) {
+		if (!isValidTel(tel)) {
 			return;
 		}
 
@@ -44,8 +45,6 @@ const TelFormBanner = ({ active, setActive, id }: TelFormBannerProps) => {
 			setLoading(false);
 		}
 	};
-
-	const validTel = tel.trim() !== "" && tel.length > 8;
 
 	return (
 		<>
@@ -84,10 +83,8 @@ const TelFormBanner = ({ active, setActive, id }: TelFormBannerProps) => {
 						<div
 							className={`tel-form-banner__success-container ${loading ? "loading" : error !== null ? "error" : success ? "success" : ""}`.trim()}
 						>
-							{loading && <p>Зачекайте, будь ласка...</p>}
-							{success && (
-								<p>Дякуємо! Ми зв’яжемося з вами найближчим часом.</p>
-							)}
+							{loading && <p>{t("loading")}</p>}
+							{success && <p>{t("success")}</p>}
 							{error !== null && <p>{error}</p>}
 						</div>
 					)}
@@ -102,7 +99,7 @@ const TelFormBanner = ({ active, setActive, id }: TelFormBannerProps) => {
 						>
 							<label htmlFor={id}>{t("tel")}</label>
 							<input
-								className={`input ${inputTouched && !validTel ? "input--invalid" : ""}`.trim()}
+								className={`input ${inputTouched && !isValidTel(tel) ? "input--invalid" : ""}`.trim()}
 								onChange={(e) => {
 									setTel(e.target.value);
 								}}
@@ -116,14 +113,10 @@ const TelFormBanner = ({ active, setActive, id }: TelFormBannerProps) => {
 								required
 							/>
 						</div>
-						{inputTouched && !validTel && (
+						{inputTouched && !isValidTel(tel) && (
 							<p className="input-empty-message">Введіть номер телефону</p>
 						)}
-						<button
-							className="tel-form-banner__form-btn"
-							type="submit"
-							// disabled={tel.trim() === "" || tel.length < 9}
-						>
+						<button className="tel-form-banner__form-btn" type="submit">
 							{t("send")}
 						</button>
 					</form>

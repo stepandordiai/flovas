@@ -18,7 +18,7 @@
 	border-radius: 20px;
 }
 
-.contacts__details {
+.contacts-container {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -28,6 +28,7 @@
 .contacts__details-container {
 	display: flex;
 	flex-direction: column;
+	align-items: flex-start;
 	row-gap: 5px;
 }
 
@@ -36,11 +37,71 @@
 	gap: 10px;
 }
 
-.contacts__map {
-	width: 100%;
+.contacts-form {
 	display: flex;
 	flex-direction: column;
-	row-gap: 10px;
+	gap: 5px;
+	flex-grow: 1;
+
+	textarea {
+		flex-grow: 1;
+
+		&:focus {
+			outline: 1px solid var(--bg-clr);
+		}
+	}
+}
+
+.input-container {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+
+	&:nth-last-child(2) {
+		flex-grow: 1;
+	}
+}
+
+.label {
+	margin-left: 10px;
+}
+
+.contacts__input {
+	background: #fff;
+	border-radius: 20px;
+	padding: 10px;
+
+	&:focus {
+		outline: 1px solid var(--bg-clr);
+	}
+}
+
+.contacts-form__btn {
+	background: var(--sec-accent-clr);
+	align-self: flex-end;
+	padding: 10px;
+	border-radius: 20px;
+
+	&:hover {
+		background: #000;
+		color: #fff;
+	}
+}
+
+.contacts-form__btn--loading {
+	cursor: not-allowed;
+}
+
+.contacts-form__btn--success {
+	color: #fff;
+	background: #000;
+	cursor: not-allowed;
+}
+
+.contacts-form__btn--error {
+	color: #fff;
+	background: #f00;
+	cursor: not-allowed;
 }
 
 .contacts__details-title {
@@ -57,7 +118,7 @@
 @media screen and (width <= 1000px) {
 	.contacts__inner {
 		display: flex;
-		flex-direction: column;
+		flex-direction: column-reverse;
 	}
 }
 

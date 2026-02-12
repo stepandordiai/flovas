@@ -45,6 +45,14 @@ a {
 	}
 }
 
+textarea {
+	resize: none;
+
+	&:focus {
+		outline: none;
+	}
+}
+
 .empty-div {
 	height: 100dvh;
 	pointer-events: none;

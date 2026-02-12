@@ -27,6 +27,8 @@
 	"homeMetaTitle": "Zamestnanie v Česku pre Ukrajincov",
 	"homeMetaDesc": "Práca v Česku pre Ukrajincov. FLOVAS s.r.o. — personálna agentúra s legálnym zamestnaním, ubytovaním a pomocou s dokumentmi po celom Česku.",
 	"followUs": "Sledujte nás",
+	"loading": "Počkajte, prosím...",
+	"success": "Ďakujeme! Budeme vás čoskoro kontaktovať.",
 
 	"home": {
 		"title1": "Zamestnanosť v meste",
@@ -64,6 +66,14 @@
 		"goal_desc": "Zabezpečiť každému klientovi stabilnú prácu, komfortné ubytovanie a plnú právnu podporu pre istý štart v Českej republike.",
 		"employment_place_title": "Zamestnávame po celom Česku",
 		"employment_place_desc": "a ďalšie mestá."
+	},
+
+	"contacts": {
+		"contactUs": "Kontaktujte nás",
+		"name": "Meno",
+		"address": "V ktorom meste hľadáte prácu?",
+		"position": "O akú profesiu máte záujem?",
+		"message": "Správa"
 	},
 
 	"web_app": {
