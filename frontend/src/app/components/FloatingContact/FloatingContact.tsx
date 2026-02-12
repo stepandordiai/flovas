@@ -3,7 +3,7 @@
 import { useState } from "react";
 import contactsData from "@/app/lib/data/contactsData";
 import classNames from "classnames";
-import TelIcon from "@/app/Icons/TelIcon";
+import TelIcon from "@/app/icons/TelIcon";
 import "./FloatingContact.scss";
 
 const FloatingContact = () => {

@@ -37,6 +37,13 @@
 	gap: 10px;
 }
 
+.contacts__socials-link {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
+}
+
 .contacts-form {
 	display: flex;
 	flex-direction: column;

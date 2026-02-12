@@ -1,25 +1,22 @@
-import FacebookIcon from "@/app/Icons/FacebookIcon";
-import InstagramIcon from "@/app/Icons/InstagramIcon";
-import TiktokIcon from "@/app/Icons/TiktokIcon";
+import FacebookIcon from "@/app/icons/FacebookIcon";
+import InstagramIcon from "@/app/icons/InstagramIcon";
+import TiktokIcon from "@/app/icons/TiktokIcon";
 
 const socialsData = [
 	{
-		id: 1,
 		title: "Facebook",
-		socialUrl: "https://www.facebook.com/flovas.agency/",
-		socialImg: FacebookIcon,
+		url: "https://www.facebook.com/flovas.agency/",
+		icon: FacebookIcon,
 	},
 	{
-		id: 2,
 		title: "Instagram",
-		socialUrl: "https://www.instagram.com/flovas.cz/",
-		socialImg: InstagramIcon,
+		url: "https://www.instagram.com/flovas.cz/",
+		icon: InstagramIcon,
 	},
 	{
-		id: 3,
 		title: "TikTok",
-		socialUrl: "https://www.tiktok.com/@flovas.cz",
-		socialImg: TiktokIcon,
+		url: "https://www.tiktok.com/@flovas.cz",
+		icon: TiktokIcon,
 	},
 ];
 

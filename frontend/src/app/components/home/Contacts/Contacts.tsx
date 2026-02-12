@@ -86,16 +86,17 @@ export default function Contacts() {
 						вакансії в Чехії.
 					</h3>
 					<div className="contacts__socials-container">
-						{socialsData.map((social) => {
-							const Icon = social.socialImg;
+						{socialsData.map((social, i) => {
+							const Icon = social.icon;
 							return (
 								<a
-									key={social.id}
-									href={social.socialUrl}
+									className="contacts__socials-link"
+									key={i}
+									href={social.url}
 									target="_blank"
-									title={social.title}
 								>
-									<Icon size={40} />
+									<Icon />
+									<span>{social.title}</span>
 								</a>
 							);
 						})}

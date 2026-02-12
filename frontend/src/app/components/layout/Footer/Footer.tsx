@@ -12,21 +12,6 @@ const Footer = async () => {
 			<div className="footer-inner">
 				<div className="footer-top">
 					<p className="footer__logo">flovas</p>
-					<div className="footer__socials">
-						{socialsData.map((social) => {
-							const Icon = social.socialImg;
-							return (
-								<a
-									key={social.id}
-									href={social.socialUrl}
-									title={social.title}
-									target="_blank"
-								>
-									<Icon size={40} />
-								</a>
-							);
-						})}
-					</div>
 				</div>
 				<div className="footer__nav-container">
 					<div className="footer__nav">
@@ -62,9 +47,16 @@ const Footer = async () => {
 					<div className="footer__nav">
 						<p className="footer__nav-title">{t("followUs")}</p>
 						<div className="footer__nav-list">
-							{socialsData.map((social) => {
+							{socialsData.map((social, i) => {
+								const Icon = social.icon;
 								return (
-									<a key={social.id} href={social.socialUrl} target="_blank">
+									<a
+										key={i}
+										className="footer__social-link"
+										href={social.url}
+										target="_blank"
+									>
+										<Icon />
 										{social.title}
 									</a>
 								);

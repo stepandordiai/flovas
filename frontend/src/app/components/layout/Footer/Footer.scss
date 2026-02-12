@@ -34,6 +34,13 @@
 	gap: 10px;
 }
 
+.footer__social-link {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
+}
+
 .footer__nav-container {
 	width: 100%;
 	display: flex;
