@@ -1,22 +1,18 @@
-import TelegramIcon from "@/app/Icons/TelegramIcon";
-import WhatsappIcon from "@/app/Icons/WhatsappIcon";
-import ViberIcon from "@/app/Icons/ViberIcon";
-
 const contactsData = [
 	{
 		title: "Telegram",
-		contactUrl: "https://t.me/flovas_agency",
-		contactImg: TelegramIcon,
+		url: "https://t.me/flovas_agency",
+		img: "/icons/telegram.svg",
 	},
 	{
 		title: "WhatsApp",
-		contactUrl: "https://wa.me/420777957290",
-		contactImg: WhatsappIcon,
+		url: "https://wa.me/420777957290",
+		img: "/icons/whatsapp.svg",
 	},
 	{
 		title: "Viber",
-		contactUrl: "viber://chat?number=+420777957290",
-		contactImg: ViberIcon,
+		url: "viber://chat?number=+420777957290",
+		img: "/icons/viber.svg",
 	},
 ];
 

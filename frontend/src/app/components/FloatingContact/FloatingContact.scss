@@ -7,11 +7,62 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	padding: 10px;
-	background: var(--sec-accent-clr);
+	background: rgba(0, 0, 0, 0.5);
 	-webkit-backdrop-filter: blur(10px);
 	backdrop-filter: blur(10px);
 	border-radius: 30px;
+	overflow: hidden;
+}
+
+.float-contact__link {
+	width: 50px;
+	aspect-ratio: 1/1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.float-contact__btn {
+	width: 50px;
+	aspect-ratio: 1/1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #fff;
+	animation: phoneRing 1.8s ease-in-out infinite;
+}
+
+@keyframes phoneRing {
+	0% {
+		transform: rotate(0deg);
+	}
+	5% {
+		transform: rotate(15deg) scale(1.1);
+	}
+	10% {
+		transform: rotate(-14deg);
+	}
+	15% {
+		transform: rotate(13deg);
+	}
+	20% {
+		transform: rotate(-11deg);
+	}
+	25% {
+		transform: rotate(9deg);
+	}
+	30% {
+		transform: rotate(-6deg);
+	}
+	35% {
+		transform: rotate(3deg);
+	}
+	40% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(0deg);
+	}
 }
 
 @media screen and (width <= 896px) {
@@ -24,44 +75,15 @@
 .floating-contact-container {
 	display: grid;
 	grid-template-rows: 0fr;
-	transition: all 0.3s;
+	transition: grid-template-rows 0.3s;
 }
 
 .floating-contact-container--active {
 	grid-template-rows: 1fr;
-	padding-bottom: 5px;
 }
 
 .floating-contact-container-inner {
 	display: flex;
 	flex-direction: column;
-	row-gap: 5px;
 	overflow: hidden;
-
-	a {
-		position: relative;
-
-		&::after {
-			content: attr(data-value);
-			position: absolute;
-			left: 0;
-			top: 50%;
-			transform: translate(calc(-100% - 15px), -50%);
-			background: #fff;
-			padding: 7.5px;
-			border-radius: 15px;
-			pointer-events: none;
-			opacity: 0;
-			transition: opacity 0.3s;
-		}
-
-		&:hover::after {
-			opacity: 1 !important;
-		}
-	}
-}
-
-.floating-contact-container-inner--active {
-	overflow: visible;
-	transition: all 0.3s;
 }

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import contactsData from "@/app/lib/data/contactsData";
 import classNames from "classnames";
+import TelIcon from "@/app/Icons/TelIcon";
 import "./FloatingContact.scss";
 
 const FloatingContact = () => {
@@ -25,27 +26,27 @@ const FloatingContact = () => {
 					})}
 				>
 					{contactsData.map((contact, index) => {
-						const Icon = contact.contactImg;
 						return (
 							<a
 								key={index}
-								href={contact.contactUrl}
+								className="float-contact__link"
+								href={contact.url}
 								target="_blank"
-								data-value={contact.title}
+								title={contact.title}
 							>
-								<Icon size={40} />
+								<img src={contact.img} width={30} height={30} alt="" />
 							</a>
 						);
 					})}
 				</div>
 			</div>
 			<button
-				className="floating-contact__btn"
+				className="float-contact__btn"
 				onClick={toggleFloatingContact}
 				aria-expanded={isActive}
 				aria-controls="floating-contact-menu"
 			>
-				<img src="/icons/message.svg" width={40} height={40} alt="" />
+				<TelIcon size={25} />
 			</button>
 		</div>
 	);
