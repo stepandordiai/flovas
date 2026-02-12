@@ -34,14 +34,20 @@ export async function generateMetadata({
 	};
 }
 
-export default async function Home() {
+export default async function Home({
+	params,
+}: {
+	params: Promise<{ locale: string }>;
+}) {
+	const { locale } = await params;
+
 	return (
 		<main className="main home" id="home">
 			<div className="home-inner">
 				<HomeClient />
 				<About />
 				<Contacts />
-				<WebApp />
+				<WebApp locale={locale} />
 				<ScrollToTopBtn />
 			</div>
 		</main>
