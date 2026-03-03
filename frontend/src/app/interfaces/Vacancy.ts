@@ -6,4 +6,5 @@ export interface VacancyInterface {
 	place: string;
 	title: string;
 	desc: string;
+	salary: string;
 }

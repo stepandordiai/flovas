@@ -5,6 +5,7 @@ import Header from "../components/layout/Header/Header";
 import Footer from "../components/layout/Footer/Footer";
 import FloatingContact from "../components/FloatingContact/FloatingContact";
 import { Montserrat } from "next/font/google";
+import ScrollToTop from "../utils/ScrollToTop";
 import "@/app/scss/globals.scss";
 
 const montserrat = Montserrat({
@@ -29,6 +30,7 @@ export default async function LocaleLayout({
 	return (
 		<html lang={locale}>
 			<body className={montserrat.variable}>
+				<ScrollToTop />
 				<NextIntlClientProvider locale={locale}>
 					<FloatingContact />
 					<Header />

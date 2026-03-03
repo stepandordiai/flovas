@@ -14,7 +14,7 @@ type VacancyProps = {
 const Vacancy = ({ vacancy }: VacancyProps) => {
 	const t = useTranslations();
 
-	const { id, img, isActive, createdAt, place, title } = vacancy;
+	const { id, img, isActive, createdAt, place, title, salary } = vacancy;
 
 	const [imgError, setImgError] = useState(false);
 
@@ -48,8 +48,9 @@ const Vacancy = ({ vacancy }: VacancyProps) => {
 						</p>
 					)}
 					<p className="vacancy__date">Опубліковано: {createdAt}</p>
-					<p>📍 {place}</p>
-					<p style={{ fontWeight: 500 }}>{title}</p>
+					<p style={{ fontWeight: 500 }}>📍 Місто: {place}</p>
+					<p style={{ fontSize: "18px", fontWeight: 600 }}>{title}</p>
+					<p style={{ fontWeight: 500 }}>{salary}</p>
 				</div>
 				<div className="vacancy__link-container">
 					<Link className="vacancy__link" href={`/prace/${id}`} scroll={true}>
