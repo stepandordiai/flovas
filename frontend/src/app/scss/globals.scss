@@ -1,7 +1,6 @@
 @use "reset";
 @use "mixins";
 @use "variables";
-@use "fonts";
 
 // FIXME:
 html {
@@ -17,7 +16,7 @@ html {
 
 body {
 	position: relative;
-	font-family: "Montserrat", sans-serif;
+	font-family: var(--font-montserrat);
 	background: var(--bg-clr);
 	padding: 0 25px;
 }
