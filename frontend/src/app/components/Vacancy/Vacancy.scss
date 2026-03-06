@@ -69,9 +69,6 @@
 	width: 100%;
 	padding: 0 10px;
 	background: var(--sec-accent-clr);
-	transition:
-		background-color 0.2s,
-		color 0.2s;
 
 	&:hover {
 		background: #000;
@@ -87,9 +84,6 @@
 	border-radius: 25px;
 	width: 100%;
 	padding: 0 10px;
-	transition:
-		background-color 0.2s,
-		color 0.2s;
 
 	&:hover {
 		background: #000;

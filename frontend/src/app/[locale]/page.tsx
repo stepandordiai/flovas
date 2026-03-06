@@ -8,7 +8,6 @@ import WebApp from "../components/home/WebApp/WebApp";
 import ScrollToTopBtn from "@/app/components/ScrollToTopBtn/ScrollToTopBtn";
 import "./Home.scss";
 
-// TODO: learn this
 export async function generateMetadata({
 	params,
 }: {
@@ -40,16 +39,31 @@ export default async function Home({
 	params: Promise<{ locale: string }>;
 }) {
 	const { locale } = await params;
+	const t = await getTranslations({ locale });
+
+	const jsonLd = {
+		"@context": "https://schema.org",
+		"@type": "EmploymentAgency",
+		name: "flovas",
+		url: `https://www.flovas.cz/${locale}`,
+		description: t("homeMetaDesc"),
+	};
 
 	return (
-		<main className="main home" id="home">
-			<div className="home-inner">
-				<HomeClient />
-				<About />
-				<Contacts />
-				<WebApp locale={locale} />
-				<ScrollToTopBtn />
-			</div>
-		</main>
+		<>
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+			/>
+			<main className="main home" id="home">
+				<div className="home-inner">
+					<HomeClient />
+					<About />
+					<Contacts />
+					<WebApp locale={locale} />
+					<ScrollToTopBtn />
+				</div>
+			</main>
+		</>
 	);
 }

@@ -9,16 +9,16 @@ import "./VacancyPage.scss";
 const vacancies: VacancyInterface[] = vacanciesData;
 
 // TODO: LEARN THIS
-export async function generateStaticParams() {
-	const locales = ["uk", "cs", "sk", "en"];
+// export async function generateStaticParams() {
+// 	const locales = ["uk", "cs", "sk", "en"];
 
-	return locales.flatMap((locale) =>
-		vacancies.map((vacancy) => ({
-			locale,
-			id: String(vacancy.id),
-		})),
-	);
-}
+// 	return locales.flatMap((locale) =>
+// 		vacancies.map((vacancy) => ({
+// 			locale,
+// 			id: String(vacancy.id),
+// 		})),
+// 	);
+// }
 
 export async function generateMetadata({
 	params,
@@ -54,13 +54,13 @@ export async function generateMetadata({
 }
 
 type VacancyPageProps = {
-	params: Promise<{ id: string }>;
+	params: Promise<{ id: string; locale: string }>;
 };
 
 export default async function VacancyPage({ params }: VacancyPageProps) {
-	const t = await getTranslations();
+	const { id, locale } = await params;
 
-	const { id } = await params;
+	const t = await getTranslations({ locale });
 
 	const vacancy = vacancies.find((vacancy) => vacancy.id === id);
 
@@ -68,48 +68,87 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 		return notFound();
 	}
 
+	const jsonLd = {
+		"@context": "https://schema.org",
+		"@type": "JobPosting",
+		title: vacancy.title,
+		description: vacancy.desc,
+		datePosted: vacancy.createdAt,
+		employmentType: "FULL_TIME", // PART_TIME, CONTRACTOR, TEMPORARY, INTERN
+		hiringOrganization: {
+			"@type": "Organization",
+			name: "flovas",
+			url: `https://www.flovas.cz/${locale}`,
+		},
+		jobLocation: {
+			"@type": "Place",
+			address: {
+				"@type": "PostalAddress",
+				addressCountry: "Прага",
+				addressLocality: vacancy.place,
+			},
+		},
+		baseSalary: {
+			"@type": "MonetaryAmount",
+			currency: "CZK",
+			value: {
+				"@type": "QuantitativeValue",
+				value: vacancy.salary,
+				unitText: "MONTH",
+			},
+		},
+	};
+
 	return (
-		<main className="main vacancy-page">
-			<Breadcrumbs
-				links={[
-					{ label: t("vacancies_title"), href: "/prace" },
-					{ label: vacancy.title },
-				]}
+		<>
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
 			/>
-			<div className="vacancy-page__details">
-				{vacancy.img ? (
-					<img
-						className="vacancy-page__img"
-						src={vacancy.img}
-						alt=""
-						loading="lazy"
-					/>
-				) : (
-					<div className="vacancy-page__no-img"></div>
-				)}
-				<div
-					style={{
-						display: "flex",
-						flexDirection: "column",
-						rowGap: 10,
-					}}
-				>
-					<h1 className="vacancy__title">{vacancy.title}</h1>
-					<p className="vacancy__created-at">
-						Опубліковано: {vacancy.createdAt}
-					</p>
-					<p style={{ fontSize: "18px", fontWeight: 600 }}>
-						📍 {vacancy.place}
-					</p>
-					<p style={{ fontSize: "18px", fontWeight: 600 }}>{vacancy.salary}</p>
-					<p style={{ whiteSpace: "pre-wrap", fontSize: "18px" }}>
-						{vacancy.desc}
-					</p>
-					<a className="vacancy-page__link" href="tel:+420777957290">
-						Дзвоніть зараз
-					</a>
+			<main className="main vacancy-page">
+				<Breadcrumbs
+					links={[
+						{ label: t("vacancies_title"), href: "/prace" },
+						{ label: vacancy.title },
+					]}
+				/>
+				<div className="vacancy-page__details">
+					{vacancy.img ? (
+						<img
+							className="vacancy-page__img"
+							src={vacancy.img}
+							alt=""
+							loading="lazy"
+						/>
+					) : (
+						<div className="vacancy-page__no-img"></div>
+					)}
+					<div
+						style={{
+							display: "flex",
+							flexDirection: "column",
+							rowGap: 10,
+						}}
+					>
+						<h1 className="vacancy__title">{vacancy.title}</h1>
+						<p className="vacancy__created-at">
+							Опубліковано: {vacancy.createdAt}
+						</p>
+						<p style={{ fontSize: "18px", fontWeight: 600 }}>
+							📍 {vacancy.place}
+						</p>
+						<p style={{ fontSize: "18px", fontWeight: 600 }}>
+							{vacancy.salary}
+						</p>
+						<p style={{ whiteSpace: "pre-wrap", fontSize: "18px" }}>
+							{vacancy.desc}
+						</p>
+						<a className="vacancy-page__link" href="tel:+420777957290">
+							Дзвоніть зараз
+						</a>
+					</div>
 				</div>
-			</div>
-		</main>
+			</main>
+		</>
 	);
 }

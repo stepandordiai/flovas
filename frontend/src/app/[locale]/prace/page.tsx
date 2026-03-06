@@ -16,10 +16,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
 	const baseUrl = "https://www.flovas.cz";
 	const { locale } = await params;
+	const t = await getTranslations({ locale });
 
 	return {
-		title: "Вакансії | flovas",
-		description: "",
+		title: `${t("vacanciesMetaTitle")} | flovas`,
+		description: `${t("vacanciesMetaDesc")}`,
 		alternates: {
 			canonical: `${baseUrl}/${locale}/prace`,
 			languages: {
@@ -32,19 +33,42 @@ export async function generateMetadata({
 	};
 }
 
-export default async function Vacancies() {
-	const t = await getTranslations();
+export default async function Vacancies({
+	params,
+}: {
+	params: Promise<{ locale: string }>;
+}) {
+	const { locale } = await params;
+	const t = await getTranslations({ locale });
+
+	const jsonLd = {
+		"@context": "https://schema.org",
+		"@type": "ItemList",
+		name: t("vacancies_title"),
+		url: `https://www.flovas.cz/${locale}/prace`,
+		itemListElement: vacancies.map((vacancy, i) => ({
+			"@type": "ListItem",
+			position: i + 1,
+			url: `https://www.flovas.cz/${locale}/prace/${vacancy.id}`,
+		})),
+	};
 
 	return (
-		<main className="main vacancies-page">
-			<Breadcrumbs links={[{ label: t("vacancies_title") }]} />
-			<h1 className="vacancies-page__title">{t("vacancies_title")}</h1>
-			<div className="vacancies-page-container">
-				{vacancies.map((vacancy, index) => (
-					<Vacancy key={index} vacancy={vacancy} />
-				))}
-			</div>
-			<ScrollToTopBtn />
-		</main>
+		<>
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+			/>
+			<main className="main vacancies-page">
+				<Breadcrumbs links={[{ label: t("vacancies_title") }]} />
+				<h1 className="vacancies-page__title">{t("vacancies_title")}</h1>
+				<div className="vacancies-page-container">
+					{vacancies.map((vacancy, index) => (
+						<Vacancy key={index} vacancy={vacancy} />
+					))}
+				</div>
+				<ScrollToTopBtn />
+			</main>
+		</>
 	);
 }
