@@ -2,16 +2,10 @@
 @use "mixins";
 @use "variables";
 
-// FIXME:
 html {
-	// TODO:
 	overscroll-behavior: none;
 	scroll-behavior: smooth;
 	background: var(--bg-clr);
-}
-
-::-webkit-scrollbar {
-	display: none;
 }
 
 body {

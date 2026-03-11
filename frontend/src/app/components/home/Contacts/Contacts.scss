@@ -81,6 +81,10 @@
 	&:focus {
 		outline: 1px solid var(--bg-clr);
 	}
+
+	&--incorrect {
+		outline: 1px solid rgb(255, 115, 115) !important;
+	}
 }
 
 .contacts-form__btn {
@@ -102,12 +106,6 @@
 .contacts-form__btn--success {
 	color: #fff;
 	background: #000;
-	cursor: not-allowed;
-}
-
-.contacts-form__btn--error {
-	color: #fff;
-	background: #f00;
 	cursor: not-allowed;
 }
 

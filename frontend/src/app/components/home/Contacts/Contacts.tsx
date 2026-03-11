@@ -11,7 +11,7 @@ import "./Contacts.scss";
 
 export default function Contacts() {
 	const t = useTranslations();
-	const [error, setError] = useState(null);
+	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
 	const [success, setSuccess] = useState(false);
 
@@ -26,13 +26,14 @@ export default function Contacts() {
 	// TODO: learn this
 	const saveData = async (e: React.FormEvent) => {
 		e.preventDefault();
+		setError(null);
 
 		if (!isValidTel(formData.tel)) {
+			setError("Некорректний номер телефону");
 			return;
 		}
 
 		setLoading(true);
-		setError(null);
 
 		try {
 			await axios.post(
@@ -112,6 +113,9 @@ export default function Contacts() {
 				<div className="contacts-container">
 					<h3 className="contacts__details-title">{t("contacts.contactUs")}</h3>
 					<form className="contacts-form" onSubmit={saveData}>
+						{error && !isValidTel(formData.tel) && formData.tel !== "" && (
+							<span style={{ color: "rgb(255, 115, 115)" }}>{error}</span>
+						)}
 						<div className="input-container">
 							<label className="label" htmlFor="name">
 								{t("contacts.name")}
@@ -128,13 +132,16 @@ export default function Contacts() {
 						</div>
 						<div className="input-container">
 							<label className="label" htmlFor="tel">
-								{t("tel")}
+								{t("tel")} *
 							</label>
 							<input
 								onChange={(e) => handleForm(e.target.name, e.target.value)}
 								name="tel"
 								value={formData.tel}
-								className="contacts__input"
+								className={classNames("contacts__input", {
+									"contacts__input--incorrect":
+										error && !isValidTel(formData.tel) && formData.tel !== "",
+								})}
 								type="tel"
 								id="tel"
 								autoComplete="tel"
@@ -183,18 +190,11 @@ export default function Contacts() {
 							className={classNames("contacts-form__btn", {
 								"contacts-form__btn--loading": loading,
 								"contacts-form__btn--success": success,
-								"contacts-form__btn--error": error,
 							})}
 							type="submit"
 							disabled={loading || success}
 						>
-							{loading
-								? t("loading")
-								: success
-									? t("success")
-									: error
-										? error
-										: t("send")}
+							{loading ? t("loading") : success ? t("success") : t("send")}
 						</button>
 					</form>
 				</div>
