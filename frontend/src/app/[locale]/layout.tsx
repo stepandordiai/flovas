@@ -1,10 +1,12 @@
+import { Montserrat } from "next/font/google";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import Header from "../components/layout/Header/Header";
 import Footer from "../components/layout/Footer/Footer";
 import FloatingContact from "../components/FloatingContact/FloatingContact";
-import { Montserrat } from "next/font/google";
 import ScrollToTop from "../utils/ScrollToTop";
 import "@/app/scss/globals.scss";
 
@@ -12,6 +14,10 @@ const montserrat = Montserrat({
 	variable: "--font-montserrat",
 	subsets: ["latin", "cyrillic"],
 });
+
+export const metadata: Metadata = {
+	metadataBase: new URL("https://www.flovas.cz"),
+};
 
 type LocaleLayoutProps = {
 	children: React.ReactNode;
@@ -23,12 +29,29 @@ export default async function LocaleLayout({
 	params,
 }: Readonly<LocaleLayoutProps>) {
 	const { locale } = await params;
+
+	const t = await getTranslations({ locale });
+
 	if (!hasLocale(routing.locales, locale)) {
 		notFound();
 	}
 
 	return (
 		<html lang={locale}>
+			<head>
+				<script
+					type="application/ld+json"
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify({
+							"@context": "https://schema.org",
+							"@type": "EmploymentAgency",
+							name: "flovas",
+							url: `https://www.flovas.cz/${locale}`,
+							description: t("homeMetaDesc"),
+						}),
+					}}
+				/>
+			</head>
 			<body className={montserrat.variable}>
 				<ScrollToTop />
 				<NextIntlClientProvider locale={locale}>

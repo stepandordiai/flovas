@@ -1,24 +1,24 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import vacanciesData from "./../../../lib/data/vacancies-data.json";
 import { VacancyInterface } from "@/app/interfaces/Vacancy";
-import type { Metadata } from "next";
 import Breadcrumbs from "@/app/components/common/Breadcrumbs/Breadcrumbs";
 import "./VacancyPage.scss";
 
 const vacancies: VacancyInterface[] = vacanciesData;
 
 // TODO: LEARN THIS
-// export async function generateStaticParams() {
-// 	const locales = ["uk", "cs", "sk", "en"];
+export async function generateStaticParams() {
+	const locales = ["uk", "cs", "sk", "en"];
 
-// 	return locales.flatMap((locale) =>
-// 		vacancies.map((vacancy) => ({
-// 			locale,
-// 			id: String(vacancy.id),
-// 		})),
-// 	);
-// }
+	return locales.flatMap((locale) =>
+		vacancies.map((vacancy) => ({
+			locale,
+			id: String(vacancy.id),
+		})),
+	);
+}
 
 export async function generateMetadata({
 	params,
@@ -26,17 +26,19 @@ export async function generateMetadata({
 	params: Promise<{ locale: string; id: string }>;
 }): Promise<Metadata> {
 	const { locale, id } = await params;
-	const BASE_URL = "https://www.flovas.cz";
-	const locales = ["uk", "cs", "sk", "en"];
 
 	const vacancy = vacancies.find((vacancy) => vacancy.id === id);
 
 	if (!vacancy) {
-		return {};
+		return {
+			title: "404",
+		};
 	}
 
+	const locales = ["uk", "cs", "sk", "en"];
+
 	const alternates = Object.fromEntries(
-		locales.map((l) => [l, `${BASE_URL}/${l}${id}`]),
+		locales.map((l) => [l, `/${l}/prace/${id}`]),
 	);
 
 	return {
@@ -44,10 +46,10 @@ export async function generateMetadata({
 		description: vacancy.desc.slice(0, 160),
 
 		alternates: {
-			canonical: `${BASE_URL}/${locale}/${id}`,
+			canonical: `/${locale}/prace/${id}`,
 			languages: {
 				...alternates,
-				"x-default": `${BASE_URL}/uk/${id}`,
+				"x-default": `/uk/prace/${id}`,
 			},
 		},
 	};

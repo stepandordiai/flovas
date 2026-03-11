@@ -1,7 +1,7 @@
+import type { Metadata } from "next";
 import Breadcrumbs from "@/app/components/common/Breadcrumbs/Breadcrumbs";
 import ScrollToTopBtn from "@/app/components/ScrollToTopBtn/ScrollToTopBtn";
 import CopyBtn from "@/app/components/CopyBtn/CopyBtn";
-import type { Metadata } from "next";
 import { Locale } from "@/app/interfaces/Locale";
 import styles from "./Gdpr.module.scss";
 
@@ -11,20 +11,20 @@ export async function generateMetadata({
 	params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
 	const { locale } = await params;
-	const baseUrl = "https://www.flovas.cz";
+
+	const locales = ["uk", "cs", "sk", "en"];
+
+	const alternates = Object.fromEntries(locales.map((l) => [l, `/${l}/gdpr`]));
 
 	return {
 		title: `Zásady ochrany osobních údajů | flovas`,
 		description:
 			"Tyto zásady vysvětlují, jakým způsobem shromažďujeme, používáme a chráníme vaše osobní údaje v rámci zprostředkování zaměstnání a personální agendy.",
 		alternates: {
-			canonical: `${baseUrl}/${locale}/gdpr`,
+			canonical: `/${locale}/gdpr`,
 			languages: {
-				uk: `${baseUrl}/uk/gdpr`,
-				cs: `${baseUrl}/cs/gdpr`,
-				sk: `${baseUrl}/sk/gdpr`,
-				en: `${baseUrl}/en/gdpr`,
-				"x-default": `${baseUrl}/uk/gdpr`,
+				...alternates,
+				"x-default": "/uk/gdpr",
 			},
 		},
 	};

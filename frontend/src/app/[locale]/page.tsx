@@ -15,19 +15,19 @@ export async function generateMetadata({
 }): Promise<Metadata> {
 	const { locale } = await params;
 	const t = await getTranslations({ locale });
-	const baseUrl = "https://www.flovas.cz";
+
+	const locales = ["uk", "cs", "sk", "en"];
+
+	const alternates = Object.fromEntries(locales.map((l) => [l, `/${l}`]));
 
 	return {
 		title: `${t("homeMetaTitle")} | flovas`,
 		description: t("homeMetaDesc"),
 		alternates: {
-			canonical: `${baseUrl}/${locale}`,
+			canonical: `/${locale}`,
 			languages: {
-				uk: `${baseUrl}/uk`,
-				cs: `${baseUrl}/cs`,
-				sk: `${baseUrl}/sk`,
-				en: `${baseUrl}/en`,
-				"x-default": `${baseUrl}/uk`,
+				...alternates,
+				"x-default": "/uk",
 			},
 		},
 	};
@@ -39,31 +39,16 @@ export default async function Home({
 	params: Promise<{ locale: string }>;
 }) {
 	const { locale } = await params;
-	const t = await getTranslations({ locale });
-
-	const jsonLd = {
-		"@context": "https://schema.org",
-		"@type": "EmploymentAgency",
-		name: "flovas",
-		url: `https://www.flovas.cz/${locale}`,
-		description: t("homeMetaDesc"),
-	};
 
 	return (
-		<>
-			<script
-				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-			/>
-			<main className="main home" id="home">
-				<div className="home-inner">
-					<HomeClient />
-					<About />
-					<Contacts />
-					<WebApp locale={locale} />
-					<ScrollToTopBtn />
-				</div>
-			</main>
-		</>
+		<main className="main home" id="home">
+			<div className="home-inner">
+				<HomeClient />
+				<About />
+				<Contacts />
+				<WebApp locale={locale} />
+				<ScrollToTopBtn />
+			</div>
+		</main>
 	);
 }
