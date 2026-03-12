@@ -1,5 +1,15 @@
 [
 	{
+		"id": "uklizecka-cheb",
+		"img": "/vacancies/flovas-vacancy-19-c.png",
+		"isActive": true,
+		"createdAt": "2026-03-12",
+		"place": "Cheb (Хеб)",
+		"title": "Потрібна прибиральниця",
+		"salary": "💰 Оплата: 130 Kč/год",
+		"desc": "⌚ 12 год робочий графік\n🪪 Візова підтримка\n💵 Регулярна виплата авансів до зарплати\n🏠 Проживання 4500 kč/місяць\n🧹 Не потрібен досвід — навчимо на місці"
+	},
+	{
 		"id": "brusic-kurim",
 		"img": "/vacancies/flovas-vacancy-18-c.png",
 		"isActive": true,
