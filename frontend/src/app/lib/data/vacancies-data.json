@@ -1,5 +1,15 @@
 [
 	{
+		"id": "pracovnice-myti-nadobi",
+		"img": "/vacancies/flovas-vacancy-20-c.png",
+		"isActive": true,
+		"createdAt": "2026-03-13",
+		"place": "Прага (Hostivař)",
+		"title": "Працівниця на кухню (миття посуду)",
+		"salary": "💰 Оплата: 120 Kč/год",
+		"desc": "🪪 Візова підтримка\n💵 Регулярна виплата авансів до зарплати\n🧹 Не потрібен досвід — навчимо на місці"
+	},
+	{
 		"id": "uklizecka-cheb",
 		"img": "/vacancies/flovas-vacancy-19-c.png",
 		"isActive": true,
