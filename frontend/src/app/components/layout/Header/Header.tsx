@@ -11,6 +11,12 @@ import { VacancyInterface } from "@/app/interfaces/Vacancy";
 import vacanciesData from "@/app/lib/data/vacancies-data.json";
 import "./Header.scss";
 
+interface Indicator {
+	width: string;
+	left: string;
+	transition: string;
+}
+
 const vacancies: VacancyInterface[] = vacanciesData;
 
 const Header = () => {
@@ -19,23 +25,29 @@ const Header = () => {
 	const indicatorRef = useRef<HTMLDivElement>(null);
 	const navRef = useRef<HTMLElement>(null);
 
-	const [indicatorStyle, setIndicatorStyle] = useState({});
+	const [indicatorStyle, setIndicatorStyle] = useState<Indicator>({
+		width: "0px",
+		left: "0px",
+		transition: "none",
+	});
 	const [menuOpen, setMenuOpen] = useState(false);
 
 	const updateIndicator = () => {
-		if (!navRef.current) return;
+		if (!navRef.current || !indicatorRef.current) return;
 
-		const activeLink = navRef.current.querySelector(
-			".nav-link.active",
-		) as HTMLElement;
+		requestAnimationFrame(() => {
+			const activeLink = navRef.current?.querySelector(
+				".nav-link.active",
+			) as HTMLElement;
 
-		if (activeLink && indicatorRef.current) {
-			setIndicatorStyle({
+			if (!activeLink) return;
+
+			setIndicatorStyle((prev) => ({
 				width: `${activeLink.offsetWidth}px`,
 				left: `${activeLink.offsetLeft}px`,
-				transition: "all 0.3s",
-			});
-		}
+				transition: prev.width === "0px" ? "none" : "all 0.3s",
+			}));
+		});
 	};
 
 	function getRect(
@@ -76,39 +88,28 @@ const Header = () => {
 			".dot",
 		) as NodeListOf<HTMLElement>;
 
-		const handleGetRectOnScroll = () => getRect(sections, navLinks, menuDots);
-
-		setTimeout(() => {
-			handleGetRectOnScroll();
-		}, 100);
+		// Reset indicator style
+		setIndicatorStyle({
+			width: "0px",
+			left: "0px",
+			transition: "none",
+		});
 
 		if (!menuDots || !navLinks.length || !sections.some(Boolean)) return;
+
+		const handleGetRectOnScroll = () => getRect(sections, navLinks, menuDots);
+
+		const frameId = requestAnimationFrame(() => {
+			handleGetRectOnScroll();
+		});
 
 		document.addEventListener("scroll", handleGetRectOnScroll);
 
 		return () => {
+			cancelAnimationFrame(frameId);
 			document.removeEventListener("scroll", handleGetRectOnScroll);
 		};
 	}, [pathname, t]);
-
-	// FIXME:
-	useEffect(() => {
-		const navLinks = document.querySelectorAll(".nav-link");
-		const menuDots = document.querySelectorAll(".dot");
-		// Reset indicator and dots when navigating to another page
-		const resetActiveStates = () => {
-			navLinks.forEach((link) => link.classList.remove("active"));
-			menuDots.forEach((dot) => dot.classList.remove("dot--active"));
-
-			// Reset indicator style
-			setIndicatorStyle({
-				width: "0",
-				left: "0",
-			});
-		};
-
-		resetActiveStates();
-	}, [pathname]);
 
 	// menu
 
@@ -151,7 +152,7 @@ const Header = () => {
 						})}
 					></span>
 				</button>
-				<Link href="/#home" className="header__logo">
+				<Link href="/#uvod" className="header__logo">
 					{t("logoTitle")}
 				</Link>
 				<nav ref={navRef} className="header__nav">

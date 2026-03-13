@@ -65,7 +65,7 @@ export default function Contacts() {
 	};
 
 	return (
-		<section className="contacts" id="contacts">
+		<section className="contacts" id="kontakty">
 			<h2 className="contacts__title">{t("contacts_title")}</h2>
 			<div className="contacts__inner">
 				<div className="contacts-container">

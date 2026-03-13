@@ -41,7 +41,7 @@ export default async function Home({
 	const { locale } = await params;
 
 	return (
-		<main className="main home" id="home">
+		<main className="main home" id="uvod">
 			<div className="home-inner">
 				<HomeClient />
 				<About />

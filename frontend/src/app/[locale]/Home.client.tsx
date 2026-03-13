@@ -86,16 +86,16 @@ export default function HomeClient() {
 					</p>
 				</div>
 				<div className="home__link-container">
-					<Link className="home__link" href="/#contacts">
+					<a className="home__link" href="#kontakty">
 						{t("contact_us_title")}
-					</Link>
+					</a>
 					<Link className="home__link" href="/prace">
 						{t("vacancies_title")}
 						<span className="home__link-vacancies-qty">{vacancies.length}</span>
 					</Link>
 				</div>
 			</section>
-			<section className="vacancies" id="vacancies">
+			<section className="vacancies" id="prace">
 				<h2 className="vacancies__title">{t("hotVacanciesTitle")} 🔥</h2>
 				<div className="vacancies-container">
 					{vacancies

@@ -10,7 +10,7 @@ const WebApp = async ({ locale }: WebAppProps) => {
 	const baseUrl = `https://www.flovas.cz/${locale}`;
 
 	return (
-		<section className="web-app" id="web-app">
+		<section className="web-app" id="web-aplikace">
 			<h2 className="web-app__title">{t("web_app.title")}</h2>
 			<div className="web-app__container">
 				<img width={200} src="/widget.png" alt="Flovas app sample on mobile" />

@@ -25,7 +25,7 @@ export default async function About() {
 	const t = await getTranslations();
 
 	return (
-		<section className="about" id="about">
+		<section className="about" id="o-nas">
 			<h2 className="about__title">{t("about_title")}</h2>
 			<p className="about__desc">{t("about.desc")}</p>
 			<div className="about-milestones">
