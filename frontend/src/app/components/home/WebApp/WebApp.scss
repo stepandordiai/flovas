@@ -1,6 +1,7 @@
 .web-app {
 	width: 100%;
 	padding: 0 25px;
+	min-height: calc(100svh - 85px);
 }
 
 .web-app__title {
@@ -25,8 +26,18 @@
 
 	li {
 		font-size: clamp(1rem, 2vw, 1.25rem);
-		list-style: disc !important;
 		list-style-position: inside !important;
+	}
+
+	ul {
+		background: var(--sec-accent-clr);
+		padding: 12.5px !important;
+		border-radius: 25px;
+
+		li {
+			list-style-type: disc !important;
+			list-style-position: inside !important;
+		}
 	}
 }
 
