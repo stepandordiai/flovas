@@ -17,7 +17,6 @@ export async function generateMetadata({
 	const t = await getTranslations({ locale });
 
 	const locales = ["uk", "cs", "sk", "en"];
-
 	const alternates = Object.fromEntries(locales.map((l) => [l, `/${l}`]));
 
 	return {

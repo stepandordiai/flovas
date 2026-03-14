@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { useState } from "react";
 import { VacancyInterface } from "@/app/interfaces/Vacancy";
 import TelFormBanner from "../TelFormBanner/TelFormBanner";
+import Image from "next/image";
 import "./Vacancy.scss";
 
 type VacancyProps = {
@@ -28,11 +29,12 @@ const Vacancy = ({ vacancy }: VacancyProps) => {
 			<div className="vacancy">
 				{img && !imgError ? (
 					// I can do with fallback.png also src={imgError ? "/fallback.png" : img}
-					<img
+					<Image
 						onError={() => setImgError(true)}
 						src={img}
+						width={1024}
+						height={1024}
 						alt={title}
-						loading="lazy"
 					/>
 				) : (
 					<div className="vacancy__no-img"></div>

@@ -10,7 +10,6 @@ const pages = ["", "prace", "gdpr"];
 export default function sitemap(): MetadataRoute.Sitemap {
 	const now = new Date();
 
-	// TODO: LEARN THIS
 	const alternates = (path: string) => ({
 		...Object.fromEntries(
 			locales.map((locale) => [locale, `${BASE_URL}/${locale}${path}`]),

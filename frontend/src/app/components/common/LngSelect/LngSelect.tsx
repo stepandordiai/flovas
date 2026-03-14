@@ -4,9 +4,10 @@ import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import classNames from "classnames";
+import Image from "next/image";
 import "./LngSelect.scss";
 
-const lngData = [
+const languages = [
 	{ code: "uk", name: "Українська", flagIcon: "/lng-icons/uk.svg" },
 	{ code: "cs", name: "Čeština", flagIcon: "/lng-icons/cs.svg" },
 	{ code: "sk", name: "Slovak", flagIcon: "/lng-icons/sk.svg" },
@@ -22,7 +23,8 @@ const LngSelect = () => {
 
 	const [lngSelectVisible, setLngSelectVisible] = useState(false);
 
-	const currentLng = lngData.find((lng) => lng.code === locale) || lngData[0];
+	const currentLng =
+		languages.find((lng) => lng.code === locale) || languages[0];
 
 	// TODO: LEARN THIS
 	const handleLngOption = (lngCode: string) => {
@@ -33,7 +35,6 @@ const LngSelect = () => {
 
 	return (
 		<>
-			{/* lng-select__banner */}
 			<div
 				className={classNames("lng-select-banner", {
 					"lng-select-banner--visible": lngSelectVisible,
@@ -49,7 +50,7 @@ const LngSelect = () => {
 				</div>
 				<div className="lng-select-list-container">
 					<ul className="lng-select__list">
-						{lngData.map((lng) => {
+						{languages.map((lng) => {
 							return (
 								<li
 									onClick={() => handleLngOption(lng.code)}
@@ -59,21 +60,19 @@ const LngSelect = () => {
 									})}
 								>
 									<span>{lng.name}</span>
-									<img width={24} height={24} src={lng.flagIcon} alt="" />
+									<Image width={24} height={24} src={lng.flagIcon} alt="" />
 								</li>
 							);
 						})}
 					</ul>
 				</div>
 			</div>
-			{/* lng-select__curtain */}
 			<div
 				onClick={() => setLngSelectVisible(false)}
 				className={classNames("lng-select__curtain", {
 					"lng-select__curtain--active": lngSelectVisible,
 				})}
 			></div>
-			{/* lng-select */}
 			<div className="lng-select">
 				<button
 					onClick={() => setLngSelectVisible(true)}
@@ -82,7 +81,7 @@ const LngSelect = () => {
 					aria-controls="lng-select-banner"
 				>
 					<span className="lng-select__btn-value">{currentLng.name}</span>
-					<img width={25} height={25} src={currentLng.flagIcon} alt="" />
+					<Image width={24} height={24} src={currentLng.flagIcon} alt="" />
 				</button>
 			</div>
 		</>

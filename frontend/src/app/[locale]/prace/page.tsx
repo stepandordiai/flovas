@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Vacancy from "@/app/components/Vacancy/Vacancy";
-import vacanciesData from "./../../lib/data/vacancies-data.json";
-import { VacancyInterface } from "@/app/interfaces/Vacancy";
+import vacancies from "./../../lib/data/vacancies.json";
 import ScrollToTopBtn from "@/app/components/ScrollToTopBtn/ScrollToTopBtn";
 import Breadcrumbs from "@/app/components/common/Breadcrumbs/Breadcrumbs";
 import "./Vacancies.scss";
-
-const vacancies: VacancyInterface[] = vacanciesData;
 
 export async function generateMetadata({
 	params,

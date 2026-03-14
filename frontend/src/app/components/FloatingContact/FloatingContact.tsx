@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import contactsData from "@/app/lib/data/contactsData";
+import contacts from "@/app/lib/data/contacts.json";
 import classNames from "classnames";
 import TelIcon from "@/app/icons/TelIcon";
 import "./FloatingContact.scss";
@@ -25,7 +25,7 @@ const FloatingContact = () => {
 						"floating-contact-container-inner--active": isActive,
 					})}
 				>
-					{contactsData.map((contact, index) => {
+					{contacts.map((contact, index) => {
 						return (
 							<a
 								key={index}

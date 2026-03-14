@@ -1,21 +1,18 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import vacanciesData from "./../../../lib/data/vacancies-data.json";
-import { VacancyInterface } from "@/app/interfaces/Vacancy";
+import vacancies from "./../../../lib/data/vacancies.json";
 import Breadcrumbs from "@/app/components/common/Breadcrumbs/Breadcrumbs";
+import Image from "next/image";
 import "./VacancyPage.scss";
 
-const vacancies: VacancyInterface[] = vacanciesData;
+const locales = ["uk", "cs", "sk", "en"];
 
-// TODO: LEARN THIS
 export async function generateStaticParams() {
-	const locales = ["uk", "cs", "sk", "en"];
-
 	return locales.flatMap((locale) =>
 		vacancies.map((vacancy) => ({
 			locale,
-			id: String(vacancy.id),
+			id: vacancy.id,
 		})),
 	);
 }
@@ -34,8 +31,6 @@ export async function generateMetadata({
 			title: "404",
 		};
 	}
-
-	const locales = ["uk", "cs", "sk", "en"];
 
 	const alternates = Object.fromEntries(
 		locales.map((l) => [l, `/${l}/prace/${id}`]),
@@ -116,11 +111,12 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 				/>
 				<div className="vacancy-page__details">
 					{vacancy.img ? (
-						<img
+						<Image
 							className="vacancy-page__img"
 							src={vacancy.img}
-							alt=""
-							loading="lazy"
+							width={1024}
+							height={1024}
+							alt={vacancy.id}
 						/>
 					) : (
 						<div className="vacancy-page__no-img"></div>

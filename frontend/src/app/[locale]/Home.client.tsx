@@ -3,15 +3,12 @@
 import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 import { Link } from "@/i18n/navigation";
-import vacanciesData from "./../lib/data/vacancies-data.json";
-import { VacancyInterface } from "../interfaces/Vacancy";
+import vacancies from "./../lib/data/vacancies.json";
 import Vacancy from "../components/Vacancy/Vacancy";
 import "./Home.scss";
 
 export default function HomeClient() {
 	const t = useTranslations();
-
-	const vacancies: VacancyInterface[] = vacanciesData;
 
 	// FIXME:
 	useEffect(() => {

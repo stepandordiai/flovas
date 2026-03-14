@@ -1,9 +1,7 @@
 import { getTranslations } from "next-intl/server";
-import vacanciesData from "@/app/lib/data/vacancies-data.json";
-import { VacancyInterface } from "@/app/interfaces/Vacancy";
+import vacancies from "@/app/lib/data/vacancies.json";
+import Image from "next/image";
 import "./About.scss";
-
-const vacancies: VacancyInterface[] = vacanciesData;
 
 const benefitsData = [
 	{ img: "/icons/czech.png", title: "about.our_advantages1" },
@@ -56,7 +54,7 @@ export default async function About() {
 				{benefitsData.map((benefit, index) => {
 					return (
 						<li key={index} className="about__benefits-item">
-							<img src={benefit.img} width={50} height={50} alt="" />
+							<Image src={benefit.img} width={50} height={50} alt="" />
 							<span>{t(benefit.title)}</span>
 						</li>
 					);

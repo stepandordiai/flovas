@@ -7,8 +7,7 @@ import linksData from "@/app/lib/data/links-data.json";
 import LngSelect from "../../common/LngSelect/LngSelect";
 import classNames from "classnames";
 import { Link } from "@/i18n/navigation";
-import { VacancyInterface } from "@/app/interfaces/Vacancy";
-import vacanciesData from "@/app/lib/data/vacancies-data.json";
+import vacancies from "@/app/lib/data/vacancies.json";
 import "./Header.scss";
 
 interface Indicator {
@@ -16,8 +15,6 @@ interface Indicator {
 	left: string;
 	transition: string;
 }
-
-const vacancies: VacancyInterface[] = vacanciesData;
 
 const Header = () => {
 	const t = useTranslations();
