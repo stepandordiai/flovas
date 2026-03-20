@@ -54,13 +54,6 @@
 	text-align: right;
 }
 
-.vacancy__link-container {
-	margin-top: auto;
-	display: flex;
-	flex-direction: column;
-	row-gap: 5px;
-}
-
 .vacancy__link {
 	@include grid-center;
 	color: #000;
@@ -69,21 +62,7 @@
 	width: 100%;
 	padding: 0 10px;
 	background: var(--sec-accent-clr);
-
-	&:hover {
-		background: #000;
-		color: #fff;
-	}
-}
-
-.vacancy__btn {
-	@include grid-center;
-	background: #fff;
-	color: #000;
-	height: 50px;
-	border-radius: 25px;
-	width: 100%;
-	padding: 0 10px;
+	font-weight: 500;
 
 	&:hover {
 		background: #000;

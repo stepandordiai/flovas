@@ -1,8 +1,18 @@
 [
 	{
+		"id": "prace-ve-skladu",
+		"img": "/vacancies/flovas-vacancy-21-c.png",
+		"isActive": true,
+		"createdAt": "2026-03-20",
+		"place": "Прага",
+		"title": "Робота на складі для чоловіків",
+		"salary": "💰 Оплата: 170 Kč/год",
+		"desc": "• 11 год робочий графік\n• Субота/Неділя вихідний\n• Візова підтримка\n• Здравотка/соціалка оплачується\n• Регулярна виплата авансів до зарплати\n• Надаємо проживання (5000 kč)\n• Не потрібен досвід - навчимо на місці"
+	},
+	{
 		"id": "pracovnice-myti-nadobi",
 		"img": "/vacancies/flovas-vacancy-20-c.png",
-		"isActive": true,
+		"isActive": false,
 		"createdAt": "2026-03-13",
 		"place": "Прага (Hostivař)",
 		"title": "Працівниця на кухню (миття посуду)",
@@ -81,8 +91,8 @@
 	},
 	{
 		"id": "uklizecka-domov-pro-seniory-pysely",
-		"img": "https://flovas-admin.netlify.app/flovas-vacancy-13.jpg",
-		"isActive": true,
+		"img": "",
+		"isActive": false,
 		"createdAt": "2026-01-23",
 		"place": "Pyšely",
 		"title": "Потрібна прибиральниця в будинок для престарілих",
@@ -91,8 +101,8 @@
 	},
 	{
 		"id": "pecovatelka-domov-pro-seniory-praha",
-		"img": "https://flovas-admin.netlify.app/flovas-vacancy-12.jpg",
-		"isActive": true,
+		"img": "",
+		"isActive": false,
 		"createdAt": "2026-01-23",
 		"place": "Прага",
 		"title": "Потрібні доглядальниці в будинок для престарілих",
@@ -101,7 +111,7 @@
 	},
 	{
 		"id": "uklizecka-domov-pro-seniory-pysely",
-		"img": "https://flovas-admin.netlify.app/flovas-vacancy-11.jpg",
+		"img": "",
 		"isActive": false,
 		"createdAt": "2026-01-23",
 		"place": "Прага",
@@ -111,7 +121,7 @@
 	},
 	{
 		"id": "uklizecka-tovarna-panasonic-pardubice",
-		"img": "https://flovas-admin.netlify.app/flovas-vacancy-10.jpg",
+		"img": "",
 		"isActive": false,
 		"createdAt": "2025-12-01",
 		"place": "Пардубіце",
@@ -121,7 +131,7 @@
 	},
 	{
 		"id": "baleni-vlocek-tovarna-bona-vita-praha",
-		"img": "https://flovas-admin.netlify.app/09-c.jpg",
+		"img": "",
 		"isActive": false,
 		"createdAt": "2025-10-15",
 		"place": "Прага",
@@ -131,7 +141,7 @@
 	},
 	{
 		"id": "pecovatelka-domov-pro-seniory-chelcice",
-		"img": "https://flovas-admin.netlify.app/07-c.jpg",
+		"img": "",
 		"isActive": false,
 		"createdAt": "2025-11-23",
 		"place": "Chelčice",
@@ -141,7 +151,7 @@
 	},
 	{
 		"id": "pecovatelka-domov-pro-seniory-pardubice",
-		"img": "https://flovas-admin.netlify.app/07-c.jpg",
+		"img": "",
 		"isActive": false,
 		"createdAt": "2025-11-23",
 		"place": "Пардубіце",

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import vacanciesData from "./lib/data/vacancies-data.json";
+import vacanciesData from "./lib/data/vacancies.json";
 import { VacancyInterface } from "./interfaces/Vacancy";
 
 const vacancies: VacancyInterface[] = vacanciesData;

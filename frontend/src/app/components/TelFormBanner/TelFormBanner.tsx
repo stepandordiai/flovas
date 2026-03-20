@@ -10,10 +10,9 @@ import "./TelFormBanner.scss";
 type TelFormBannerProps = {
 	active: boolean;
 	setActive: Dispatch<SetStateAction<boolean>>;
-	id: string;
 };
 
-const TelFormBanner = ({ active, setActive, id }: TelFormBannerProps) => {
+const TelFormBanner = ({ active, setActive }: TelFormBannerProps) => {
 	const t = useTranslations();
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(false);
@@ -97,7 +96,7 @@ const TelFormBanner = ({ active, setActive, id }: TelFormBannerProps) => {
 								rowGap: 10,
 							}}
 						>
-							<label htmlFor={id}>{t("tel")}</label>
+							<label htmlFor="tel">{t("tel")}</label>
 							<input
 								className={`input ${inputTouched && !isValidTel(tel) ? "input--invalid" : ""}`.trim()}
 								onChange={(e) => {
@@ -109,7 +108,7 @@ const TelFormBanner = ({ active, setActive, id }: TelFormBannerProps) => {
 								name="tel"
 								// TODO: ?
 								autoComplete="tel"
-								id={id}
+								id="tel"
 								required
 							/>
 						</div>
