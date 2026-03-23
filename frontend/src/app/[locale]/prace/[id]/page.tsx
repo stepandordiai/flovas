@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import vacancies from "./../../../lib/data/vacancies.json";
 import Breadcrumbs from "@/app/components/common/Breadcrumbs/Breadcrumbs";
 import Image from "next/image";
 import "./VacancyPage.scss";
 
-const locales = ["uk", "cs", "sk", "en"];
-
 export async function generateStaticParams() {
-	return locales.flatMap((locale) =>
+	return routing.locales.flatMap((locale) =>
 		vacancies.map((vacancy) => ({
 			locale,
 			id: vacancy.id,
@@ -33,7 +32,7 @@ export async function generateMetadata({
 	}
 
 	const alternates = Object.fromEntries(
-		locales.map((l) => [l, `/${l}/prace/${id}`]),
+		routing.locales.map((l) => [l, `/${l}/prace/${id}`]),
 	);
 
 	return {
@@ -44,7 +43,7 @@ export async function generateMetadata({
 			canonical: `/${locale}/prace/${id}`,
 			languages: {
 				...alternates,
-				"x-default": `/uk/prace/${id}`,
+				"x-default": `/${routing.defaultLocale}/prace/${id}`,
 			},
 		},
 	};

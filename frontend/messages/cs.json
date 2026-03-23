@@ -24,18 +24,26 @@
 	"active_vacancy": "Pozice je aktivní",
 	"inactive_vacancy": "Pozice je neaktivní",
 	"send": "Odeslat",
-	"homeMetaTitle": "Zaměstnání v Česku pro Ukrajince",
-	"homeMetaDesc": "Práce v Česku pro Ukrajince. FLOVAS s.r.o. — personální agentura s legálním zaměstnáním, ubytováním a pomocí s dokumenty po celé ČR.",
-	"vacanciesMetaTitle": "Práce v Česku – sklady, továrny, úklid | Volná práce",
-	"vacanciesMetaDesc": "Práce v Česku: sklady, továrny, úklid, péče. Ověřené pracovní nabídky po celé České republice. Pomoc se zaměstnáním.",
 	"followUs": "Sledujte nás",
 	"loading": "Počkejte prosím...",
 	"success": "Děkujeme! Brzy vás budeme kontaktovat.",
 
 	"home": {
+		"meta": {
+			"title": "Práce v Česku 2026 pro Ukrajince – práce s ubytováním i bez praxe",
+			"description": "Aktuální práce v Česku pro Ukrajince 2026: sklady, výroba, úklid. Práce bez praxe i s ubytováním. Legální zaměstnání a pomoc s dokumenty po celé ČR."
+		},
+
 		"title1": "Zaměstnanost ve městě",
 		"title2": "s agenturou flovas",
 		"backToTop": "Zpět nahoru"
+	},
+
+	"vacancies": {
+		"meta": {
+			"title": "Volná místa v Česku 2026 – sklady, výroba, úklid",
+			"description": "Nabídka práce v Česku: sklady, továrny, úklid i pomocné práce. Ověřené nabídky, práce pro Ukrajince, možnost ubytování a rychlý nástup."
+		}
 	},
 
 	"footer": {

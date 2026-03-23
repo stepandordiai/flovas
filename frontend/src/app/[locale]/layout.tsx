@@ -47,7 +47,7 @@ export default async function LocaleLayout({
 							"@type": "EmploymentAgency",
 							name: "flovas",
 							url: `https://www.flovas.cz/${locale}`,
-							description: t("homeMetaDesc"),
+							description: t("home.meta.description"),
 						}),
 					}}
 				/>

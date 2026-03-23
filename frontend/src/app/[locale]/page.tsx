@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { routing } from "@/i18n/routing";
 import type { Locale } from "../interfaces/Locale";
 import HomeClient from "./Home.client";
 import About from "../components/home/About/About";
@@ -14,19 +15,20 @@ export async function generateMetadata({
 	params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
 	const { locale } = await params;
-	const t = await getTranslations({ locale });
+	const t = await getTranslations({ locale, namespace: "home.meta" });
 
-	const locales = ["uk", "cs", "sk", "en"];
-	const alternates = Object.fromEntries(locales.map((l) => [l, `/${l}`]));
+	const alternates = Object.fromEntries(
+		routing.locales.map((l) => [l, `/${l}`]),
+	);
 
 	return {
-		title: `${t("homeMetaTitle")} | flovas`,
-		description: t("homeMetaDesc"),
+		title: `${t("title")} | flovas`,
+		description: t("description"),
 		alternates: {
 			canonical: `/${locale}`,
 			languages: {
 				...alternates,
-				"x-default": "/uk",
+				"x-default": `/${routing.defaultLocale}`,
 			},
 		},
 	};

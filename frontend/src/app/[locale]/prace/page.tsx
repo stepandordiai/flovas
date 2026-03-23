@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { routing } from "@/i18n/routing";
 import Vacancy from "@/app/components/Vacancy/Vacancy";
 import vacancies from "./../../lib/data/vacancies.json";
 import ScrollToTopBtn from "@/app/components/ScrollToTopBtn/ScrollToTopBtn";
@@ -12,20 +13,20 @@ export async function generateMetadata({
 	params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
 	const { locale } = await params;
-	const t = await getTranslations({ locale });
+	const t = await getTranslations({ locale, namespace: "vacancies.meta" });
 
-	const locales = ["uk", "cs", "sk", "en"];
-
-	const alternates = Object.fromEntries(locales.map((l) => [l, `/${l}/prace`]));
+	const alternates = Object.fromEntries(
+		routing.locales.map((l) => [l, `/${l}/prace`]),
+	);
 
 	return {
-		title: `${t("vacanciesMetaTitle")} | flovas`,
-		description: `${t("vacanciesMetaDesc")}`,
+		title: `${t("title")} | flovas`,
+		description: `${t("description")}`,
 		alternates: {
 			canonical: `/${locale}/prace`,
 			languages: {
 				...alternates,
-				"x-default": "/uk/prace",
+				"x-default": `/${routing.defaultLocale}/prace`,
 			},
 		},
 	};

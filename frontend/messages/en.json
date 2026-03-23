@@ -24,18 +24,26 @@
 	"active_vacancy": "Vacancy is active",
 	"inactive_vacancy": "Vacancy is inactive",
 	"send": "Send",
-	"homeMetaTitle": "Employment in the Czech Republic for Ukrainians",
-	"homeMetaDesc": "Jobs in the Czech Republic for Ukrainians. FLOVAS s.r.o. — a recruitment agency offering legal employment, accommodation, and assistance with documents throughout the Czech Republic.",
-	"vacanciesMetaTitle": "Jobs in Czech Republic – Warehouses, Factories, Cleaning",
-	"vacanciesMetaDesc": "Jobs in the Czech Republic: warehouses, factories, cleaning, caregiving. Verified job offers across the Czech Republic. Help with employment.",
 	"followUs": "Follow us",
 	"loading": "Please wait...",
 	"success": "Thank you! We will contact you shortly.",
 
 	"home": {
+		"meta": {
+			"title": "Jobs in Czech Republic 2026 for Ukrainians – with accommodation, no experience",
+			"description": "Latest jobs in Czech Republic for Ukrainians 2026: warehouse, factory, cleaning jobs. No experience needed, accommodation provided. Legal employment and full support."
+		},
+
 		"title1": "Employment in the city",
 		"title2": "with flovas agency",
 		"backToTop": "Back to top"
+	},
+
+	"vacancies": {
+		"meta": {
+			"title": "Jobs in Czech Republic 2026 – warehouse, factory, cleaning vacancies",
+			"description": "Browse verified job vacancies in Czech Republic: warehouses, factories, cleaning jobs. Work for Ukrainians with accommodation and quick hiring process."
+		}
 	},
 
 	"footer": {

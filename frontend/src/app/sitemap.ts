@@ -1,10 +1,8 @@
 import type { MetadataRoute } from "next";
-import vacanciesData from "./lib/data/vacancies.json";
-import { VacancyInterface } from "./interfaces/Vacancy";
+import vacancies from "./lib/data/vacancies.json";
+import { routing } from "@/i18n/routing";
 
-const vacancies: VacancyInterface[] = vacanciesData;
 const BASE_URL = "https://www.flovas.cz";
-const locales = ["uk", "cs", "sk", "en"] as const;
 const pages = ["", "prace", "gdpr"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -12,12 +10,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
 	const alternates = (path: string) => ({
 		...Object.fromEntries(
-			locales.map((locale) => [locale, `${BASE_URL}/${locale}${path}`]),
+			routing.locales.map((locale) => [locale, `${BASE_URL}/${locale}${path}`]),
 		),
-		"x-default": `${BASE_URL}/uk${path}`,
+		"x-default": `${BASE_URL}/${routing.defaultLocale}${path}`,
 	});
 
-	const localePages = locales.flatMap((locale) =>
+	const localePages = routing.locales.flatMap((locale) =>
 		pages.map((page) => ({
 			url: `${BASE_URL}/${locale}/${page}`.replace(/\/$/, ""),
 			lastModified: now,
@@ -29,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		})),
 	);
 
-	const vacanciesLocalePages = locales.flatMap((locale) =>
+	const vacanciesLocalePages = routing.locales.flatMap((locale) =>
 		vacancies.map((vacancy) => ({
 			url: `${BASE_URL}/${locale}/prace/${vacancy.id}`,
 			lastModified: now,
