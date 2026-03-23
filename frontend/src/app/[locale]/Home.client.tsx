@@ -5,10 +5,23 @@ import { useEffect, useRef } from "react";
 import { Link } from "@/i18n/navigation";
 import vacancies from "./../lib/data/vacancies.json";
 import Vacancy from "../components/Vacancy/Vacancy";
+import axios from "axios";
 import "./Home.scss";
 
 export default function HomeClient() {
 	const t = useTranslations();
+
+	// TODO: learn this
+	useEffect(() => {
+		axios
+			.get("https://weekly-planner-backend.onrender.com/health")
+			.then(() => {
+				console.log("API awake");
+			})
+			.catch(() => {
+				console.warn("API still sleeping");
+			});
+	}, []);
 
 	// FIXME:
 	useEffect(() => {
