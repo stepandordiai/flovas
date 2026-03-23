@@ -15,9 +15,27 @@ const montserrat = Montserrat({
 	subsets: ["latin", "cyrillic"],
 });
 
-export const metadata: Metadata = {
-	metadataBase: new URL("https://www.flovas.cz"),
-};
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+	const { locale } = await params;
+	const t = await getTranslations({ locale });
+
+	return {
+		metadataBase: new URL("https://www.flovas.cz"),
+
+		// TODO: learn this
+		openGraph: {
+			title: t("logoTitle"),
+			description: t("home.meta.title"),
+			url: `/${locale}`,
+			type: "website",
+			images: "/flovas-og-c.png",
+		},
+	};
+}
 
 type LocaleLayoutProps = {
 	children: React.ReactNode;
