@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { routing } from "@/i18n/routing";
 import Breadcrumbs from "@/app/components/common/Breadcrumbs/Breadcrumbs";
 import ScrollToTopBtn from "@/app/components/ScrollToTopBtn/ScrollToTopBtn";
 import CopyBtn from "@/app/components/CopyBtn/CopyBtn";
@@ -11,20 +12,20 @@ export async function generateMetadata({
 	params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
 	const { locale } = await params;
-
-	const locales = ["uk", "cs", "sk", "en"];
-
-	const alternates = Object.fromEntries(locales.map((l) => [l, `/${l}/gdpr`]));
+	const page = "gdpr";
+	const languages = Object.fromEntries(
+		routing.locales.map((l) => [l, `/${l}/${page}`]),
+	);
 
 	return {
 		title: `Zásady ochrany osobních údajů | flovas`,
 		description:
 			"Tyto zásady vysvětlují, jakým způsobem shromažďujeme, používáme a chráníme vaše osobní údaje v rámci zprostředkování zaměstnání a personální agendy.",
 		alternates: {
-			canonical: `/${locale}/gdpr`,
+			canonical: `/${locale}/${page}`,
 			languages: {
-				...alternates,
-				"x-default": "/uk/gdpr",
+				...languages,
+				"x-default": `/${routing.defaultLocale}/${page}`,
 			},
 		},
 	};

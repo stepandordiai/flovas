@@ -31,8 +31,9 @@ export async function generateMetadata({
 		};
 	}
 
-	const alternates = Object.fromEntries(
-		routing.locales.map((l) => [l, `/${l}/prace/${id}`]),
+	const page = "prace";
+	const languages = Object.fromEntries(
+		routing.locales.map((l) => [l, `/${l}/${page}/${id}`]),
 	);
 
 	return {
@@ -40,10 +41,10 @@ export async function generateMetadata({
 		description: vacancy.desc.slice(0, 160),
 
 		alternates: {
-			canonical: `/${locale}/prace/${id}`,
+			canonical: `/${locale}/${page}/${id}`,
 			languages: {
-				...alternates,
-				"x-default": `/${routing.defaultLocale}/prace/${id}`,
+				...languages,
+				"x-default": `/${routing.defaultLocale}/${page}/${id}`,
 			},
 		},
 	};

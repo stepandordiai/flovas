@@ -14,19 +14,19 @@ export async function generateMetadata({
 }): Promise<Metadata> {
 	const { locale } = await params;
 	const t = await getTranslations({ locale, namespace: "vacancies.meta" });
-
-	const alternates = Object.fromEntries(
-		routing.locales.map((l) => [l, `/${l}/prace`]),
+	const page = "prace";
+	const languages = Object.fromEntries(
+		routing.locales.map((l) => [l, `/${l}/${page}`]),
 	);
 
 	return {
 		title: `${t("title")} | flovas`,
 		description: `${t("description")}`,
 		alternates: {
-			canonical: `/${locale}/prace`,
+			canonical: `/${locale}/${page}`,
 			languages: {
-				...alternates,
-				"x-default": `/${routing.defaultLocale}/prace`,
+				...languages,
+				"x-default": `/${routing.defaultLocale}/${page}`,
 			},
 		},
 	};
