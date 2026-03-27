@@ -9,7 +9,6 @@
 	left: 0;
 	z-index: 2;
 	min-height: 75px;
-	padding: 0 25px;
 	background: var(--bg-clr);
 }
 
@@ -43,6 +42,52 @@
 	pointer-events: none;
 }
 
+// TODO: learn this
+.header-banner {
+	background: var(--sec-accent-clr);
+	font-size: 12px;
+	font-weight: 500;
+	height: 25px;
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	width: 100%;
+	position: relative;
+}
+
+.header-banner-inner {
+	display: flex;
+	width: max-content;
+	animation: scroll 18s linear infinite;
+
+	&:hover {
+		animation-play-state: paused;
+	}
+}
+
+.header-banner__list {
+	display: flex;
+	gap: 5px;
+	justify-content: space-between;
+	/* KEY: each item is at minimum the full screen width */
+	min-width: 100vw;
+	padding: 0 2.5px;
+}
+
+.header-banner__item {
+	white-space: nowrap;
+	// padding: 0 5px;
+}
+
+@keyframes scroll {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-50%);
+	} /* still -50% because 2 items */
+}
+
 .header-top {
 	position: relative;
 	height: 75px;
@@ -50,6 +95,7 @@
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
+	padding: 0 25px;
 }
 
 .header__logo {
@@ -126,12 +172,12 @@
 	grid-template-rows: 0fr;
 	overflow: hidden;
 	transition: all 0.5s;
-	padding: 0;
+	padding: 0 10px;
 }
 
 .menu--active {
 	grid-template-rows: 1fr;
-	padding: 10px 0;
+	padding: 10px;
 }
 
 .menu__inner {
@@ -196,7 +242,6 @@
 @media screen and (width <= 896px) {
 	.header {
 		min-height: 50px;
-		padding: 0 10px;
 	}
 
 	.header::before {
@@ -209,6 +254,7 @@
 
 	.header-top {
 		height: 50px;
+		padding: 0 10px;
 	}
 
 	.header__logo {

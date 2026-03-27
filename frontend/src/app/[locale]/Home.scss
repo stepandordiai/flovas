@@ -21,7 +21,6 @@
 	flex-direction: column;
 	row-gap: 25px;
 	padding: 50px 25px 0;
-	scroll-margin-top: 150px;
 }
 
 .blur-char {
@@ -118,7 +117,7 @@
 
 @media screen and (width <= 896px) {
 	.home {
-		padding-top: 60px;
+		padding-top: 75px;
 	}
 
 	.home-inner-container {
@@ -159,6 +158,7 @@
 	padding: 0 25px 25px;
 	width: 100%;
 	height: 100%;
+	scroll-margin-top: 25px;
 }
 
 .vacancies__title {

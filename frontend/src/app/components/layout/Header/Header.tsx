@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, CSSProperties } from "react";
 import { usePathname } from "@/i18n/navigation";
 import linksData from "@/app/lib/data/links-data.json";
 import LngSelect from "../../common/LngSelect/LngSelect";
@@ -135,6 +135,35 @@ const Header = () => {
 
 	return (
 		<header className="header">
+			{/* TODO: learn this */}
+			<div className="header-banner">
+				<div className="header-banner-inner">
+					{Array.from({ length: 2 }).map((_, i) => {
+						return (
+							<div key={i} className="header-banner__list">
+								<span className="header-banner__item">
+									СВІЖІ ВАКАНСІЇ ЩОДНЯ
+								</span>
+								<span className="header-banner__item">•</span>
+								<span className="header-banner__item">
+									ОФІЦІЙНЕ ПРАЦЕВЛАШТУВАННЯ
+								</span>
+								<span className="header-banner__item">•</span>
+								<span className="header-banner__item">НАДАЄМО ЖИТЛО</span>
+								<span className="header-banner__item">•</span>
+								<span className="header-banner__item">
+									ОПЛАЧУЄМО СОЦІАЛЬНЕ ТА МЕДИЧНЕ СТРАХУВАННЯ
+								</span>
+								<span className="header-banner__item">•</span>
+								<span className="header-banner__item">
+									ДЛЯ ЧОЛОВІКІВ ЖІНОК ТА СІМЕЙНИХ ПАР
+								</span>
+								<span className="header-banner__item">•</span>
+							</div>
+						);
+					})}
+				</div>
+			</div>
 			<div className="header-top">
 				<button
 					onClick={toggleMenu}
