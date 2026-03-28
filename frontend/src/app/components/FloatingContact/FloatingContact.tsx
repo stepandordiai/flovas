@@ -45,6 +45,10 @@ const FloatingContact = () => {
 				onClick={toggleFloatingContact}
 				aria-expanded={isActive}
 				aria-controls="floating-contact-menu"
+				// FIXME:
+				aria-label={
+					isActive ? "Сховати способи зв’язку" : "Показати способи зв’язку"
+				}
 			>
 				<TelIcon size={25} />
 			</button>
