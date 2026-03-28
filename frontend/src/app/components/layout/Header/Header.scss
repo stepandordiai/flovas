@@ -10,6 +10,8 @@
 	z-index: 2;
 	min-height: 75px;
 	background: var(--bg-clr);
+	width: min(calc(100%), calc(1920px + 50px));
+	margin: 0 auto;
 }
 
 .header::before {

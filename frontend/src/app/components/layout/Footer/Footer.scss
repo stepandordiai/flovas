@@ -6,6 +6,8 @@
 	right: 25px;
 	left: 25px;
 	height: 100dvh;
+	width: min(calc(100% - 50px), 1920px);
+	margin: 0 auto;
 }
 
 .footer-inner {
@@ -140,6 +142,7 @@
 	.footer {
 		left: 10px;
 		right: 10px;
+		width: min(calc(100% - 20px), 1920px);
 	}
 
 	.footer-inner {
