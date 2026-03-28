@@ -28,6 +28,10 @@
 	li {
 		font-size: clamp(1rem, 2vw, 1.25rem);
 		list-style-position: inside !important;
+
+		&:has(ul) {
+			list-style: none;
+		}
 	}
 
 	ul {

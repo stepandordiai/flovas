@@ -50,7 +50,6 @@
 }
 
 .vacancy__date {
-	color: rgba(0, 0, 0, 0.5);
 	text-align: right;
 }
 
@@ -63,6 +62,7 @@
 	padding: 0 10px;
 	background: var(--sec-accent-clr);
 	font-weight: 500;
+	text-decoration: none !important;
 
 	&:hover {
 		background: #000;

@@ -104,6 +104,7 @@
 	font-weight: 500;
 	align-self: center;
 	width: max-content;
+	text-decoration: none !important;
 }
 
 .header__nav {
@@ -123,6 +124,7 @@
 	place-content: center;
 	padding: 0 12.5px;
 	border-radius: 25px;
+	text-decoration: none !important;
 }
 
 .nav-link-indicator {
@@ -215,6 +217,7 @@
 	display: inline-block;
 	font-size: 1.5rem;
 	color: #000;
+	text-decoration: none !important;
 }
 
 .menu__link-extra {

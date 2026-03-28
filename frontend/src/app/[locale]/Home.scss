@@ -96,6 +96,7 @@
 	height: 50px;
 	border-radius: 25px;
 	@include grid-center;
+	text-decoration: none !important;
 
 	&:nth-child(2) {
 		background: var(--accent-clr);
@@ -215,6 +216,7 @@
 	width: max-content;
 	padding: 0 10px;
 	background: var(--sec-accent-clr);
+	text-decoration: none !important;
 
 	&:hover {
 		background: #000;

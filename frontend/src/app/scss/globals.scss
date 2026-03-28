@@ -31,10 +31,11 @@ body {
 
 a {
 	align-self: flex-start;
-	color: rgba(0, 0, 0, 0.5);
+	color: #000;
+	text-decoration: underline !important;
 
 	&:hover {
-		color: #000;
+		text-decoration: none !important;
 	}
 }
 
