@@ -114,8 +114,9 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 						<Image
 							className="vacancy-page__img"
 							src={vacancy.img}
-							width={1024}
-							height={1024}
+							// TODO: ?
+							width={500}
+							height={500}
 							alt={vacancy.id}
 						/>
 					) : (

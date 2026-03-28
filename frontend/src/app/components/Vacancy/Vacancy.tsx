@@ -27,8 +27,9 @@ const Vacancy = ({ vacancy }: VacancyProps) => {
 				<Image
 					onError={() => setImgError(true)}
 					src={img}
-					width={1024}
-					height={1024}
+					// TODO: ?
+					width={440}
+					height={440}
 					alt={title}
 				/>
 			) : (
