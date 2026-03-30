@@ -1,5 +1,25 @@
 [
 	{
+		"id": "pecovatelka-domov-pro-seniory-praha-slivenec",
+		"img": "/vacancies/flovas-vacancy-23-c.png",
+		"isActive": true,
+		"createdAt": "2026-03-30",
+		"place": "Прага, Slivenec",
+		"title": "Потрібні доглядальниці в будинок для престарілих",
+		"salary": "💰 Оплата: 170 Kč/год",
+		"desc": "🕒 Графік: 12 год/день\n📄 Офіційне працевлаштування\n🛂 Візова підтримка\n🏠 Проживання та хороші умови праці\n✨ Не потрібен досвід - навчимо на місці"
+	},
+	{
+		"id": "uklizecka-hostivar",
+		"img": "/vacancies/flovas-vacancy-24-c.png",
+		"isActive": true,
+		"createdAt": "2026-03-30",
+		"place": "Прага, Hostivař",
+		"title": "Прибиральниця в будинок для престарілих",
+		"salary": "💰 Оплата: 120 Kč/год",
+		"desc": "⌚ 12 год робочий графік\n🪪 Візова підтримка\n💵 Регулярна виплата авансів до зарплати\n🧹 Не потрібен досвід — навчимо на місці"
+	},
+	{
 		"id": "prace-ve-skladu",
 		"img": "/vacancies/flovas-vacancy-21-c.png",
 		"isActive": true,
@@ -14,7 +34,7 @@
 		"img": "/vacancies/flovas-vacancy-20-c.png",
 		"isActive": false,
 		"createdAt": "2026-03-13",
-		"place": "Прага (Hostivař)",
+		"place": "Прага, Hostivař",
 		"title": "Працівниця на кухню (миття посуду)",
 		"salary": "💰 Оплата: 120 Kč/год",
 		"desc": "🪪 Візова підтримка\n💵 Регулярна виплата авансів до зарплати\n🧹 Не потрібен досвід — навчимо на місці"

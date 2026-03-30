@@ -1,13 +1,13 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import React, { useEffect, useRef, useState, CSSProperties } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "@/i18n/navigation";
-import linksData from "@/app/lib/data/links-data.json";
+import linksData from "@/app/data/links-data.json";
 import LngSelect from "../../common/LngSelect/LngSelect";
 import classNames from "classnames";
 import { Link } from "@/i18n/navigation";
-import vacancies from "@/app/lib/data/vacancies.json";
+import vacancies from "@/app/data/vacancies.json";
 import "./Header.scss";
 
 interface Indicator {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import socialsData from "@/app/lib/data/socialsData";
+import socialsData from "@/app/data/socialsData";
 import CopyBtn from "../../CopyBtn/CopyBtn";
 import { isValidTel } from "@/app/utils/validators";
 import { useState } from "react";

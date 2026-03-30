@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
-import vacancies from "./../../../lib/data/vacancies.json";
+import vacancies from "@/app/data/vacancies.json";
 import Breadcrumbs from "@/app/components/common/Breadcrumbs/Breadcrumbs";
 import Image from "next/image";
 import "./VacancyPage.scss";
