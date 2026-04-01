@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { routing } from "@/i18n/routing";
-import Breadcrumbs from "@/app/components/common/Breadcrumbs/Breadcrumbs";
-import ScrollToTopBtn from "@/app/components/ScrollToTopBtn/ScrollToTopBtn";
-import CopyBtn from "@/app/components/CopyBtn/CopyBtn";
-import { Locale } from "@/app/interfaces/Locale";
+import Breadcrumbs from "@/components/common/Breadcrumbs/Breadcrumbs";
+import ScrollToTopBtn from "@/components/ScrollToTopBtn/ScrollToTopBtn";
+import CopyBtn from "@/components/CopyBtn/CopyBtn";
+import { Locale } from "@/interfaces/Locale";
 import styles from "./Gdpr.module.scss";
 
 export async function generateMetadata({

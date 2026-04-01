@@ -1,5 +1,25 @@
 [
 	{
+		"id": "uklizecka-pardubice",
+		"img": "/vacancies/flovas-vacancy-26-c.png",
+		"isActive": true,
+		"createdAt": "2026-04-01",
+		"place": "Пардубіце",
+		"title": "Потрібні прибиральниці на завод Foxconn",
+		"salary": "💰 Оплата: 140 Kč/год",
+		"desc": "🪪 Візова підтримка\n💵 Регулярна виплата авансів до зарплати\n🧹 Не потрібен досвід — навчимо на місці"
+	},
+	{
+		"id": "uklizec-pardubice",
+		"img": "/vacancies/flovas-vacancy-25-c.png",
+		"isActive": true,
+		"createdAt": "2026-04-01",
+		"place": "Пардубіце",
+		"title": "Потрібні прибиральники на завод Foxconn",
+		"salary": "💰 Оплата: 150 Kč/год",
+		"desc": "🪪 Візова підтримка\n💵 Регулярна виплата авансів до зарплати\n🧹 Не потрібен досвід — навчимо на місці"
+	},
+	{
 		"id": "pecovatelka-domov-pro-seniory-praha-slivenec",
 		"img": "/vacancies/flovas-vacancy-23-c.png",
 		"isActive": true,

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import type { Locale } from "../interfaces/Locale";
+import type { Locale } from "@/interfaces/Locale";
 import HomeClient from "./Home.client";
-import About from "../components/home/About/About";
-import Contacts from "../components/home/Contacts/Contacts";
-import WebApp from "../components/home/WebApp/WebApp";
-import ScrollToTopBtn from "@/app/components/ScrollToTopBtn/ScrollToTopBtn";
+import About from "@/components/home/About/About";
+import Contacts from "@/components/home/Contacts/Contacts";
+import WebApp from "@/components/home/WebApp/WebApp";
+import ScrollToTopBtn from "@/components/ScrollToTopBtn/ScrollToTopBtn";
 import "./Home.scss";
 
 export async function generateMetadata({

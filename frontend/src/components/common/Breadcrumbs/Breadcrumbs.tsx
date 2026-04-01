@@ -1,4 +1,4 @@
-import HomeIcon from "@/app/icons/HomeIcon";
+import HomeIcon from "@/components/icons/HomeIcon";
 import { Link } from "@/i18n/navigation";
 import "./Breadcrumbs.scss";
 

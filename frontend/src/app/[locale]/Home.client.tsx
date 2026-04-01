@@ -3,8 +3,8 @@
 import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 import { Link } from "@/i18n/navigation";
-import vacancies from "@/app/data/vacancies.json";
-import Vacancy from "../components/Vacancy/Vacancy";
+import vacancies from "@/data/vacancies.json";
+import Vacancy from "@/components/Vacancy/Vacancy";
 import axios from "axios";
 import "./Home.scss";
 

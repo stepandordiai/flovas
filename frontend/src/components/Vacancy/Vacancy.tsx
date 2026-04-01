@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useState } from "react";
-import { VacancyInterface } from "@/app/interfaces/Vacancy";
+import { VacancyInterface } from "@/interfaces/Vacancy";
 import Image from "next/image";
 import "./Vacancy.scss";
 

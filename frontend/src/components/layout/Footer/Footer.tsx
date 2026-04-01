@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
-import linksData from "@/app/data/links-data.json";
-import socialsData from "@/app/data/socialsData";
+import linksData from "@/data/links-data.json";
+import socialsData from "@/data/socialsData";
 import { Link } from "@/i18n/navigation";
 import "./Footer.scss";
 

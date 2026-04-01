@@ -1,9 +1,9 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import socialsData from "@/app/data/socialsData";
+import socialsData from "@/data/socialsData";
 import CopyBtn from "../../CopyBtn/CopyBtn";
-import { isValidTel } from "@/app/utils/validators";
+import { isValidTel } from "@/utils/validators";
 import { useState } from "react";
 import axios from "axios";
 import classNames from "classnames";

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import contacts from "@/app/data/contacts.json";
+import contacts from "@/data/contacts.json";
 import classNames from "classnames";
-import TelIcon from "@/app/icons/TelIcon";
+import TelIcon from "@/components/icons/TelIcon";
 import "./FloatingContact.scss";
 
 const FloatingContact = () => {

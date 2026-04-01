@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import Vacancy from "@/app/components/Vacancy/Vacancy";
-import vacancies from "@/app/data/vacancies.json";
-import ScrollToTopBtn from "@/app/components/ScrollToTopBtn/ScrollToTopBtn";
-import Breadcrumbs from "@/app/components/common/Breadcrumbs/Breadcrumbs";
+import Vacancy from "@/components/Vacancy/Vacancy";
+import vacancies from "@/data/vacancies.json";
+import ScrollToTopBtn from "@/components/ScrollToTopBtn/ScrollToTopBtn";
+import Breadcrumbs from "@/components/common/Breadcrumbs/Breadcrumbs";
 import "./Vacancies.scss";
 
 export async function generateMetadata({

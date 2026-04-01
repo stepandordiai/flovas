@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import classNames from "classnames";
 import { Dispatch, SetStateAction, useState } from "react";
 import axios from "axios";
-import { isValidTel } from "@/app/utils/validators";
+import { isValidTel } from "@/utils/validators";
 import "./TelFormBanner.scss";
 
 type TelFormBannerProps = {
