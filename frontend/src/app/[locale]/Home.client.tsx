@@ -14,13 +14,10 @@ export default function HomeClient() {
 	// TODO: learn this
 	useEffect(() => {
 		axios
-			.get("https://weekly-planner-backend.onrender.com/health")
-			.then(() => {
-				console.log("API awake");
+			.get("https://weekly-planner-backend.onrender.com/health", {
+				timeout: 60000,
 			})
-			.catch(() => {
-				console.warn("API still sleeping");
-			});
+			.catch(() => {});
 	}, []);
 
 	// FIXME:

@@ -9,21 +9,21 @@ import axios from "axios";
 import classNames from "classnames";
 import "./Contacts.scss";
 
+const initContactForm = {
+	name: "",
+	tel: "",
+	address: "",
+	position: "",
+	details: "",
+};
+
 export default function Contacts() {
 	const t = useTranslations();
 	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
 	const [success, setSuccess] = useState(false);
+	const [formData, setFormData] = useState(initContactForm);
 
-	const [formData, setFormData] = useState({
-		name: "",
-		tel: "",
-		address: "",
-		position: "",
-		details: "",
-	});
-
-	// TODO: learn this
 	const saveData = async (e: React.FormEvent) => {
 		e.preventDefault();
 		setError(null);
@@ -42,19 +42,16 @@ export default function Contacts() {
 			);
 
 			setSuccess(true);
-
+			setFormData(initContactForm);
 			setTimeout(() => {
-				setFormData({
-					name: "",
-					tel: "",
-					address: "",
-					position: "",
-					details: "",
-				});
 				setSuccess(false);
 			}, 3000);
 		} catch (err: any) {
-			setError(err.response?.data?.message);
+			if (err.response?.status !== 409) {
+				setError(err.response?.data?.message);
+				setLoading(false);
+				return;
+			}
 		} finally {
 			setLoading(false);
 		}
@@ -113,7 +110,10 @@ export default function Contacts() {
 				<div className="contacts-container">
 					<h3 className="contacts__details-title">{t("contacts.contactUs")}</h3>
 					<form className="contacts-form" onSubmit={saveData}>
-						{error && !isValidTel(formData.tel) && formData.tel !== "" && (
+						{/* {error && !isValidTel(formData.tel) && formData.tel !== "" && (
+							<span style={{ color: "rgb(255, 115, 115)" }}>{error}</span>
+						)} */}
+						{error && (
 							<span style={{ color: "rgb(255, 115, 115)" }}>{error}</span>
 						)}
 						<div className="input-container">
