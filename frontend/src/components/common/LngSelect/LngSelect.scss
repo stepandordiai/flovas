@@ -1,8 +1,4 @@
-@use "./../../../scss/mixins" as *;
-
-.lng-select {
-	position: relative;
-}
+@use "@/scss/mixins" as *;
 
 .lng-select__btn {
 	@include flex-center;

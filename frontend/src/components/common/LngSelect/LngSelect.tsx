@@ -73,17 +73,16 @@ const LngSelect = () => {
 					"lng-select__curtain--active": lngSelectVisible,
 				})}
 			></div>
-			<div className="lng-select">
-				<button
-					onClick={() => setLngSelectVisible(true)}
-					className="lng-select__btn"
-					aria-expanded={lngSelectVisible}
-					aria-controls="lng-select-banner"
-				>
-					<span className="lng-select__btn-value">{currentLng.name}</span>
-					<Image width={24} height={24} src={currentLng.flagIcon} alt="" />
-				</button>
-			</div>
+			<button
+				onClick={() => setLngSelectVisible(true)}
+				className="lng-select__btn"
+				aria-expanded={lngSelectVisible}
+				aria-controls="lng-select-banner"
+				aria-label={`Вибір мови, поточна мова: ${currentLng.name}`}
+			>
+				<span className="lng-select__btn-value">{currentLng.name}</span>
+				<Image width={24} height={24} src={currentLng.flagIcon} alt="" />
+			</button>
 		</>
 	);
 };
