@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import Vacancy from "@/components/Vacancy/Vacancy";
 import vacancies from "@/data/vacancies.json";
-import ScrollToTopBtn from "@/components/ScrollToTopBtn/ScrollToTopBtn";
-import Breadcrumbs from "@/components/common/Breadcrumbs/Breadcrumbs";
+import VacanciesClient from "./VacanciesClient";
 import "./Vacancies.scss";
 
 export async function generateMetadata({
@@ -59,14 +57,7 @@ export default async function Vacancies({
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
 			/>
 			<main className="main vacancies-page">
-				<Breadcrumbs links={[{ label: t("vacancies_title") }]} />
-				<h1 className="vacancies-page__title">{t("vacancies_title")}</h1>
-				<div className="vacancies-page-container">
-					{vacancies.map((vacancy, index) => (
-						<Vacancy key={index} vacancy={vacancy} />
-					))}
-				</div>
-				<ScrollToTopBtn />
+				<VacanciesClient />
 			</main>
 		</>
 	);

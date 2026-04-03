@@ -1,5 +1,7 @@
 .vacancies-page {
 	padding: 125px 25px 25px;
+	display: flex;
+	gap: 25px;
 }
 
 .vacancies-page__title {
@@ -12,6 +14,32 @@
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	gap: 10px;
+}
+
+.vacancies-filter {
+	padding-right: 25px;
+	border-right: 1px solid var(--bg-clr);
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.vacancies-filter-inner {
+	position: sticky;
+	top: 125px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.input {
+	border-radius: 20px;
+	padding: 10px;
+	border: 1px solid var(--bg-clr);
+}
+
+.filter-btn {
+	display: none;
 }
 
 @media screen and (width <= 1400px) {
@@ -33,6 +61,54 @@
 
 	.vacancies-page__title {
 		padding: 10px 0;
+	}
+
+	.vacancies-filter {
+		display: none;
+	}
+
+	.modal-filter {
+		padding: 25px;
+		background: var(--bg-clr);
+		border-radius: 25px;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		z-index: 9999;
+		width: min(calc(100% - 40px), 500px);
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		pointer-events: none;
+		transform: translate(-50%, -50%) scale(0.9);
+		opacity: 0;
+		transition:
+			transform 0.5s,
+			opacity 0.5s;
+
+		&--visible {
+			pointer-events: auto;
+			transform: translate(-50%, -50%) scale(1);
+			opacity: 1;
+		}
+	}
+
+	.modal-filter-inner {
+		background: #fff;
+		border-radius: 20px;
+		height: 100%;
+		padding: 10px;
+	}
+
+	.filter-btn {
+		display: initial;
+		position: sticky;
+		bottom: 10px;
+		font-weight: 500;
+		background: #000;
+		color: #fff;
+		width: 100%;
+		padding: 10px;
+		height: 50px;
+		border-radius: 25px;
 	}
 }
 
