@@ -1,5 +1,15 @@
 [
 	{
+		"id": "pecovatelka-domov-pro-seniory-praha-senevida-klamovka",
+		"img": "/vacancies/flovas-vacancy-27-c.png",
+		"isActive": true,
+		"createdAt": "2026-04-06",
+		"place": "Прага",
+		"title": "Потрібні доглядальниці в будинок для престарілих (Senevida Klamovka)",
+		"salary": "💰 Оплата: 170 Kč/год",
+		"desc": "🕒 Графік: 12 год/день\n📄 Офіційне працевлаштування\n🛂 Візова підтримка\n🏠 Проживання та хороші умови праці\n✨ Не потрібен досвід - навчимо на місці"
+	},
+	{
 		"id": "uklizecka-pardubice",
 		"img": "/vacancies/flovas-vacancy-26-c.png",
 		"isActive": true,
