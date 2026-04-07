@@ -3,7 +3,23 @@ import vacancies from "@/data/vacancies.json";
 import { routing } from "@/i18n/routing";
 
 const BASE_URL = "https://www.flovas.cz";
-const pages = ["", "prace", "gdpr"];
+const pages = [
+	{
+		path: "",
+		priority: 1,
+		changeFrequency: "weekly",
+	},
+	{
+		path: "prace",
+		priority: 0.8,
+		changeFrequency: "weekly",
+	},
+	{
+		path: "gdpr",
+		priority: 0.1,
+		changeFrequency: "never",
+	},
+] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
 	const now = new Date();
@@ -17,10 +33,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
 	const localePages = routing.locales.flatMap((locale) =>
 		pages.map((page) => ({
-			url: `${BASE_URL}/${locale}/${page}`.replace(/\/$/, ""),
+			url: `${BASE_URL}/${locale}/${page.path}`.replace(/\/$/, ""),
 			lastModified: now,
-			changeFrequency: "monthly" as const,
-			priority: page === "" ? 1 : 0.9,
+			changeFrequency: page.changeFrequency,
+			priority: page.priority,
 			alternates: {
 				languages: alternates(page ? `/${page}` : ""),
 			},
@@ -31,8 +47,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		vacancies.map((vacancy) => ({
 			url: `${BASE_URL}/${locale}/prace/${vacancy.id}`,
 			lastModified: now,
-			changeFrequency: "monthly" as const,
-			priority: 0.8,
+			changeFrequency: "weekly" as const,
+			priority: 0.7,
 			alternates: {
 				languages: alternates(`/prace/${vacancy.id}`),
 			},
