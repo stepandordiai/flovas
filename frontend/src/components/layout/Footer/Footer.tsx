@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import linksData from "@/data/links-data.json";
 import socialsData from "@/data/socialsData";
 import { Link } from "@/i18n/navigation";
+import { CSSProperties } from "react";
 import "./Footer.scss";
 
 const Footer = async () => {
@@ -79,52 +80,52 @@ const Footer = async () => {
 						"--width": "300px",
 						"--quantity": "6",
 						// TODO: learn this
-					} as React.CSSProperties
+					} as CSSProperties
 				}
 			>
 				<div className="footer-bottom__list">
 					<div
 						className="footer-bottom__item"
-						style={{ "--position": "1" } as React.CSSProperties}
+						style={{ "--position": "1" } as CSSProperties}
 					>
 						<p>&copy; 2025&ndash;{new Date().getFullYear()} FLOVAS s.r.o.</p>
 					</div>
 					<div
 						className="footer-bottom__item"
-						style={{ "--position": "2" } as React.CSSProperties}
+						style={{ "--position": "2" } as CSSProperties}
 					>
 						<p>{t("footer.all_rights_reserved")}</p>
 					</div>
 					<div
 						className="footer-bottom__item"
-						style={{ "--position": "3" } as React.CSSProperties}
+						style={{ "--position": "3" } as CSSProperties}
 					>
 						<p>
 							Website created by{" "}
-							<a href="https://www.heeeyooo.studio/" target="_blank">
+							<a href="https://www.heeeyooo.com" target="_blank">
 								heeeyooo studio
 							</a>
 						</p>
 					</div>
 					<div
 						className="footer-bottom__item"
-						style={{ "--position": "4" } as React.CSSProperties}
+						style={{ "--position": "4" } as CSSProperties}
 					>
 						<p>&copy; 2025&ndash;{new Date().getFullYear()} FLOVAS s.r.o.</p>
 					</div>
 					<div
 						className="footer-bottom__item"
-						style={{ "--position": "5" } as React.CSSProperties}
+						style={{ "--position": "5" } as CSSProperties}
 					>
 						<p>{t("footer.all_rights_reserved")}</p>
 					</div>
 					<div
 						className="footer-bottom__item"
-						style={{ "--position": "6" } as React.CSSProperties}
+						style={{ "--position": "6" } as CSSProperties}
 					>
 						<p>
 							Website created by{" "}
-							<a href="https://www.heeeyooo.studio/" target="_blank">
+							<a href="https://www.heeeyooo.com" target="_blank">
 								heeeyooo studio
 							</a>
 						</p>
