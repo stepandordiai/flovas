@@ -2,6 +2,7 @@
 	padding: 125px 25px 25px;
 	display: flex;
 	gap: 25px;
+	min-height: calc(100svh - 85px);
 }
 
 .vacancies-page__title {
@@ -40,6 +41,10 @@
 
 .filter-btn {
 	display: none;
+}
+
+.vacancies-scroll-top-top-btn-wrapper {
+	margin-top: 25px;
 }
 
 @media screen and (width <= 1400px) {
@@ -109,6 +114,11 @@
 		padding: 10px;
 		height: 50px;
 		border-radius: 25px;
+		margin-top: 10px;
+	}
+
+	.vacancies-scroll-top-top-btn-wrapper {
+		margin-top: 10px;
 	}
 }
 

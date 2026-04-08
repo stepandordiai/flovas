@@ -1,9 +1,9 @@
 .scroll-to-top-btn {
-	width: calc(100% - 20px);
+	width: 100%;
 	background: var(--accent-clr);
 	padding: 10px;
-	margin: 10px;
-	border-radius: 20px;
+	height: 50px;
+	border-radius: 25px;
 
 	&:hover {
 		background: var(--sec-accent-clr);

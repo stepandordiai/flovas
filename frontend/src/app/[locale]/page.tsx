@@ -48,7 +48,9 @@ export default async function Home({
 				<About />
 				<Contacts />
 				<WebApp locale={locale} />
-				<ScrollToTopBtn />
+				<div className="scroll-to-top-btn-wrapper">
+					<ScrollToTopBtn />
+				</div>
 			</div>
 		</main>
 	);

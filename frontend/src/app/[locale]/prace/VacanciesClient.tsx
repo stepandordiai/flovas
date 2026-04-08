@@ -13,10 +13,16 @@ import { VacancyInterface } from "@/interfaces/Vacancy";
 export default function VacanciesClient() {
 	const t = useTranslations();
 	const [placeFilter, setPlaceFilter] = useState("");
+	const [jobTypeFilter, setJobTypeFilter] = useState("");
 
-	const filteredVacancies = vacancies.filter((vacancy) =>
-		placeFilter ? placeFilter === vacancy.place : true,
-	);
+	const filteredVacancies = vacancies.filter((vacancy) => {
+		const filteredPlace = placeFilter ? placeFilter === vacancy.place : true;
+		const filteredJobType = jobTypeFilter
+			? jobTypeFilter === vacancy.jobType
+			: true;
+
+		return filteredPlace && filteredJobType;
+	});
 
 	const [filterVisible, setFilterVisible] = useState(false);
 
@@ -56,7 +62,7 @@ export default function VacanciesClient() {
 					</div>
 					<div className="modal-filter-inner">
 						<div style={{ display: "flex", flexDirection: "column" }}>
-							<label htmlFor="place-select">Місто</label>
+							<label htmlFor="place-select">Місце роботи</label>
 							<select
 								id="place-select"
 								className="input"
@@ -69,6 +75,23 @@ export default function VacanciesClient() {
 										{place}
 									</option>
 								))}
+							</select>
+						</div>
+						<div>
+							<label htmlFor="">Посада</label>
+							<select
+								className="input"
+								onChange={(e) => setJobTypeFilter(e.target.value)}
+								value={jobTypeFilter}
+							>
+								<option value="">Всі посади</option>
+								{uniqueJobTypes.map((jobType, i) => {
+									return (
+										<option key={i} value={jobType}>
+											{jobType}
+										</option>
+									);
+								})}
 							</select>
 						</div>
 					</div>
@@ -85,6 +108,9 @@ export default function VacanciesClient() {
 	};
 
 	const uniquePlaces = [...new Set(vacancies.map((vacancy) => vacancy.place))];
+	const uniqueJobTypes = [
+		...new Set(vacancies.map((vacancy) => vacancy.jobType)),
+	];
 
 	return (
 		<>
@@ -98,17 +124,49 @@ export default function VacanciesClient() {
 				<div className="vacancies-filter-inner">
 					<p className="lng-select-banner__title">Фільтри</p>
 					<div>
-						<label htmlFor="">Місто</label>
+						<label htmlFor="">Місце роботи</label>
 						<select
 							className="input"
 							onChange={(e) => setPlaceFilter(e.target.value)}
 							value={placeFilter}
 						>
-							<option value="">Всі міста</option>
+							<option value="">
+								Всі міста <span>{vacancies?.length}вакансії</span>
+							</option>
 							{uniquePlaces.map((place, i) => {
+								// const vacanciesQty = vacancies.filter((v) => {
+								// 	return jobTypeFilter
+								// 		? v.jobType === jobTypeFilter && v.place === place
+								// 		: v.place === placeFilter;
+								// }).length;
 								return (
 									<option key={i} value={place}>
 										{place}
+										{/* {vacanciesQty === 0 ? "" : vacanciesQty} */}
+									</option>
+								);
+							})}
+						</select>
+					</div>
+					<div>
+						<label htmlFor="">Посада</label>
+						<select
+							className="input"
+							onChange={(e) => setJobTypeFilter(e.target.value)}
+							value={jobTypeFilter}
+						>
+							<option value="">Всі посади</option>
+							{uniqueJobTypes.map((jobType, i) => {
+								// const vacanciesQty = vacancies.filter((v) => {
+								// 	return placeFilter
+								// 		? v.place === placeFilter && v.jobType === jobType
+								// 		: v.jobType === jobType;
+								// }).length;
+
+								return (
+									<option key={i} value={jobType}>
+										{jobType}
+										{/* {vacanciesQty === 0 ? "" : vacanciesQty} */}
 									</option>
 								);
 							})}
@@ -116,18 +174,26 @@ export default function VacanciesClient() {
 					</div>
 				</div>
 			</div>
-			<div>
+			<div style={{ width: "100%" }}>
 				<Breadcrumbs links={[{ label: t("vacancies_title") }]} />
 				<h1 className="vacancies-page__title">{t("vacancies_title")}</h1>
-				<div className="vacancies-page-container">
-					{filteredVacancies.map((vacancy, index) => (
-						<Vacancy key={index} vacancy={vacancy} />
-					))}
-				</div>
+				{filteredVacancies.length < 1 ? (
+					<p>Вибраних вакансій нажаль немає.</p>
+				) : (
+					<div className="vacancies-page-container">
+						{filteredVacancies.map((vacancy, index) => (
+							<Vacancy key={index} vacancy={vacancy} />
+						))}
+					</div>
+				)}
+				{/* <div style={{ marginTop: "auto", width: "100%" }}> */}
 				<button onClick={() => setFilterVisible(true)} className="filter-btn">
 					Фільтри
 				</button>
-				<ScrollToTopBtn />
+				<div className="vacancies-scroll-top-top-btn-wrapper">
+					<ScrollToTopBtn />
+				</div>
+				{/* </div> */}
 			</div>
 		</>
 	);

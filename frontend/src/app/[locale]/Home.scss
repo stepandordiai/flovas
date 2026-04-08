@@ -224,6 +224,11 @@
 	}
 }
 
+.scroll-to-top-btn-wrapper {
+	width: 100%;
+	padding: 25px;
+}
+
 @media screen and (width <= 1400px) {
 	.vacancies-container {
 		grid-template-columns: repeat(3, 1fr);
@@ -253,5 +258,9 @@
 
 	.vacancies__title {
 		padding-top: 75px;
+	}
+
+	.scroll-to-top-btn-wrapper {
+		padding: 10px;
 	}
 }
