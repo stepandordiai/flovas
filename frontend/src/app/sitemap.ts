@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
 import vacancies from "@/data/vacancies.json";
 import { routing } from "@/i18n/routing";
+import { BASE_URL } from "@/lib/constants";
 
-const BASE_URL = "https://www.flovas.cz";
 const pages = [
 	{
 		path: "",

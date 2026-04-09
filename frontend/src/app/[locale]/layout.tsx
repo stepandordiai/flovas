@@ -8,6 +8,7 @@ import Header from "@/components/layout/Header/Header";
 import Footer from "@/components/layout/Footer/Footer";
 import FloatingContact from "@/components/FloatingContact/FloatingContact";
 import ScrollToTop from "@/utils/ScrollToTop";
+import { BASE_URL } from "@/lib/constants";
 import "@/scss/globals.scss";
 
 const montserrat = Montserrat({
@@ -24,7 +25,7 @@ export async function generateMetadata({
 	const t = await getTranslations({ locale });
 
 	return {
-		metadataBase: new URL("https://www.flovas.cz"),
+		metadataBase: new URL(BASE_URL),
 
 		// TODO: learn this
 		openGraph: {
