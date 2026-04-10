@@ -12,13 +12,27 @@ import { VacancyInterface } from "@/interfaces/Vacancy";
 
 export default function VacanciesClient() {
 	const t = useTranslations();
-	const [placeFilter, setPlaceFilter] = useState("");
-	const [jobTypeFilter, setJobTypeFilter] = useState("");
+	const [vacanciesFilter, setVacanciesFilter] = useState({
+		place: "",
+		jobType: "",
+	});
+
+	const activeFiltersLength =
+		Object.values(vacanciesFilter).filter(Boolean).length;
+
+	const handleVacanciesFilter = (name: string, value: string) => {
+		setVacanciesFilter((prev) => ({ ...prev, [name]: value }));
+	};
+
+	// TODO: learn this
+	const [visibleLength, setVisibleLength] = useState(12);
 
 	const filteredVacancies = vacancies.filter((vacancy) => {
-		const filteredPlace = placeFilter ? placeFilter === vacancy.place : true;
-		const filteredJobType = jobTypeFilter
-			? jobTypeFilter === vacancy.jobType
+		const filteredPlace = vacanciesFilter.place
+			? vacanciesFilter.place === vacancy.place
+			: true;
+		const filteredJobType = vacanciesFilter.jobType
+			? vacanciesFilter.jobType === vacancy.jobType
 			: true;
 
 		return filteredPlace && filteredJobType;
@@ -28,17 +42,13 @@ export default function VacanciesClient() {
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
-	}, [placeFilter]);
+	}, [vacanciesFilter]);
 
 	const VacanciesModal = ({
 		filterVisible,
-		placeFilter,
-		setPlaceFilter,
 		setFilterVisible,
 	}: {
 		filterVisible: boolean;
-		placeFilter: string;
-		setPlaceFilter: (v: string) => void;
 		setFilterVisible: (v: boolean) => void;
 	}) => {
 		const [mounted, setMounted] = useState(false);
@@ -66,8 +76,8 @@ export default function VacanciesClient() {
 							<select
 								id="place-select"
 								className="input"
-								onChange={(e) => setPlaceFilter(e.target.value)}
-								value={placeFilter}
+								onChange={(e) => handleVacanciesFilter("place", e.target.value)}
+								value={vacanciesFilter.place}
 							>
 								<option value="">Всі міста</option>
 								{uniquePlaces.map((place, i) => (
@@ -81,8 +91,10 @@ export default function VacanciesClient() {
 							<label htmlFor="">Посада</label>
 							<select
 								className="input"
-								onChange={(e) => setJobTypeFilter(e.target.value)}
-								value={jobTypeFilter}
+								onChange={(e) =>
+									handleVacanciesFilter("jobType", e.target.value)
+								}
+								value={vacanciesFilter.jobType}
 							>
 								<option value="">Всі посади</option>
 								{uniqueJobTypes.map((jobType, i) => {
@@ -93,6 +105,49 @@ export default function VacanciesClient() {
 									);
 								})}
 							</select>
+						</div>
+						<div
+							style={{
+								display: "flex",
+								justifyContent: "space-between",
+								gap: 5,
+								flexWrap: "wrap",
+							}}
+						>
+							<button
+								style={{
+									background: "#000",
+									color: "#fff",
+									height: 50,
+									borderRadius: 25,
+									padding: "0 12.5px",
+									marginTop: 10,
+								}}
+								onClick={() => {
+									setVacanciesFilter({
+										place: "",
+										jobType: "",
+									});
+								}}
+							>
+								Скинути фільтри{" "}
+								{activeFiltersLength > 0 && (
+									<span>({activeFiltersLength})</span>
+								)}
+							</button>
+							<button
+								style={{
+									background: "var(--sec-accent-clr)",
+									color: "#000",
+									padding: "0 12.5px",
+									height: 50,
+									borderRadius: 25,
+									marginTop: 10,
+								}}
+								onClick={() => setFilterVisible(false)}
+							>
+								Показати результати ({filteredVacancies.length})
+							</button>
 						</div>
 					</div>
 				</div>
@@ -116,8 +171,6 @@ export default function VacanciesClient() {
 		<>
 			<VacanciesModal
 				filterVisible={filterVisible}
-				placeFilter={placeFilter}
-				setPlaceFilter={setPlaceFilter}
 				setFilterVisible={setFilterVisible}
 			/>
 			<div className="vacancies-filter">
@@ -127,12 +180,10 @@ export default function VacanciesClient() {
 						<label htmlFor="">Місце роботи</label>
 						<select
 							className="input"
-							onChange={(e) => setPlaceFilter(e.target.value)}
-							value={placeFilter}
+							onChange={(e) => handleVacanciesFilter("place", e.target.value)}
+							value={vacanciesFilter.place}
 						>
-							<option value="">
-								Всі міста <span>{vacancies?.length}вакансії</span>
-							</option>
+							<option value="">Всі міста</option>
 							{uniquePlaces.map((place, i) => {
 								// const vacanciesQty = vacancies.filter((v) => {
 								// 	return jobTypeFilter
@@ -152,8 +203,8 @@ export default function VacanciesClient() {
 						<label htmlFor="">Посада</label>
 						<select
 							className="input"
-							onChange={(e) => setJobTypeFilter(e.target.value)}
-							value={jobTypeFilter}
+							onChange={(e) => handleVacanciesFilter("jobType", e.target.value)}
+							value={vacanciesFilter.jobType}
 						>
 							<option value="">Всі посади</option>
 							{uniqueJobTypes.map((jobType, i) => {
@@ -172,6 +223,25 @@ export default function VacanciesClient() {
 							})}
 						</select>
 					</div>
+					<span>Знайдено вакансій: {filteredVacancies.length}</span>
+					<button
+						style={{
+							background: "#000",
+							color: "#fff",
+							height: 50,
+							borderRadius: 25,
+							marginTop: "auto",
+						}}
+						onClick={() => {
+							setVacanciesFilter({
+								place: "",
+								jobType: "",
+							});
+						}}
+					>
+						Скинути фільтри{" "}
+						{activeFiltersLength > 0 && <span>({activeFiltersLength})</span>}
+					</button>
 				</div>
 			</div>
 			<div style={{ width: "100%" }}>
@@ -181,14 +251,25 @@ export default function VacanciesClient() {
 					<p>Вибраних вакансій нажаль немає.</p>
 				) : (
 					<div className="vacancies-page-container">
-						{filteredVacancies.map((vacancy, index) => (
+						{/* TODO: learn this */}
+						{filteredVacancies.slice(0, visibleLength).map((vacancy, index) => (
 							<Vacancy key={index} vacancy={vacancy} />
 						))}
 					</div>
 				)}
+				{/* TODO: learn this */}
+				{filteredVacancies.length > visibleLength && (
+					<button
+						className="vacancies__btn"
+						onClick={() => setVisibleLength((prev) => prev + 8)}
+					>
+						Показати більше
+					</button>
+				)}
 				{/* <div style={{ marginTop: "auto", width: "100%" }}> */}
 				<button onClick={() => setFilterVisible(true)} className="filter-btn">
-					Фільтри
+					Фільтри{" "}
+					{activeFiltersLength > 0 && <span>({activeFiltersLength})</span>}
 				</button>
 				<div className="vacancies-scroll-top-top-btn-wrapper">
 					<ScrollToTopBtn />

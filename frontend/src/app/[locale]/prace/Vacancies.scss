@@ -34,6 +34,7 @@
 }
 
 .input {
+	flex-grow: 1;
 	border-radius: 20px;
 	padding: 10px;
 	border: 1px solid var(--bg-clr);
@@ -45,6 +46,22 @@
 
 .vacancies-scroll-top-top-btn-wrapper {
 	margin-top: 25px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.vacancies__btn {
+	background: var(--sec-accent-clr);
+	height: 50px;
+	border-radius: 25px;
+	width: 100%;
+	margin-top: 10px;
+
+	&:active {
+		background: #000;
+		color: #fff;
+	}
 }
 
 @media screen and (width <= 1400px) {
