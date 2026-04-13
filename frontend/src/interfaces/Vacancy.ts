@@ -4,7 +4,11 @@ export interface VacancyInterface {
 	isActive: boolean;
 	createdAt: string;
 	place: string;
+	address?: string;
+	addressUrl?: string;
 	title: string;
-	desc: string;
-	salary: string;
+	desc: string[];
+	salary: number;
+	requirements?: string[];
+	jobType: string;
 }

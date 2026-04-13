@@ -5,7 +5,7 @@ import { useState } from "react";
 import classNames from "classnames";
 import "./CopyBtn.scss";
 
-const CopyBtn = () => {
+const CopyBtn = ({ value = "Скопіювати", txt = "" }) => {
 	const t = useTranslations();
 
 	const [btnValueCopied, setBtnValueCopied] = useState(false);
@@ -22,14 +22,14 @@ const CopyBtn = () => {
 
 	return (
 		<button
-			onClick={() => handleCopy("17430089")}
+			onClick={() => handleCopy(txt)}
 			title={t("click_to_copy")}
 			className={classNames("copy-btn", {
 				"copy-btn--copied": btnValueCopied,
 			})}
 			disabled={btnValueCopied}
 		>
-			{btnValueCopied ? t("copied") : "17430089"}
+			{btnValueCopied ? t("copied") : value}
 		</button>
 	);
 };

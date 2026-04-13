@@ -8,8 +8,8 @@
 }
 
 .vacancy-page__img {
-	width: 100%;
-	max-width: 500px;
+	object-fit: contain;
+	object-position: top;
 }
 
 .vacancy-page__no-img {
@@ -21,7 +21,12 @@
 
 .vacancy-page__details {
 	display: flex;
-	gap: 10px;
+	gap: 25px;
+}
+
+.vacancy-page__details-title {
+	font-size: 18px;
+	font-weight: 600;
 }
 
 .vacancy__title {
@@ -30,20 +35,43 @@
 }
 
 .vacancy__created-at {
-	align-self: flex-end;
+	font-size: 16px;
 }
 
 .vacancy-page__link {
-	align-self: flex-end;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 12.5px;
+	padding: 0 12.5px;
 	color: #000;
 	height: 50px;
 	border-radius: 25px;
 	background: var(--sec-accent-clr);
 	text-decoration: none !important;
+	font-weight: 500;
+
+	&:hover {
+		background: #000;
+		color: #fff;
+	}
+
+	&:first-child {
+		background: var(--accent-clr);
+
+		&:hover {
+			background: var(--sec-accent-clr);
+			color: #000;
+		}
+	}
+}
+
+.share-btn {
+	background: var(--sec-accent-clr);
+	padding: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
 
 	&:hover {
 		background: #000;
@@ -59,5 +87,6 @@
 
 	.vacancy-page__details {
 		flex-direction: column;
+		gap: 10px;
 	}
 }

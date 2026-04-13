@@ -1,12 +1,15 @@
 .copy-btn {
-	text-decoration: underline;
+	background: var(--sec-accent-clr);
+	padding: 5px;
 
 	&:hover {
-		text-decoration: none;
+		background: #000;
+		color: #fff;
 	}
 }
 
 .copy-btn--copied {
+	background: #000;
+	color: #fff;
 	cursor: not-allowed;
-	text-decoration: none;
 }

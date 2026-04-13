@@ -5,6 +5,9 @@ import { notFound } from "next/navigation";
 import vacancies from "@/data/vacancies.json";
 import Breadcrumbs from "@/components/common/Breadcrumbs/Breadcrumbs";
 import Image from "next/image";
+import CopyBtn from "@/components/CopyBtn/CopyBtn";
+import VacancyPageClient from "./VacancyPageClient";
+import { Link } from "@/i18n/navigation";
 import "./VacancyPage.scss";
 
 export async function generateStaticParams() {
@@ -31,6 +34,12 @@ export async function generateMetadata({
 		};
 	}
 
+	// TODO: learn this
+	const seoDesc = vacancy.desc
+		.map((item: string) => item.replace(/^\p{Emoji}\s*/u, "").trim())
+		.join(" · ")
+		.slice(0, 160);
+
 	const page = "prace";
 	const languages = Object.fromEntries(
 		routing.locales.map((l) => [l, `/${l}/${page}/${id}`]),
@@ -38,7 +47,7 @@ export async function generateMetadata({
 
 	return {
 		title: vacancy.title,
-		description: vacancy.desc.slice(0, 160),
+		description: seoDesc,
 
 		alternates: {
 			canonical: `/${locale}/${page}/${id}`,
@@ -65,11 +74,16 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 		return notFound();
 	}
 
+	const seoDesc = vacancy.desc
+		.map((item: string) => item.replace(/^\p{Emoji}\s*/u, "").trim())
+		.join(" · ");
+
+	// TODO: learn this
 	const jsonLd = {
 		"@context": "https://schema.org",
 		"@type": "JobPosting",
 		title: vacancy.title,
-		description: vacancy.desc,
+		description: seoDesc,
 		datePosted: vacancy.createdAt,
 		employmentType: "FULL_TIME", // PART_TIME, CONTRACTOR, TEMPORARY, INTERN
 		hiringOrganization: {
@@ -81,7 +95,7 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 			"@type": "Place",
 			address: {
 				"@type": "PostalAddress",
-				addressCountry: "Прага",
+				addressCountry: "CZ",
 				addressLocality: vacancy.place,
 			},
 		},
@@ -129,22 +143,61 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 							rowGap: 10,
 						}}
 					>
+						<div
+							style={{
+								display: "flex",
+								justifyContent: "space-between",
+								flexWrap: "wrap",
+								gap: 10,
+							}}
+						>
+							<p className="vacancy__created-at">
+								Опубліковано: {vacancy.createdAt.replaceAll("-", "/")}
+							</p>
+							<VacancyPageClient />
+						</div>
 						<h1 className="vacancy__title">{vacancy.title}</h1>
-						<p className="vacancy__created-at">
-							Опубліковано: {vacancy.createdAt}
+
+						<p className="vacancy-page__details-title">
+							Місто: {vacancy.place}
 						</p>
-						<p style={{ fontSize: "18px", fontWeight: 600 }}>
-							📍 {vacancy.place}
+						{vacancy.address && (
+							<div>
+								<span className="vacancy-page__details-title">Адреса: </span>
+								<a href={vacancy.addressUrl} target="_blank">
+									{vacancy.address}
+								</a>{" "}
+								<CopyBtn txt={vacancy.address} />
+							</div>
+						)}
+						<p className="vacancy-page__details-title">
+							Заробітна плата: {vacancy.salary} Kč/год
 						</p>
-						<p style={{ fontSize: "18px", fontWeight: 600 }}>
-							{vacancy.salary}
-						</p>
-						<p style={{ whiteSpace: "pre-wrap", fontSize: "18px" }}>
-							{vacancy.desc}
-						</p>
-						<a className="vacancy-page__link" href="tel:+420777957290">
-							Дзвоніть зараз
-						</a>
+						<p className="vacancy-page__details-title">Опис:</p>
+						{vacancy.desc.map((el, i) => {
+							return (
+								<span style={{ fontSize: "18px" }} key={i}>
+									{el}
+								</span>
+							);
+						})}
+						<p className="vacancy-page__details-title">Вимоги:</p>
+						{vacancy.requirements &&
+							vacancy.requirements.map((el, i) => {
+								return (
+									<span style={{ fontSize: "18px" }} key={i}>
+										{el}
+									</span>
+								);
+							})}
+						<div style={{ display: "flex", gap: 5, alignSelf: "flex-end" }}>
+							<Link className="vacancy-page__link" href="/#kontakty">
+								{t("contacts_title")}
+							</Link>
+							<a className="vacancy-page__link" href="tel:+420777957290">
+								Дзвоніть зараз
+							</a>
+						</div>
 					</div>
 				</div>
 			</main>

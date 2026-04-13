@@ -77,7 +77,9 @@ export default function Contacts() {
 							Pod Hroby 271 Kolín IV
 						</a>
 						<p>IČO</p>
-						<CopyBtn />
+						<span>
+							17430089 <CopyBtn txt="17430089" />
+						</span>
 					</div>
 					<h3>
 						Підписуйтесь на наші соціальні мережі, щоб не пропустити нові

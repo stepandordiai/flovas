@@ -45,10 +45,12 @@ const Vacancy = ({ vacancy }: VacancyProps) => {
 						<span></span> <span>{t("inactive_vacancy")}</span>
 					</p>
 				)}
-				<p className="vacancy__date">Опубліковано: {createdAt}</p>
-				<p style={{ fontWeight: 500 }}>📍 Місто: {place}</p>
+				<p className="vacancy__date">
+					Опубліковано: {createdAt.replaceAll("-", "/")}
+				</p>
+				<p style={{ fontWeight: 500 }}>Місто: {place}</p>
 				<p style={{ fontSize: "18px", fontWeight: 600 }}>{title}</p>
-				<p style={{ fontWeight: 500 }}>{salary}</p>
+				<p style={{ fontWeight: 500 }}>Заробітна плата: {salary} Kč/год</p>
 			</div>
 			<Link className="vacancy__link" href={`/prace/${id}`} scroll={true}>
 				{t("more_info_btn")}
