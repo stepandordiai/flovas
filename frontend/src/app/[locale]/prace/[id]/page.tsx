@@ -56,6 +56,22 @@ export async function generateMetadata({
 				"x-default": `/${routing.defaultLocale}/${page}/${id}`,
 			},
 		},
+
+		// TODO: learn this
+		openGraph: {
+			title: vacancy.title,
+			description: seoDesc,
+			url: `/${locale}/${page}/${id}`,
+			type: "website",
+			images: [
+				{
+					url: "/flovas-og-c.png",
+					width: 1200,
+					height: 630,
+					alt: vacancy.title,
+				},
+			],
+		},
 	};
 }
 
