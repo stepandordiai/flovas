@@ -65,8 +65,9 @@ export async function generateMetadata({
 			type: "website",
 			images: [
 				{
-					url: "/flovas-og-c.png",
-					width: 1200,
+					// url: "/flovas-og-c.png",
+					url: vacancy.img,
+					width: 630,
 					height: 630,
 					alt: vacancy.title,
 				},
@@ -167,9 +168,7 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 								gap: 10,
 							}}
 						>
-							<p className="vacancy__created-at">
-								Опубліковано: {vacancy.createdAt.replaceAll("-", "/")}
-							</p>
+							<p>Опубліковано: {vacancy.createdAt.replaceAll("-", "/")}</p>
 							<VacancyPageClient />
 						</div>
 						<h1 className="vacancy__title">{vacancy.title}</h1>
@@ -190,22 +189,21 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 							Заробітна плата: {vacancy.salary} Kč/год
 						</p>
 						<p className="vacancy-page__details-title">Опис:</p>
-						{vacancy.desc.map((el, i) => {
-							return (
-								<span style={{ fontSize: "18px" }} key={i}>
-									{el}
-								</span>
-							);
-						})}
-						<p className="vacancy-page__details-title">Вимоги:</p>
-						{vacancy.requirements &&
-							vacancy.requirements.map((el, i) => {
-								return (
-									<span style={{ fontSize: "18px" }} key={i}>
-										{el}
-									</span>
-								);
+						<ul>
+							{vacancy.desc.map((el, i) => {
+								return <li key={i}>{el}</li>;
 							})}
+						</ul>
+						{vacancy.requirements && (
+							<>
+								<p className="vacancy-page__details-title">Вимоги:</p>
+								<ul>
+									{vacancy.requirements.map((el, i) => {
+										return <li key={i}>{el}</li>;
+									})}
+								</ul>
+							</>
+						)}
 						<div style={{ display: "flex", gap: 5, alignSelf: "flex-end" }}>
 							<Link className="vacancy-page__link" href="/#kontakty">
 								{t("contacts_title")}
