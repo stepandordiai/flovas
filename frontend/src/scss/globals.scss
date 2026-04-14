@@ -65,8 +65,8 @@ textarea {
 	align-items: center;
 	flex-direction: column;
 	row-gap: 25px;
-	margin-top: 75px;
-	min-height: calc(100vh - 100px);
+	margin-top: 100px;
+	min-height: calc(100svh - 185px);
 	background: #fff;
 	border-radius: 25px;
 	padding: 25px;
@@ -83,13 +83,28 @@ textarea {
 	border-radius: 25px;
 	background: var(--sec-accent-clr);
 	font-weight: 500;
+	text-decoration: none !important;
+
+	&:first-child {
+		background: var(--accent-clr);
+
+		&:active {
+			background: var(--sec-accent-clr);
+			color: #000;
+		}
+	}
+
+	&:active {
+		background: #000;
+		color: #fff;
+	}
 }
 
 @media screen and (width <= 896px) {
 	.not-found {
-		margin-top: 50px;
+		margin-top: 75px;
 		padding: 10px;
-		min-height: calc(100vh - 60px);
+		min-height: calc(100svh - 140px);
 		row-gap: 10px;
 	}
 }
