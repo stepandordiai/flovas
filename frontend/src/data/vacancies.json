@@ -1,5 +1,28 @@
 [
 	{
+		"id": "pecovatelka-domov-pro-seniory-praha-jasmin",
+		"img": "/vacancies/flovas-vacancy-12-c.jpg",
+		"isActive": true,
+		"createdAt": "2026-04-14",
+		"place": "Прага",
+		"address": "Řešovská 852/10, 181 00 Praha 8",
+		"addressUrl": "https://maps.app.goo.gl/6U8K9mEo6VH9BeK59",
+		"title": "Потрібно доглядальницю в будинок для престарілих (Jasmín)",
+		"salary": 170,
+		"desc": [
+			"🕒 Графік: 12 год/день",
+			"📄 Офіційне працевлаштування",
+			"🛂 Візова підтримка",
+			"🏠 Проживання та хороші умови праці",
+			"✨ Не потрібен досвід - навчимо на місці"
+		],
+		"requirements": [
+			"• Жінки віком від 18 до 60 років",
+			"• Мінімальне знання чеської мови"
+		],
+		"jobType": "Доглядання"
+	},
+	{
 		"id": "uklizecka-janovice",
 		"img": "/vacancies/flovas-vacancy-22-c.png",
 		"isActive": false,

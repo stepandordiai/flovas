@@ -38,6 +38,12 @@ export default function VacanciesClient() {
 		return filteredPlace && filteredJobType;
 	});
 
+	// TODO: learn this
+	const sortedFilteredVacancies = [
+		...filteredVacancies.filter((v) => v.isActive),
+		...filteredVacancies.filter((v) => !v.isActive),
+	];
+
 	const [filterVisible, setFilterVisible] = useState(false);
 
 	useEffect(() => {
@@ -252,9 +258,11 @@ export default function VacanciesClient() {
 				) : (
 					<div className="vacancies-page-container">
 						{/* TODO: learn this */}
-						{filteredVacancies.slice(0, visibleLength).map((vacancy, index) => (
-							<Vacancy key={index} vacancy={vacancy} />
-						))}
+						{sortedFilteredVacancies
+							.slice(0, visibleLength)
+							.map((vacancy, index) => (
+								<Vacancy key={index} vacancy={vacancy} />
+							))}
 					</div>
 				)}
 				{/* TODO: learn this */}
