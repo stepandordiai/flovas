@@ -1,65 +1,11 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import socialsData from "@/data/socialsData";
 import CopyBtn from "../../CopyBtn/CopyBtn";
-import { isValidTel } from "@/utils/validators";
-import { useState } from "react";
-import axios from "axios";
-import classNames from "classnames";
+import ContactsClient from "./ContactsClient";
 import "./Contacts.scss";
 
-const initContactForm = {
-	name: "",
-	tel: "",
-	address: "",
-	position: "",
-	details: "",
-};
-
-export default function Contacts() {
-	const t = useTranslations();
-	const [error, setError] = useState<string | null>(null);
-	const [loading, setLoading] = useState(false);
-	const [success, setSuccess] = useState(false);
-	const [formData, setFormData] = useState(initContactForm);
-
-	const saveData = async (e: React.FormEvent) => {
-		e.preventDefault();
-		setError(null);
-
-		if (!isValidTel(formData.tel)) {
-			setError("Некорректний номер телефону");
-			return;
-		}
-
-		setLoading(true);
-
-		try {
-			await axios.post(
-				`https://weekly-planner-backend.onrender.com/leads`,
-				formData,
-			);
-
-			setSuccess(true);
-			setFormData(initContactForm);
-			setTimeout(() => {
-				setSuccess(false);
-			}, 3000);
-		} catch (err: any) {
-			if (err.response?.status !== 409) {
-				setError(err.response?.data?.message);
-				setLoading(false);
-				return;
-			}
-		} finally {
-			setLoading(false);
-		}
-	};
-
-	const handleForm = (name: string, value: string) => {
-		setFormData((prev) => ({ ...prev, [name]: value }));
-	};
+export default async function Contacts() {
+	const t = await getTranslations();
 
 	return (
 		<section className="contacts" id="kontakty">
@@ -111,94 +57,8 @@ export default function Contacts() {
 				</div>
 				<div className="contacts-container">
 					<h3 className="contacts__details-title">{t("contacts.contactUs")}</h3>
-					<form className="contacts-form" onSubmit={saveData}>
-						{/* {error && !isValidTel(formData.tel) && formData.tel !== "" && (
-							<span style={{ color: "rgb(255, 115, 115)" }}>{error}</span>
-						)} */}
-						{error && (
-							<span style={{ color: "rgb(255, 115, 115)" }}>{error}</span>
-						)}
-						<div className="input-container">
-							<label className="label" htmlFor="name">
-								{t("contacts.name")}
-							</label>
-							<input
-								onChange={(e) => handleForm(e.target.name, e.target.value)}
-								name="name"
-								value={formData.name}
-								className="contacts__input"
-								type="text"
-								id="name"
-								autoComplete="given-name"
-							/>
-						</div>
-						<div className="input-container">
-							<label className="label" htmlFor="tel">
-								{t("tel")} *
-							</label>
-							<input
-								onChange={(e) => handleForm(e.target.name, e.target.value)}
-								name="tel"
-								value={formData.tel}
-								className={classNames("contacts__input", {
-									"contacts__input--incorrect":
-										error && !isValidTel(formData.tel) && formData.tel !== "",
-								})}
-								type="tel"
-								id="tel"
-								autoComplete="tel"
-								required
-							/>
-						</div>
-						<div className="input-container">
-							<label className="label" htmlFor="address">
-								{t("contacts.address")}
-							</label>
-							<input
-								onChange={(e) => handleForm(e.target.name, e.target.value)}
-								name="address"
-								value={formData.address}
-								className="contacts__input"
-								type="text"
-								id="address"
-							/>
-						</div>
-						<div className="input-container">
-							<label className="label" htmlFor="position">
-								{t("contacts.position")}
-							</label>
-							<input
-								onChange={(e) => handleForm(e.target.name, e.target.value)}
-								name="position"
-								value={formData.position}
-								className="contacts__input"
-								type="text"
-								id="position"
-							/>
-						</div>
-						<div className="input-container">
-							<label className="label" htmlFor="details">
-								{t("contacts.message")}
-							</label>
-							<textarea
-								onChange={(e) => handleForm(e.target.name, e.target.value)}
-								name="details"
-								value={formData.details}
-								className="contacts__input"
-								id="details"
-							></textarea>
-						</div>
-						<button
-							className={classNames("contacts-form__btn", {
-								"contacts-form__btn--loading": loading,
-								"contacts-form__btn--success": success,
-							})}
-							type="submit"
-							disabled={loading || success}
-						>
-							{loading ? t("loading") : success ? t("success") : t("send")}
-						</button>
-					</form>
+					<p>Заповніть форму, і ми зв’яжемося з вами найближчим часом.</p>
+					<ContactsClient />
 				</div>
 			</div>
 		</section>
