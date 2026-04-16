@@ -81,7 +81,8 @@ export default function ContactsClient() {
 			</div>
 			<div className="input-container">
 				<label className="label" htmlFor="tel">
-					{t("tel")} *
+					{t("tel")}
+					<span style={{ color: "rgb(255, 115, 115)" }}>*</span>
 				</label>
 				<input
 					onChange={(e) => handleContactsForm(e.target.name, e.target.value)}
@@ -133,6 +134,7 @@ export default function ContactsClient() {
 					value={contactsForm.details}
 					className="contacts__input"
 					id="details"
+					rows={3}
 				></textarea>
 			</div>
 			<button
