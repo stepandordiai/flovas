@@ -18,7 +18,7 @@ const Footer = async () => {
 					<div className="footer__nav">
 						<p className="footer__nav-title">{t("footer.nav")}</p>
 						<div className="footer__nav-list">
-							{linksData.map((link: any, index: any) => {
+							{linksData.map((link, index) => {
 								return (
 									<Link key={index} href={link.path}>
 										{t(link.name)}
@@ -37,12 +37,12 @@ const Footer = async () => {
 					<div className="footer__nav">
 						<p className="footer__nav-title">{t("footer.working_hours")}</p>
 						<div className="footer__nav-list">
-							<p>
-								{t("footer.mon")} - {t("footer.sat")}: 8:00 - 17:00
-							</p>
-							<p>
+							<span>
+								{t("footer.mon")} - {t("footer.sat")}: 8:00 - 19:00
+							</span>
+							<span>
 								{t("footer.sunday")}: {t("footer.closed")}
-							</p>
+							</span>
 						</div>
 					</div>
 					<div className="footer__nav">
