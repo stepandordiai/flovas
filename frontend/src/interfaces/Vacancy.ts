@@ -1,6 +1,6 @@
 export interface VacancyInterface {
 	id: string;
-	img: string;
+	img?: string;
 	isActive: boolean;
 	createdAt: string;
 	place: string;
@@ -10,5 +10,6 @@ export interface VacancyInterface {
 	desc: string[];
 	salary: number;
 	requirements?: string[];
+	responsibilities?: string[];
 	jobType: string;
 }

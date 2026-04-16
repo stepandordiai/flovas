@@ -74,6 +74,13 @@
 	}
 }
 
+.vacancy-page-list {
+	li {
+		list-style: disc;
+		list-style-position: inside;
+	}
+}
+
 @media screen and (width <= 896px) {
 	.vacancy-page {
 		row-gap: 10px;

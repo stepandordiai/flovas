@@ -65,8 +65,7 @@ export async function generateMetadata({
 			type: "website",
 			images: [
 				{
-					// url: "/flovas-og-c.png",
-					url: vacancy.img,
+					url: vacancy.img || "/flovas-og-c.png",
 					width: 630,
 					height: 630,
 					alt: vacancy.title,
@@ -189,15 +188,25 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 							Заробітна плата: {vacancy.salary} Kč/год
 						</p>
 						<p className="vacancy-page__details-title">Опис:</p>
-						<ul>
+						<ul className="vacancy-page-list">
 							{vacancy.desc.map((el, i) => {
 								return <li key={i}>{el}</li>;
 							})}
 						</ul>
+						{vacancy.responsibilities && (
+							<>
+								<p className="vacancy-page__details-title">Обов'язки:</p>
+								<ul className="vacancy-page-list">
+									{vacancy.responsibilities.map((el, i) => {
+										return <li key={i}>{el}</li>;
+									})}
+								</ul>
+							</>
+						)}
 						{vacancy.requirements && (
 							<>
 								<p className="vacancy-page__details-title">Вимоги:</p>
-								<ul>
+								<ul className="vacancy-page-list">
 									{vacancy.requirements.map((el, i) => {
 										return <li key={i}>{el}</li>;
 									})}
