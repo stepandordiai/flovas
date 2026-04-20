@@ -8,7 +8,6 @@ import ScrollToTopBtn from "@/components/ScrollToTopBtn/ScrollToTopBtn";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 import { createPortal } from "react-dom";
-import { VacancyInterface } from "@/interfaces/Vacancy";
 
 export default function VacanciesClient() {
 	const t = useTranslations();
@@ -38,10 +37,20 @@ export default function VacanciesClient() {
 		return filteredPlace && filteredJobType;
 	});
 
-	// TODO: learn this
+	// FIXME:
 	const sortedFilteredVacancies = [
-		...filteredVacancies.filter((v) => v.isActive),
-		...filteredVacancies.filter((v) => !v.isActive),
+		...filteredVacancies
+			.filter((v) => v.isActive)
+			.sort(
+				(a, b) =>
+					new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+			),
+		...filteredVacancies
+			.filter((v) => !v.isActive)
+			.sort(
+				(a, b) =>
+					new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+			),
 	];
 
 	const [filterVisible, setFilterVisible] = useState(false);

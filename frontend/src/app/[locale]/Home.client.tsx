@@ -105,7 +105,12 @@ export default function HomeClient() {
 			<section className="vacancies" id="prace">
 				<h2 className="vacancies__title">{t("hotVacanciesTitle")} 🔥</h2>
 				<div className="vacancies-container">
-					{vacancies
+					{[...vacancies]
+						.sort(
+							(a, b) =>
+								new Date(b.createdAt).getTime() -
+								new Date(a.createdAt).getTime(),
+						)
 						.filter((vacancy) => vacancy.isActive)
 						.map((vacancy, index) => (
 							<Vacancy key={index} vacancy={vacancy} />

@@ -164,16 +164,18 @@
 		"jobType": "Прибирання"
 	},
 	{
-		"id": "prace-ve-skladu",
+		"id": "skladnik-modletice",
 		"img": "/vacancies/flovas-vacancy-21-c.png",
 		"isActive": true,
-		"createdAt": "2026-03-20",
+		"createdAt": "2026-04-20",
 		"place": "Прага",
-		"title": "Робота на складі для чоловіків",
+		"address": "Modletice",
+		"addressUrl": "https://maps.app.goo.gl/SFw5xY3CkZaDi2ao9",
+		"title": "Робота на складі для чоловіків (Modletice)",
 		"salary": 170,
 		"desc": [
-			"11 год робочий графік",
-			"субота/Неділя вихідний",
+			"11-12 год робочий графік",
+			"Субота/Неділя вихідний",
 			"візова підтримка",
 			"здравотка/соціалка оплачується",
 			"регулярна виплата авансів до зарплати",
