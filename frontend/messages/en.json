@@ -99,5 +99,44 @@
 
 	"tel_form_banner": {
 		"title": "How to contact you"
+	},
+
+	"privacyPolicy": {
+		"title": "Privacy Policy (GDPR)",
+		"company": "Company:",
+		"address": "Registered address:",
+		"txt1": "These policies explain how we collect, use and protect your personal data in the context of employment mediation and personnel administration.",
+		"txt2": "Who is the controller of your data?",
+		"txt3": "The controller of personal data is FLOVAS s.r.o. We are responsible for ensuring that your data is processed lawfully, transparently and securely in accordance with EU Regulation 2016/679 (GDPR).",
+		"txt4": "What data do we collect?",
+		"txt5": "For the purposes of finding a suitable job position and entering into an employment relationship, we process in particular:",
+		"txt6": "Identification data: first name, surname, date of birth, nationality.",
+		"txt7": "Contact data: phone number, email, residential address.",
+		"txt8": "Professional data: CV, information about education, previous work experience and skills.",
+		"txt9": "Documents: copies of visas, residence permits, passport data (necessary for lawful employee registration).",
+		"txt10": "Purpose and legal basis of processing",
+		"txt11": "We process your data on the basis of the following legal grounds:",
+		"txt12": "Performance of a contract or measures taken prior to entering into a contract: in order to mediate work and conclude a contract.",
+		"txt13": "Compliance with a legal obligation: reporting to authorities (Labour Office, CSSZ, health insurance companies) and tax administration.",
+		"txt14": "Consent: for retention in the applicant database for future job offers.",
+		"txt15": "Legitimate interest: to protect our rights in the event of legal disputes.",
+		"txt16": "To whom do we transfer your data?",
+		"txt17": "Your data may be provided to:",
+		"txt18": "Employers (clients): potential companies you are applying to.",
+		"txt19": "State authorities: Labour Office of the Czech Republic, Customs Administration, health insurance companies and social security administration.",
+		"txt20": "Processors: external accounting and payroll companies or IT service providers.",
+		"txt21": "Data retention period",
+		"txt22": "For the duration of the selection process for a specific position.",
+		"txt23": "For the duration of the employment relationship and subsequently for 10 years (in accordance with archiving periods set by Czech law).",
+		"txt24": "3 years based on your consent (for the purposes of future offers), unless you withdraw your consent earlier.",
+		"txt25": "Your rights",
+		"txt26": "You have the right to:",
+		"txt27": "Request access to your personal data.",
+		"txt28": "Rectification of incomplete or incorrect data.",
+		"txt29": "Erasure of data (\"right to be forgotten\").",
+		"txt30": "Withdraw your consent to processing at any time.",
+		"txt31": "Lodge a complaint with the Office for Personal Data Protection (UOOU).",
+		"contact": "Contact",
+		"txt32": "If you have any questions regarding GDPR, you can contact us:"
 	}
 }

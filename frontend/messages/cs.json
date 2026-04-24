@@ -99,5 +99,44 @@
 
 	"tel_form_banner": {
 		"title": "Jak vás kontaktovat"
+	},
+
+	"privacyPolicy": {
+		"title": "Zásady ochrany osobních údajů (GDPR)",
+		"company": "Společnost:",
+		"address": "Sídlo:",
+		"txt1": "Tyto zásady vysvětlují, jakým způsobem shromažďujeme, používáme a chráníme vaše osobní údaje v rámci zprostředkování zaměstnání a personální agendy.",
+		"txt2": "Kdo je správcem vašich údajů?",
+		"txt3": "Správcem osobních údajů je společnost FLOVAS s.r.o. Odpovídáme za to, aby vaše údaje byly zpracovávány zákonně, transparentně a bezpečně v souladu s nařízením EU 2016/679 (GDPR).",
+		"txt4": "Jaké údaje shromažďujeme?",
+		"txt5": "Pro účely nalezení vhodné pracovní pozice a uzavření pracovněprávního vztahu zpracováváme zejména:",
+		"txt6": "Identifikační údaje: jméno, příjmení, datum narození, státní občanství.",
+		"txt7": "Kontaktní údaje: telefonní číslo, e-mail, adresa bydliště.",
+		"txt8": "Profesní údaje: životopis (CV), informace o vzdělání, předchozích pracovních zkušenostech a dovednostech.",
+		"txt9": "Doklady: kopie víz, povolení k pobytu, údaje z pasu (nezbytné pro zákonnou registraci zaměstnance).",
+		"txt10": "Účel a právní základ zpracování",
+		"txt11": "Vaše údaje zpracováváme na základě těchto právních titulů:",
+		"txt12": "Plnění smlouvy či provedení opatření před uzavřením smlouvy: abychom vám mohli zprostředkovat práci a uzavřít smlouvu.",
+		"txt13": "Plnění právní povinnosti: hlášení na úřady (Úřad práce, OSSZ, zdravotní pojišťovny) a daňová agenda.",
+		"txt14": "Souhlas: pro uchování v databázi uchazečů pro budoucí pracovní nabídky.",
+		"txt15": "Oprávněný zájem: pro ochranu našich práv v případě právních sporů.",
+		"txt16": "Komu vaše údaje předáváme?",
+		"txt17": "Vaše údaje mohou být poskytnuty:",
+		"txt18": "Zaměstnavatelům (klientům): potenciálním firmám, u kterých se ucházíte o práci.",
+		"txt19": "Státním orgánům: Úřad práce ČR, Celní správa, zdravotní pojišťovny a správa sociálního zabezpečení.",
+		"txt20": "Zpracovatelům: externím účetním a mzdovým firmám či poskytovatelům IT služeb.",
+		"txt21": "Doba uchovávání údajů",
+		"txt22": "Po dobu výběrového řízení na konkrétní pozici.",
+		"txt23": "Po dobu trvání pracovního poměru a následně po dobu 10 let (dle archivačních lhůt daných českými zákony).",
+		"txt24": "3 roky na základě vašeho souhlasu (pro účely budoucích nabídek), pokud souhlas neodvoláte dříve.",
+		"txt25": "Vaše práva",
+		"txt26": "Máte právo:",
+		"txt27": "Požadovat přístup ke svým osobním údajům.",
+		"txt28": "Na opravu neúplných či nesprávných údajů.",
+		"txt29": "Na výmaz údajů („právo být zapomenut“).",
+		"txt30": "Kdykoliv odvolat svůj souhlas se zpracováním.",
+		"txt31": "Podat stížnost u Úřadu pro ochranu osobních údajů (ÚOOÚ).",
+		"contact": "Kontakt",
+		"txt32": "V případě dotazů ohledně GDPR nás můžete kontaktovat:"
 	}
 }
