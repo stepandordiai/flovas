@@ -1,4 +1,4 @@
-@use "./../../../scss/mixins" as *;
+@use "@/scss/mixins" as *;
 
 .header {
 	display: flex;
@@ -69,16 +69,15 @@
 
 .header-banner__list {
 	display: flex;
-	gap: 5px;
+	gap: 10px;
 	justify-content: space-between;
 	/* KEY: each item is at minimum the full screen width */
 	min-width: 100vw;
-	padding: 0 2.5px;
+	padding: 0 5px;
 }
 
 .header-banner__item {
 	white-space: nowrap;
-	// padding: 0 5px;
 }
 
 @keyframes scroll {
@@ -87,7 +86,7 @@
 	}
 	to {
 		transform: translateX(-50%);
-	} /* still -50% because 2 items */
+	}
 }
 
 .header-top {

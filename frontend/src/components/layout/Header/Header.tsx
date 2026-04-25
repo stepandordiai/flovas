@@ -8,6 +8,7 @@ import LngSelect from "../../common/LngSelect/LngSelect";
 import classNames from "classnames";
 import { Link } from "@/i18n/navigation";
 import vacancies from "@/data/vacancies.json";
+import React from "react";
 import "./Header.scss";
 
 interface Indicator {
@@ -140,25 +141,22 @@ const Header = () => {
 				<div className="header-banner-inner">
 					{Array.from({ length: 2 }).map((_, i) => {
 						return (
-							<div key={i} className="header-banner__list">
-								<span className="header-banner__item">
-									СВІЖІ ВАКАНСІЇ ЩОДНЯ
-								</span>
-								<span className="header-banner__item">•</span>
-								<span className="header-banner__item">
-									ОФІЦІЙНЕ ПРАЦЕВЛАШТУВАННЯ
-								</span>
-								<span className="header-banner__item">•</span>
-								<span className="header-banner__item">НАДАЄМО ЖИТЛО</span>
-								<span className="header-banner__item">•</span>
-								<span className="header-banner__item">
-									ОПЛАЧУЄМО СОЦІАЛЬНЕ ТА МЕДИЧНЕ СТРАХУВАННЯ
-								</span>
-								<span className="header-banner__item">•</span>
-								<span className="header-banner__item">
-									ДЛЯ ЧОЛОВІКІВ ЖІНОК ТА СІМЕЙНИХ ПАР
-								</span>
-								<span className="header-banner__item">•</span>
+							<div
+								key={i}
+								className="header-banner__list"
+								// TODO: Hide cloned items from google seo
+								aria-hidden={i > 0 ? "true" : "false"}
+							>
+								{t.raw("header.banner.items").map((item: string, i: number) => {
+									return (
+										<React.Fragment key={i}>
+											<span className="header-banner__item">{item}</span>
+											<span className="header-banner__item" aria-hidden="true">
+												•
+											</span>
+										</React.Fragment>
+									);
+								})}
 							</div>
 						);
 					})}

@@ -46,6 +46,18 @@
 		}
 	},
 
+	"header": {
+		"banner": {
+			"items": [
+				"New job offers in the Czech Republic every week",
+				"Official employment",
+				"Accommodation provided",
+				"We cover social and health insurance",
+				"For men, women, and couples"
+			]
+		}
+	},
+
 	"footer": {
 		"nav": "Navigation",
 		"working_hours": "Working hours",

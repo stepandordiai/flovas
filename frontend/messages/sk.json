@@ -50,6 +50,18 @@
 		}
 	},
 
+	"header": {
+		"banner": {
+			"items": [
+				"Nové pracovné ponuky v Česku každý týždeň",
+				"Oficiálne zamestnanie",
+				"Zabezpečujeme ubytovanie",
+				"Hradíme sociálne a zdravotné poistenie",
+				"Pre mužov, ženy aj páry"
+			]
+		}
+	},
+
 	"footer": {
 		"nav": "Navigácia",
 		"working_hours": "Pracovná doba",
