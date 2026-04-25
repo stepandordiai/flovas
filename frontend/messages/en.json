@@ -113,6 +113,32 @@
 		"title": "How to contact you"
 	},
 
+	"faq": {
+		"title": "Frequently asked questions",
+		"q": {
+			"1": "What types of jobs do you offer?",
+			"2": "Is the employment official?",
+			"3": "Do you provide accommodation?",
+			"4": "Is knowledge of Czech required?",
+			"5": "What is the salary and how is it paid?",
+			"6": "Do you help with documents and work permits?",
+			"7": "Do you cover health and social insurance?",
+			"8": "How can I apply for a job?",
+			"9": "How quickly can I start working?"
+		},
+		"a": {
+			"1": "We offer jobs in manufacturing, logistics, warehouses, and other sectors across the Czech Republic. Positions are suitable for men, women, and couples.",
+			"2": "Yes, all positions are based on official employment contracts in accordance with Czech legislation.",
+			"3": "Yes, we provide accommodation for most job positions. Conditions may vary depending on the specific offer.",
+			"4": "In most cases, knowledge of Czech is not required. For some positions it is an advantage, but not mandatory.",
+			"5": "The salary depends on the specific position. Wages are paid regularly, usually monthly, to a bank account.",
+			"6": "Yes, we assist with the preparation of necessary documents and support you throughout the entire employment process.",
+			"7": "Yes, health and social insurance are covered in accordance with Czech law.",
+			"8": "Simply contact us via the website form or by phone. Our team will get in touch with current job offers.",
+			"9": "You can usually start within a few days, depending on job availability and document processing."
+		}
+	},
+
 	"privacyPolicy": {
 		"title": "Privacy Policy (GDPR)",
 		"company": "Company:",

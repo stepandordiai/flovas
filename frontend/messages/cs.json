@@ -113,6 +113,32 @@
 		"title": "Jak vás kontaktovat"
 	},
 
+	"faq": {
+		"title": "Často kladené otázky",
+		"q": {
+			"1": "Jaké typy práce nabízíte?",
+			"2": "Je zaměstnání oficiální?",
+			"3": "Poskytujete ubytování?",
+			"4": "Je nutná znalost češtiny?",
+			"5": "Jaký je plat a jak probíhá vyplácení mzdy?",
+			"6": "Pomáháte s dokumenty a povolením k práci?",
+			"7": "Hradíte zdravotní a sociální pojištění?",
+			"8": "Jak se mohu přihlásit o práci?",
+			"9": "Za jak dlouho mohu nastoupit do práce?"
+		},
+		"a": {
+			"1": "Nabízíme práci ve výrobě, logistice, skladech a dalších odvětvích po celé České republice. Pozice jsou vhodné pro muže, ženy i páry.",
+			"2": "Ano, všechny pracovní pozice jsou na základě oficiální pracovní smlouvy v souladu s českou legislativou.",
+			"3": "Ano, pro většinu pracovních pozic zajišťujeme ubytování. Podmínky se mohou lišit podle konkrétní nabídky.",
+			"4": "Ve většině případů není znalost češtiny nutná. Na některých pozicích je výhodou, ale ne podmínkou.",
+			"5": "Výše mzdy závisí na konkrétní pozici. Mzda je vyplácena pravidelně, obvykle měsíčně, na bankovní účet.",
+			"6": "Ano, pomáháme s vyřízením potřebných dokumentů a poskytujeme podporu během celého procesu nástupu do práce.",
+			"7": "Ano, zdravotní i sociální pojištění je hrazeno v souladu s českými zákony.",
+			"8": "Stačí nás kontaktovat přes formulář na webu nebo telefonicky. Náš tým vás bude kontaktovat s aktuální nabídkou práce.",
+			"9": "Nástup je možný často během několika dní, v závislosti na dostupnosti pozic a vyřízení dokumentů."
+		}
+	},
+
 	"privacyPolicy": {
 		"title": "Zásady ochrany osobních údajů (GDPR)",
 		"company": "Společnost:",
