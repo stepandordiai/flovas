@@ -1,5 +1,53 @@
 [
 	{
+		"id": "uklizecka-pardubice-panasonic",
+		"img": "/vacancies/flovas-vacancy-29-c.png",
+		"isActive": true,
+		"createdAt": "2026-04-27",
+		"place": "Pardubice",
+		"address": "U Panasonicu 266, 530 06 Pardubice VI",
+		"addressUrl": "https://maps.app.goo.gl/nZRPCNfEEJVXoQ6t5",
+		"title": "Потрібні прибиральниці на завод Panasonic",
+		"salary": 140,
+		"desc": [
+			"графік: 12 год/день",
+			"офіційне працевлаштування",
+			"здравотка/соціалка оплачується",
+			"візова підтримка",
+			"проживання та хороші умови праці",
+			"не потрібен досвід - навчимо на місці"
+		],
+		"requirements": [
+			"жінки віком від 18 до 60 років",
+			"мінімальне знання чеської мови"
+		],
+		"jobType": "Прибирання"
+	},
+	{
+		"id": "uklizecka-vysoke-myto-iveco",
+		"img": "/vacancies/flovas-vacancy-28-c.png",
+		"isActive": true,
+		"createdAt": "2026-04-27",
+		"place": "Vysoke Myto",
+		"address": "566 01 Vysoké Mýto",
+		"addressUrl": "https://maps.app.goo.gl/pj7EZJWxk7ZtsDQr9",
+		"title": "Потрібно прибиральницю на завод IVECO",
+		"salary": 140,
+		"desc": [
+			"графік: 12 год/день",
+			"офіційне працевлаштування",
+			"здравотка/соціалка оплачується",
+			"візова підтримка",
+			"проживання та хороші умови праці",
+			"не потрібен досвід - навчимо на місці"
+		],
+		"requirements": [
+			"жінки віком від 18 до 60 років",
+			"мінімальне знання чеської мови"
+		],
+		"jobType": "Прибирання"
+	},
+	{
 		"id": "pecovatelka-domov-pro-seniory-praha-jasmin",
 		"img": "/vacancies/flovas-vacancy-12-c.jpg",
 		"isActive": true,
@@ -149,7 +197,7 @@
 		"id": "uklizecka-hostivar",
 		"img": "/vacancies/flovas-vacancy-24-c.png",
 		"isActive": true,
-		"createdAt": "2026-03-30",
+		"createdAt": "2026-04-27",
 		"place": "Прага",
 		"address": "U Hostivařského nádraží 792, 102 00 Praha 15",
 		"addressUrl": "https://maps.app.goo.gl/vDSzqaJSw5XZtELHA",
@@ -167,7 +215,7 @@
 		"id": "skladnik-modletice",
 		"img": "/vacancies/flovas-vacancy-21-c.png",
 		"isActive": true,
-		"createdAt": "2026-04-20",
+		"createdAt": "2026-04-27",
 		"place": "Прага",
 		"address": "Modletice",
 		"addressUrl": "https://maps.app.goo.gl/SFw5xY3CkZaDi2ao9",
