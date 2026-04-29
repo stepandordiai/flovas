@@ -1,7 +1,7 @@
 [
 	{
 		"id": "uklizecka-pardubice-panasonic",
-		"img": "/vacancies/flovas-vacancy-29-c.png",
+		"img": "/vacancies/uklizecka-pardubice-panasonic-c.png",
 		"isActive": true,
 		"createdAt": "2026-04-27",
 		"place": "Pardubice",
@@ -25,7 +25,7 @@
 	},
 	{
 		"id": "uklizecka-vysoke-myto-iveco",
-		"img": "/vacancies/flovas-vacancy-28-c.png",
+		"img": "/vacancies/uklizecka-vysoke-myto-iveco-c.png",
 		"isActive": true,
 		"createdAt": "2026-04-27",
 		"place": "Vysoke Myto",
@@ -49,7 +49,7 @@
 	},
 	{
 		"id": "pecovatelka-domov-pro-seniory-praha-jasmin",
-		"img": "/vacancies/flovas-vacancy-12-c.jpg",
+		"img": "/vacancies/pecovatelka-domov-pro-seniory-praha-jasmin-c.jpg",
 		"isActive": true,
 		"createdAt": "2026-04-14",
 		"place": "Прага",
@@ -79,7 +79,7 @@
 	},
 	{
 		"id": "uklizecka-janovice",
-		"img": "/vacancies/flovas-vacancy-22-c.png",
+		"img": "/vacancies/uklizecka-janovice-c.png",
 		"isActive": false,
 		"createdAt": "2026-04-08",
 		"place": "Яновіце",
@@ -99,7 +99,7 @@
 		"id": "pecovatelka-domov-pro-seniory-praha-senevida-klamovka",
 		"img": "/vacancies/flovas-vacancy-27-c.png",
 		"isActive": true,
-		"createdAt": "2026-04-06",
+		"createdAt": "2026-04-29",
 		"place": "Прага",
 		"address": "Jinonická 1317/1, 150 00 Praha 5-Košíře",
 		"addressUrl": "https://maps.app.goo.gl/2j8LCooinqG9PAwn8",
@@ -127,7 +127,7 @@
 	},
 	{
 		"id": "uklizecka-pardubice-foxconn",
-		"img": "/vacancies/flovas-vacancy-26-c.png",
+		"img": "/vacancies/uklizecka-pardubice-foxconn-c.png",
 		"isActive": true,
 		"createdAt": "2026-04-01",
 		"place": "Пардубіце",
@@ -144,7 +144,7 @@
 	},
 	{
 		"id": "uklizec-pardubice-foxconn",
-		"img": "/vacancies/flovas-vacancy-25-c.png",
+		"img": "/vacancies/uklizec-pardubice-foxconn-c.png",
 		"isActive": true,
 		"createdAt": "2026-04-01",
 		"place": "Пардубіце",
@@ -165,7 +165,7 @@
 	},
 	{
 		"id": "pecovatelka-domov-pro-seniory-praha-slivenec",
-		"img": "/vacancies/flovas-vacancy-23-c.png",
+		"img": "/vacancies/pecovatelka-domov-pro-seniory-praha-slivenec-c.png",
 		"isActive": true,
 		"createdAt": "2026-03-30",
 		"place": "Прага",
@@ -195,7 +195,7 @@
 	},
 	{
 		"id": "uklizecka-hostivar",
-		"img": "/vacancies/flovas-vacancy-24-c.png",
+		"img": "/vacancies/uklizecka-hostivar-c.png",
 		"isActive": true,
 		"createdAt": "2026-04-27",
 		"place": "Прага",
@@ -213,7 +213,7 @@
 	},
 	{
 		"id": "skladnik-modletice",
-		"img": "/vacancies/flovas-vacancy-21-c.png",
+		"img": "/vacancies/skladnik-modletice-c.png",
 		"isActive": true,
 		"createdAt": "2026-04-27",
 		"place": "Прага",
@@ -233,8 +233,8 @@
 		"jobType": "Склад"
 	},
 	{
-		"id": "pracovnice-myti-nadobi",
-		"img": "/vacancies/flovas-vacancy-20-c.png",
+		"id": "pracovnice-myti-nadobi-praha",
+		"img": "/vacancies/pracovnice-myti-nadobi-praha-c.png",
 		"isActive": false,
 		"createdAt": "2026-03-13",
 		"place": "Прага",
@@ -249,7 +249,7 @@
 	},
 	{
 		"id": "uklizecka-cheb",
-		"img": "/vacancies/flovas-vacancy-19-c.png",
+		"img": "/vacancies/uklizecka-cheb-c.png",
 		"isActive": false,
 		"createdAt": "2026-03-12",
 		"place": "Cheb",
@@ -266,7 +266,7 @@
 	},
 	{
 		"id": "brusic-kurim",
-		"img": "/vacancies/flovas-vacancy-18-c.png",
+		"img": "/vacancies/brusic-kurim-c.png",
 		"isActive": true,
 		"createdAt": "2026-03-03",
 		"place": "Курім",
@@ -282,8 +282,8 @@
 		"jobType": "Шліфувальник по металу"
 	},
 	{
-		"id": "vakansiia-laborant-zhinka-chvaletice",
-		"img": "/vacancies/flovas-vacancy-17-c.png",
+		"id": "laborantka-chvaletice",
+		"img": "/vacancies/laborantka-chvaletice-c.png",
 		"isActive": true,
 		"createdAt": "2026-03-03",
 		"place": "Хвалетіце",
@@ -299,8 +299,8 @@
 		"jobType": "Лабораторія"
 	},
 	{
-		"id": "pracivnyky-malyarnyy-tseh-chvaletice",
-		"img": "/vacancies/flovas-vacancy-16-c.png",
+		"id": "pracovnici-lakovna-chvaletice",
+		"img": "/vacancies/pracovnici-lakovna-chvaletice-c.png",
 		"isActive": true,
 		"createdAt": "2026-03-03",
 		"place": "Хвалетіце",
@@ -317,7 +317,7 @@
 	},
 	{
 		"id": "brusic-chvaletice",
-		"img": "/vacancies/flovas-vacancy-5-c.png",
+		"img": "/vacancies/brusic-chvaletice-c.png",
 		"isActive": true,
 		"createdAt": "2026-03-03",
 		"place": "Хвалетіце",
@@ -335,7 +335,7 @@
 	},
 	{
 		"id": "ridic-vzv-chvaletice",
-		"img": "/vacancies/flovas-vacancy-14-c.png",
+		"img": "/vacancies/ridic-vzv-chvaletice-c.png",
 		"isActive": true,
 		"createdAt": "2026-03-03",
 		"place": "Хвалетіце",
@@ -352,7 +352,7 @@
 	},
 	{
 		"id": "elektrikar-chvaletice",
-		"img": "/vacancies/flovas-vacancy-15-c.png",
+		"img": "/vacancies/elektrikar-chvaletice-c.png",
 		"isActive": true,
 		"createdAt": "2026-03-03",
 		"place": "Хвалетіце",
