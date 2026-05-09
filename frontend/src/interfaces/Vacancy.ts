@@ -1,13 +1,13 @@
 export interface VacancyInterface {
 	id: string;
 	img?: string;
-	isActive: boolean;
-	createdAt: string;
+	is_active: boolean;
+	updated_at: string;
 	place: string;
 	address?: string;
-	addressUrl?: string;
+	address_url?: string;
 	title: string;
-	desc: string[];
+	description: string[];
 	salary: number;
 	requirements?: string[];
 	responsibilities?: string[];

@@ -5,7 +5,10 @@ const nextConfig: NextConfig = {
 	// TODO: learn this
 	images: {
 		remotePatterns: [
-			{ protocol: "https", hostname: "flovas-admin.netlify.app" },
+			{
+				protocol: "https",
+				hostname: "jxtgobmjhdpxvqqkvkzr.supabase.co",
+			},
 		],
 	},
 };

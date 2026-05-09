@@ -7,9 +7,11 @@ import linksData from "@/data/links-data.json";
 import LngSelect from "../../common/LngSelect/LngSelect";
 import classNames from "classnames";
 import { Link } from "@/i18n/navigation";
-import vacancies from "@/data/vacancies.json";
+// import vacancies from "@/data/vacancies.json";
+import { getVacancies } from "@/services/vacancies";
 import React from "react";
 import "./Header.scss";
+import { VacancyInterface } from "@/interfaces/Vacancy";
 
 interface Indicator {
 	width: string;
@@ -130,8 +132,18 @@ const Header = () => {
 
 	const toggleMenu = () => setMenuOpen((prev) => !prev);
 
+	const [vacancies, setVacancies] = useState<VacancyInterface[]>([]);
+
+	useEffect(() => {
+		const fetch = async () => {
+			const { data } = await getVacancies();
+			setVacancies(data ?? []);
+		};
+		fetch();
+	}, []);
+
 	const hotVacanciesQty = vacancies.filter(
-		(vacancy) => vacancy.isActive,
+		(vacancy) => vacancy.is_active,
 	).length;
 
 	return (

@@ -1,24 +1,28 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
-import vacancies from "@/data/vacancies.json";
+// import vacancies from "@/data/vacancies.json";
+import { getVacancies } from "@/services/vacancies";
 import Vacancy from "@/components/Vacancy/Vacancy";
 import axios from "axios";
 import "./Home.scss";
+import { VacancyInterface } from "@/interfaces/Vacancy";
 
 export default function HomeClient() {
 	const t = useTranslations();
 
-	// TODO: learn this
-	useEffect(() => {
-		axios
-			.get("https://weekly-planner-backend.onrender.com/health", {
-				timeout: 60000,
-			})
-			.catch(() => {});
-	}, []);
+	const [vacancies, setVacancies] = useState<VacancyInterface[]>([]);
+
+	// // TODO: learn this
+	// useEffect(() => {
+	// 	axios
+	// 		.get("https://weekly-planner-backend.onrender.com/health", {
+	// 			timeout: 60000,
+	// 		})
+	// 		.catch(() => {});
+	// }, []);
 
 	// FIXME:
 	useEffect(() => {
@@ -57,6 +61,16 @@ export default function HomeClient() {
 		const interval = setInterval(rotateWord, 3000);
 		return () => clearInterval(interval);
 	}, []);
+
+	useEffect(() => {
+		const fetch = async () => {
+			const { data } = await getVacancies();
+			setVacancies(data ?? []);
+		};
+		fetch();
+	}, []);
+
+	console.log(vacancies);
 
 	return (
 		<div className="home-inner-container">
@@ -108,10 +122,10 @@ export default function HomeClient() {
 					{[...vacancies]
 						.sort(
 							(a, b) =>
-								new Date(b.createdAt).getTime() -
-								new Date(a.createdAt).getTime(),
+								new Date(b.updated_at).getTime() -
+								new Date(a.updated_at).getTime(),
 						)
-						.filter((vacancy) => vacancy.isActive)
+						.filter((vacancy) => vacancy.is_active)
 						.map((vacancy, index) => (
 							<Vacancy key={index} vacancy={vacancy} />
 						))}

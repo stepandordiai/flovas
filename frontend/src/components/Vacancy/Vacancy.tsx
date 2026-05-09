@@ -14,10 +14,12 @@ type VacancyProps = {
 const Vacancy = ({ vacancy }: VacancyProps) => {
 	const t = useTranslations();
 
-	const { id, img, isActive, createdAt, place, title, salary } = vacancy;
+	const { id, img, is_active, updated_at, place, title, salary } = vacancy;
 
 	// FIXME:
 	const [imgError, setImgError] = useState(false);
+
+	const updated = new Date(updated_at);
 
 	return (
 		<div className="vacancy">
@@ -36,7 +38,7 @@ const Vacancy = ({ vacancy }: VacancyProps) => {
 				<div className="vacancy__no-img"></div>
 			)}
 			<div className="vacancy__details">
-				{isActive ? (
+				{is_active ? (
 					<p className="vacancy__active">
 						<span></span> <span>{t("active_vacancy")}</span>
 					</p>
@@ -46,7 +48,7 @@ const Vacancy = ({ vacancy }: VacancyProps) => {
 					</p>
 				)}
 				<p className="vacancy__date">
-					Опубліковано: {createdAt.replaceAll("-", "/")}
+					Опубліковано: {updated.toLocaleDateString()}
 				</p>
 				<p style={{ fontWeight: 500 }}>Місто: {place}</p>
 				<p style={{ fontSize: "18px", fontWeight: 600 }}>{title}</p>

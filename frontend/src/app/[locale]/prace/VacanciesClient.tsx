@@ -3,11 +3,13 @@
 import { useTranslations } from "next-intl";
 import Breadcrumbs from "@/components/common/Breadcrumbs/Breadcrumbs";
 import Vacancy from "@/components/Vacancy/Vacancy";
-import vacancies from "@/data/vacancies.json";
+// import vacancies from "@/data/vacancies.json";
 import ScrollToTopBtn from "@/components/ScrollToTopBtn/ScrollToTopBtn";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 import { createPortal } from "react-dom";
+import { VacancyInterface } from "@/interfaces/Vacancy";
+import { getVacancies } from "@/services/vacancies";
 
 export default function VacanciesClient() {
 	const t = useTranslations();
@@ -15,6 +17,16 @@ export default function VacanciesClient() {
 		place: "",
 		jobType: "",
 	});
+
+	const [vacancies, setVacancies] = useState<VacancyInterface[]>([]);
+
+	useEffect(() => {
+		const fetch = async () => {
+			const { data } = await getVacancies();
+			setVacancies(data ?? []);
+		};
+		fetch();
+	}, []);
 
 	const activeFiltersLength =
 		Object.values(vacanciesFilter).filter(Boolean).length;
@@ -40,16 +52,16 @@ export default function VacanciesClient() {
 	// FIXME:
 	const sortedFilteredVacancies = [
 		...filteredVacancies
-			.filter((v) => v.isActive)
+			.filter((v) => v.is_active)
 			.sort(
 				(a, b) =>
-					new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+					new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
 			),
 		...filteredVacancies
-			.filter((v) => !v.isActive)
+			.filter((v) => !v.is_active)
 			.sort(
 				(a, b) =>
-					new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+					new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
 			),
 	];
 

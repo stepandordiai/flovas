@@ -1,325 +1,9 @@
 [
 	{
-		"id": "uklizecka-pardubice-panasonic",
-		"img": "/vacancies/uklizecka-pardubice-panasonic-c.png",
-		"isActive": true,
-		"createdAt": "2026-04-27",
-		"place": "Pardubice",
-		"address": "U Panasonicu 266, 530 06 Pardubice VI",
-		"addressUrl": "https://maps.app.goo.gl/nZRPCNfEEJVXoQ6t5",
-		"title": "Потрібні прибиральниці на завод Panasonic",
-		"salary": 140,
-		"desc": [
-			"графік: 12 год/день",
-			"офіційне працевлаштування",
-			"здравотка/соціалка оплачується",
-			"візова підтримка",
-			"проживання та хороші умови праці",
-			"не потрібен досвід - навчимо на місці"
-		],
-		"requirements": [
-			"жінки віком від 18 до 60 років",
-			"мінімальне знання чеської мови"
-		],
-		"jobType": "Прибирання"
-	},
-	{
-		"id": "uklizecka-vysoke-myto-iveco",
-		"img": "/vacancies/uklizecka-vysoke-myto-iveco-c.png",
-		"isActive": true,
-		"createdAt": "2026-04-27",
-		"place": "Vysoke Myto",
-		"address": "566 01 Vysoké Mýto",
-		"addressUrl": "https://maps.app.goo.gl/pj7EZJWxk7ZtsDQr9",
-		"title": "Потрібно прибиральницю на завод IVECO",
-		"salary": 140,
-		"desc": [
-			"графік: 12 год/день",
-			"офіційне працевлаштування",
-			"здравотка/соціалка оплачується",
-			"візова підтримка",
-			"проживання та хороші умови праці",
-			"не потрібен досвід - навчимо на місці"
-		],
-		"requirements": [
-			"жінки віком від 18 до 60 років",
-			"мінімальне знання чеської мови"
-		],
-		"jobType": "Прибирання"
-	},
-	{
-		"id": "pecovatelka-domov-pro-seniory-praha-jasmin",
-		"img": "/vacancies/pecovatelka-domov-pro-seniory-praha-jasmin-c.jpg",
-		"isActive": true,
-		"createdAt": "2026-04-14",
-		"place": "Прага",
-		"address": "Řešovská 852/10, 181 00 Praha 8",
-		"addressUrl": "https://maps.app.goo.gl/6U8K9mEo6VH9BeK59",
-		"title": "Потрібно доглядальницю в будинок для престарілих (Jasmín)",
-		"salary": 170,
-		"desc": [
-			"графік: 12 год/день",
-			"офіційне працевлаштування",
-			"візова підтримка",
-			"проживання та хороші умови праці",
-			"не потрібен досвід - навчимо на місці"
-		],
-		"requirements": [
-			"жінки віком від 18 до 60 років",
-			"мінімальне знання чеської мови"
-		],
-		"responsibilities": [
-			"допомога з особистою гігієною",
-			"допомога з одяганням та роздяганням",
-			"допомога при прийомі їжі та напоїв",
-			"контроль питного режиму",
-			"зміна підгузків (у лежачих пацієнтів)"
-		],
-		"jobType": "Доглядання"
-	},
-	{
-		"id": "uklizecka-janovice",
-		"img": "/vacancies/uklizecka-janovice-c.png",
-		"isActive": false,
-		"createdAt": "2026-04-08",
-		"place": "Яновіце",
-		"address": "Rozvojová zóna 504, 340 21 Janovice nad Úhlavou",
-		"addressUrl": "https://maps.app.goo.gl/nSmBDxKJyGTAZob88",
-		"title": "Потрібно жінку на прибирання в будинок для престарілих",
-		"salary": 120,
-		"desc": [
-			"візова підтримка",
-			"регулярна виплата авансів до зарплати",
-			"надаємо житло (безплатно)",
-			"не потрібен досвід — навчимо на місці"
-		],
-		"jobType": "Прибирання"
-	},
-	{
-		"id": "pecovatelka-domov-pro-seniory-praha-senevida-klamovka",
-		"img": "/vacancies/pecovatelka-domov-pro-seniory-praha-senevida-klamovka-c.png",
-		"isActive": true,
-		"createdAt": "2026-04-29",
-		"place": "Прага",
-		"address": "Jinonická 1317/1, 150 00 Praha 5-Košíře",
-		"addressUrl": "https://maps.app.goo.gl/2j8LCooinqG9PAwn8",
-		"title": "Потрібні доглядальниці в будинок для престарілих (Senevida Klamovka)",
-		"salary": 170,
-		"desc": [
-			"графік: 12 год/день",
-			"офіційне працевлаштування",
-			"візова підтримка",
-			"проживання та хороші умови праці",
-			"не потрібен досвід - навчимо на місці"
-		],
-		"requirements": [
-			"жінки віком від 18 до 60 років",
-			"мінімальне знання чеської мови"
-		],
-		"responsibilities": [
-			"допомога з особистою гігієною",
-			"допомога з одяганням та роздяганням",
-			"допомога при прийомі їжі та напоїв",
-			"контроль питного режиму",
-			"зміна підгузків (у лежачих пацієнтів)"
-		],
-		"jobType": "Доглядання"
-	},
-	{
-		"id": "uklizecka-pardubice-foxconn",
-		"img": "/vacancies/uklizecka-pardubice-foxconn-c.png",
-		"isActive": true,
-		"createdAt": "2026-04-01",
-		"place": "Пардубіце",
-		"address": "U Zámečku 27, 530 03 Pardubice IV-Pardubičky",
-		"addressUrl": "https://maps.app.goo.gl/NhPsriXuXTTB5RZv7",
-		"title": "Потрібні жінки на прибирання (завод Foxconn)",
-		"salary": 140,
-		"desc": [
-			"візова підтримка",
-			"регулярна виплата авансів до зарплати",
-			"не потрібен досвід — навчимо на місці"
-		],
-		"jobType": "Прибирання"
-	},
-	{
-		"id": "uklizec-pardubice-foxconn",
-		"img": "/vacancies/uklizec-pardubice-foxconn-c.png",
-		"isActive": true,
-		"createdAt": "2026-04-01",
-		"place": "Пардубіце",
-		"address": "U Zámečku 27, 530 03 Pardubice IV-Pardubičky",
-		"addressUrl": "https://maps.app.goo.gl/NhPsriXuXTTB5RZv7",
-		"title": "Потрібні чоловіки на прибирання (завод Foxconn)",
-		"salary": 150,
-		"desc": [
-			"візова підтримка",
-			"регулярна виплата авансів до зарплати",
-			"не потрібен досвід — навчимо на місці"
-		],
-		"responsibilities": [
-			"прибирання та утримання території в належному стані",
-			"косіння трави та догляд за зеленими насадженнями"
-		],
-		"jobType": "Прибирання"
-	},
-	{
-		"id": "pecovatelka-domov-pro-seniory-praha-slivenec",
-		"img": "/vacancies/pecovatelka-domov-pro-seniory-praha-slivenec-c.png",
-		"isActive": true,
-		"createdAt": "2026-03-30",
-		"place": "Прага",
-		"address": "Ke Smíchovu 1144/144, 154 00 Slivenec",
-		"addressUrl": "https://maps.app.goo.gl/kcjMLuWus9DSXwCu9",
-		"title": "Потрібні доглядальниці в будинок для престарілих",
-		"salary": 170,
-		"desc": [
-			"графік: 12 год/день",
-			"офіційне працевлаштування",
-			"візова підтримка",
-			"проживання та хороші умови праці",
-			"не потрібен досвід - навчимо на місці"
-		],
-		"requirements": [
-			"жінки віком від 18 до 60 років",
-			"мінімальне знання чеської мови"
-		],
-		"responsibilities": [
-			"допомога з особистою гігієною",
-			"допомога з одяганням та роздяганням",
-			"допомога при прийомі їжі та напоїв",
-			"контроль питного режиму",
-			"зміна підгузків (у лежачих пацієнтів)"
-		],
-		"jobType": "Доглядання"
-	},
-	{
-		"id": "uklizecka-hostivar",
-		"img": "/vacancies/uklizecka-hostivar-c.png",
-		"isActive": true,
-		"createdAt": "2026-05-06",
-		"place": "Прага",
-		"address": "U Hostivařského nádraží 792, 102 00 Praha 15",
-		"addressUrl": "https://maps.app.goo.gl/vDSzqaJSw5XZtELHA",
-		"title": "Прибиральниця в будинок для престарілих",
-		"salary": 130,
-		"desc": [
-			"12 год робочий графік",
-			"візова підтримка",
-			"регулярна виплата авансів до зарплати",
-			"не потрібен досвід — навчимо на місці"
-		],
-		"jobType": "Прибирання"
-	},
-	{
-		"id": "skladnik-modletice",
-		"img": "/vacancies/skladnik-modletice-c.png",
-		"isActive": true,
-		"createdAt": "2026-04-27",
-		"place": "Прага",
-		"address": "Modletice",
-		"addressUrl": "https://maps.app.goo.gl/SFw5xY3CkZaDi2ao9",
-		"title": "Робота на складі для чоловіків (Modletice)",
-		"salary": 170,
-		"desc": [
-			"11-12 год робочий графік",
-			"Субота/Неділя вихідний",
-			"візова підтримка",
-			"здравотка/соціалка оплачується",
-			"регулярна виплата авансів до зарплати",
-			"надаємо проживання (5000 kč)",
-			"не потрібен досвід - навчимо на місці"
-		],
-		"jobType": "Склад"
-	},
-	{
-		"id": "pracovnice-myti-nadobi-praha",
-		"img": "/vacancies/pracovnice-myti-nadobi-praha-c.png",
-		"isActive": false,
-		"createdAt": "2026-03-13",
-		"place": "Прага",
-		"title": "Працівниця на кухню (миття посуду)",
-		"salary": 120,
-		"desc": [
-			"візова підтримка",
-			"регулярна виплата авансів до зарплати",
-			"не потрібен досвід — навчимо на місці"
-		],
-		"jobType": "Миття посуду"
-	},
-	{
-		"id": "uklizecka-cheb",
-		"img": "/vacancies/uklizecka-cheb-c.png",
-		"isActive": false,
-		"createdAt": "2026-03-12",
-		"place": "Cheb",
-		"title": "Потрібна прибиральниця",
-		"salary": 130,
-		"desc": [
-			"12 год робочий графік",
-			"візова підтримка",
-			"регулярна виплата авансів до зарплати",
-			"проживання 4500 kč/місяць",
-			"не потрібен досвід — навчимо на місці"
-		],
-		"jobType": "Прибирання"
-	},
-	{
-		"id": "brusic-kurim",
-		"img": "/vacancies/brusic-kurim-c.png",
-		"isActive": true,
-		"createdAt": "2026-03-03",
-		"place": "Курім",
-		"title": "Потрібні шліфувальники",
-		"salary": 190,
-		"desc": [
-			"офіційне працевлаштування",
-			"соціалка/страховка оплачується",
-			"візова підтримка",
-			"регулярна виплата авансів до зарплати",
-			"проживання 4800 kč/місяць"
-		],
-		"jobType": "Шліфувальник по металу"
-	},
-	{
-		"id": "laborantka-chvaletice",
-		"img": "/vacancies/laborantka-chvaletice-c.png",
-		"isActive": true,
-		"createdAt": "2026-03-03",
-		"place": "Хвалетіце",
-		"title": "Потрібно працівницю в лабораторію",
-		"salary": 150,
-		"desc": [
-			"офіційне працевлаштування",
-			"соціалка/страховка оплачується",
-			"візова підтримка",
-			"регулярна виплата авансів до зарплати",
-			"проживання 4800 kč/місяць"
-		],
-		"jobType": "Лабораторія"
-	},
-	{
-		"id": "pracovnici-lakovna-chvaletice",
-		"img": "/vacancies/pracovnici-lakovna-chvaletice-c.png",
-		"isActive": true,
-		"createdAt": "2026-03-03",
-		"place": "Хвалетіце",
-		"title": "Потрібні працівники в малярний цех (лаковня)",
-		"salary": 160,
-		"desc": [
-			"офіційне працевлаштування",
-			"соціалка/страховка оплачується",
-			"візова підтримка",
-			"регулярна виплата авансів до зарплати",
-			"проживання 4800 kč/місяць"
-		],
-		"jobType": "Малярний цех"
-	},
-	{
 		"id": "brusic-chvaletice",
 		"img": "/vacancies/brusic-chvaletice-c.png",
-		"isActive": true,
-		"createdAt": "2026-03-03",
+		"is_active": true,
+		"created_at": "2026-03-03",
 		"place": "Хвалетіце",
 		"title": "Потрібні шліфувальники",
 		"salary": 175,
@@ -331,13 +15,13 @@
 			"регулярна виплата авансів до зарплати",
 			"проживання 4800 kč/місяць"
 		],
-		"jobType": "Шліфувальник по металу"
+		"job_type": "Шліфувальник по металу"
 	},
 	{
 		"id": "ridic-vzv-chvaletice",
 		"img": "/vacancies/ridic-vzv-chvaletice-c.png",
-		"isActive": true,
-		"createdAt": "2026-03-03",
+		"is_active": true,
+		"created_at": "2026-03-03",
 		"place": "Хвалетіце",
 		"title": "Потрібні водії навантажувача (карщики)",
 		"salary": 170,
@@ -348,13 +32,13 @@
 			"регулярна виплата авансів до зарплати",
 			"проживання 4800 kč/місяць"
 		],
-		"jobType": "Водій VZV"
+		"job_type": "Водій VZV"
 	},
 	{
 		"id": "elektrikar-chvaletice",
 		"img": "/vacancies/elektrikar-chvaletice-c.png",
-		"isActive": true,
-		"createdAt": "2026-03-03",
+		"is_active": true,
+		"created_at": "2026-03-03",
 		"place": "Хвалетіце",
 		"title": "Потрібні електрики",
 		"salary": 210,
@@ -365,12 +49,12 @@
 			"регулярна виплата авансів до зарплати",
 			"проживання 4800 kč/місяць"
 		],
-		"jobType": "Електрик"
+		"job_type": "Електрик"
 	},
 	{
 		"id": "uklizecka-domov-pro-seniory-pysely",
-		"isActive": false,
-		"createdAt": "2026-01-23",
+		"is_active": false,
+		"created_at": "2026-01-23",
 		"place": "Pyšely",
 		"title": "Потрібна прибиральниця в будинок для престарілих",
 		"salary": 150,
@@ -382,12 +66,12 @@
 			"не потрібен досвід — навчимо на місці",
 			"дзвоніть зараз — кількість місць обмежена!"
 		],
-		"jobType": "Прибирання"
+		"job_type": "Прибирання"
 	},
 	{
 		"id": "uklizecka-domov-pro-seniory-pysely",
-		"isActive": false,
-		"createdAt": "2026-01-23",
+		"is_active": false,
+		"created_at": "2026-01-23",
 		"place": "Прага",
 		"title": "Потрібні прибиральниці в будинок для престарілих",
 		"salary": 120,
@@ -398,12 +82,12 @@
 			"надаємо житло",
 			"дзвоніть зараз — кількість місць обмежена!"
 		],
-		"jobType": "Прибирання"
+		"job_type": "Прибирання"
 	},
 	{
 		"id": "uklizecka-tovarna-panasonic-pardubice",
-		"isActive": false,
-		"createdAt": "2025-12-01",
+		"is_active": false,
+		"created_at": "2025-12-01",
 		"place": "Пардубіце",
 		"title": "Потрібні прибиральниці на завод Panasonic",
 		"salary": 130,
@@ -414,12 +98,12 @@
 			"регулярна виплата авансів до зарплати",
 			"надаємо житло"
 		],
-		"jobType": "Прибирання"
+		"job_type": "Прибирання"
 	},
 	{
 		"id": "baleni-vlocek-tovarna-bona-vita-praha",
-		"isActive": false,
-		"createdAt": "2025-10-15",
+		"is_active": false,
+		"created_at": "2025-10-15",
 		"place": "Прага",
 		"title": "Потрібні працівниці на упаковку хлоп’їв!",
 		"salary": 140,
@@ -434,12 +118,12 @@
 			"перевіряти якість упаковки",
 			"складати продукцію в коробки"
 		],
-		"jobType": "Завод"
+		"job_type": "Завод"
 	},
 	{
 		"id": "pecovatelka-domov-pro-seniory-chelcice",
-		"isActive": false,
-		"createdAt": "2025-11-23",
+		"is_active": false,
+		"created_at": "2025-11-23",
 		"place": "Chelčice",
 		"title": "Шукаємо доглядальників за літніми людьми в будинку престарілих.",
 		"salary": 160,
@@ -462,16 +146,16 @@
 			"контроль питного режиму",
 			"зміна підгузків (у лежачих пацієнтів)"
 		],
-		"jobType": "Доглядання"
+		"job_type": "Доглядання"
 	},
 	{
 		"id": "pecovatelka-domov-pro-seniory-pardubice",
 		"img": "/vacancies/pecovatelka-domov-pro-seniory-pardubice-c.png",
-		"isActive": true,
-		"createdAt": "2026-05-06",
+		"is_active": true,
+		"created_at": "2026-05-06",
 		"place": "Пардубіце",
 		"address": "Bělehradská 591, 530 09 Pardubice II",
-		"addressUrl": "https://maps.app.goo.gl/J9rku8DKdHZ6kFdB6",
+		"address_url": "https://maps.app.goo.gl/J9rku8DKdHZ6kFdB6",
 		"title": "Потрібні прибиральниці в будинок для престарілих",
 		"salary": 170,
 		"desc": [
@@ -492,6 +176,6 @@
 			"контроль питного режиму",
 			"зміна підгузків (у лежачих пацієнтів)"
 		],
-		"jobType": "Доглядання"
+		"job_type": "Доглядання"
 	}
 ]

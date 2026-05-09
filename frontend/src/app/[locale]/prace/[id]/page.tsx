@@ -2,15 +2,21 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
-import vacancies from "@/data/vacancies.json";
+// import vacancies from "@/data/vacancies.json";
+import { getVacancies } from "@/services/vacancies";
 import Breadcrumbs from "@/components/common/Breadcrumbs/Breadcrumbs";
 import Image from "next/image";
 import CopyBtn from "@/components/CopyBtn/CopyBtn";
 import VacancyPageClient from "./VacancyPageClient";
 import { Link } from "@/i18n/navigation";
 import "./VacancyPage.scss";
+import { VacancyInterface } from "@/interfaces/Vacancy";
 
 export async function generateStaticParams() {
+	const { data: vacancies, error } = await getVacancies();
+
+	if (!vacancies || error) return [];
+
 	return routing.locales.flatMap((locale) =>
 		vacancies.map((vacancy) => ({
 			locale,
@@ -26,6 +32,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
 	const { locale, id } = await params;
 
+	const { data: vacancies, error } = await getVacancies();
+
+	if (!vacancies || error) return {};
+
 	const vacancy = vacancies.find((vacancy) => vacancy.id === id);
 
 	if (!vacancy) {
@@ -35,7 +45,7 @@ export async function generateMetadata({
 	}
 
 	// TODO: learn this
-	const seoDesc = vacancy.desc
+	const seoDesc = vacancy.description
 		.map((item: string) => item.replace(/^\p{Emoji}\s*/u, "").trim())
 		.join(" · ")
 		.slice(0, 160);
@@ -84,13 +94,20 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 
 	const t = await getTranslations({ locale });
 
-	const vacancy = vacancies.find((vacancy) => vacancy.id === id);
+	const { data: vacancies, error } = await getVacancies();
+
+	if (error) return <div>Error loading vacancies</div>;
+	if (!vacancies) return <div>No vacancies found</div>;
+
+	const vacancy: VacancyInterface = vacancies.find(
+		(vacancy) => vacancy.id === id,
+	);
 
 	if (!vacancy) {
 		return notFound();
 	}
 
-	const seoDesc = vacancy.desc
+	const seoDesc = vacancy.description
 		.map((item: string) => item.replace(/^\p{Emoji}\s*/u, "").trim())
 		.join(" · ");
 
@@ -100,7 +117,7 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 		"@type": "JobPosting",
 		title: vacancy.title,
 		description: seoDesc,
-		datePosted: vacancy.createdAt,
+		datePosted: vacancy.updated_at,
 		employmentType: "FULL_TIME", // PART_TIME, CONTRACTOR, TEMPORARY, INTERN
 		hiringOrganization: {
 			"@type": "Organization",
@@ -125,6 +142,8 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 			},
 		},
 	};
+
+	const updated = new Date(vacancy.updated_at);
 
 	return (
 		<>
@@ -167,7 +186,7 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 								gap: 10,
 							}}
 						>
-							<p>Опубліковано: {vacancy.createdAt.replaceAll("-", "/")}</p>
+							<p>Опубліковано: {updated.toLocaleDateString()}</p>
 							<VacancyPageClient />
 						</div>
 						<h1 className="vacancy__title">{vacancy.title}</h1>
@@ -178,7 +197,7 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 						{vacancy.address && (
 							<div>
 								<span className="vacancy-page__details-title">Адреса: </span>
-								<a href={vacancy.addressUrl} target="_blank">
+								<a href={vacancy.address_url} target="_blank">
 									{vacancy.address}
 								</a>{" "}
 								<CopyBtn txt={vacancy.address} />
@@ -189,7 +208,7 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 						</p>
 						<p className="vacancy-page__details-title">Опис:</p>
 						<ul className="vacancy-page-list">
-							{vacancy.desc.map((el, i) => {
+							{vacancy.description.map((el, i) => {
 								return <li key={i}>{el}</li>;
 							})}
 						</ul>
