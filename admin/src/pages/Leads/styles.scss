@@ -1,0 +1,15 @@
+.pag-btn {
+	background: var(--bg-clr);
+	// padding: 10px;
+	border-radius: 25px;
+	width: 40px;
+	aspect-ratio: 1/1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&--active {
+		background: #000;
+		color: #fff;
+	}
+}

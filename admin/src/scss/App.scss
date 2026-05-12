@@ -1,4 +1,5 @@
-@use "reset";
+// @use "reset";
+@use "./reset";
 @use "mixins";
 @use "variables";
 
@@ -6,6 +7,7 @@
 	--accent-clr: #f4f3ed;
 	--sec-accent-clr: rgb(226, 255, 182);
 	--bg-clr: rgb(225, 225, 225);
+	--border-clr: rgb(195, 195, 195);
 	--bg-lighter-clr: rgb(245, 245, 245);
 }
 
@@ -18,10 +20,16 @@ body {
 	position: relative;
 	font-family: "Montserrat", sans-serif;
 	background: var(--bg-clr);
-	padding: 25px;
+}
+
+.layout {
+	display: flex;
+	flex: 1;
 }
 
 .main {
+	padding: 25px;
+	width: 100%;
 }
 
 .main__title {
@@ -33,14 +41,20 @@ body {
 	border-radius: 25px;
 	margin-top: 10px;
 	padding: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.025);
 }
 
 table {
 	border-collapse: collapse;
 	width: 100%;
-	th {
-		text-align: left;
-		padding: 5px;
+
+	thead {
+		background: rgba(0, 0, 0, 0.1);
+
+		th {
+			text-align: left;
+			padding: 5px;
+		}
 	}
 
 	td {
@@ -144,10 +158,24 @@ table {
 }
 
 form {
-	// width: 100%;
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
+	// height: 100%;
+}
+
+.form__title {
+	font-size: 1.5rem;
+}
+
+.form__submit-btn {
+	align-self: flex-end;
+	background: #000;
+	color: #fff;
+	padding: 10px;
+	min-width: 50px;
+	height: 50px;
+	border-radius: 25px;
 }
 
 .input-container {
@@ -192,7 +220,7 @@ label {
 	margin-left: 10px;
 }
 
-.create-vacancy-btn {
+.create-btn {
 	background: #000;
 	color: #fff;
 	padding: 10px;
@@ -202,13 +230,7 @@ label {
 }
 
 a {
-	align-self: flex-start;
 	color: #000;
-	text-decoration: underline !important;
-
-	&:hover {
-		text-decoration: none !important;
-	}
 }
 
 textarea {

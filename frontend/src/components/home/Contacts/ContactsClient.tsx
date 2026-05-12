@@ -5,13 +5,14 @@ import { isValidTel } from "@/utils/validators";
 import { useState } from "react";
 import axios from "axios";
 import classNames from "classnames";
+import { supabase } from "@/lib/supabase";
 
 const initContactsForm = {
 	name: "",
 	tel: "",
 	address: "",
 	position: "",
-	details: "",
+	message: "",
 };
 
 export default function ContactsClient() {
@@ -33,24 +34,17 @@ export default function ContactsClient() {
 
 		setLoading(true);
 
-		try {
-			await axios.post(
-				`https://weekly-planner-backend.onrender.com/leads`,
-				contactsForm,
-			);
-
+		const { error } = await supabase.from("leads").insert([contactsForm]);
+		if (error) {
+			console.error("Insert error:", error.message);
+			setError(error.message);
+			setLoading(false);
+		} else {
 			setSuccess(true);
 			setContactsForm(initContactsForm);
 			setTimeout(() => {
 				setSuccess(false);
 			}, 3000);
-		} catch (err: any) {
-			if (err.response?.status !== 409) {
-				setError(err.response?.data?.message);
-				setLoading(false);
-				return;
-			}
-		} finally {
 			setLoading(false);
 		}
 	};
@@ -125,15 +119,15 @@ export default function ContactsClient() {
 				/>
 			</div>
 			<div className="input-container">
-				<label className="label" htmlFor="details">
+				<label className="label" htmlFor="message">
 					{t("contacts.message")}
 				</label>
 				<textarea
 					onChange={(e) => handleContactsForm(e.target.name, e.target.value)}
-					name="details"
-					value={contactsForm.details}
+					name="message"
+					value={contactsForm.message}
 					className="contacts__input"
-					id="details"
+					id="message"
 					rows={3}
 				></textarea>
 			</div>
