@@ -3,26 +3,15 @@
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
-// import vacancies from "@/data/vacancies.json";
 import { getVacancies } from "@/services/vacancies";
 import Vacancy from "@/components/Vacancy/Vacancy";
-import axios from "axios";
-import "./Home.scss";
 import { VacancyInterface } from "@/interfaces/Vacancy";
+import "./Home.scss";
 
 export default function HomeClient() {
 	const t = useTranslations();
 
 	const [vacancies, setVacancies] = useState<VacancyInterface[]>([]);
-
-	// // TODO: learn this
-	// useEffect(() => {
-	// 	axios
-	// 		.get("https://weekly-planner-backend.onrender.com/health", {
-	// 			timeout: 60000,
-	// 		})
-	// 		.catch(() => {});
-	// }, []);
 
 	// FIXME:
 	useEffect(() => {

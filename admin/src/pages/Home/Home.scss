@@ -1,0 +1,20 @@
+.home-inner {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 10px;
+}
+
+.home-container {
+	width: 300px;
+	height: 200px;
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: 25px;
+
+	p:nth-of-type(1) {
+		font-size: 2rem;
+	}
+}

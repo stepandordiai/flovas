@@ -1,5 +1,7 @@
 import { supabase } from "../../lib/supabase";
 import { useState, useEffect } from "react";
+import EditIcon from "../../components/icons/EditIcon";
+import TrashIcon from "../../components/icons/TrashIcon";
 import "./styles.scss";
 
 const EMPTY_FORM = {
@@ -20,36 +22,36 @@ interface Lead {
 	message: string;
 }
 
-const Leads = () => {
-	const [leads, setLeads] = useState<Lead[]>([]);
+type LeadsProps = {
+	leads: Lead[];
+	setLeads: React.Dispatch<React.SetStateAction<Lead[]>>;
+	load: () => Promise<void>;
+};
+
+const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 	const [isNew, setIsNew] = useState(false);
 	const [modalVisible, setModalVisible] = useState(false);
 	const [form, setForm] = useState(EMPTY_FORM);
 	const [error, setError] = useState<null | string>(null);
 	const [filter, setFilter] = useState("");
+	const [deleteModal, setDeleteModal] = useState(false);
+	const [idToDelete, setIdToDelete] = useState("");
+
+	// TODO: learn this
+	const filteredLeads = leads.filter((lead) =>
+		Object.values(lead).some((value) =>
+			String(value).toLowerCase().includes(filter.toLowerCase()),
+		),
+	);
 	const [currentPage, setCurrentPage] = useState(1);
 
 	const handleForm = (name: string, value: string) => {
 		setForm((prev) => ({ ...prev, [name]: value }));
 	};
 
-	const getAll = async () => supabase.from("leads").select("*");
-	// .order("created_at", { ascending: false });
-
-	const load = async () => {
-		const { data } = await getAll();
-		setLeads(data ?? []);
-	};
-
 	useEffect(() => {
-		load();
-	}, []);
-
-	useEffect(() => {
-		window.scrollTo(0, 0);
+		document.documentElement.scrollTo(0, 0);
 	}, [currentPage]);
-
-	console.log(leads);
 
 	const insertLead = async (data: Lead) => {
 		setError(null);
@@ -79,6 +81,12 @@ const Leads = () => {
 		await load();
 	};
 
+	const handleDelete = () => {
+		deleteOne(idToDelete);
+		setIdToDelete("");
+		setDeleteModal(false);
+	};
+
 	const deleteOne = async (id: string) => {
 		const { error } = await supabase.from("leads").delete().eq("id", id);
 		if (error) console.error("Delete error:", error.message);
@@ -91,8 +99,16 @@ const Leads = () => {
 		<>
 			<div className={`modal ${modalVisible ? "modal--visible" : ""}`}>
 				<div style={{ display: "flex", justifyContent: "space-between" }}>
-					<p className="form__title">Створити ліда</p>
-					<button className="close-btn" onClick={() => setModalVisible(false)}>
+					<p className="form__title">
+						{isNew ? "Створити лід" : "Змінити лід"}
+					</p>
+					<button
+						className="close-btn"
+						onClick={() => {
+							setModalVisible(false);
+							setForm(EMPTY_FORM);
+						}}
+					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="16"
@@ -158,9 +174,61 @@ const Leads = () => {
 						/>
 					</div>
 					<button className="form__submit-btn" type="submit">
-						Створити
+						{isNew ? "Створити" : "Змінити"}
 					</button>
 				</form>
+			</div>
+			<div
+				onClick={() => {
+					setModalVisible(false);
+					setDeleteModal(false);
+					setIsNew(false);
+					setIdToDelete("");
+					setForm(EMPTY_FORM);
+				}}
+				className={`main-curtain ${modalVisible || deleteModal ? "main-curtain--visible" : ""}`}
+			></div>
+			<div
+				className={`delete-modal ${deleteModal ? "delete-modal--visible" : ""}`}
+			>
+				<strong>Ви точно хочете видалити цей запис?</strong>
+				<div
+					style={{
+						display: "grid",
+						gridTemplateColumns: "repeat(2, 1fr)",
+						gap: "10px",
+					}}
+				>
+					<button
+						onClick={() => {
+							setIdToDelete("");
+							setDeleteModal(false);
+						}}
+						style={{
+							height: "40px",
+							padding: "0 10px",
+							borderRadius: "20px",
+							background: "#000",
+							color: "#fff",
+							fontWeight: 600,
+						}}
+					>
+						Скасувати
+					</button>
+					<button
+						style={{
+							height: "40px",
+							padding: "0 10px",
+							borderRadius: "20px",
+							background: "rgb(222, 92, 77)",
+							color: "#fff",
+							fontWeight: 600,
+						}}
+						onClick={() => handleDelete()}
+					>
+						Підтвердити
+					</button>
+				</div>
 			</div>
 			<div className="layout">
 				<main className="main">
@@ -177,12 +245,22 @@ const Leads = () => {
 						</button>
 					</div>
 					<div className="container">
-						<input
-							onChange={(e) => setFilter(e.target.value)}
-							value={filter}
-							type="text"
-							placeholder="Search"
-						/>
+						<div
+							style={{
+								position: "sticky",
+								top: "0px",
+								padding: "10px 0",
+								background: "#fff",
+							}}
+						>
+							<input
+								style={{ height: "40px" }}
+								onChange={(e) => setFilter(e.target.value)}
+								value={filter}
+								type="text"
+								placeholder="Пошук"
+							/>
+						</div>
 						<table>
 							<thead>
 								<tr>
@@ -196,8 +274,7 @@ const Leads = () => {
 								</tr>
 							</thead>
 							<tbody>
-								{leads
-									.filter((l) => l.tel.includes(filter))
+								{filteredLeads
 									.slice((currentPage - 1) * 50, currentPage * 50)
 									.map((l, i) => {
 										const number = (currentPage - 1) * 50 + i + 1;
@@ -220,13 +297,15 @@ const Leads = () => {
 																setIsNew(false);
 															}}
 														>
-															Edit
+															<EditIcon size={20} />
 														</button>
 														<button
 															className="delete-btn"
-															onClick={() => deleteOne(l.id)}
+															onClick={() => {
+																(setDeleteModal(true), setIdToDelete(l.id));
+															}}
 														>
-															X
+															<TrashIcon size={20} />
 														</button>
 													</div>
 												</td>
@@ -235,11 +314,49 @@ const Leads = () => {
 									})}
 							</tbody>
 						</table>
-						<div style={{ display: "flex", justifyContent: "space-between" }}>
-							<p>
-								{(currentPage - 1) * 50 + 1} -{" "}
-								{Math.min(currentPage * 50, leads.length)} of {leads.length}
-							</p>
+						<div
+							style={{
+								display: "flex",
+								justifyContent: "space-between",
+								alignItems: "center",
+								position: "sticky",
+								bottom: "0px",
+								background: "white",
+								padding: "10px 0",
+								marginTop: "auto",
+							}}
+						>
+							<div style={{ display: "flex", gap: "5px" }}>
+								<p
+									style={{
+										background: "hsl(0, 0%, 95%)",
+										height: "40px",
+										display: "flex",
+										justifyContent: "center",
+										alignItems: "center",
+										padding: "0 10px",
+										borderRadius: "20px",
+										fontWeight: "600",
+									}}
+								>
+									{(currentPage - 1) * 50 + 1} -{" "}
+									{Math.min(currentPage * 50, filteredLeads.length)}
+								</p>
+								<p
+									style={{
+										background: "hsl(0, 0%, 95%)",
+										height: "40px",
+										display: "flex",
+										justifyContent: "center",
+										alignItems: "center",
+										padding: "0 10px",
+										borderRadius: "20px",
+										fontWeight: "600",
+									}}
+								>
+									Всього: {filteredLeads.length}
+								</p>
+							</div>
 							<div style={{ display: "flex", gap: "5px" }}>
 								{Array.from({ length: totalPages }, (_, i) => (
 									<button
