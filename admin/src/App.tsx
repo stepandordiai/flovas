@@ -41,10 +41,7 @@ function App() {
 				<Routes>
 					<Route path="/" element={<Home leads={leads} />} />
 					<Route path="/vacancies" element={<Vacancies />} />
-					<Route
-						path="/leads"
-						element={<Leads leads={leads} setLeads={setLeads} load={load} />}
-					/>
+					<Route path="/leads" element={<Leads leads={leads} load={load} />} />
 				</Routes>
 			</div>
 		</Router>

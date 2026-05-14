@@ -24,11 +24,10 @@ interface Lead {
 
 type LeadsProps = {
 	leads: Lead[];
-	setLeads: React.Dispatch<React.SetStateAction<Lead[]>>;
 	load: () => Promise<void>;
 };
 
-const Leads = ({ leads, setLeads, load }: LeadsProps) => {
+const Leads = ({ leads, load }: LeadsProps) => {
 	const [isNew, setIsNew] = useState(false);
 	const [modalVisible, setModalVisible] = useState(false);
 	const [form, setForm] = useState(EMPTY_FORM);
