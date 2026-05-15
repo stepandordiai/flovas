@@ -33,16 +33,20 @@
 	row-gap: 25px;
 	flex-wrap: wrap;
 
-	div {
+	li {
 		display: flex;
 		justify-content: flex-start;
 		align-items: flex-start;
 		flex-direction: column;
 	}
 
-	span:nth-child(1) {
+	strong {
 		font-weight: 500;
 		font-size: 2.5rem;
+	}
+
+	span {
+		font-weight: 500;
 	}
 }
 
@@ -90,8 +94,19 @@
 }
 
 .about__places-desc {
-	font-size: clamp(1rem, 2vw, 1.25rem);
-	text-align: center;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 10px;
+}
+
+.about__place {
+	background: var(--bg-clr);
+	height: 60px;
+	border-radius: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: 500;
 }
 
 @media screen and (width <= 896px) {
@@ -110,6 +125,24 @@
 
 @media screen and (width < 700px) {
 	.about__benefits-list {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
+
+@media screen and (width <= 1400px) {
+	.about__places-desc {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media screen and (width <= 1100px) {
+	.about__places-desc {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media screen and (width <= 750px) {
+	.about__places-desc {
 		grid-template-columns: repeat(1, 1fr);
 	}
 }

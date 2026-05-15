@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import vacancies from "@/data/vacancies.json";
+import { getVacancies } from "@/services/vacancies";
 import Image from "next/image";
 import "./About.scss";
 
@@ -22,31 +22,43 @@ const benefitsData = [
 export default async function About() {
 	const t = await getTranslations();
 
+	const { data, error } = await getVacancies();
+	const vacancies = data ?? [];
+
+	console.log(error);
+
 	return (
 		<section className="about" id="o-nas">
 			<h2 className="about__title">{t("about_title")}</h2>
 			<p className="about__desc">{t("about.desc")}</p>
-			<div className="about-milestones">
-				<div>
-					<span>{vacancies.length}</span>
-					<span>Вакансій</span>
-				</div>
-				<div>
-					<span>20+</span>
+			<ul className="about-milestones">
+				<li>
+					<strong>{vacancies.length}</strong>
+					<span>Вакансій по всій Чехії</span>
+				</li>
+				<li>
+					<strong>20+</strong>
 					<span>Років досвіду</span>
-				</div>
-				<div>
-					<span>1000+</span>
+				</li>
+				<li>
+					<strong>1000+</strong>
 					<span>Українцям допомогли працевлаштуватись</span>
-				</div>
-			</div>
+				</li>
+			</ul>
 			<h3 className="about__places-title">
 				{t("about.employment_place_title")}
 			</h3>
-			<p className="about__places-desc">
-				{[...new Set(vacancies.map((vacancy) => vacancy.place))].join(", ")}{" "}
-				{t("about.employment_place_desc")}
-			</p>
+			<div className="about__places-desc">
+				{[...new Set(vacancies.map((vacancy) => vacancy.place))].map(
+					(place, i) => {
+						return (
+							<div key={i} className="about__place">
+								{place}
+							</div>
+						);
+					},
+				)}
+			</div>
 			<h3 className="about__benefits-title">
 				{t("about.our_advantages_title")}
 			</h3>
