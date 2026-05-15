@@ -3,15 +3,16 @@
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
-import { getVacancies } from "@/services/vacancies";
 import Vacancy from "@/components/Vacancy/Vacancy";
 import { VacancyInterface } from "@/interfaces/Vacancy";
 import "./Home.scss";
 
-export default function HomeClient() {
+export default function HomeClient({
+	vacancies,
+}: {
+	vacancies: VacancyInterface[];
+}) {
 	const t = useTranslations();
-
-	const [vacancies, setVacancies] = useState<VacancyInterface[]>([]);
 
 	// FIXME:
 	useEffect(() => {
@@ -49,33 +50,23 @@ export default function HomeClient() {
 
 		const interval = setInterval(rotateWord, 3000);
 		return () => clearInterval(interval);
-	}, []);
-
-	useEffect(() => {
-		const fetch = async () => {
-			const { data } = await getVacancies();
-			setVacancies(data ?? []);
-		};
-		fetch();
-	}, []);
-
-	console.log(vacancies);
+	}, [vacancies.length]);
 
 	return (
 		<div className="home-inner-container">
 			<section className="home-top" id="hero">
-				<div className="home__title">
-					<p>
+				<div className="home-top-inner">
+					<h1 className="section__title" aria-label={t("home.title1")}>
 						{t("home.title1")
 							.split("")
 							.map((char, index) => {
 								return (
-									<span key={index} className="blur-char">
+									<span key={index} className="blur-char" aria-hidden="true">
 										{char}
 									</span>
 								);
 							})}
-					</p>
+					</h1>
 					<div className="home__rotate-wrapper">
 						<div ref={rotateRef} className="home__rotate-container">
 							{[...new Set(vacancies.map((v) => v.place))].map((place, i) => (
@@ -83,24 +74,13 @@ export default function HomeClient() {
 							))}
 						</div>
 					</div>
-					<p>
-						{t("home.title2")
-							.split("")
-							.map((char, index) => {
-								return (
-									<span key={index} className="blur-char">
-										{char}
-									</span>
-								);
-							})}
-					</p>
 				</div>
 				<div className="home__link-container">
 					<a className="home__link" href="#kontakty">
 						{t("contact_us_title")}
 					</a>
 					<Link className="home__link" href="/prace">
-						{t("vacancies_title")}
+						Всі вакансії
 						<span className="home__link-vacancies-qty">{vacancies.length}</span>
 					</Link>
 				</div>
@@ -115,6 +95,7 @@ export default function HomeClient() {
 								new Date(a.updated_at).getTime(),
 						)
 						.filter((vacancy) => vacancy.is_active)
+						.slice(0, 6)
 						.map((vacancy, index) => (
 							<Vacancy key={index} vacancy={vacancy} />
 						))}

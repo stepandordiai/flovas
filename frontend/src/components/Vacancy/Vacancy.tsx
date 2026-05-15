@@ -19,7 +19,14 @@ const Vacancy = ({ vacancy }: VacancyProps) => {
 	// FIXME:
 	const [imgError, setImgError] = useState(false);
 
-	const updated = new Date(updated_at);
+	// TODO: learn this
+	function formatDate(date: Date) {
+		return [
+			String(date.getDate()).padStart(2, "0"),
+			String(date.getMonth() + 1).padStart(2, "0"),
+			date.getFullYear(),
+		].join("/");
+	}
 
 	return (
 		<div className="vacancy">
@@ -48,7 +55,7 @@ const Vacancy = ({ vacancy }: VacancyProps) => {
 					</p>
 				)}
 				<p className="vacancy__date">
-					Опубліковано: {updated.toLocaleDateString()}
+					Опубліковано: {formatDate(new Date(updated_at))}
 				</p>
 				<p style={{ fontWeight: 500 }}>Місто: {place}</p>
 				<p style={{ fontSize: "18px", fontWeight: 600 }}>{title}</p>

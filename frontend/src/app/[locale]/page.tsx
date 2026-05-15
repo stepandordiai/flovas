@@ -9,6 +9,7 @@ import WebApp from "@/components/home/WebApp/WebApp";
 import ScrollToTopBtn from "@/components/ScrollToTopBtn/ScrollToTopBtn";
 import FAQ from "@/components/FAQ/FAQ";
 import "./Home.scss";
+import { getVacancies } from "@/services/vacancies";
 
 export async function generateMetadata({
 	params,
@@ -42,10 +43,12 @@ export default async function Home({
 }) {
 	const { locale } = await params;
 
+	const { data: vacancies } = await getVacancies();
+
 	return (
 		<main className="main home" id="uvod">
 			<div className="home-inner">
-				<HomeClient />
+				<HomeClient vacancies={vacancies ?? []} />
 				<About />
 				<FAQ />
 				<Contacts />

@@ -23,6 +23,12 @@
 	padding: 50px 25px 0;
 }
 
+.home-top-inner {
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+}
+
 .blur-char {
 	opacity: 0;
 	filter: blur(10px);
@@ -36,7 +42,7 @@
 	filter: blur(0) !important;
 }
 
-.home__title {
+.section__title {
 	text-align: center;
 	font-size: clamp(1.5rem, 4vw, 2.5rem);
 	font-weight: 500;
@@ -52,6 +58,8 @@
 	@include flex-center;
 	height: 60px;
 	background: var(--accent-clr);
+	font-size: clamp(1.5rem, 4vw, 2.5rem);
+	font-weight: 500;
 
 	span {
 		position: absolute;
@@ -97,6 +105,7 @@
 	border-radius: 25px;
 	@include grid-center;
 	text-decoration: none !important;
+	font-weight: 500;
 
 	&:nth-child(2) {
 		background: var(--accent-clr);
