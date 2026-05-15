@@ -11,6 +11,7 @@ const EMPTY_FORM = {
 	address: "",
 	position: "",
 	message: "",
+	is_working: false,
 };
 
 interface Lead {
@@ -20,14 +21,16 @@ interface Lead {
 	address: string;
 	position: string;
 	message: string;
+	is_working: boolean;
 }
 
 type LeadsProps = {
 	leads: Lead[];
 	load: () => Promise<void>;
+	setLeads: React.Dispatch<React.SetStateAction<Lead[]>>;
 };
 
-const Leads = ({ leads, load }: LeadsProps) => {
+const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 	const [isNew, setIsNew] = useState(false);
 	const [modalVisible, setModalVisible] = useState(false);
 	const [form, setForm] = useState(EMPTY_FORM);
@@ -90,6 +93,16 @@ const Leads = ({ leads, load }: LeadsProps) => {
 		const { error } = await supabase.from("leads").delete().eq("id", id);
 		if (error) console.error("Delete error:", error.message);
 		else load(); // refresh list
+	};
+
+	const toggleIsWorking = async (id: string, value: boolean) =>
+		supabase.from("leads").update({ is_working: value }).eq("id", id);
+
+	const handleToggleIsWorking = async (id: string, current: boolean) => {
+		await toggleIsWorking(id, !current);
+		setLeads((prev) =>
+			prev.map((v) => (v.id === id ? { ...v, is_working: !current } : v)),
+		);
 	};
 
 	const totalPages = Math.ceil(leads.length / 50);
@@ -269,6 +282,7 @@ const Leads = ({ leads, load }: LeadsProps) => {
 									<th>Адреса</th>
 									<th>Позиція</th>
 									<th>Повідомлення</th>
+									<th>Статус</th>
 									<th>Опції</th>
 								</tr>
 							</thead>
@@ -286,6 +300,16 @@ const Leads = ({ leads, load }: LeadsProps) => {
 												<td>{l.address}</td>
 												<td>{l.position}</td>
 												<td style={{ maxWidth: "200px" }}>{l.message}</td>
+												<td>
+													<button
+														onClick={() =>
+															handleToggleIsWorking(l.id, l.is_working)
+														}
+														className={`status-btn ${!l.is_working ? "status-btn--inactive" : ""}`}
+													>
+														{l.is_working ? "Працює" : "Не працює"}
+													</button>
+												</td>
 												<td>
 													<div style={{ display: "flex", gap: "5px" }}>
 														<button
