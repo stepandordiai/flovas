@@ -212,17 +212,18 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 								return <li key={i}>{el}</li>;
 							})}
 						</ul>
-						{vacancy.responsibilities && (
-							<>
-								<p className="vacancy-page__details-title">Обов'язки:</p>
-								<ul className="vacancy-page-list">
-									{vacancy.responsibilities.map((el, i) => {
-										return <li key={i}>{el}</li>;
-									})}
-								</ul>
-							</>
-						)}
-						{vacancy.requirements && (
+						{vacancy.responsibilities &&
+							vacancy.responsibilities.length > 0 && (
+								<>
+									<p className="vacancy-page__details-title">Обов'язки:</p>
+									<ul className="vacancy-page-list">
+										{vacancy.responsibilities.map((el, i) => {
+											return <li key={i}>{el}</li>;
+										})}
+									</ul>
+								</>
+							)}
+						{vacancy.requirements && vacancy.requirements.length > 0 && (
 							<>
 								<p className="vacancy-page__details-title">Вимоги:</p>
 								<ul className="vacancy-page-list">

@@ -6,6 +6,7 @@ html {
 	overscroll-behavior: none;
 	scroll-behavior: smooth;
 	background: var(--bg-clr);
+	-webkit-text-size-adjust: 100%;
 }
 
 body {

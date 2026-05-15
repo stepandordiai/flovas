@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "@/i18n/navigation";
 import Vacancy from "@/components/Vacancy/Vacancy";
 import { VacancyInterface } from "@/interfaces/Vacancy";
@@ -94,8 +94,7 @@ export default function HomeClient({
 								new Date(b.updated_at).getTime() -
 								new Date(a.updated_at).getTime(),
 						)
-						.filter((vacancy) => vacancy.is_active)
-						.slice(0, 6)
+						.filter((vacancy) => vacancy.hot_vacancy)
 						.map((vacancy, index) => (
 							<Vacancy key={index} vacancy={vacancy} />
 						))}

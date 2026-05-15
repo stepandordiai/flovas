@@ -7,11 +7,10 @@ import linksData from "@/data/links-data.json";
 import LngSelect from "../../common/LngSelect/LngSelect";
 import classNames from "classnames";
 import { Link } from "@/i18n/navigation";
-// import vacancies from "@/data/vacancies.json";
 import { getVacancies } from "@/services/vacancies";
 import React from "react";
-import "./Header.scss";
 import { VacancyInterface } from "@/interfaces/Vacancy";
+import "./Header.scss";
 
 interface Indicator {
 	width: string;
@@ -143,7 +142,7 @@ const Header = () => {
 	}, []);
 
 	const hotVacanciesQty = vacancies.filter(
-		(vacancy) => vacancy.is_active,
+		(vacancy) => vacancy.hot_vacancy,
 	).length;
 
 	return (

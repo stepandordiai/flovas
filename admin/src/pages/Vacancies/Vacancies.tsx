@@ -11,10 +11,11 @@ export interface VacancyInterface {
 	title: string;
 	description: string[];
 	salary: number;
-	requirements: string[];
-	responsibilities: string[];
+	requirements: string[] | null;
+	responsibilities: string[] | null;
 	job_type: string;
 	updated_at: string;
+	hot_vacancy: boolean;
 }
 
 export type VacancySave = Omit<VacancyInterface, "updated_at">;
@@ -29,9 +30,10 @@ const EMPTY_FORM = {
 	title: "",
 	description: [""],
 	salary: 0,
-	requirements: [""],
-	responsibilities: [""],
+	requirements: null as string[] | null,
+	responsibilities: null as string[] | null,
 	job_type: "",
+	hot_vacancy: false,
 };
 
 const Vacancies = () => {
@@ -94,6 +96,9 @@ const Vacancies = () => {
 	const toggleActive = async (id: string, value: boolean) =>
 		supabase.from("vacancies").update({ is_active: value }).eq("id", id);
 
+	const toggleHotVacancy = async (id: string, value: boolean) =>
+		supabase.from("vacancies").update({ hot_vacancy: value }).eq("id", id);
+
 	const handleSave = async (form: VacancySave) => {
 		if (isNew) {
 			await insertOne(form);
@@ -110,6 +115,13 @@ const Vacancies = () => {
 		await toggleActive(id, !current);
 		setVacancies((prev) =>
 			prev.map((v) => (v.id === id ? { ...v, is_active: !current } : v)),
+		);
+	};
+
+	const handleToggleHotVacancy = async (id: string, current: boolean) => {
+		await toggleHotVacancy(id, !current);
+		setVacancies((prev) =>
+			prev.map((v) => (v.id === id ? { ...v, hot_vacancy: !current } : v)),
 		);
 	};
 
@@ -249,13 +261,13 @@ const Vacancies = () => {
 					</div>
 					<div className="input-container">
 						<label>Вимоги</label>
-						{form.requirements.map((item, i) => (
+						{(form.requirements ?? []).map((item, i) => (
 							<div key={i} style={{ display: "flex", gap: 8 }}>
 								<input
 									type="text"
 									value={item}
 									onChange={(e) => {
-										const next = [...form.requirements] as string[];
+										const next = [...(form.requirements ?? [])] as string[];
 										next[i] = e.target.value;
 										handleForm("requirements", next);
 									}}
@@ -267,7 +279,7 @@ const Vacancies = () => {
 									onClick={() =>
 										handleForm(
 											"requirements",
-											form.requirements.filter((_, idx) => idx !== i),
+											(form.requirements ?? []).filter((_, idx) => idx !== i),
 										)
 									}
 								>
@@ -278,7 +290,7 @@ const Vacancies = () => {
 						<button
 							type="button"
 							onClick={() =>
-								handleForm("requirements", [...form.requirements, ""])
+								handleForm("requirements", [...(form.requirements ?? []), ""])
 							}
 						>
 							+ Новий рядок
@@ -286,13 +298,13 @@ const Vacancies = () => {
 					</div>
 					<div className="input-container">
 						<label>Обов'язки</label>
-						{form.responsibilities.map((item, i) => (
+						{(form.responsibilities ?? []).map((item, i) => (
 							<div key={i} style={{ display: "flex", gap: 8 }}>
 								<input
 									type="text"
 									value={item}
 									onChange={(e) => {
-										const next = [...form.responsibilities] as string[];
+										const next = [...(form.responsibilities ?? [])] as string[];
 										next[i] = e.target.value;
 										handleForm("responsibilities", next);
 									}}
@@ -304,7 +316,9 @@ const Vacancies = () => {
 									onClick={() =>
 										handleForm(
 											"responsibilities",
-											form.responsibilities.filter((_, idx) => idx !== i),
+											(form.responsibilities ?? []).filter(
+												(_, idx) => idx !== i,
+											),
 										)
 									}
 								>
@@ -315,7 +329,10 @@ const Vacancies = () => {
 						<button
 							type="button"
 							onClick={() =>
-								handleForm("responsibilities", [...form.responsibilities, ""])
+								handleForm("responsibilities", [
+									...(form.responsibilities ?? []),
+									"",
+								])
 							}
 						>
 							+ Новий рядок
@@ -381,6 +398,7 @@ const Vacancies = () => {
 								<th>Місто</th>
 								<th>Оновлено</th>
 								<th>Статус</th>
+								<th>Гаряча вакансія</th>
 								<th>Інструмети</th>
 							</tr>
 						</thead>
@@ -409,6 +427,16 @@ const Vacancies = () => {
 											</button>
 										</td>
 										<td>
+											<button
+												onClick={() =>
+													handleToggleHotVacancy(v.id, v.hot_vacancy)
+												}
+												className={`status-btn ${!v.hot_vacancy ? "status-btn--inactive" : ""}`}
+											>
+												{v.hot_vacancy ? "Гаряча" : "Не гаряча"}
+											</button>
+										</td>
+										<td>
 											<div
 												style={{
 													display: "flex",
@@ -424,8 +452,8 @@ const Vacancies = () => {
 															img: v.img ?? "",
 															address: v.address ?? "",
 															address_url: v.address_url ?? "",
-															requirements: v.requirements ?? [""],
-															responsibilities: v.responsibilities ?? [""],
+															requirements: v.requirements,
+															responsibilities: v.responsibilities,
 														});
 													}}
 												>

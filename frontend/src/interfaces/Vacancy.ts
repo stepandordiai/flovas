@@ -11,5 +11,6 @@ export interface VacancyInterface {
 	salary: number;
 	requirements?: string[];
 	responsibilities?: string[];
-	jobType: string;
+	job_type: string;
+	hot_vacancy: boolean;
 }

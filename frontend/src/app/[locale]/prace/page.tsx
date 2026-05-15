@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import vacancies from "@/data/vacancies.json";
 import VacanciesClient from "./VacanciesClient";
+import { getVacancies } from "@/services/vacancies";
 import "./Vacancies.scss";
 
 export async function generateMetadata({
@@ -38,6 +38,9 @@ export default async function Vacancies({
 	const { locale } = await params;
 	const t = await getTranslations({ locale });
 
+	const { data, error } = await getVacancies();
+	const vacancies = data ?? [];
+
 	const jsonLd = {
 		"@context": "https://schema.org",
 		"@type": "ItemList",
@@ -57,7 +60,7 @@ export default async function Vacancies({
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
 			/>
 			<main className="main vacancies-page">
-				<VacanciesClient />
+				<VacanciesClient vacancies={vacancies} />
 			</main>
 		</>
 	);

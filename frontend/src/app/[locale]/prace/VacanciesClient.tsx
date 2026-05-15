@@ -3,30 +3,22 @@
 import { useTranslations } from "next-intl";
 import Breadcrumbs from "@/components/common/Breadcrumbs/Breadcrumbs";
 import Vacancy from "@/components/Vacancy/Vacancy";
-// import vacancies from "@/data/vacancies.json";
 import ScrollToTopBtn from "@/components/ScrollToTopBtn/ScrollToTopBtn";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 import { createPortal } from "react-dom";
 import { VacancyInterface } from "@/interfaces/Vacancy";
-import { getVacancies } from "@/services/vacancies";
 
-export default function VacanciesClient() {
+export default function VacanciesClient({
+	vacancies,
+}: {
+	vacancies: VacancyInterface[];
+}) {
 	const t = useTranslations();
 	const [vacanciesFilter, setVacanciesFilter] = useState({
 		place: "",
-		jobType: "",
+		job_type: "",
 	});
-
-	const [vacancies, setVacancies] = useState<VacancyInterface[]>([]);
-
-	useEffect(() => {
-		const fetch = async () => {
-			const { data } = await getVacancies();
-			setVacancies(data ?? []);
-		};
-		fetch();
-	}, []);
 
 	const activeFiltersLength =
 		Object.values(vacanciesFilter).filter(Boolean).length;
@@ -42,8 +34,8 @@ export default function VacanciesClient() {
 		const filteredPlace = vacanciesFilter.place
 			? vacanciesFilter.place === vacancy.place
 			: true;
-		const filteredJobType = vacanciesFilter.jobType
-			? vacanciesFilter.jobType === vacancy.jobType
+		const filteredJobType = vacanciesFilter.job_type
+			? vacanciesFilter.job_type === vacancy.job_type
 			: true;
 
 		return filteredPlace && filteredJobType;
@@ -119,9 +111,9 @@ export default function VacanciesClient() {
 							<select
 								className="input"
 								onChange={(e) =>
-									handleVacanciesFilter("jobType", e.target.value)
+									handleVacanciesFilter("job_type", e.target.value)
 								}
-								value={vacanciesFilter.jobType}
+								value={vacanciesFilter.job_type}
 							>
 								<option value="">Всі посади</option>
 								{uniqueJobTypes.map((jobType, i) => {
@@ -153,7 +145,7 @@ export default function VacanciesClient() {
 								onClick={() => {
 									setVacanciesFilter({
 										place: "",
-										jobType: "",
+										job_type: "",
 									});
 								}}
 							>
@@ -191,7 +183,7 @@ export default function VacanciesClient() {
 
 	const uniquePlaces = [...new Set(vacancies.map((vacancy) => vacancy.place))];
 	const uniqueJobTypes = [
-		...new Set(vacancies.map((vacancy) => vacancy.jobType)),
+		...new Set(vacancies.map((vacancy) => vacancy.job_type)),
 	];
 
 	return (
@@ -212,15 +204,9 @@ export default function VacanciesClient() {
 						>
 							<option value="">Всі міста</option>
 							{uniquePlaces.map((place, i) => {
-								// const vacanciesQty = vacancies.filter((v) => {
-								// 	return jobTypeFilter
-								// 		? v.jobType === jobTypeFilter && v.place === place
-								// 		: v.place === placeFilter;
-								// }).length;
 								return (
 									<option key={i} value={place}>
 										{place}
-										{/* {vacanciesQty === 0 ? "" : vacanciesQty} */}
 									</option>
 								);
 							})}
@@ -230,21 +216,16 @@ export default function VacanciesClient() {
 						<label htmlFor="">Посада</label>
 						<select
 							className="input"
-							onChange={(e) => handleVacanciesFilter("jobType", e.target.value)}
-							value={vacanciesFilter.jobType}
+							onChange={(e) =>
+								handleVacanciesFilter("job_type", e.target.value)
+							}
+							value={vacanciesFilter.job_type}
 						>
 							<option value="">Всі посади</option>
 							{uniqueJobTypes.map((jobType, i) => {
-								// const vacanciesQty = vacancies.filter((v) => {
-								// 	return placeFilter
-								// 		? v.place === placeFilter && v.jobType === jobType
-								// 		: v.jobType === jobType;
-								// }).length;
-
 								return (
 									<option key={i} value={jobType}>
 										{jobType}
-										{/* {vacanciesQty === 0 ? "" : vacanciesQty} */}
 									</option>
 								);
 							})}
@@ -262,7 +243,7 @@ export default function VacanciesClient() {
 						onClick={() => {
 							setVacanciesFilter({
 								place: "",
-								jobType: "",
+								job_type: "",
 							});
 						}}
 					>
@@ -295,7 +276,6 @@ export default function VacanciesClient() {
 						Показати більше
 					</button>
 				)}
-				{/* <div style={{ marginTop: "auto", width: "100%" }}> */}
 				<button onClick={() => setFilterVisible(true)} className="filter-btn">
 					Фільтри{" "}
 					{activeFiltersLength > 0 && <span>({activeFiltersLength})</span>}
@@ -303,7 +283,6 @@ export default function VacanciesClient() {
 				<div className="vacancies-scroll-top-top-btn-wrapper">
 					<ScrollToTopBtn />
 				</div>
-				{/* </div> */}
 			</div>
 		</>
 	);
