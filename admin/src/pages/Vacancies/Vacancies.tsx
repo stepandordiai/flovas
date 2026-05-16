@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useRef } from "react";
 import { supabase } from "./../../lib/supabase";
 
 export interface VacancyInterface {
@@ -36,12 +36,18 @@ const EMPTY_FORM = {
 	hot_vacancy: false,
 };
 
-const Vacancies = () => {
-	const [vacancies, setVacancies] = useState<VacancyInterface[]>([]);
+type LeadsProps = {
+	vacancies: VacancyInterface[];
+	load: () => Promise<void>;
+	setVacancies: React.Dispatch<React.SetStateAction<VacancyInterface[]>>;
+};
+
+const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 	const [formVisible, setFormVisible] = useState(false);
 	const [isNew, setIsNew] = useState(false);
 	const [filter, setFilter] = useState("");
 	const [currentPage, setCurrentPage] = useState(1);
+	const [error, setError] = useState<string | null>(null);
 
 	const filteredVacancies = vacancies.filter((vacancy) =>
 		Object.values(vacancy).some((value) =>
@@ -58,30 +64,24 @@ const Vacancies = () => {
 		setForm((prev) => ({ ...prev, [name]: value }));
 	};
 
+	const modal = useRef<HTMLDivElement>(null);
+
 	// Supabase
-	const getAll = async () =>
-		supabase
-			.from("vacancies")
-			.select("*")
-			.order("updated_at", { ascending: false });
-
-	const load = async () => {
-		const { data } = await getAll();
-		setVacancies(data ?? []);
-	};
-
-	useEffect(() => {
-		load();
-	}, []);
-
 	const insertOne = async (data: VacancySave) => {
+		setError(null);
+
 		const { error } = await supabase.from("vacancies").insert([data]);
-		if (error) console.error("Insert error:", error.message);
-		else {
-			await load();
-			setFormVisible(false);
-			setForm(EMPTY_FORM);
+		if (error) {
+			if (error.code === "23505") setError("Вакансія з таким ID вже існує");
+			else console.error("Insert error:", error.message);
+			modal.current?.scrollTo({ top: 0, behavior: "smooth" });
+			return false;
 		}
+		await load();
+		setFormVisible(false);
+		setForm(EMPTY_FORM);
+		setIsNew(false);
+		return true;
 	};
 
 	const deleteOne = async (id: string) => {
@@ -90,8 +90,24 @@ const Vacancies = () => {
 		else load();
 	};
 
-	const updateOne = async (id: string, data: Partial<VacancySave>) =>
-		supabase.from("vacancies").update(data).eq("id", id);
+	const updateOne = async (id: string, data: Partial<VacancySave>) => {
+		setError(null);
+
+		const { error } = await supabase
+			.from("vacancies")
+			.update(data)
+			.eq("id", id);
+		if (error) {
+			if (error.code === "23505") setError("Вакансія з таким ID вже існує");
+			else console.error("Insert error:", error.message);
+			modal.current?.scrollTo({ top: 0, behavior: "smooth" });
+			return false;
+		}
+		await load();
+		setFormVisible(false);
+		setForm(EMPTY_FORM);
+		return true;
+	};
 
 	const toggleActive = async (id: string, value: boolean) =>
 		supabase.from("vacancies").update({ is_active: value }).eq("id", id);
@@ -105,10 +121,6 @@ const Vacancies = () => {
 		} else {
 			await updateOne(form.id, form);
 		}
-		setForm(EMPTY_FORM);
-		setIsNew(false);
-		await load();
-		setFormVisible(false);
 	};
 
 	const handleToggle = async (id: string, current: boolean) => {
@@ -127,9 +139,23 @@ const Vacancies = () => {
 
 	const totalPages = Math.ceil(vacancies.length / 50);
 
+	const uniqueVacanciesPlaces = [...new Set(vacancies.map((v) => v.place))];
+	const uniqueVacanciesDescription = [
+		...new Set(vacancies.flatMap((v) => v.description.map((d) => d))),
+	];
+	const uniqueVacanciesRequirements = [
+		...new Set(vacancies.flatMap((v) => v.requirements?.map((d) => d))),
+	];
+	const uniqueVacanciesResponsibilities = [
+		...new Set(vacancies.flatMap((v) => v.responsibilities?.map((d) => d))),
+	];
+
 	return (
 		<>
-			<div className={`modal ${formVisible ? "modal--visible" : ""}`}>
+			<div
+				ref={modal}
+				className={`modal ${formVisible ? "modal--visible" : ""}`}
+			>
 				<div
 					style={{
 						display: "flex",
@@ -140,7 +166,13 @@ const Vacancies = () => {
 					<p style={{ fontSize: "1.5rem" }}>
 						{isNew ? "Створити вакансію" : "Змінити вакансію"}
 					</p>
-					<button className="close-btn" onClick={() => setFormVisible(false)}>
+					<button
+						className="close-btn"
+						onClick={() => {
+							setFormVisible(false);
+							setForm(EMPTY_FORM);
+						}}
+					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="16"
@@ -153,6 +185,7 @@ const Vacancies = () => {
 						</svg>
 					</button>
 				</div>
+				{error && <strong style={{ color: "red" }}>{error}</strong>}
 				<form
 					onSubmit={(e) => {
 						e.preventDefault();
@@ -162,15 +195,28 @@ const Vacancies = () => {
 					<div className="input-container">
 						<label htmlFor="">ID</label>
 						<input
+							className="input"
 							type="text"
 							name="id"
-							onChange={(e) => handleForm(e.target.name, e.target.value)}
+							onChange={(e) => {
+								handleForm(e.target.name, e.target.value);
+								setError(null);
+							}}
 							value={form.id}
 						/>
 					</div>
+					{form.img && (
+						<img
+							style={{ margin: "0 auto" }}
+							src={form.img}
+							width={250}
+							alt=""
+						/>
+					)}
 					<div className="input-container">
 						<label htmlFor="">Зображення</label>
 						<input
+							className="input"
 							type="text"
 							name="img"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
@@ -179,16 +225,36 @@ const Vacancies = () => {
 					</div>
 					<div className="input-container">
 						<label htmlFor="">Місто</label>
-						<input
-							type="text"
-							name="place"
-							onChange={(e) => handleForm(e.target.name, e.target.value)}
-							value={form.place}
-						/>
+						<div className="input" style={{ display: "flex" }}>
+							<input
+								style={{ width: "100%" }}
+								type="text"
+								name="place"
+								onChange={(e) => handleForm(e.target.name, e.target.value)}
+								value={form.place}
+								placeholder="Вкажіть місто"
+							/>
+							<select
+								name="place"
+								onChange={(e) => handleForm(e.target.name, e.target.value)}
+								value={""}
+								id=""
+							>
+								<option value=""></option>
+								{uniqueVacanciesPlaces.map((p, i) => {
+									return (
+										<option key={i} value={p}>
+											{p}
+										</option>
+									);
+								})}
+							</select>
+						</div>
 					</div>
 					<div className="input-container">
 						<label htmlFor="">Адреса</label>
 						<input
+							className="input"
 							type="text"
 							name="address"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
@@ -198,6 +264,7 @@ const Vacancies = () => {
 					<div className="input-container">
 						<label htmlFor="">Адреса (ссилка)</label>
 						<input
+							className="input"
 							type="text"
 							name="address_url"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
@@ -207,6 +274,7 @@ const Vacancies = () => {
 					<div className="input-container">
 						<label htmlFor="">Назва</label>
 						<input
+							className="input"
 							type="text"
 							name="title"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
@@ -214,19 +282,59 @@ const Vacancies = () => {
 						/>
 					</div>
 					<div className="input-container">
+						<label htmlFor="">Заробітна плата</label>
+						<input
+							className="input"
+							type="number"
+							name="salary"
+							onChange={(e) => handleForm(e.target.name, e.target.value)}
+							value={form.salary}
+						/>
+					</div>
+					<div className="input-container">
 						<label>Опис</label>
 						{form.description.map((item, i) => (
 							<div key={i} style={{ display: "flex", gap: 8 }}>
-								<input
-									type="text"
-									value={item}
-									onChange={(e) => {
-										const next = [...form.description] as string[];
-										next[i] = e.target.value;
-										handleForm("description", next);
+								<div
+									className="input"
+									style={{
+										display: "flex",
+										justifyContent: "space-between",
+										gap: "10px",
 									}}
-									placeholder={`Опис ${i + 1}`}
-								/>
+								>
+									<input
+										style={{ width: "100%" }}
+										type="text"
+										value={item}
+										onChange={(e) => {
+											const next = [...form.description] as string[];
+											next[i] = e.target.value;
+											handleForm("description", next);
+										}}
+										placeholder={`Вкажіть опис ${i + 1}`}
+									/>
+									<select
+										className="select"
+										name="description"
+										onChange={(e) => {
+											const next = [...form.description] as string[];
+											next[i] = e.target.value;
+											handleForm("description", next);
+										}}
+										value={""}
+										id=""
+									>
+										<option value=""></option>
+										{uniqueVacanciesDescription.map((p, i) => {
+											return (
+												<option key={i} value={p}>
+													{p}
+												</option>
+											);
+										})}
+									</select>
+								</div>
 								<button
 									className="delete-btn"
 									type="button"
@@ -242,37 +350,54 @@ const Vacancies = () => {
 							</div>
 						))}
 						<button
+							className="update-btn"
+							style={{ margin: "0 auto" }}
 							type="button"
 							onClick={() =>
 								handleForm("description", [...form.description, ""])
 							}
 						>
-							+ Новий рядок
+							+
 						</button>
 					</div>
-					<div className="input-container">
-						<label htmlFor="">Заробітна плата</label>
-						<input
-							type="number"
-							name="salary"
-							onChange={(e) => handleForm(e.target.name, e.target.value)}
-							value={form.salary}
-						/>
-					</div>
+
 					<div className="input-container">
 						<label>Вимоги</label>
-						{(form.requirements ?? []).map((item, i) => (
+						{(form.requirements ?? [""]).map((item, i) => (
 							<div key={i} style={{ display: "flex", gap: 8 }}>
-								<input
-									type="text"
-									value={item}
-									onChange={(e) => {
-										const next = [...(form.requirements ?? [])] as string[];
-										next[i] = e.target.value;
-										handleForm("requirements", next);
-									}}
-									placeholder={`Вимога ${i + 1}`}
-								/>
+								<div className="input" style={{ display: "flex" }}>
+									<input
+										style={{ width: "100%" }}
+										type="text"
+										value={item}
+										onChange={(e) => {
+											const next = [...(form.requirements ?? [])] as string[];
+											next[i] = e.target.value;
+											handleForm("requirements", next);
+										}}
+										placeholder={`Вкажіть вимогу ${i + 1}`}
+									/>
+									<select
+										className="select"
+										name="requirements"
+										onChange={(e) => {
+											const next = [...(form.requirements ?? [])] as string[];
+											next[i] = e.target.value;
+											handleForm("requirements", next);
+										}}
+										value={""}
+										id=""
+									>
+										<option value=""></option>
+										{uniqueVacanciesRequirements.map((p, i) => {
+											return (
+												<option key={i} value={p}>
+													{p}
+												</option>
+											);
+										})}
+									</select>
+								</div>
 								<button
 									className="delete-btn"
 									type="button"
@@ -288,28 +413,57 @@ const Vacancies = () => {
 							</div>
 						))}
 						<button
+							className="update-btn"
+							style={{ margin: "0 auto" }}
 							type="button"
 							onClick={() =>
 								handleForm("requirements", [...(form.requirements ?? []), ""])
 							}
 						>
-							+ Новий рядок
+							+
 						</button>
 					</div>
 					<div className="input-container">
 						<label>Обов'язки</label>
-						{(form.responsibilities ?? []).map((item, i) => (
+						{(form.responsibilities ?? [""]).map((item, i) => (
 							<div key={i} style={{ display: "flex", gap: 8 }}>
-								<input
-									type="text"
-									value={item}
-									onChange={(e) => {
-										const next = [...(form.responsibilities ?? [])] as string[];
-										next[i] = e.target.value;
-										handleForm("responsibilities", next);
-									}}
-									placeholder={`Item ${i + 1}`}
-								/>
+								<div className="input" style={{ display: "flex" }}>
+									<input
+										style={{ width: "100%" }}
+										type="text"
+										value={item}
+										onChange={(e) => {
+											const next = [
+												...(form.responsibilities ?? []),
+											] as string[];
+											next[i] = e.target.value;
+											handleForm("responsibilities", next);
+										}}
+										placeholder={`Вкажіть обов'язок ${i + 1}`}
+									/>
+									<select
+										className="select"
+										name="responsibilities"
+										onChange={(e) => {
+											const next = [
+												...(form.responsibilities ?? []),
+											] as string[];
+											next[i] = e.target.value;
+											handleForm("responsibilities", next);
+										}}
+										value={""}
+										id=""
+									>
+										<option value=""></option>
+										{uniqueVacanciesResponsibilities.map((p, i) => {
+											return (
+												<option key={i} value={p}>
+													{p}
+												</option>
+											);
+										})}
+									</select>
+								</div>
 								<button
 									className="delete-btn"
 									type="button"
@@ -327,6 +481,8 @@ const Vacancies = () => {
 							</div>
 						))}
 						<button
+							className="update-btn"
+							style={{ margin: "0 auto" }}
 							type="button"
 							onClick={() =>
 								handleForm("responsibilities", [
@@ -335,12 +491,13 @@ const Vacancies = () => {
 								])
 							}
 						>
-							+ Новий рядок
+							+
 						</button>
 					</div>
 					<div className="input-container">
 						<label htmlFor="">Тип роботи</label>
 						<input
+							className="input"
 							type="text"
 							name="job_type"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
@@ -358,19 +515,9 @@ const Vacancies = () => {
 					style={{
 						display: "flex",
 						justifyContent: "space-between",
-						paddingTop: "25px",
 					}}
 				>
-					<h1 className="main__title">Вакансії {vacancies.length}</h1>
-					<button
-						className="create-vacancy-btn"
-						onClick={() => {
-							setIsNew(true);
-							setFormVisible(true);
-						}}
-					>
-						Створити вакансію
-					</button>
+					<h1 className="main__title">Вакансії</h1>
 				</div>
 				<div className="container">
 					<div
@@ -379,15 +526,26 @@ const Vacancies = () => {
 							top: "0px",
 							padding: "10px 0",
 							background: "#fff",
+							display: "flex",
+							justifyContent: "space-between",
 						}}
 					>
 						<input
-							style={{ height: "40px" }}
+							className="search-input"
 							onChange={(e) => setFilter(e.target.value)}
 							value={filter}
 							type="text"
 							placeholder="Пошук"
 						/>
+						<button
+							className="create-btn"
+							onClick={() => {
+								setIsNew(true);
+								setFormVisible(true);
+							}}
+						>
+							Створити вакансію
+						</button>
 					</div>
 					<table>
 						<thead>
@@ -495,7 +653,7 @@ const Vacancies = () => {
 							display: "flex",
 							justifyContent: "space-between",
 							alignItems: "center",
-							position: "sticky",
+							// position: "sticky",
 							bottom: "0px",
 							background: "white",
 							padding: "10px 0",

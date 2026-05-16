@@ -22,6 +22,7 @@ interface Lead {
 	position: string;
 	message: string;
 	is_working: boolean;
+	created_at: Date;
 }
 
 type LeadsProps = {
@@ -70,7 +71,8 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 	const updateOne = async (id: string, data: Lead) =>
 		supabase.from("leads").update(data).eq("id", id);
 
-	const handleSave = async (form: Lead) => {
+	// FIXME:
+	const handleSave = async (form: any) => {
 		if (isNew) {
 			const ok = await insertLead(form);
 			if (!ok) return;
@@ -92,7 +94,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 	const deleteOne = async (id: string) => {
 		const { error } = await supabase.from("leads").delete().eq("id", id);
 		if (error) console.error("Delete error:", error.message);
-		else load(); // refresh list
+		else load();
 	};
 
 	const toggleIsWorking = async (id: string, value: boolean) =>
@@ -143,6 +145,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 					<div className="input-container">
 						<label htmlFor="">Імя</label>
 						<input
+							className="input"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.name}
 							name="name"
@@ -152,6 +155,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 					<div className="input-container">
 						<label htmlFor="">Номер телефону</label>
 						<input
+							className="input"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.tel}
 							name="tel"
@@ -161,6 +165,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 					<div className="input-container">
 						<label htmlFor="">Адреса</label>
 						<input
+							className="input"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.address}
 							name="address"
@@ -170,6 +175,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 					<div className="input-container">
 						<label htmlFor="">Позиція</label>
 						<input
+							className="input"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.position}
 							name="position"
@@ -179,6 +185,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 					<div className="input-container">
 						<label htmlFor="">Повідомлення</label>
 						<input
+							className="input"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.message}
 							name="message"
@@ -246,15 +253,6 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 				<main className="main">
 					<div style={{ display: "flex", justifyContent: "space-between" }}>
 						<h1 className="main__title">Ліди</h1>
-						<button
-							className="create-btn"
-							onClick={() => {
-								setIsNew(true);
-								setModalVisible(true);
-							}}
-						>
-							Новий лід
-						</button>
 					</div>
 					<div className="container">
 						<div
@@ -263,27 +261,38 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 								top: "0px",
 								padding: "10px 0",
 								background: "#fff",
+								display: "flex",
+								justifyContent: "space-between",
 							}}
 						>
 							<input
-								style={{ height: "40px" }}
+								className="search-input"
 								onChange={(e) => setFilter(e.target.value)}
 								value={filter}
 								type="text"
 								placeholder="Пошук"
 							/>
+							<button
+								className="create-btn"
+								onClick={() => {
+									setIsNew(true);
+									setModalVisible(true);
+								}}
+							>
+								Новий лід
+							</button>
 						</div>
 						<table>
 							<thead>
 								<tr>
-									<th>№</th>
+									<th style={{ width: "1%" }}>№</th>
 									<th>Ім'я</th>
 									<th>Номер телефону</th>
 									<th>Адреса</th>
 									<th>Позиція</th>
 									<th>Повідомлення</th>
-									<th>Статус</th>
-									<th>Опції</th>
+									<th style={{ width: "1%" }}>Статус</th>
+									<th style={{ width: "1%" }}>Опції</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -292,15 +301,34 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 									.map((l, i) => {
 										const number = (currentPage - 1) * 50 + i + 1;
 
+										const now = new Date();
+
+										const diffMs =
+											now.getTime() - new Date(l.created_at).getTime();
+
+										const diffDays = diffMs / (1000 * 60 * 60 * 24);
+
 										return (
-											<tr key={l.id}>
-												<td>{number}</td>
-												<td>{l.name}</td>
+											<tr key={l.id} className="leads-tr">
+												<td style={{ width: "1%" }}>{number}</td>
+												<td style={{ width: "1%", whiteSpace: "nowrap" }}>
+													{l.name}{" "}
+													{diffDays <= 3 && (
+														<span
+															style={{
+																background: "var(--sec-accent-clr)",
+																padding: "5px",
+															}}
+														>
+															Новий
+														</span>
+													)}
+												</td>
 												<td>{l.tel}</td>
 												<td>{l.address}</td>
 												<td>{l.position}</td>
 												<td style={{ maxWidth: "200px" }}>{l.message}</td>
-												<td>
+												<td style={{ width: "1%", whiteSpace: "nowrap" }}>
 													<button
 														onClick={() =>
 															handleToggleIsWorking(l.id, l.is_working)
@@ -310,7 +338,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 														{l.is_working ? "Працює" : "Не працює"}
 													</button>
 												</td>
-												<td>
+												<td style={{ width: "1%" }}>
 													<div style={{ display: "flex", gap: "5px" }}>
 														<button
 															className="update-btn"
@@ -342,8 +370,6 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 								display: "flex",
 								justifyContent: "space-between",
 								alignItems: "center",
-								position: "sticky",
-								bottom: "0px",
 								background: "white",
 								padding: "10px 0",
 								marginTop: "auto",

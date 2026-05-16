@@ -15,24 +15,58 @@ interface Lead {
 	position: string;
 	message: string;
 	is_working: boolean;
+	created_at: Date;
+}
+
+export interface Vacancy {
+	id: string;
+	img: string;
+	is_active: boolean;
+	place: string;
+	address: string;
+	address_url: string;
+	title: string;
+	description: string[];
+	salary: number;
+	requirements: string[] | null;
+	responsibilities: string[] | null;
+	job_type: string;
+	updated_at: string;
+	hot_vacancy: boolean;
 }
 
 function App() {
 	const [leads, setLeads] = useState<Lead[]>([]);
+	const [vacancies, setVacancies] = useState<Vacancy[]>([]);
 
-	const getAll = async () =>
+	const getAllLeads = async () =>
 		supabase
 			.from("leads")
 			.select("*")
 			.order("updated_at", { ascending: false });
 
-	const load = async () => {
-		const { data } = await getAll();
+	const loadLeads = async () => {
+		const { data } = await getAllLeads();
 		setLeads(data ?? []);
 	};
 
+	const getAllVacancies = async () =>
+		supabase
+			.from("vacancies")
+			.select("*")
+			.order("updated_at", { ascending: false });
+
+	const loadVacancies = async () => {
+		const { data } = await getAllVacancies();
+		setVacancies(data ?? []);
+	};
+
 	useEffect(() => {
-		load();
+		loadLeads();
+	}, []);
+
+	useEffect(() => {
+		loadVacancies();
 	}, []);
 
 	return (
@@ -40,11 +74,25 @@ function App() {
 			<div className="layout">
 				<Sidebar />
 				<Routes>
-					<Route path="/" element={<Home leads={leads} />} />
-					<Route path="/vacancies" element={<Vacancies />} />
+					<Route
+						path="/"
+						element={<Home leads={leads} vacancies={vacancies} />}
+					/>
+					<Route
+						path="/vacancies"
+						element={
+							<Vacancies
+								vacancies={vacancies}
+								setVacancies={setVacancies}
+								load={loadVacancies}
+							/>
+						}
+					/>
 					<Route
 						path="/leads"
-						element={<Leads leads={leads} setLeads={setLeads} load={load} />}
+						element={
+							<Leads leads={leads} setLeads={setLeads} load={loadLeads} />
+						}
 					/>
 				</Routes>
 			</div>
