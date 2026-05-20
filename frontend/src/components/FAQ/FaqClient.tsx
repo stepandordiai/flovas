@@ -1,12 +1,9 @@
 "use client";
-import { useTranslations } from "next-intl";
 import { useState } from "react";
 import classNames from "classnames";
 import faqs from "@/data/faqs.json";
 
 export default function FaqClient() {
-	const t = useTranslations();
-
 	const [activeFaq, setActiveFaq] = useState(faqs[0]);
 
 	return (
@@ -20,14 +17,14 @@ export default function FaqClient() {
 						})}
 					>
 						<button className="faq__btn" onClick={() => setActiveFaq(faq)}>
-							{t(faq.q)}
+							{faq.q}
 						</button>
 						<div
 							className={classNames("faq-dd", {
 								"faq-dd--active": faq === activeFaq,
 							})}
 						>
-							<p>{t(activeFaq.a)}</p>
+							<p>{faq.a}</p>
 						</div>
 					</div>
 				);

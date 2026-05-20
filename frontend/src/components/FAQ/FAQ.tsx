@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import FaqClient from "./FaqClient";
-import "./styles.scss";
 import faqs from "@/data/faqs.json";
+import "./styles.scss";
 
 export default async function FAQ() {
 	const t = await getTranslations();
@@ -11,10 +11,10 @@ export default async function FAQ() {
 		"@type": "FAQPage",
 		mainEntity: faqs.map(({ q, a }) => ({
 			"@type": "Question",
-			name: t(q),
+			name: q,
 			acceptedAnswer: {
 				"@type": "Answer",
-				text: t(a),
+				text: a,
 			},
 		})),
 	};
