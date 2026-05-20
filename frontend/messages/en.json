@@ -115,26 +115,28 @@
 	"faq": {
 		"title": "Frequently asked questions",
 		"q": {
-			"1": "What types of jobs do you offer?",
-			"2": "Is the employment official?",
-			"3": "Do you provide accommodation?",
-			"4": "Is knowledge of Czech required?",
-			"5": "What is the salary and how is it paid?",
-			"6": "Do you help with documents and work permits?",
-			"7": "Do you cover health and social insurance?",
-			"8": "How can I apply for a job?",
-			"9": "How quickly can I start working?"
+			"1": "What jobs in the Czech Republic are currently available for Ukrainians?",
+			"2": "Is official employment available in the Czech Republic for Ukrainians?",
+			"3": "Is knowledge of the Czech language required to work in the Czech Republic?",
+			"4": "Is accommodation provided for jobs in the Czech Republic?",
+			"5": "What salary can Ukrainians expect when working in the Czech Republic?",
+			"6": "Do you help with preparing documents for work in the Czech Republic?",
+			"7": "How many hours per week can you work in the Czech Republic?",
+			"8": "Are there jobs in the Czech Republic for couples?",
+			"9": "How quickly can you leave for work in the Czech Republic?",
+			"10": "How can I apply for a job in the Czech Republic?"
 		},
 		"a": {
-			"1": "We offer jobs in manufacturing, logistics, warehouses, and other sectors across the Czech Republic. Positions are suitable for men, women, and couples.",
-			"2": "Yes, all positions are based on official employment contracts in accordance with Czech legislation.",
-			"3": "Yes, we provide accommodation for most job positions. Conditions may vary depending on the specific offer.",
-			"4": "In most cases, knowledge of Czech is not required. For some positions it is an advantage, but not mandatory.",
-			"5": "The salary depends on the specific position. Wages are paid regularly, usually monthly, to a bank account.",
-			"6": "Yes, we assist with the preparation of necessary documents and support you throughout the entire employment process.",
-			"7": "Yes, health and social insurance are covered in accordance with Czech law.",
-			"8": "Simply contact us via the website form or by phone. Our team will get in touch with current job offers.",
-			"9": "You can usually start within a few days, depending on job availability and document processing."
+			"1": "We offer official jobs in the Czech Republic for Ukrainians in warehouses, manufacturing, logistics, the food industry, cleaning services, and caregiving. Vacancies are available throughout the Czech Republic — Prague, Brno, Plzeň, and other cities. There are opportunities for men, women, and couples.",
+			"2": "Yes, all our vacancies provide official employment in accordance with Czech legislation. Every employee receives an employment contract, official salary, and social insurance. We help prepare all the necessary documents.",
+			"3": "For most vacancies, knowledge of the Czech language is not required. We have many opportunities for candidates without language skills — especially in manufacturing, warehouses, and logistics. We also provide support in Ukrainian throughout the entire process.",
+			"4": "Yes, for most vacancies the employer or agency provides accommodation for employees. Living conditions depend on the specific vacancy and company. There are offers with free or partially paid accommodation.",
+			"5": "The salary level depends on the vacancy, number of working hours, and shifts. On average, wages range from 140 to 220 CZK per hour. Many vacancies also offer overtime opportunities and bonuses for night shifts.",
+			"6": "Yes, we fully support clients throughout the entire process: we help with work permits, registration, and preparation of the necessary documents. Our managers provide consultations in Ukrainian and answer all questions.",
+			"7": "On average, the working day lasts 8–12 hours, 5–6 days a week. Many vacancies also offer overtime opportunities. The exact schedule depends on the company and the selected position.",
+			"8": "Yes, we have special vacancies for couples with the possibility of living together and working at the same company. This is one of the most popular categories among Ukrainians looking for work in the Czech Republic.",
+			"9": "You can start working within just a few days after the vacancy is approved and the documents are prepared. The timing depends on the specific position and the readiness of the candidate’s documents.",
+			"10": "To apply, leave a request on our website or contact us by phone or messenger. Our manager will contact you, select current vacancies in the Czech Republic, and help with all the necessary documents."
 		}
 	},
 

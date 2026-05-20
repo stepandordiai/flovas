@@ -119,26 +119,28 @@
 	"faq": {
 		"title": "Často kladené otázky",
 		"q": {
-			"1": "Aké typy práce ponúkate?",
-			"2": "Je zamestnanie oficiálne?",
-			"3": "Poskytujete ubytovanie?",
-			"4": "Je potrebná znalosť češtiny?",
-			"5": "Aký je plat a ako prebieha vyplácanie mzdy?",
-			"6": "Pomáhate s dokumentmi a povolením na prácu?",
-			"7": "Hradíte zdravotné a sociálne poistenie?",
-			"8": "Ako sa môžem prihlásiť o prácu?",
-			"9": "Ako rýchlo môžem nastúpiť do práce?"
+			"1": "Aká práca v Česku je momentálne dostupná pre Ukrajincov?",
+			"2": "Je v Česku pre Ukrajincov dostupné oficiálne zamestnanie?",
+			"3": "Je na prácu v Česku potrebná čeština?",
+			"4": "Je pri práci v Česku zabezpečené ubytovanie?",
+			"5": "Aký plat môžu Ukrajinci očakávať pri práci v Česku?",
+			"6": "Pomáhate s vybavením dokumentov na prácu v Česku?",
+			"7": "Koľko hodín týždenne je možné pracovať v Česku?",
+			"8": "Je v Česku práca pre páry?",
+			"9": "Ako rýchlo je možné vycestovať za prácou do Česka?",
+			"10": "Ako podať žiadosť o prácu v Česku?"
 		},
 		"a": {
-			"1": "Ponúkame prácu vo výrobe, logistike, skladoch a ďalších odvetviach po celej Českej republike. Pozície sú vhodné pre mužov, ženy aj páry.",
-			"2": "Áno, všetky pracovné pozície sú na základe oficiálnej pracovnej zmluvy v súlade s českou legislatívou.",
-			"3": "Áno, pre väčšinu pracovných pozícií zabezpečujeme ubytovanie. Podmienky sa môžu líšiť podľa konkrétnej ponuky.",
-			"4": "Vo väčšine prípadov nie je znalosť češtiny potrebná. Na niektorých pozíciách je výhodou, ale nie podmienkou.",
-			"5": "Výška mzdy závisí od konkrétnej pozície. Mzda je vyplácaná pravidelne, zvyčajne mesačne, na bankový účet.",
-			"6": "Áno, pomáhame s vybavením potrebných dokumentov a poskytujeme podporu počas celého procesu nástupu do práce.",
-			"7": "Áno, zdravotné a sociálne poistenie je hradené v súlade s českými zákonmi.",
-			"8": "Stačí nás kontaktovať cez formulár na webe alebo telefonicky. Náš tím vás bude kontaktovať s aktuálnou ponukou práce.",
-			"9": "Nástup je často možný už v priebehu niekoľkých dní, v závislosti od dostupnosti pozícií a vybavenia dokumentov."
+			"1": "Ponúkame oficiálnu prácu v Česku pre Ukrajincov v skladoch, výrobe, logistike, potravinárstve, upratovaní a starostlivosti o ľudí. Voľné pracovné miesta sú po celom Česku — Praha, Brno, Plzeň a ďalšie mestá. Ponuky sú pre mužov, ženy aj páry.",
+			"2": "Áno, všetky naše pracovné ponuky zahŕňajú oficiálne zamestnanie v súlade s českou legislatívou. Každý zamestnanec dostáva pracovnú zmluvu, oficiálnu mzdu a sociálne poistenie. Pomáhame s vybavením všetkých potrebných dokumentov.",
+			"3": "Pre väčšinu pracovných pozícií nie je znalosť češtiny povinná. Máme veľa ponúk pre kandidátov bez znalosti jazyka — najmä vo výrobe, skladoch a logistike. Poskytujeme tiež podporu v ukrajinčine počas celého procesu.",
+			"4": "Áno, pri väčšine pracovných pozícií zamestnávateľ alebo agentúra poskytuje pracovníkom ubytovanie. Podmienky bývania závisia od konkrétnej pracovnej ponuky a podniku. K dispozícii sú ponuky s bezplatným alebo čiastočne hradeným ubytovaním.",
+			"5": "Výška mzdy závisí od pracovnej pozície, počtu odpracovaných hodín a zmien. Priemerná mzda sa pohybuje od 140 do 220 Kč za hodinu. Mnohé pracovné pozície ponúkajú možnosť nadčasov a príplatkov za nočné zmeny.",
+			"6": "Áno, klientov plne sprevádzame počas celého procesu: pomáhame s vybavením pracovného povolenia, registráciou a prípravou potrebných dokumentov. Naši manažéri komunikujú v ukrajinčine a odpovedajú na všetky otázky.",
+			"7": "Priemerný pracovný deň trvá 8–12 hodín, 5–6 dní v týždni. Pri mnohých pracovných pozíciách sú dostupné nadčasy. Konkrétny pracovný čas závisí od podniku a vybranej pracovnej ponuky.",
+			"8": "Áno, máme špeciálne pracovné ponuky pre páry s možnosťou spoločného bývania a práce v jednom podniku. Je to jedna z najobľúbenejších kategórií medzi Ukrajincami, ktorí hľadajú prácu v Česku.",
+			"9": "Nástup do práce je možný už v priebehu niekoľkých dní po schválení pracovnej ponuky a príprave dokumentov. Termíny závisia od konkrétnej pozície a pripravenosti dokumentov kandidáta.",
+			"10": "Ak chcete podať žiadosť, zanechajte dopyt na našej webovej stránke alebo nás kontaktujte telefonicky či cez messengery. Náš manažér vás bude kontaktovať, vyberie aktuálne pracovné ponuky v Česku a pomôže so všetkými dokumentmi."
 		}
 	},
 
