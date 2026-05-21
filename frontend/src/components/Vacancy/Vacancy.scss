@@ -1,12 +1,35 @@
-@use "./../../scss/mixins" as *;
+@use "@/scss/mixins" as *;
 
 .vacancy {
+	position: relative;
 	background: var(--bg-lighter-clr);
 	display: flex;
 	flex-direction: column;
 	row-gap: 10px;
 	border-radius: 0 0 30px 30px;
 	padding: 10px;
+}
+
+.vacancy-indicator {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	background: rgba(0, 0, 0, 0.5);
+	@include glass-effect(10px);
+	padding: 10px;
+	border-radius: 20px;
+	color: rgb(255, 255, 255);
+	font-weight: 500;
+}
+
+.vacancy-salary {
+	position: absolute;
+	bottom: 10px;
+	left: 0px;
+	color: #fff;
+	background: #000;
+	padding: 12.5px;
+	border-radius: 0 25px 25px 0;
 }
 
 .vacancy__no-img {
@@ -24,7 +47,7 @@
 	span:nth-child(1) {
 		width: 10px;
 		height: 10px;
-		background: #ff0000;
+		background: #fb7185;
 		border-radius: 50%;
 	}
 }
@@ -38,7 +61,7 @@
 	span:nth-child(1) {
 		width: 10px;
 		height: 10px;
-		background: #00ff00;
+		background: #4ade80;
 		border-radius: 50%;
 	}
 }
@@ -49,8 +72,12 @@
 	row-gap: 10px;
 }
 
-.vacancy__date {
-	text-align: right;
+.vacancy__date,
+.vacancy__place {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 5px;
 }
 
 .vacancy__link {

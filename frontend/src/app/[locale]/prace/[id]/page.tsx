@@ -2,15 +2,16 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
-// import vacancies from "@/data/vacancies.json";
 import { getVacancies } from "@/services/vacancies";
 import Breadcrumbs from "@/components/common/Breadcrumbs/Breadcrumbs";
 import Image from "next/image";
 import CopyBtn from "@/components/CopyBtn/CopyBtn";
 import VacancyPageClient from "./VacancyPageClient";
 import { Link } from "@/i18n/navigation";
-import "./VacancyPage.scss";
 import { VacancyInterface } from "@/interfaces/Vacancy";
+import "./VacancyPage.scss";
+import getUpdatedDate from "@/utils/getUpdatedDate";
+import ClockIcon from "@/components/icons/ClockIcon";
 
 export async function generateStaticParams() {
 	const { data: vacancies, error } = await getVacancies();
@@ -143,8 +144,6 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 		},
 	};
 
-	const updated = new Date(vacancy.updated_at);
-
 	return (
 		<>
 			<script
@@ -186,7 +185,17 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 								gap: 10,
 							}}
 						>
-							<p>Опубліковано: {updated.toLocaleDateString()}</p>
+							<p
+								style={{
+									display: "flex",
+									justifyContent: "center",
+									alignItems: "center",
+									gap: "5px",
+								}}
+							>
+								<ClockIcon />{" "}
+								<span>Оновлено {getUpdatedDate(vacancy.updated_at)}</span>
+							</p>
 							<VacancyPageClient />
 						</div>
 						<h1 className="vacancy__title">{vacancy.title}</h1>
