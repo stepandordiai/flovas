@@ -6,7 +6,6 @@ import { useState } from "react";
 import { VacancyInterface } from "@/interfaces/Vacancy";
 import Image from "next/image";
 import getUpdatedDate from "@/utils/getUpdatedDate";
-import CashIcon from "@/components/icons/CashIcon";
 import ClockIcon from "@/components/icons/ClockIcon";
 import GeoIcon from "@/components/icons/GeoIcon";
 import "./Vacancy.scss";
@@ -18,7 +17,8 @@ type VacancyProps = {
 const Vacancy = ({ vacancy }: VacancyProps) => {
 	const t = useTranslations();
 
-	const { id, img, is_active, updated_at, place, title, salary } = vacancy;
+	const { id, img, is_active, updated_at, place, title, salary, badges } =
+		vacancy;
 
 	// FIXME:
 	const [imgError, setImgError] = useState(false);
@@ -26,7 +26,13 @@ const Vacancy = ({ vacancy }: VacancyProps) => {
 	return (
 		// TODO: learn this
 		<article className="vacancy">
-			<div style={{ position: "relative" }}>
+			<div
+				style={{
+					position: "relative",
+					borderRadius: "25px 25px 0 0",
+					overflow: "hidden",
+				}}
+			>
 				<p
 					className={`vacancy-indicator ${is_active ? "vacancy__active" : "vacancy__inactive"}`}
 				>
@@ -35,18 +41,8 @@ const Vacancy = ({ vacancy }: VacancyProps) => {
 				</p>
 				<div className="vacancy-salary">
 					<span style={{ fontSize: "1rem" }}>Заробітна плата</span>
-					<span
-						style={{
-							display: "flex",
-							justifyContent: "center",
-							alignItems: "center",
-							gap: "5px",
-						}}
-					>
-						<CashIcon size={28} />
-						<span style={{ fontSize: "1.5rem" }}>
-							<strong>{salary}</strong>Kč/год
-						</span>
+					<span style={{ fontSize: "1.5rem" }}>
+						<strong>{salary}</strong> Kč/год
 					</span>
 				</div>
 
@@ -73,6 +69,25 @@ const Vacancy = ({ vacancy }: VacancyProps) => {
 					<GeoIcon /> {place}
 				</span>
 				<h3 style={{ fontSize: "20px", fontWeight: 600 }}>{title}</h3>
+				{badges && badges.length > 0 && (
+					<ul style={{ display: "flex", flexWrap: "wrap", gap: "5px" }}>
+						{badges?.map((b) => {
+							return (
+								<li
+									key={b}
+									style={{
+										background: "#fff",
+										padding: "5px",
+										fontSize: "0.9rem",
+										borderRadius: "10px",
+									}}
+								>
+									{b}
+								</li>
+							);
+						})}
+					</ul>
+				)}
 			</div>
 			<Link className="vacancy__link" href={`/prace/${id}`} scroll={true}>
 				{t("more_info_btn")}

@@ -9,9 +9,9 @@ import CopyBtn from "@/components/CopyBtn/CopyBtn";
 import VacancyPageClient from "./VacancyPageClient";
 import { Link } from "@/i18n/navigation";
 import { VacancyInterface } from "@/interfaces/Vacancy";
-import "./VacancyPage.scss";
 import getUpdatedDate from "@/utils/getUpdatedDate";
 import ClockIcon from "@/components/icons/ClockIcon";
+import "./VacancyPage.scss";
 
 export async function generateStaticParams() {
 	const { data: vacancies, error } = await getVacancies();
@@ -241,6 +241,33 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 									})}
 								</ul>
 							</>
+						)}
+						{vacancy.badges && vacancy.badges.length > 0 && (
+							<ul
+								style={{
+									display: "flex",
+									flexWrap: "wrap",
+									gap: "5px",
+									background: "var(--bg-lighter-clr)",
+									padding: "10px",
+									borderRadius: "25px",
+								}}
+							>
+								{vacancy.badges.map((el) => {
+									return (
+										<li
+											key={el}
+											style={{
+												background: "#fff",
+												padding: "5px",
+												borderRadius: "10px",
+											}}
+										>
+											{el}
+										</li>
+									);
+								})}
+							</ul>
 						)}
 						<div style={{ display: "flex", gap: 5, alignSelf: "flex-end" }}>
 							<Link className="vacancy-page__link" href="/#kontakty">

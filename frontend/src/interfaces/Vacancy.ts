@@ -13,4 +13,5 @@ export interface VacancyInterface {
 	responsibilities?: string[];
 	job_type: string;
 	hot_vacancy: boolean;
+	badges?: string[];
 }

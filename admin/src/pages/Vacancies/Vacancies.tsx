@@ -13,6 +13,7 @@ export interface VacancyInterface {
 	salary: number;
 	requirements: string[] | null;
 	responsibilities: string[] | null;
+	badges: string[] | null;
 	job_type: string;
 	updated_at: string;
 	hot_vacancy: boolean;
@@ -32,6 +33,7 @@ const EMPTY_FORM = {
 	salary: 0,
 	requirements: null as string[] | null,
 	responsibilities: null as string[] | null,
+	badges: null as string[] | null,
 	job_type: "",
 	hot_vacancy: false,
 };
@@ -70,7 +72,15 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 	const insertOne = async (data: VacancySave) => {
 		setError(null);
 
-		const { error } = await supabase.from("vacancies").insert([data]);
+		const cleaned: Partial<VacancySave> = {
+			...data,
+			badges: data.badges?.filter((b) => b.trim() !== ""),
+			description: data.description?.filter((d) => d.trim() !== ""),
+			responsibilities: data.responsibilities?.filter((r) => r.trim() !== ""),
+			requirements: data.requirements?.filter((r) => r.trim() !== ""),
+		};
+
+		const { error } = await supabase.from("vacancies").insert([cleaned]);
 		if (error) {
 			if (error.code === "23505") setError("Вакансія з таким ID вже існує");
 			else console.error("Insert error:", error.message);
@@ -93,9 +103,17 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 	const updateOne = async (id: string, data: Partial<VacancySave>) => {
 		setError(null);
 
+		const cleaned: Partial<VacancySave> = {
+			...data,
+			badges: data.badges?.filter((b) => b.trim() !== ""),
+			description: data.description?.filter((d) => d.trim() !== ""),
+			responsibilities: data.responsibilities?.filter((r) => r.trim() !== ""),
+			requirements: data.requirements?.filter((r) => r.trim() !== ""),
+		};
+
 		const { error } = await supabase
 			.from("vacancies")
-			.update(data)
+			.update(cleaned)
 			.eq("id", id);
 		if (error) {
 			if (error.code === "23505") setError("Вакансія з таким ID вже існує");
@@ -144,10 +162,17 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 		...new Set(vacancies.flatMap((v) => v.description.map((d) => d))),
 	];
 	const uniqueVacanciesRequirements = [
-		...new Set(vacancies.flatMap((v) => v.requirements?.map((d) => d))),
+		...new Set(vacancies.flatMap((v) => v.requirements?.map((d) => d) ?? [])),
 	];
 	const uniqueVacanciesResponsibilities = [
-		...new Set(vacancies.flatMap((v) => v.responsibilities?.map((d) => d))),
+		...new Set(
+			vacancies.flatMap((v) => v.responsibilities?.map((d) => d) ?? []),
+		),
+	];
+
+	// TODO: learn this
+	const uniqueVacanciesBadges = [
+		...new Set(vacancies.flatMap((v) => v.badges?.map((b) => b) ?? [])),
 	];
 
 	return (
@@ -171,6 +196,7 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 						onClick={() => {
 							setFormVisible(false);
 							setForm(EMPTY_FORM);
+							setIsNew(false);
 						}}
 					>
 						<svg
@@ -389,13 +415,19 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 										id=""
 									>
 										<option value=""></option>
-										{uniqueVacanciesRequirements.map((p, i) => {
-											return (
-												<option key={i} value={p}>
-													{p}
-												</option>
-											);
-										})}
+										{uniqueVacanciesRequirements
+											.filter(
+												(r) =>
+													!form.requirements?.includes(r) ||
+													form.requirements[i] === r,
+											)
+											.map((p, i) => {
+												return (
+													<option key={i} value={p}>
+														{p}
+													</option>
+												);
+											})}
 									</select>
 								</div>
 								<button
@@ -455,13 +487,19 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 										id=""
 									>
 										<option value=""></option>
-										{uniqueVacanciesResponsibilities.map((p, i) => {
-											return (
-												<option key={i} value={p}>
-													{p}
-												</option>
-											);
-										})}
+										{uniqueVacanciesResponsibilities
+											.filter(
+												(r) =>
+													!form.responsibilities?.includes(r) ||
+													form.responsibilities[i] === r,
+											)
+											.map((p, i) => {
+												return (
+													<option key={i} value={p}>
+														{p}
+													</option>
+												);
+											})}
 									</select>
 								</div>
 								<button
@@ -503,6 +541,72 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.job_type}
 						/>
+					</div>
+					<div className="input-container">
+						<label>Ключові слова</label>
+						{(form.badges ?? [""]).map((item, i) => (
+							<div key={i} style={{ display: "flex", gap: 8 }}>
+								<div className="input" style={{ display: "flex" }}>
+									<input
+										style={{ width: "100%" }}
+										type="text"
+										value={item}
+										onChange={(e) => {
+											const next = [...(form.badges ?? [])] as string[];
+											next[i] = e.target.value;
+											handleForm("badges", next);
+										}}
+										placeholder={`Вкажіть ключове слово ${i + 1}`}
+									/>
+									<select
+										className="select"
+										name="badges"
+										onChange={(e) => {
+											const next = [...(form.badges ?? [])] as string[];
+											next[i] = e.target.value;
+											handleForm("badges", next);
+										}}
+										value={""}
+										id=""
+									>
+										<option value=""></option>
+										{uniqueVacanciesBadges
+											.filter(
+												(p) =>
+													// TODO: learn this
+													!form.badges?.includes(p) || form.badges[i] === p,
+											)
+											.map((p, i) => {
+												return (
+													<option key={i} value={p}>
+														{p}
+													</option>
+												);
+											})}
+									</select>
+								</div>
+								<button
+									className="delete-btn"
+									type="button"
+									onClick={() =>
+										handleForm(
+											"badges",
+											(form.badges ?? []).filter((_, idx) => idx !== i),
+										)
+									}
+								>
+									✕
+								</button>
+							</div>
+						))}
+						<button
+							className="update-btn"
+							style={{ margin: "0 auto" }}
+							type="button"
+							onClick={() => handleForm("badges", [...(form.badges ?? []), ""])}
+						>
+							+
+						</button>
 					</div>
 					<button className="submit-btn" type="submit">
 						{isNew ? "Створити вакансію" : "Змінити вакансію"}
@@ -612,6 +716,7 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 															address_url: v.address_url ?? "",
 															requirements: v.requirements,
 															responsibilities: v.responsibilities,
+															badges: v.badges,
 														});
 													}}
 												>
