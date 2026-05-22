@@ -33,6 +33,7 @@ export interface Vacancy {
 	job_type: string;
 	updated_at: string;
 	hot_vacancy: boolean;
+	badges: string[] | null;
 }
 
 function App() {
