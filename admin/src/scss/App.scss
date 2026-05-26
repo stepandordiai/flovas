@@ -1,7 +1,8 @@
 // @use "reset";
-@use "./reset";
+@use "reset";
 @use "mixins";
 @use "variables";
+@use "fonts";
 
 :root {
 	--accent-clr: #f4f3ed;
@@ -168,6 +169,9 @@ table {
 	overflow-y: auto;
 	opacity: 0;
 	pointer-events: none;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 
 	&--visible {
 		opacity: 1;

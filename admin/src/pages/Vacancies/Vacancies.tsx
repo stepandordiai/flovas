@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { supabase } from "./../../lib/supabase";
+import "./styles.scss";
 
 export interface VacancyInterface {
 	id: string;
@@ -50,6 +51,9 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 	const [filter, setFilter] = useState("");
 	const [currentPage, setCurrentPage] = useState(1);
 	const [error, setError] = useState<string | null>(null);
+	const [loading, setLoading] = useState(false);
+	const [deleteModal, setDeleteModal] = useState(false);
+	const [idToDelete, setIdToDelete] = useState("");
 
 	const filteredVacancies = vacancies.filter((vacancy) =>
 		Object.values(vacancy).some((value) =>
@@ -71,6 +75,7 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 	// Supabase
 	const insertOne = async (data: VacancySave) => {
 		setError(null);
+		setLoading(true);
 
 		const cleaned: Partial<VacancySave> = {
 			...data,
@@ -85,9 +90,11 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 			if (error.code === "23505") setError("Вакансія з таким ID вже існує");
 			else console.error("Insert error:", error.message);
 			modal.current?.scrollTo({ top: 0, behavior: "smooth" });
+			setLoading(false);
 			return false;
 		}
 		await load();
+		setLoading(false);
 		setFormVisible(false);
 		setForm(EMPTY_FORM);
 		setIsNew(false);
@@ -102,6 +109,7 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 
 	const updateOne = async (id: string, data: Partial<VacancySave>) => {
 		setError(null);
+		setLoading(true);
 
 		const cleaned: Partial<VacancySave> = {
 			...data,
@@ -119,9 +127,11 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 			if (error.code === "23505") setError("Вакансія з таким ID вже існує");
 			else console.error("Insert error:", error.message);
 			modal.current?.scrollTo({ top: 0, behavior: "smooth" });
+			setLoading(false);
 			return false;
 		}
 		await load();
+		setLoading(false);
 		setFormVisible(false);
 		setForm(EMPTY_FORM);
 		return true;
@@ -175,42 +185,40 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 		...new Set(vacancies.flatMap((v) => v.badges?.map((b) => b) ?? [])),
 	];
 
+	const handleDelete = () => {
+		deleteOne(idToDelete);
+		setIdToDelete("");
+		setDeleteModal(false);
+	};
+
 	return (
 		<>
 			<div
 				ref={modal}
 				className={`modal ${formVisible ? "modal--visible" : ""}`}
 			>
-				<div
-					style={{
-						display: "flex",
-						justifyContent: "space-between",
-						alignItems: "flex-start",
+				<button
+					className="close-btn modal-close-btn"
+					onClick={() => {
+						setFormVisible(false);
+						setForm(EMPTY_FORM);
+						setIsNew(false);
 					}}
 				>
-					<p style={{ fontSize: "1.5rem" }}>
-						{isNew ? "Створити вакансію" : "Змінити вакансію"}
-					</p>
-					<button
-						className="close-btn"
-						onClick={() => {
-							setFormVisible(false);
-							setForm(EMPTY_FORM);
-							setIsNew(false);
-						}}
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="16"
+						height="16"
+						fill="currentColor"
+						className="bi bi-x-lg"
+						viewBox="0 0 16 16"
 					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="16"
-							height="16"
-							fill="currentColor"
-							className="bi bi-x-lg"
-							viewBox="0 0 16 16"
-						>
-							<path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
-						</svg>
-					</button>
-				</div>
+						<path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+					</svg>
+				</button>
+				<p style={{ fontSize: "1.5rem", fontWeight: "600" }}>
+					{isNew ? "Створити вакансію" : "Змінити вакансію"}
+				</p>
 				{error && <strong style={{ color: "red" }}>{error}</strong>}
 				<form
 					onSubmit={(e) => {
@@ -609,11 +617,61 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 						</button>
 					</div>
 					<button className="submit-btn" type="submit">
-						{isNew ? "Створити вакансію" : "Змінити вакансію"}
+						{loading
+							? isNew
+								? "Створення..."
+								: "Збереження..."
+							: isNew
+								? "Створити вакансію"
+								: "Змінити вакансію"}
 					</button>
 				</form>
 			</div>
-			<div className={`curtain ${formVisible ? "curtain--visible" : ""}`}></div>
+			<div
+				className={`curtain ${formVisible || deleteModal ? "curtain--visible" : ""}`}
+			></div>
+			<div
+				className={`delete-modal ${deleteModal ? "delete-modal--visible" : ""}`}
+			>
+				<strong>Ви точно хочете видалити цей запис?</strong>
+				<div
+					style={{
+						display: "grid",
+						gridTemplateColumns: "repeat(2, 1fr)",
+						gap: "10px",
+					}}
+				>
+					<button
+						onClick={() => {
+							setIdToDelete("");
+							setDeleteModal(false);
+						}}
+						style={{
+							height: "40px",
+							padding: "0 10px",
+							borderRadius: "20px",
+							background: "#000",
+							color: "#fff",
+							fontWeight: 600,
+						}}
+					>
+						Скасувати
+					</button>
+					<button
+						style={{
+							height: "40px",
+							padding: "0 10px",
+							borderRadius: "20px",
+							background: "rgb(222, 92, 77)",
+							color: "#fff",
+							fontWeight: 600,
+						}}
+						onClick={() => handleDelete()}
+					>
+						Підтвердити
+					</button>
+				</div>
+			</div>
 			<main className="main">
 				<div
 					style={{
@@ -733,7 +791,10 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 												</button>
 												<button
 													className="delete-btn"
-													onClick={() => deleteOne(v.id)}
+													onClick={() => {
+														setIdToDelete(v.id);
+														setDeleteModal(true);
+													}}
 												>
 													<svg
 														xmlns="http://www.w3.org/2000/svg"
