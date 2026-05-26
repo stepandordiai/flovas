@@ -5,6 +5,7 @@ import Leads from "./pages/Leads/Leads";
 import Vacancies from "./pages/Vacancies/Vacancies";
 import { useState, useEffect } from "react";
 import { supabase } from "./lib/supabase";
+import type { Vacancy } from "./interfaces/Vacancy";
 import "./scss/App.scss";
 
 interface Lead {
@@ -16,24 +17,6 @@ interface Lead {
 	message: string;
 	is_working: boolean;
 	created_at: Date;
-}
-
-export interface Vacancy {
-	id: string;
-	img: string;
-	is_active: boolean;
-	place: string;
-	address: string;
-	address_url: string;
-	title: string;
-	description: string[];
-	salary: number;
-	requirements: string[] | null;
-	responsibilities: string[] | null;
-	job_type: string;
-	updated_at: string;
-	hot_vacancy: boolean;
-	badges: string[] | null;
 }
 
 function App() {

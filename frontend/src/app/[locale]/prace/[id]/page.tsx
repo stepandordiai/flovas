@@ -45,11 +45,10 @@ export async function generateMetadata({
 		};
 	}
 
-	// TODO: learn this
-	const seoDesc = vacancy.description
-		.map((item: string) => item.replace(/^\p{Emoji}\s*/u, "").trim())
-		.join(" · ")
-		.slice(0, 160);
+	// const seoDesc = vacancy.benefits
+	// 	.map((item: string) => item.replace(/^\p{Emoji}\s*/u, "").trim())
+	// 	.join(" · ")
+	// 	.slice(0, 160);
 
 	const page = "prace";
 	const languages = Object.fromEntries(
@@ -58,7 +57,7 @@ export async function generateMetadata({
 
 	return {
 		title: vacancy.title,
-		description: seoDesc,
+		description: vacancy.description,
 
 		alternates: {
 			canonical: `/${locale}/${page}/${id}`,
@@ -71,7 +70,7 @@ export async function generateMetadata({
 		// TODO: learn this
 		openGraph: {
 			title: vacancy.title,
-			description: seoDesc,
+			description: vacancy.description,
 			url: `/${locale}/${page}/${id}`,
 			type: "website",
 			images: [
@@ -104,20 +103,16 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 		(vacancy) => vacancy.id === id,
 	);
 
-	if (!vacancy) {
-		return notFound();
-	}
-
-	const seoDesc = vacancy.description
-		.map((item: string) => item.replace(/^\p{Emoji}\s*/u, "").trim())
-		.join(" · ");
+	// const seoDesc = vacancy.benefits
+	// 	.map((item: string) => item.replace(/^\p{Emoji}\s*/u, "").trim())
+	// 	.join(" · ");
 
 	// TODO: learn this
 	const jsonLd = {
 		"@context": "https://schema.org",
 		"@type": "JobPosting",
 		title: vacancy.title,
-		description: seoDesc,
+		description: vacancy.description,
 		datePosted: vacancy.updated_at,
 		employmentType: "FULL_TIME", // PART_TIME, CONTRACTOR, TEMPORARY, INTERN
 		hiringOrganization: {
@@ -143,6 +138,10 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 			},
 		},
 	};
+
+	if (!vacancy) {
+		return notFound();
+	}
 
 	return (
 		<>
@@ -215,9 +214,16 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 						<p className="vacancy-page__details-title">
 							Заробітна плата: {vacancy.salary} Kč/год
 						</p>
-						<p className="vacancy-page__details-title">Опис:</p>
+						{vacancy.description && (
+							<>
+								<p className="vacancy-page__details-title">Опис:</p>
+								<p>{vacancy.description}</p>
+							</>
+						)}
+
+						<p className="vacancy-page__details-title">Що ми пропонуємо:</p>
 						<ul className="vacancy-page-list">
-							{vacancy.description.map((el, i) => {
+							{vacancy.benefits.map((el, i) => {
 								return <li key={i}>{el}</li>;
 							})}
 						</ul>

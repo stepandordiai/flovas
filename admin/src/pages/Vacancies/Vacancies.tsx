@@ -1,26 +1,9 @@
 import { useState, useRef } from "react";
 import { supabase } from "./../../lib/supabase";
+import type { Vacancy } from "../../interfaces/Vacancy";
 import "./styles.scss";
 
-export interface VacancyInterface {
-	id: string;
-	img: string;
-	is_active: boolean;
-	place: string;
-	address: string;
-	address_url: string;
-	title: string;
-	description: string[];
-	salary: number;
-	requirements: string[] | null;
-	responsibilities: string[] | null;
-	badges: string[] | null;
-	job_type: string;
-	updated_at: string;
-	hot_vacancy: boolean;
-}
-
-export type VacancySave = Omit<VacancyInterface, "updated_at">;
+export type VacancySave = Omit<Vacancy, "updated_at">;
 
 const EMPTY_FORM = {
 	id: "",
@@ -30,7 +13,8 @@ const EMPTY_FORM = {
 	address: "",
 	address_url: "",
 	title: "",
-	description: [""],
+	description: "",
+	benefits: [""],
 	salary: 0,
 	requirements: null as string[] | null,
 	responsibilities: null as string[] | null,
@@ -40,9 +24,9 @@ const EMPTY_FORM = {
 };
 
 type LeadsProps = {
-	vacancies: VacancyInterface[];
+	vacancies: Vacancy[];
 	load: () => Promise<void>;
-	setVacancies: React.Dispatch<React.SetStateAction<VacancyInterface[]>>;
+	setVacancies: React.Dispatch<React.SetStateAction<Vacancy[]>>;
 };
 
 const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
@@ -80,7 +64,7 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 		const cleaned: Partial<VacancySave> = {
 			...data,
 			badges: data.badges?.filter((b) => b.trim() !== ""),
-			description: data.description?.filter((d) => d.trim() !== ""),
+			benefits: data.benefits?.filter((d) => d.trim() !== ""),
 			responsibilities: data.responsibilities?.filter((r) => r.trim() !== ""),
 			requirements: data.requirements?.filter((r) => r.trim() !== ""),
 		};
@@ -114,7 +98,7 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 		const cleaned: Partial<VacancySave> = {
 			...data,
 			badges: data.badges?.filter((b) => b.trim() !== ""),
-			description: data.description?.filter((d) => d.trim() !== ""),
+			benefits: data.benefits?.filter((d) => d.trim() !== ""),
 			responsibilities: data.responsibilities?.filter((r) => r.trim() !== ""),
 			requirements: data.requirements?.filter((r) => r.trim() !== ""),
 		};
@@ -168,8 +152,8 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 	const totalPages = Math.ceil(vacancies.length / 50);
 
 	const uniqueVacanciesPlaces = [...new Set(vacancies.map((v) => v.place))];
-	const uniqueVacanciesDescription = [
-		...new Set(vacancies.flatMap((v) => v.description.map((d) => d))),
+	const uniqueVacanciesBenefits = [
+		...new Set(vacancies.flatMap((v) => v.benefits.map((d) => d))),
 	];
 	const uniqueVacanciesRequirements = [
 		...new Set(vacancies.flatMap((v) => v.requirements?.map((d) => d) ?? [])),
@@ -326,8 +310,18 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 						/>
 					</div>
 					<div className="input-container">
-						<label>Опис</label>
-						{form.description.map((item, i) => (
+						<label htmlFor="">Опис</label>
+						<input
+							className="input"
+							type="text"
+							name="description"
+							onChange={(e) => handleForm(e.target.name, e.target.value)}
+							value={form.description}
+						/>
+					</div>
+					<div className="input-container">
+						<label>Переваги</label>
+						{form.benefits.map((item, i) => (
 							<div key={i} style={{ display: "flex", gap: 8 }}>
 								<div
 									className="input"
@@ -342,25 +336,25 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 										type="text"
 										value={item}
 										onChange={(e) => {
-											const next = [...form.description] as string[];
+											const next = [...form.benefits] as string[];
 											next[i] = e.target.value;
-											handleForm("description", next);
+											handleForm("benefits", next);
 										}}
 										placeholder={`Вкажіть опис ${i + 1}`}
 									/>
 									<select
 										className="select"
-										name="description"
+										name="benefits"
 										onChange={(e) => {
-											const next = [...form.description] as string[];
+											const next = [...form.benefits] as string[];
 											next[i] = e.target.value;
-											handleForm("description", next);
+											handleForm("benefits", next);
 										}}
 										value={""}
 										id=""
 									>
 										<option value=""></option>
-										{uniqueVacanciesDescription.map((p, i) => {
+										{uniqueVacanciesBenefits.map((p, i) => {
 											return (
 												<option key={i} value={p}>
 													{p}
@@ -374,8 +368,8 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 									type="button"
 									onClick={() =>
 										handleForm(
-											"description",
-											form.description.filter((_, idx) => idx !== i),
+											"benefits",
+											form.benefits.filter((_, idx) => idx !== i),
 										)
 									}
 								>
@@ -387,9 +381,7 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 							className="update-btn"
 							style={{ margin: "0 auto" }}
 							type="button"
-							onClick={() =>
-								handleForm("description", [...form.description, ""])
-							}
+							onClick={() => handleForm("benefits", [...form.benefits, ""])}
 						>
 							+
 						</button>

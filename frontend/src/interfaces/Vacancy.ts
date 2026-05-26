@@ -7,7 +7,8 @@ export interface VacancyInterface {
 	address?: string;
 	address_url?: string;
 	title: string;
-	description: string[];
+	description: string;
+	benefits: string[];
 	salary: number;
 	requirements?: string[];
 	responsibilities?: string[];
