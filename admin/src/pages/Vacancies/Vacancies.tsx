@@ -3,6 +3,7 @@ import { supabase } from "./../../lib/supabase";
 import type { Vacancy, VacancyForm } from "../../interfaces/Vacancy";
 import ImageDropzone from "../../components/ImgDropzone/ImgDropzone";
 import "./styles.scss";
+import MagicIcon from "../../components/icons/MagicIcon";
 
 const EMPTY_FORM: VacancyForm = {
 	id: "",
@@ -38,6 +39,7 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 	const [loading, setLoading] = useState(false);
 	const [deleteModal, setDeleteModal] = useState(false);
 	const [idToDelete, setIdToDelete] = useState("");
+	const [aiLoading, setAiLoading] = useState(false);
 
 	const filteredVacancies = vacancies.filter((vacancy) =>
 		Object.values(vacancy).some((value) =>
@@ -264,6 +266,42 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 		setDeleteModal(false);
 	};
 
+	const generateId = async () => {
+		if (!form.title) return;
+
+		setAiLoading(true);
+
+		try {
+			const res = await fetch(
+				"https://api.groq.com/openai/v1/chat/completions",
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${import.meta.env.VITE_GROQ_API_KEY}`,
+					},
+					body: JSON.stringify({
+						model: "llama-3.1-8b-instant",
+						messages: [
+							{
+								role: "user",
+								content: `Translate this Ukrainian job title to English and convert to a URL slug (lowercase, hyphens, max 5 words): "${form.title}". Return only the slug.`,
+							},
+						],
+					}),
+				},
+			);
+
+			const data = await res.json();
+			const slug = data.choices[0].message.content.trim();
+			handleForm("id", slug);
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setAiLoading(false);
+		}
+	};
+
 	return (
 		<>
 			<div
@@ -311,6 +349,18 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 							}}
 							value={form.id}
 						/>
+						<button
+							className="ai-btn"
+							type="button"
+							onClick={generateId}
+							disabled={!form.title}
+						>
+							<MagicIcon />
+							<span> {aiLoading ? "Зачекайте..." : "Згенерувати ID"}</span>
+							<div className="hoverEffect">
+								<div></div>
+							</div>
+						</button>
 					</div>
 					<div className="input-container">
 						<label htmlFor="">Зображення</label>
