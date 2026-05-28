@@ -1,6 +1,7 @@
 export interface Vacancy {
 	id: string;
-	img: string;
+	// URL from Supabase Storage
+	img: string | null;
 	is_active: boolean;
 	place: string;
 	address: string;
@@ -15,4 +16,10 @@ export interface Vacancy {
 	updated_at: string;
 	hot_vacancy: boolean;
 	badges: string[] | null;
+}
+
+export interface VacancyForm extends Omit<Vacancy, "img" | "updated_at"> {
+	// local file before upload
+	img: File | null;
+	current_img: string | null;
 }

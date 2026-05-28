@@ -1,13 +1,12 @@
 import { useState, useRef } from "react";
 import { supabase } from "./../../lib/supabase";
-import type { Vacancy } from "../../interfaces/Vacancy";
+import type { Vacancy, VacancyForm } from "../../interfaces/Vacancy";
+import ImageDropzone from "../../components/ImgDropzone/ImgDropzone";
 import "./styles.scss";
 
-export type VacancySave = Omit<Vacancy, "updated_at">;
-
-const EMPTY_FORM = {
+const EMPTY_FORM: VacancyForm = {
 	id: "",
-	img: "",
+	img: null,
 	is_active: true,
 	place: "",
 	address: "",
@@ -21,6 +20,7 @@ const EMPTY_FORM = {
 	badges: null as string[] | null,
 	job_type: "",
 	hot_vacancy: false,
+	current_img: null,
 };
 
 type LeadsProps = {
@@ -49,7 +49,7 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 
 	const handleForm = (
 		name: string,
-		value: string | string[] | boolean | number,
+		value: string | string[] | boolean | number | File | null,
 	) => {
 		setForm((prev) => ({ ...prev, [name]: value }));
 	};
@@ -57,16 +57,45 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 	const modal = useRef<HTMLDivElement>(null);
 
 	// Supabase
-	const insertOne = async (data: VacancySave) => {
+	const insertOne = async (data: VacancyForm) => {
 		setError(null);
 		setLoading(true);
 
-		const cleaned: Partial<VacancySave> = {
-			...data,
+		const uploadImage = async (file: File) => {
+			const fileName = file.name;
+
+			const { error } = await supabase.storage
+				.from("vacancies")
+				.upload(fileName, file);
+
+			if (error) {
+				console.log(`Помилка завантаження фото: ${error.message}`);
+				return null;
+			}
+
+			const { data: urlData } = supabase.storage
+				.from("vacancies")
+				.getPublicUrl(fileName);
+
+			return urlData.publicUrl;
+		};
+
+		let imageUrl: string | null = null;
+
+		if (data.img) {
+			imageUrl = await uploadImage(data.img);
+		}
+
+		// remove File object
+		const { img, ...rest } = data;
+
+		const cleaned: Partial<Vacancy> = {
+			...rest,
 			badges: data.badges?.filter((b) => b.trim() !== ""),
 			benefits: data.benefits?.filter((d) => d.trim() !== ""),
 			responsibilities: data.responsibilities?.filter((r) => r.trim() !== ""),
 			requirements: data.requirements?.filter((r) => r.trim() !== ""),
+			img: imageUrl,
 		};
 
 		const { error } = await supabase.from("vacancies").insert([cleaned]);
@@ -85,22 +114,82 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 		return true;
 	};
 
+	// TODO: learn this
 	const deleteOne = async (id: string) => {
+		// 1. Get the vacancy to extract image filename
+		const { data: vacancy } = await supabase
+			.from("vacancies")
+			.select("img")
+			.eq("id", id)
+			.single();
+
+		// 2. Delete the image from storage if it exists
+		if (vacancy?.img) {
+			const fileName = vacancy.img.split("/").pop(); // extracts "1779959644976-665rad.png"
+			if (fileName) {
+				const { error: storageError } = await supabase.storage
+					.from("vacancies")
+					.remove([fileName]);
+				if (storageError)
+					console.error("Storage delete error:", storageError.message);
+			}
+		}
+
 		const { error } = await supabase.from("vacancies").delete().eq("id", id);
 		if (error) console.error("Delete error:", error.message);
 		else load();
 	};
 
-	const updateOne = async (id: string, data: Partial<VacancySave>) => {
+	const updateOne = async (id: string, data: Partial<VacancyForm>) => {
 		setError(null);
 		setLoading(true);
 
-		const cleaned: Partial<VacancySave> = {
-			...data,
+		const uploadImage = async (file: File) => {
+			const fileName = file.name;
+
+			const { error } = await supabase.storage
+				.from("vacancies")
+				.upload(fileName, file, {
+					contentType: file.type, // Допомагає серверу Supabase правильно прийняти бінарні дані
+					cacheControl: "3600",
+					upsert: false,
+				});
+
+			if (error) {
+				console.log(`Помилка завантаження фото: ${error.message}`);
+				return null;
+			}
+
+			const { data: urlData } = supabase.storage
+				.from("vacancies")
+				.getPublicUrl(fileName);
+
+			return urlData.publicUrl;
+		};
+
+		let imageUrl: string | null = data.current_img ?? null; // keep existing by default
+
+		if (data.img) {
+			// Delete old image from storage first
+			if (data.current_img) {
+				const oldFileName = data.current_img.split("/").pop();
+				if (oldFileName) {
+					await supabase.storage.from("vacancies").remove([oldFileName]);
+				}
+			}
+			imageUrl = await uploadImage(data.img);
+		}
+
+		// remove File object
+		const { img, current_img, ...rest } = data;
+
+		const cleaned: Partial<Vacancy> = {
+			...rest,
 			badges: data.badges?.filter((b) => b.trim() !== ""),
 			benefits: data.benefits?.filter((d) => d.trim() !== ""),
 			responsibilities: data.responsibilities?.filter((r) => r.trim() !== ""),
 			requirements: data.requirements?.filter((r) => r.trim() !== ""),
+			img: imageUrl,
 		};
 
 		const { error } = await supabase
@@ -127,7 +216,7 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 	const toggleHotVacancy = async (id: string, value: boolean) =>
 		supabase.from("vacancies").update({ hot_vacancy: value }).eq("id", id);
 
-	const handleSave = async (form: VacancySave) => {
+	const handleSave = async (form: VacancyForm) => {
 		if (isNew) {
 			await insertOne(form);
 		} else {
@@ -223,22 +312,14 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 							value={form.id}
 						/>
 					</div>
-					{form.img && (
-						<img
-							style={{ margin: "0 auto" }}
-							src={form.img}
-							width={250}
-							alt=""
-						/>
-					)}
 					<div className="input-container">
 						<label htmlFor="">Зображення</label>
-						<input
-							className="input"
-							type="text"
-							name="img"
-							onChange={(e) => handleForm(e.target.name, e.target.value)}
-							value={form.img}
+						{/* TODO: LEARN THIS */}
+						<ImageDropzone
+							onFileSelect={(file) => handleForm("img", file)}
+							previewUrl={
+								form.img ? URL.createObjectURL(form.img) : form.current_img
+							}
 						/>
 					</div>
 					<div className="input-container">
@@ -250,7 +331,7 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 								name="place"
 								onChange={(e) => handleForm(e.target.name, e.target.value)}
 								value={form.place}
-								placeholder="Вкажіть місто"
+								placeholder="Вкажіть місто або виберіть з списку"
 							/>
 							<select
 								name="place"
@@ -297,6 +378,7 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 							name="title"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.title}
+							placeholder="Наприклад: Працівниця на кухню в місті Колін"
 						/>
 					</div>
 					<div className="input-container">
@@ -540,6 +622,7 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 							name="job_type"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.job_type}
+							placeholder="Наприклад: Доглядання"
 						/>
 					</div>
 					<div className="input-container">
@@ -556,7 +639,7 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 											next[i] = e.target.value;
 											handleForm("badges", next);
 										}}
-										placeholder={`Вкажіть ключове слово ${i + 1}`}
+										placeholder={`Вкажіть ключове слово пов'язане з вакансією або виберіть з списку`}
 									/>
 									<select
 										className="select"
@@ -722,7 +805,9 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 									<tr key={v.id}>
 										<td>{i + 1}</td>
 										<td>
-											<img src={v.img} width={50} height={50} alt="" />
+											{v.img && (
+												<img src={v.img} width={50} height={50} alt="" />
+											)}
 										</td>
 										<td style={{ width: "99%" }}>{v.title}</td>
 										<td>{v.place}</td>
@@ -761,7 +846,8 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 														setFormVisible(true);
 														setForm({
 															...v,
-															img: v.img ?? "",
+															img: null,
+															current_img: v.img,
 															address: v.address ?? "",
 															address_url: v.address_url ?? "",
 															requirements: v.requirements,
