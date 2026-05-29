@@ -39,6 +39,7 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 	const [loading, setLoading] = useState(false);
 	const [deleteModal, setDeleteModal] = useState(false);
 	const [idToDelete, setIdToDelete] = useState("");
+	const [idToUpdate, setIdToUpdate] = useState("");
 	const [aiLoading, setAiLoading] = useState(false);
 
 	const filteredVacancies = vacancies.filter((vacancy) =>
@@ -142,7 +143,7 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 		else load();
 	};
 
-	const updateOne = async (id: string, data: Partial<VacancyForm>) => {
+	const updateVacancy = async (id: string, data: Partial<VacancyForm>) => {
 		setError(null);
 		setLoading(true);
 
@@ -194,17 +195,45 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 			img: imageUrl,
 		};
 
-		const { error } = await supabase
-			.from("vacancies")
-			.update(cleaned)
-			.eq("id", id);
-		if (error) {
-			if (error.code === "23505") setError("Вакансія з таким ID вже існує");
-			else console.error("Insert error:", error.message);
-			modal.current?.scrollTo({ top: 0, behavior: "smooth" });
-			setLoading(false);
-			return false;
+		if (rest.id !== idToUpdate) {
+			// ID changed — delete old row, insert new one
+			const { error: deleteError } = await supabase
+				.from("vacancies")
+				.delete()
+				.eq("id", idToUpdate);
+
+			if (deleteError) {
+				console.error("Delete error:", deleteError.message);
+				setLoading(false);
+				return false;
+			}
+
+			const { error: insertError } = await supabase
+				.from("vacancies")
+				.insert([cleaned]);
+
+			if (insertError) {
+				if (insertError.code === "23505")
+					setError("Вакансія з таким ID вже існує");
+				else console.error("Insert error:", insertError.message);
+				setLoading(false);
+				return false;
+			}
+		} else {
+			// ID unchanged — normal update
+			const { error } = await supabase
+				.from("vacancies")
+				.update(cleaned)
+				.eq("id", id);
+			if (error) {
+				if (error.code === "23505") setError("Вакансія з таким ID вже існує");
+				else console.error("Insert error:", error.message);
+				modal.current?.scrollTo({ top: 0, behavior: "smooth" });
+				setLoading(false);
+				return false;
+			}
 		}
+
 		await load();
 		setLoading(false);
 		setFormVisible(false);
@@ -222,7 +251,7 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 		if (isNew) {
 			await insertOne(form);
 		} else {
-			await updateOne(form.id, form);
+			await updateVacancy(form.id, form);
 		}
 	};
 
@@ -800,6 +829,7 @@ Now convert: "${form.title}"`,
 													className="update-btn"
 													onClick={() => {
 														setFormVisible(true);
+														setIdToUpdate(v.id);
 														setForm({
 															...v,
 															img: null,
