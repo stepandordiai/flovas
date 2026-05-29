@@ -2,8 +2,8 @@ import { useState, useRef } from "react";
 import { supabase } from "./../../lib/supabase";
 import type { Vacancy, VacancyForm } from "../../interfaces/Vacancy";
 import ImageDropzone from "../../components/ImgDropzone/ImgDropzone";
-import "./styles.scss";
 import MagicIcon from "../../components/icons/MagicIcon";
+import "./styles.scss";
 
 const EMPTY_FORM: VacancyForm = {
 	id: "",
@@ -243,17 +243,6 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 	const totalPages = Math.ceil(vacancies.length / 50);
 
 	const uniqueVacanciesPlaces = [...new Set(vacancies.map((v) => v.place))];
-	const uniqueVacanciesBenefits = [
-		...new Set(vacancies.flatMap((v) => v.benefits.map((d) => d))),
-	];
-	const uniqueVacanciesRequirements = [
-		...new Set(vacancies.flatMap((v) => v.requirements?.map((d) => d) ?? [])),
-	];
-	const uniqueVacanciesResponsibilities = [
-		...new Set(
-			vacancies.flatMap((v) => v.responsibilities?.map((d) => d) ?? []),
-		),
-	];
 
 	// TODO: learn this
 	const uniqueVacanciesBadges = [
@@ -281,11 +270,14 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 						Authorization: `Bearer ${import.meta.env.VITE_GROQ_API_KEY}`,
 					},
 					body: JSON.stringify({
-						model: "llama-3.1-8b-instant",
+						model: "llama-3.3-70b-versatile",
 						messages: [
 							{
 								role: "user",
-								content: `Translate this Ukrainian job title to English and convert to a URL slug (lowercase, hyphens, max 5 words): "${form.title}". Return only the slug.`,
+								content: `You are a Czech SEO expert. Convert this Ukrainian job title to a Czech URL slug.
+Rules: lowercase, hyphens, no diacritics, max 5 words, return ONLY the slug.
+Example: "Прибирання в будинку для літніх людей (Nepomuk)" → "uklizecka-domov-pro-seniory-nepomuk"
+Now convert: "${form.title}"`,
 							},
 						],
 					}),
@@ -455,46 +447,18 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 						<label>Переваги</label>
 						{form.benefits.map((item, i) => (
 							<div key={i} style={{ display: "flex", gap: 8 }}>
-								<div
+								<input
 									className="input"
-									style={{
-										display: "flex",
-										justifyContent: "space-between",
-										gap: "10px",
+									style={{ width: "100%" }}
+									type="text"
+									value={item}
+									onChange={(e) => {
+										const next = [...form.benefits] as string[];
+										next[i] = e.target.value;
+										handleForm("benefits", next);
 									}}
-								>
-									<input
-										style={{ width: "100%" }}
-										type="text"
-										value={item}
-										onChange={(e) => {
-											const next = [...form.benefits] as string[];
-											next[i] = e.target.value;
-											handleForm("benefits", next);
-										}}
-										placeholder={`Вкажіть опис ${i + 1}`}
-									/>
-									<select
-										className="select"
-										name="benefits"
-										onChange={(e) => {
-											const next = [...form.benefits] as string[];
-											next[i] = e.target.value;
-											handleForm("benefits", next);
-										}}
-										value={""}
-										id=""
-									>
-										<option value=""></option>
-										{uniqueVacanciesBenefits.map((p, i) => {
-											return (
-												<option key={i} value={p}>
-													{p}
-												</option>
-											);
-										})}
-									</select>
-								</div>
+									placeholder={`Вкажіть опис ${i + 1}`}
+								/>
 								<button
 									className="delete-btn"
 									type="button"
@@ -523,45 +487,18 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 						<label>Вимоги</label>
 						{(form.requirements ?? [""]).map((item, i) => (
 							<div key={i} style={{ display: "flex", gap: 8 }}>
-								<div className="input" style={{ display: "flex" }}>
-									<input
-										style={{ width: "100%" }}
-										type="text"
-										value={item}
-										onChange={(e) => {
-											const next = [...(form.requirements ?? [])] as string[];
-											next[i] = e.target.value;
-											handleForm("requirements", next);
-										}}
-										placeholder={`Вкажіть вимогу ${i + 1}`}
-									/>
-									<select
-										className="select"
-										name="requirements"
-										onChange={(e) => {
-											const next = [...(form.requirements ?? [])] as string[];
-											next[i] = e.target.value;
-											handleForm("requirements", next);
-										}}
-										value={""}
-										id=""
-									>
-										<option value=""></option>
-										{uniqueVacanciesRequirements
-											.filter(
-												(r) =>
-													!form.requirements?.includes(r) ||
-													form.requirements[i] === r,
-											)
-											.map((p, i) => {
-												return (
-													<option key={i} value={p}>
-														{p}
-													</option>
-												);
-											})}
-									</select>
-								</div>
+								<input
+									className="input"
+									style={{ width: "100%" }}
+									type="text"
+									value={item}
+									onChange={(e) => {
+										const next = [...(form.requirements ?? [])] as string[];
+										next[i] = e.target.value;
+										handleForm("requirements", next);
+									}}
+									placeholder={`Вкажіть вимогу ${i + 1}`}
+								/>
 								<button
 									className="delete-btn"
 									type="button"
@@ -591,49 +528,18 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 						<label>Обов'язки</label>
 						{(form.responsibilities ?? [""]).map((item, i) => (
 							<div key={i} style={{ display: "flex", gap: 8 }}>
-								<div className="input" style={{ display: "flex" }}>
-									<input
-										style={{ width: "100%" }}
-										type="text"
-										value={item}
-										onChange={(e) => {
-											const next = [
-												...(form.responsibilities ?? []),
-											] as string[];
-											next[i] = e.target.value;
-											handleForm("responsibilities", next);
-										}}
-										placeholder={`Вкажіть обов'язок ${i + 1}`}
-									/>
-									<select
-										className="select"
-										name="responsibilities"
-										onChange={(e) => {
-											const next = [
-												...(form.responsibilities ?? []),
-											] as string[];
-											next[i] = e.target.value;
-											handleForm("responsibilities", next);
-										}}
-										value={""}
-										id=""
-									>
-										<option value=""></option>
-										{uniqueVacanciesResponsibilities
-											.filter(
-												(r) =>
-													!form.responsibilities?.includes(r) ||
-													form.responsibilities[i] === r,
-											)
-											.map((p, i) => {
-												return (
-													<option key={i} value={p}>
-														{p}
-													</option>
-												);
-											})}
-									</select>
-								</div>
+								<input
+									className="input"
+									style={{ width: "100%" }}
+									type="text"
+									value={item}
+									onChange={(e) => {
+										const next = [...(form.responsibilities ?? [])] as string[];
+										next[i] = e.target.value;
+										handleForm("responsibilities", next);
+									}}
+									placeholder={`Вкажіть обов'язок ${i + 1}`}
+								/>
 								<button
 									className="delete-btn"
 									type="button"
