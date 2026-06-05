@@ -11,7 +11,8 @@ const EMPTY_FORM = {
 	address: "",
 	position: "",
 	message: "",
-	is_working: false,
+	status: "Новий",
+	gender: "",
 };
 
 interface Lead {
@@ -21,8 +22,9 @@ interface Lead {
 	address: string;
 	position: string;
 	message: string;
-	is_working: boolean;
+	status: string;
 	created_at: Date;
+	gender: string;
 }
 
 type LeadsProps = {
@@ -39,6 +41,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 	const [filter, setFilter] = useState("");
 	const [deleteModal, setDeleteModal] = useState(false);
 	const [idToDelete, setIdToDelete] = useState("");
+	const [formLoading, setFormLoading] = useState(false);
 
 	// TODO: learn this
 	const filteredLeads = leads.filter((lead) =>
@@ -56,20 +59,52 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 		document.documentElement.scrollTo(0, 0);
 	}, [currentPage]);
 
+	// Supabase
 	const insertLead = async (data: Lead) => {
 		setError(null);
-		const { id, ...rest } = data;
-		const { error } = await supabase.from("leads").insert([rest]);
-		if (error) {
-			if (error.code === "23505") setError("Лід з таким номером вже існує");
-			else console.error("Insert error:", error.message);
-			return false;
+		setFormLoading(true);
+
+		try {
+			const { id, ...rest } = data;
+			const { error } = await supabase.from("leads").insert([rest]);
+
+			if (error) {
+				if (error.code === "23505") setError("Лід з таким номером вже існує");
+				else console.error("Insert error:", error.message);
+				return false;
+			}
+
+			return true;
+		} finally {
+			setFormLoading(false);
 		}
-		return true;
 	};
 
-	const updateOne = async (id: string, data: Lead) =>
-		supabase.from("leads").update(data).eq("id", id);
+	const updateLead = async (id: string, data: Lead) => {
+		setError(null);
+		setFormLoading(true);
+
+		try {
+			const { id: _, ...rest } = data;
+			const { error } = await supabase.from("leads").update(rest).eq("id", id);
+
+			if (error) {
+				if (error.code === "23505") setError("Лід з таким номером вже існує");
+				else console.error("Insert error:", error.message);
+				return false;
+			}
+
+			return true;
+		} finally {
+			setFormLoading(false);
+		}
+	};
+
+	const deleteLead = async (id: string) => {
+		const { error } = await supabase.from("leads").delete().eq("id", id);
+		if (error) console.error("Delete error:", error.message);
+		else load();
+	};
 
 	// FIXME:
 	const handleSave = async (form: any) => {
@@ -77,7 +112,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 			const ok = await insertLead(form);
 			if (!ok) return;
 		} else {
-			await updateOne(form.id, form);
+			await updateLead(form.id, form);
 		}
 		setForm(EMPTY_FORM);
 		setIsNew(false);
@@ -86,24 +121,18 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 	};
 
 	const handleDelete = () => {
-		deleteOne(idToDelete);
+		deleteLead(idToDelete);
 		setIdToDelete("");
 		setDeleteModal(false);
 	};
 
-	const deleteOne = async (id: string) => {
-		const { error } = await supabase.from("leads").delete().eq("id", id);
-		if (error) console.error("Delete error:", error.message);
-		else load();
-	};
+	const toggleIsWorking = async (id: string, value: string) =>
+		supabase.from("leads").update({ status: value }).eq("id", id);
 
-	const toggleIsWorking = async (id: string, value: boolean) =>
-		supabase.from("leads").update({ is_working: value }).eq("id", id);
-
-	const handleToggleIsWorking = async (id: string, current: boolean) => {
-		await toggleIsWorking(id, !current);
+	const handleStatus = async (id: string, current: string) => {
+		await toggleIsWorking(id, current);
 		setLeads((prev) =>
-			prev.map((v) => (v.id === id ? { ...v, is_working: !current } : v)),
+			prev.map((v) => (v.id === id ? { ...v, status: current } : v)),
 		);
 	};
 
@@ -143,8 +172,9 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 					}}
 				>
 					<div className="input-container">
-						<label htmlFor="">Імя</label>
+						<label htmlFor="name">Імя</label>
 						<input
+							id="name"
 							className="input"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.name}
@@ -153,8 +183,9 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 						/>
 					</div>
 					<div className="input-container">
-						<label htmlFor="">Номер телефону</label>
+						<label htmlFor="tel">Номер телефону</label>
 						<input
+							id="tel"
 							className="input"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.tel}
@@ -163,8 +194,34 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 						/>
 					</div>
 					<div className="input-container">
-						<label htmlFor="">Адреса</label>
+						<label>Стать</label>
+						<div style={{ display: "flex" }}>
+							<label>
+								<input
+									type="radio"
+									name="gender"
+									value="Жінка"
+									checked={form.gender === "Жінка"}
+									onChange={(e) => handleForm(e.target.name, e.target.value)}
+								/>
+								Жінка
+							</label>
+							<label>
+								<input
+									type="radio"
+									name="gender"
+									value="Чоловік"
+									checked={form.gender === "Чоловік"}
+									onChange={(e) => handleForm(e.target.name, e.target.value)}
+								/>
+								Чоловік
+							</label>
+						</div>
+					</div>
+					<div className="input-container">
+						<label htmlFor="address">Адреса</label>
 						<input
+							id="address"
 							className="input"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.address}
@@ -173,8 +230,9 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 						/>
 					</div>
 					<div className="input-container">
-						<label htmlFor="">Позиція</label>
+						<label htmlFor="position">Позиція</label>
 						<input
+							id="position"
 							className="input"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.position}
@@ -183,8 +241,9 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 						/>
 					</div>
 					<div className="input-container">
-						<label htmlFor="">Повідомлення</label>
+						<label htmlFor="message">Повідомлення</label>
 						<input
+							id="message"
 							className="input"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.message}
@@ -193,7 +252,13 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 						/>
 					</div>
 					<button className="form__submit-btn" type="submit">
-						{isNew ? "Створити" : "Змінити"}
+						{formLoading
+							? isNew
+								? "Створення..."
+								: "Збереження..."
+							: isNew
+								? "Створити"
+								: "Змінити"}
 					</button>
 				</form>
 			</div>
@@ -288,6 +353,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 									<th style={{ width: "1%" }}>№</th>
 									<th>Ім'я</th>
 									<th>Номер телефону</th>
+									<th>Стать</th>
 									<th>Адреса</th>
 									<th>Позиція</th>
 									<th>Повідомлення</th>
@@ -325,18 +391,25 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 													)}
 												</td>
 												<td>{l.tel}</td>
+												<td>{l.gender}</td>
 												<td>{l.address}</td>
 												<td>{l.position}</td>
 												<td style={{ maxWidth: "200px" }}>{l.message}</td>
 												<td style={{ width: "1%", whiteSpace: "nowrap" }}>
-													<button
-														onClick={() =>
-															handleToggleIsWorking(l.id, l.is_working)
-														}
-														className={`status-btn ${!l.is_working ? "status-btn--inactive" : ""}`}
+													<select
+														className={`status-select ${l.status === "Знайшов роботу" ? "status-select--orange" : l.status === "Працює" ? "status-select--blue" : l.status === "Неактивний" ? "status-select--red" : ""}`}
+														name="status"
+														id="status"
+														onChange={(e) => handleStatus(l.id, e.target.value)}
+														value={l.status || ""}
 													>
-														{l.is_working ? "Працює" : "Не працює"}
-													</button>
+														<option value="Новий">Новий</option>
+														<option value="Знайшов роботу">
+															Знайшов роботу
+														</option>
+														<option value="Працює">Працює</option>
+														<option value="Неактивний">Неактивний</option>
+													</select>
 												</td>
 												<td style={{ width: "1%" }}>
 													<div style={{ display: "flex", gap: "5px" }}>

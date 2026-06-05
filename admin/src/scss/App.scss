@@ -135,7 +135,7 @@ table {
 	}
 }
 
-.status-btn {
+.status-select {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -147,9 +147,19 @@ table {
 	height: 50px;
 	border-radius: 25px;
 
-	&--inactive {
-		background: rgb(253, 212, 207) !important;
-		color: rgb(222, 92, 77) !important;
+	&--orange {
+		background: rgb(255, 234, 189);
+		color: rgb(227, 158, 80);
+	}
+
+	&--red {
+		background: rgb(253, 212, 207);
+		color: rgb(222, 92, 77);
+	}
+
+	&--blue {
+		background: rgb(207, 244, 253);
+		color: rgb(77, 191, 222);
 	}
 }
 
