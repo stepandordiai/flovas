@@ -302,11 +302,39 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 						model: "llama-3.3-70b-versatile",
 						messages: [
 							{
+								role: "system",
+								content: `You convert Ukrainian or Czech job titles into Czech URL slugs.
+
+OUTPUT FORMAT (strict):
+- Return ONLY the slug, nothing else
+- No quotes, no explanation, no prefix, no newline before/after
+- Lowercase ASCII only
+- Words separated by single hyphens
+- No diacritics (á→a, č→c, ě→e, í→i, ň→n, ř→r, š→s, ť→t, ú→u, ů→u, ý→y, ž→z)
+- Max 5 words
+- Translate Ukrainian terms to Czech first, then slugify
+- Keep city/location in parentheses as the last word(s)
+- Strip filler words (v, na, pro, do, the, a) unless needed for meaning
+
+EXAMPLES:
+Input: "Прибирання в будинку для літніх людей (Nepomuk)"
+Output: uklizecka-domov-pro-seniory-nepomuk
+
+Input: "Робітник на склад (Plzeň)"
+Output: skladnik-plzen
+
+Input: "Údržbář budov (Praha 4)"
+Output: udrzbar-budov-praha-4
+
+Input: "Помічник кухаря (Brno)"
+Output: pomocnik-kuchare-brno
+
+Input: "Швачка на виробництві"
+Output: svadlena-vyroba`,
+							},
+							{
 								role: "user",
-								content: `You are a Czech SEO expert. Convert this Ukrainian job title to a Czech URL slug.
-Rules: lowercase, hyphens, no diacritics, max 5 words, return ONLY the slug.
-Example: "Прибирання в будинку для літніх людей (Nepomuk)" → "uklizecka-domov-pro-seniory-nepomuk"
-Now convert: "${form.title}"`,
+								content: form.title,
 							},
 						],
 					}),

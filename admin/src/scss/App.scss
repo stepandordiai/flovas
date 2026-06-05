@@ -135,6 +135,24 @@ table {
 	}
 }
 
+.status-btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	background: rgb(222, 252, 130);
+	color: rgb(72, 97, 20);
+	border: none;
+	min-width: 50px;
+	height: 50px;
+	border-radius: 25px;
+
+	&--inactive {
+		background: rgb(253, 212, 207);
+		color: rgb(222, 92, 77);
+	}
+}
+
 .status-select {
 	display: flex;
 	justify-content: center;
