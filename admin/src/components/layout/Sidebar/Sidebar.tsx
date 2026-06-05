@@ -1,13 +1,19 @@
 import { NavLink } from "react-router-dom";
-import "./styles.scss";
 import HouseIcon from "../../icons/HouseIcon";
 import { useState } from "react";
 import PeopleIcon from "../../icons/PeopleIcon";
 import CollectionIcon from "../../icons/CollectionIcon";
 import CollapseIcon from "../../icons/CollapseIcon";
+import { supabase } from "../../../lib/supabase";
+import "./styles.scss";
 
 const Sidebar = () => {
 	const [collapsed, setCollapsed] = useState(false);
+
+	// TODO: LEARN THIS
+	const handleLogout = async () => {
+		await supabase.auth.signOut();
+	};
 
 	return (
 		<aside className={`sidebar ${collapsed ? "sidebar--collapsed" : ""}`}>
@@ -52,6 +58,10 @@ const Sidebar = () => {
 					<span className={collapsed ? "label" : ""}>Ліди</span>
 				</NavLink>
 			</nav>
+
+			<button className="logout-btn" onClick={handleLogout}>
+				Вийти
+			</button>
 		</aside>
 	);
 };

@@ -111,9 +111,6 @@
 	border: 2px solid var(--bg-clr);
 	white-space: nowrap;
 
-	svg {
-	}
-
 	&--active {
 		background: #fff;
 		border: 2px solid var(--border-clr);
@@ -123,6 +120,15 @@
 
 .label {
 	display: none;
+}
+
+.logout-btn {
+	background: rgb(253, 212, 207);
+	color: rgb(222, 92, 77);
+	width: 100%;
+	padding: 0.75rem;
+	border-radius: 20px;
+	margin-top: auto;
 }
 
 @media screen and (width < 700px) {

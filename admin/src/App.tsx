@@ -5,13 +5,33 @@ import Leads from "./pages/Leads/Leads";
 import Vacancies from "./pages/Vacancies/Vacancies";
 import { useState, useEffect } from "react";
 import { supabase } from "./lib/supabase";
+import type { Session } from "@supabase/supabase-js";
 import type { Vacancy } from "./interfaces/Vacancy";
 import type { Lead } from "./interfaces/Lead";
+import Login from "./pages/Login/Login";
 import "./scss/App.scss";
 
 function App() {
 	const [leads, setLeads] = useState<Lead[]>([]);
 	const [vacancies, setVacancies] = useState<Vacancy[]>([]);
+	const [session, setSession] = useState<Session | null>(null);
+	const [authLoading, setAuthLoading] = useState(true);
+
+	// TODO: LEARN THIS
+	useEffect(() => {
+		supabase.auth.getSession().then(({ data }) => {
+			setSession(data.session);
+			setAuthLoading(false);
+		});
+
+		const { data: listener } = supabase.auth.onAuthStateChange(
+			(_event, session) => {
+				setSession(session);
+			},
+		);
+
+		return () => listener.subscription.unsubscribe();
+	}, []);
 
 	const getAllLeads = async () =>
 		supabase
@@ -36,12 +56,15 @@ function App() {
 	};
 
 	useEffect(() => {
-		loadLeads();
-	}, []);
-
+		if (session) loadLeads();
+	}, [session]);
 	useEffect(() => {
-		loadVacancies();
-	}, []);
+		if (session) loadVacancies();
+	}, [session]);
+
+	// TODO: learn this
+	if (authLoading) return null; // or a spinner
+	if (!session) return <Login />;
 
 	return (
 		<Router>
