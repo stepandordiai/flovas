@@ -2,6 +2,7 @@ import { supabase } from "../../lib/supabase";
 import { useState, useEffect } from "react";
 import EditIcon from "../../components/icons/EditIcon";
 import TrashIcon from "../../components/icons/TrashIcon";
+import type { Lead } from "../../interfaces/Lead";
 import "./styles.scss";
 
 const EMPTY_FORM = {
@@ -14,18 +15,6 @@ const EMPTY_FORM = {
 	status: "Новий",
 	gender: "",
 };
-
-interface Lead {
-	id: string;
-	name: string;
-	tel: string;
-	address: string;
-	position: string;
-	message: string;
-	status: string;
-	created_at: Date;
-	gender: string;
-}
 
 type LeadsProps = {
 	leads: Lead[];

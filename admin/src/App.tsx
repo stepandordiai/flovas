@@ -6,18 +6,8 @@ import Vacancies from "./pages/Vacancies/Vacancies";
 import { useState, useEffect } from "react";
 import { supabase } from "./lib/supabase";
 import type { Vacancy } from "./interfaces/Vacancy";
+import type { Lead } from "./interfaces/Lead";
 import "./scss/App.scss";
-
-interface Lead {
-	id: string;
-	name: string;
-	tel: string;
-	address: string;
-	position: string;
-	message: string;
-	is_working: boolean;
-	created_at: Date;
-}
 
 function App() {
 	const [leads, setLeads] = useState<Lead[]>([]);
