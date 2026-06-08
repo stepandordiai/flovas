@@ -6,6 +6,7 @@ export interface Lead {
 	position: string;
 	message: string;
 	status: string;
-	created_at: Date;
 	gender: string;
+	messengers: string[];
+	created_at: Date;
 }

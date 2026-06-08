@@ -5,7 +5,9 @@ import TrashIcon from "../../components/icons/TrashIcon";
 import type { Lead } from "../../interfaces/Lead";
 import "./styles.scss";
 
-const EMPTY_FORM = {
+type LeadForm = Omit<Lead, "created_at">;
+
+const EMPTY_FORM: LeadForm = {
 	id: "",
 	name: "",
 	tel: "",
@@ -13,6 +15,7 @@ const EMPTY_FORM = {
 	position: "",
 	message: "",
 	status: "Новий",
+	messengers: [],
 	gender: "",
 };
 
@@ -40,7 +43,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 	);
 	const [currentPage, setCurrentPage] = useState(1);
 
-	const handleForm = (name: string, value: string) => {
+	const handleForm = (name: string, value: string | string[]) => {
 		setForm((prev) => ({ ...prev, [name]: value }));
 	};
 
@@ -125,6 +128,14 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 		);
 	};
 
+	const handleMessenger = (value: string, checked: boolean) => {
+		const current = form.messengers ?? [];
+		const updated = checked
+			? [...current, value]
+			: current.filter((m) => m !== value);
+		handleForm("messengers", updated);
+	};
+
 	const totalPages = Math.ceil(leads.length / 50);
 
 	return (
@@ -181,6 +192,39 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 							name="tel"
 							type="text"
 						/>
+					</div>
+					<div>
+						<label htmlFor="">Месенджери</label>
+						<div style={{ display: "flex" }}>
+							<label>
+								<input
+									type="checkbox"
+									checked={form.messengers?.includes("whatsapp") ?? false}
+									onChange={(e) =>
+										handleMessenger("whatsapp", e.target.checked)
+									}
+								/>
+								WhatsApp
+							</label>
+							<label>
+								<input
+									type="checkbox"
+									checked={form.messengers?.includes("telegram") ?? false}
+									onChange={(e) =>
+										handleMessenger("telegram", e.target.checked)
+									}
+								/>
+								Telegram
+							</label>
+							<label>
+								<input
+									type="checkbox"
+									checked={form.messengers?.includes("viber") ?? false}
+									onChange={(e) => handleMessenger("viber", e.target.checked)}
+								/>
+								Viber
+							</label>
+						</div>
 					</div>
 					<div className="input-container">
 						<label>Стать</label>
@@ -342,6 +386,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 									<th style={{ width: "1%" }}>№</th>
 									<th>Ім'я</th>
 									<th>Номер телефону</th>
+									<th>Мессенджери</th>
 									<th>Стать</th>
 									<th>Адреса</th>
 									<th>Позиція</th>
@@ -380,6 +425,21 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 													)}
 												</td>
 												<td>{l.tel}</td>
+												<td>
+													<div style={{ display: "flex", gap: "5px" }}>
+														{l.messengers.map((m, i) => {
+															return (
+																<img
+																	key={i}
+																	src={`${m}.svg`}
+																	width={20}
+																	height={20}
+																	alt=""
+																/>
+															);
+														})}
+													</div>
+												</td>
 												<td>{l.gender}</td>
 												<td>{l.address}</td>
 												<td>{l.position}</td>
