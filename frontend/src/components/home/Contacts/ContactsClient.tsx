@@ -3,9 +3,8 @@
 import { useTranslations } from "next-intl";
 import { isValidTel } from "@/utils/validators";
 import { useState } from "react";
-import axios from "axios";
 import classNames from "classnames";
-import { supabase } from "@/lib/supabase";
+import { supabase, supabaseF } from "@/lib/supabase";
 
 const initContactsForm = {
 	name: "",
@@ -23,6 +22,7 @@ export default function ContactsClient() {
 	const [success, setSuccess] = useState(false);
 	const [contactsForm, setContactsForm] = useState(initContactsForm);
 
+	// TODO: !
 	const createContactsLead = async (e: React.FormEvent) => {
 		e.preventDefault();
 		setError(null);
@@ -34,17 +34,26 @@ export default function ContactsClient() {
 
 		setLoading(true);
 
-		const { error } = await supabase.from("leads").insert([contactsForm]);
-		if (error) {
-			console.error("Insert error:", error.message);
-			setError(error.message);
-			setLoading(false);
-		} else {
+		try {
+			const { error } = await supabase.from("leads").insert([contactsForm]);
+			const { error: errorF } = await supabaseF
+				.from("leads")
+				.insert([contactsForm]);
+
+			// handle unexpected errors
+			// TODO: 23505 - supabase dublicate
+			if (
+				(error && error.code !== "23505") ||
+				(errorF && errorF.code !== "23505")
+			) {
+				setError("Помилка при створенні ліда");
+				return;
+			}
+
 			setSuccess(true);
 			setContactsForm(initContactsForm);
-			setTimeout(() => {
-				setSuccess(false);
-			}, 3000);
+			setTimeout(() => setSuccess(false), 3000);
+		} finally {
 			setLoading(false);
 		}
 	};

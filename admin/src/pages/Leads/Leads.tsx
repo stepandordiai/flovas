@@ -1,4 +1,4 @@
-import { supabase } from "../../lib/supabase";
+import { supabase, supabaseF } from "../../lib/supabase";
 import { useState, useEffect } from "react";
 import EditIcon from "../../components/icons/EditIcon";
 import TrashIcon from "../../components/icons/TrashIcon";
@@ -52,17 +52,30 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 	}, [currentPage]);
 
 	// Supabase
+	// TODO: !
 	const insertLead = async (data: Lead) => {
 		setError(null);
 		setFormLoading(true);
 
 		try {
 			const { id, ...rest } = data;
-			const { error } = await supabase.from("leads").insert([rest]);
 
-			if (error) {
-				if (error.code === "23505") setError("Лід з таким номером вже існує");
-				else console.error("Insert error:", error.message);
+			const { error } = await supabase.from("leads").insert([rest]);
+			const { error: errorF } = await supabaseF.from("leads").insert([rest]);
+
+			// exists in both — show error
+			if (error?.code === "23505" && errorF?.code === "23505") {
+				setError("Лід з таким номером вже існує");
+				return false;
+			}
+
+			// handle unexpected errors
+			if (error && error.code !== "23505") {
+				console.error("DB1:", error.message);
+				return false;
+			}
+			if (errorF && errorF.code !== "23505") {
+				console.error("DB2:", errorF.message);
 				return false;
 			}
 
