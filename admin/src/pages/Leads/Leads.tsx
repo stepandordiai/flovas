@@ -43,7 +43,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 	);
 	const [currentPage, setCurrentPage] = useState(1);
 
-	const handleForm = (name: string, value: string | string[]) => {
+	const handleForm = (name: string, value: unknown) => {
 		setForm((prev) => ({ ...prev, [name]: value }));
 	};
 
@@ -141,11 +141,17 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 		);
 	};
 
+	// type Messenger = { name: string; isAvailable: boolean };
+
 	const handleMessenger = (value: string, checked: boolean) => {
 		const current = form.messengers ?? [];
-		const updated = checked
-			? [...current, value]
-			: current.filter((m) => m !== value);
+		const exists = current.find((m) => m.name === value);
+
+		const updated = exists
+			? current.map((m) =>
+					m.name === value ? { ...m, isAvailable: checked } : m,
+				)
+			: [...current, { name: value, isAvailable: checked }];
 		handleForm("messengers", updated);
 	};
 
@@ -208,35 +214,37 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 					</div>
 					<div>
 						<label htmlFor="">Месенджери</label>
-						<div style={{ display: "flex" }}>
-							<label>
-								<input
-									type="checkbox"
-									checked={form.messengers?.includes("whatsapp") ?? false}
-									onChange={(e) =>
-										handleMessenger("whatsapp", e.target.checked)
-									}
-								/>
-								WhatsApp
-							</label>
-							<label>
-								<input
-									type="checkbox"
-									checked={form.messengers?.includes("telegram") ?? false}
-									onChange={(e) =>
-										handleMessenger("telegram", e.target.checked)
-									}
-								/>
-								Telegram
-							</label>
-							<label>
-								<input
-									type="checkbox"
-									checked={form.messengers?.includes("viber") ?? false}
-									onChange={(e) => handleMessenger("viber", e.target.checked)}
-								/>
-								Viber
-							</label>
+						<div style={{ display: "flex", flexWrap: "wrap" }}>
+							{(["whatsapp", "telegram", "viber"] as const).map((name) => {
+								const messenger = form.messengers?.find((m) => m.name === name);
+								const isAvailable = messenger?.isAvailable;
+
+								return (
+									<div key={name}>
+										<label style={{ textTransform: "capitalize" }}>
+											{name}
+										</label>
+										<div style={{ display: "flex" }}>
+											<label>
+												<input
+													type="radio"
+													checked={isAvailable === true}
+													onChange={() => handleMessenger(name, true)}
+												/>
+												Так
+											</label>
+											<label>
+												<input
+													type="radio"
+													checked={isAvailable === false}
+													onChange={() => handleMessenger(name, false)}
+												/>
+												Ні
+											</label>
+										</div>
+									</div>
+								);
+							})}
 						</div>
 					</div>
 					<div className="input-container">
@@ -440,17 +448,47 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 												<td>{l.tel}</td>
 												<td>
 													<div style={{ display: "flex", gap: "5px" }}>
-														{l.messengers.map((m, i) => {
-															return (
+														{l.messengers
+															.filter((m) => m.isAvailable)
+															.map((m, i) => (
 																<img
 																	key={i}
-																	src={`${m}.svg`}
+																	src={`${m.name}.svg`}
 																	width={20}
 																	height={20}
-																	alt=""
+																	alt={m.name}
 																/>
-															);
-														})}
+															))}
+														{l.messengers
+															.filter((m) => !m.isAvailable)
+															.map((m, i) => (
+																<div
+																	key={m.name}
+																	style={{ position: "relative" }}
+																>
+																	<img
+																		key={i}
+																		src={`${m.name}.svg`}
+																		width={20}
+																		height={20}
+																		alt={m.name}
+																	/>
+																	<span
+																		style={{ position: "absolute", inset: "0" }}
+																	>
+																		<svg
+																			xmlns="http://www.w3.org/2000/svg"
+																			width="100%"
+																			height="100%"
+																			fill="red"
+																			className="bi bi-x-lg"
+																			viewBox="0 0 16 16"
+																		>
+																			<path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+																		</svg>
+																	</span>
+																</div>
+															))}
 													</div>
 												</td>
 												<td>{l.gender}</td>

@@ -32,7 +32,7 @@ const Home = ({ leads, vacancies }: HomeProps) => {
 				{uniqueVacanciesPlaces.map((p) => {
 					const vacanciesInPlace = vacancies.filter((v) => v.place === p);
 					return (
-						<div className="home-container">
+						<div key={p} className="home-container">
 							<p>Вакансій в {p}</p>
 							<p>{vacanciesInPlace.length}</p>
 						</div>
