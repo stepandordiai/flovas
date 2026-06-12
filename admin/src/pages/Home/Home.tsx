@@ -1,5 +1,6 @@
 import type { Vacancy } from "../../interfaces/Vacancy";
 import type { Lead } from "../../interfaces/Lead";
+import Chart from "../../components/Chart/Chart";
 import "./Home.scss";
 
 type HomeProps = {
@@ -13,61 +14,84 @@ const Home = ({ leads, vacancies }: HomeProps) => {
 	return (
 		<main className="main">
 			<h1 className="main__title">Головна</h1>
-			<h2>Вакансії</h2>
 			<div className="home-inner">
-				<div className="home-container">
-					<p>Всіх вакансій</p>
-					<p>{vacancies.length}</p>
+				<h2 style={{ fontSize: "1.5rem" }}>Ліди</h2>
+				<div style={{ background: "#fff", borderRadius: "25px" }}>
+					<Chart
+						items={leads}
+						stats={[
+							{
+								label: "Чоловік",
+								color: "var(--sec-accent-clr)",
+								filter: (l) => l.gender === "Чоловік",
+							},
+							{
+								label: "Жінка",
+								color: "var(--sec-accent-clr)",
+								filter: (l) => l.gender === "Жінка",
+							},
+							{
+								label: "Інше",
+								color: "var(--sec-accent-clr)",
+								filter: (l) => l.gender !== "Чоловік" && l.gender !== "Жінка",
+							},
+						]}
+						label="Кількість"
+					/>
 				</div>
-				<div className="home-container">
-					<p>Активних вакансій</p>
-					<p>
-						{vacancies.filter((v) => v.is_active).length}/{vacancies.length}
-					</p>
+				<div style={{ background: "#fff", borderRadius: "25px" }}>
+					<Chart
+						items={leads}
+						stats={[
+							{
+								label: "Новий",
+								color: "var(--sec-accent-clr)",
+								filter: (l) => l.status === "Новий",
+							},
+							{
+								label: "Знайшов роботу",
+								color: "var(--sec-accent-clr)",
+								filter: (l) => l.status === "Знайшов роботу",
+							},
+							{
+								label: "Працює",
+								color: "var(--sec-accent-clr)",
+								filter: (l) => l.status === "Працює",
+							},
+							{
+								label: "Неактивний",
+								color: "var(--sec-accent-clr)",
+								filter: (l) => l.status === "Неактивний",
+							},
+						]}
+						label="Кількість"
+					/>
 				</div>
-				<div className="home-container">
-					<p>Гарячих вакансій</p>
-					<p>{vacancies.filter((v) => v.hot_vacancy).length}</p>
-				</div>
-				{uniqueVacanciesPlaces.map((p) => {
-					const vacanciesInPlace = vacancies.filter((v) => v.place === p);
-					return (
-						<div key={p} className="home-container">
-							<p>Вакансій в {p}</p>
-							<p>{vacanciesInPlace.length}</p>
-						</div>
-					);
-				})}
-			</div>
-			<h2>Ліди</h2>
-			<div className="home-inner">
-				<div className="home-container">
-					<p>Всіх лідів</p>
-					<p>{leads.length}</p>
-				</div>
-				<div className="home-container">
-					<p>К-сть лідів "Чоловік"</p>
-					<p>{leads.filter((l) => l.gender === "Чоловік").length}</p>
-				</div>
-				<div className="home-container">
-					<p>К-сть лідів "Жінка"</p>
-					<p>{leads.filter((l) => l.gender === "Жінка").length}</p>
-				</div>
-				<div className="home-container">
-					<p>К-сть лідів статус "Новий"</p>
-					<p>{leads.filter((l) => l.status === "Новий").length}</p>
-				</div>
-				<div className="home-container">
-					<p>К-сть лідів статус "Знайшов роботу"</p>
-					<p>{leads.filter((l) => l.status === "Знайшов роботу").length}</p>
-				</div>
-				<div className="home-container">
-					<p>К-сть лідів статус "Працює"</p>
-					<p>{leads.filter((l) => l.status === "Працює").length}</p>
-				</div>
-				<div className="home-container">
-					<p>К-сть лідів статус "Неактивний"</p>
-					<p>{leads.filter((l) => l.status === "Неактивний").length}</p>
+				<h2 style={{ fontSize: "1.5rem" }}>Вакансії</h2>
+				<div className="home-grid">
+					<div className="home-container">
+						<p>Всіх вакансій</p>
+						<p>{vacancies.length}</p>
+					</div>
+					<div className="home-container">
+						<p>Активних вакансій</p>
+						<p>
+							{vacancies.filter((v) => v.is_active).length}/{vacancies.length}
+						</p>
+					</div>
+					<div className="home-container">
+						<p>Гарячих вакансій</p>
+						<p>{vacancies.filter((v) => v.hot_vacancy).length}</p>
+					</div>
+					{uniqueVacanciesPlaces.map((p) => {
+						const vacanciesInPlace = vacancies.filter((v) => v.place === p);
+						return (
+							<div key={p} className="home-container">
+								<p>Вакансій в {p}</p>
+								<p>{vacanciesInPlace.length}</p>
+							</div>
+						);
+					})}
 				</div>
 			</div>
 		</main>

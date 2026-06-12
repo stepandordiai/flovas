@@ -1,4 +1,11 @@
 .home-inner {
+	overflow: scroll;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.home-grid {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
 	gap: 10px;
@@ -20,5 +27,23 @@
 
 	p:nth-last-of-type(1) {
 		font-size: 1.5rem;
+	}
+}
+
+@media screen and (width < 1200px) {
+	.home-grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+@media screen and (width < 900px) {
+	.home-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media screen and (width < 600px) {
+	.home-grid {
+		grid-template-columns: repeat(2, 1fr);
 	}
 }
