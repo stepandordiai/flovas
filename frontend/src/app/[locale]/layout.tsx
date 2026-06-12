@@ -35,6 +35,11 @@ export async function generateMetadata({
 			type: "website",
 			images: "/flovas-og-c.png",
 		},
+		verification: {
+			other: {
+				"facebook-domain-verification": "udzqiysp77rlobdsbp6k9ojm5k8in4",
+			},
+		},
 	};
 }
 
