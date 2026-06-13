@@ -67,6 +67,36 @@ const Home = ({ leads, vacancies }: HomeProps) => {
 						label="Кількість"
 					/>
 				</div>
+				<div style={{ background: "#fff", borderRadius: "25px" }}>
+					<Chart
+						items={leads}
+						stats={[
+							{
+								label: "Telegram",
+								color: "var(--sec-accent-clr)",
+								filter: (l) =>
+									l.messengers.some(
+										(m) => m.name === "telegram" && m.isAvailable,
+									),
+							},
+							{
+								label: "Whatsapp",
+								color: "var(--sec-accent-clr)",
+								filter: (l) =>
+									l.messengers.some(
+										(m) => m.name === "whatsapp" && m.isAvailable,
+									),
+							},
+							{
+								label: "Viber",
+								color: "var(--sec-accent-clr)",
+								filter: (l) =>
+									l.messengers.some((m) => m.name === "viber" && m.isAvailable),
+							},
+						]}
+						label="Кількість"
+					/>
+				</div>
 				<h2 style={{ fontSize: "1.5rem" }}>Вакансії</h2>
 				<div className="home-grid">
 					<div className="home-container">

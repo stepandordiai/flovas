@@ -38,6 +38,7 @@ export default function Chart<T>({ items, stats, label }: Props<T>) {
 					flexWrap: "wrap",
 					gap: "8px",
 					marginBottom: 20,
+					padding: "12px",
 				}}
 			>
 				{data.map((d) => (
