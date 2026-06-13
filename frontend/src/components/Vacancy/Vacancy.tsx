@@ -12,9 +12,11 @@ import "./Vacancy.scss";
 
 type VacancyProps = {
 	vacancy: VacancyInterface;
+	index: number;
+	priorityLength: number;
 };
 
-const Vacancy = ({ vacancy }: VacancyProps) => {
+const Vacancy = ({ vacancy, index, priorityLength }: VacancyProps) => {
 	const t = useTranslations();
 
 	const { id, img, is_active, updated_at, place, title, salary, badges } =
@@ -56,6 +58,7 @@ const Vacancy = ({ vacancy }: VacancyProps) => {
 						width={440}
 						height={440}
 						alt={title}
+						priority={index < priorityLength}
 					/>
 				) : (
 					<div className="vacancy__no-img"></div>

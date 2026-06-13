@@ -165,6 +165,7 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 							width={500}
 							height={500}
 							alt={vacancy.title}
+							priority
 						/>
 					) : (
 						<div className="vacancy-page__no-img"></div>

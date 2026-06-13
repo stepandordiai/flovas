@@ -96,7 +96,12 @@ export default function HomeClient({
 						)
 						.filter((vacancy) => vacancy.hot_vacancy)
 						.map((vacancy, index) => (
-							<Vacancy key={index} vacancy={vacancy} />
+							<Vacancy
+								key={vacancy.id}
+								vacancy={vacancy}
+								index={index}
+								priorityLength={3}
+							/>
 						))}
 				</div>
 				<Link className="vacancies__link" href="/prace">

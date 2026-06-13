@@ -263,7 +263,12 @@ export default function VacanciesClient({
 						{sortedFilteredVacancies
 							.slice(0, visibleLength)
 							.map((vacancy, index) => (
-								<Vacancy key={index} vacancy={vacancy} />
+								<Vacancy
+									key={vacancy.id}
+									vacancy={vacancy}
+									index={index}
+									priorityLength={4}
+								/>
 							))}
 					</div>
 				)}
