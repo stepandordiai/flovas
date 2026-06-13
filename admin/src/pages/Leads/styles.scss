@@ -1,13 +1,18 @@
-.pag-btn {
+.pagination {
 	background: hsl(0, 0%, 95%);
-	border-radius: 25px;
-	width: 40px;
-	aspect-ratio: 1/1;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	border-radius: 20px;
+}
 
-	font-weight: 600;
+.pag-btn {
+	border-radius: 25px;
+	padding: 10px;
+	font-weight: 500;
+
+	&:active {
+		background: #000;
+		color: #fff;
+	}
+
 	&--active {
 		background: #000;
 		color: #fff;

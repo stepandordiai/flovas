@@ -1,8 +1,9 @@
 import { supabase, supabaseF } from "../../lib/supabase";
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import EditIcon from "../../components/icons/EditIcon";
 import TrashIcon from "../../components/icons/TrashIcon";
 import type { Lead } from "../../interfaces/Lead";
+import Pagination from "../../components/Pagination/Pagination";
 import "./styles.scss";
 
 type LeadForm = Omit<Lead, "created_at">;
@@ -35,21 +36,20 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 	const [idToDelete, setIdToDelete] = useState("");
 	const [formLoading, setFormLoading] = useState(false);
 
+	const containerRef = useRef<HTMLDivElement | null>(null);
+
 	// TODO: learn this
 	const filteredLeads = leads.filter((lead) =>
 		Object.values(lead).some((value) =>
 			String(value).toLowerCase().includes(filter.toLowerCase()),
 		),
 	);
-	const [currentPage, setCurrentPage] = useState(1);
 
 	const handleForm = (name: string, value: unknown) => {
 		setForm((prev) => ({ ...prev, [name]: value }));
 	};
 
-	useEffect(() => {
-		document.documentElement.scrollTo(0, 0);
-	}, [currentPage]);
+	const [currentPage, setCurrentPage] = useState(1);
 
 	// Supabase
 	// TODO: !
@@ -156,6 +156,15 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 	};
 
 	const totalPages = Math.ceil(leads.length / 50);
+
+	useEffect(() => {
+		if (!containerRef.current) return;
+		containerRef.current.scrollTo({
+			top: 0,
+			left: 0,
+			behavior: "smooth",
+		});
+	}, [currentPage]);
 
 	return (
 		<>
@@ -373,7 +382,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 					<div style={{ display: "flex", justifyContent: "space-between" }}>
 						<h1 className="main__title">Ліди</h1>
 					</div>
-					<div className="container">
+					<div ref={containerRef} className="container">
 						<div
 							style={{
 								position: "sticky",
@@ -552,13 +561,9 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 								<p
 									style={{
 										background: "hsl(0, 0%, 95%)",
-										height: "40px",
-										display: "flex",
-										justifyContent: "center",
-										alignItems: "center",
-										padding: "0 10px",
+										padding: "10px",
 										borderRadius: "20px",
-										fontWeight: "600",
+										fontWeight: "500",
 									}}
 								>
 									{(currentPage - 1) * 50 + 1} -{" "}
@@ -567,29 +572,19 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 								<p
 									style={{
 										background: "hsl(0, 0%, 95%)",
-										height: "40px",
-										display: "flex",
-										justifyContent: "center",
-										alignItems: "center",
-										padding: "0 10px",
+										padding: "10px",
 										borderRadius: "20px",
-										fontWeight: "600",
+										fontWeight: "500",
 									}}
 								>
 									Всього: {filteredLeads.length}
 								</p>
 							</div>
-							<div style={{ display: "flex", gap: "5px" }}>
-								{Array.from({ length: totalPages }, (_, i) => (
-									<button
-										key={i}
-										onClick={() => setCurrentPage(i + 1)}
-										className={`pag-btn ${currentPage === i + 1 ? "pag-btn--active" : ""}`}
-									>
-										{i + 1}
-									</button>
-								))}
-							</div>
+							<Pagination
+								totalPages={totalPages}
+								currentPage={currentPage}
+								setCurrentPage={setCurrentPage}
+							/>
 						</div>
 					</div>
 				</main>

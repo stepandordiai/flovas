@@ -1,8 +1,9 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { supabase } from "./../../lib/supabase";
 import type { Vacancy, VacancyForm } from "../../interfaces/Vacancy";
 import ImageDropzone from "../../components/ImgDropzone/ImgDropzone";
 import MagicIcon from "../../components/icons/MagicIcon";
+import Pagination from "../../components/Pagination/Pagination";
 import "./styles.scss";
 
 const EMPTY_FORM: VacancyForm = {
@@ -41,6 +42,8 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 	const [idToDelete, setIdToDelete] = useState("");
 	const [idToUpdate, setIdToUpdate] = useState("");
 	const [aiLoading, setAiLoading] = useState(false);
+
+	const containerRef = useRef<HTMLDivElement | null>(null);
 
 	const filteredVacancies = vacancies.filter((vacancy) =>
 		Object.values(vacancy).some((value) =>
@@ -350,6 +353,15 @@ Output: svadlena-vyroba`,
 			setAiLoading(false);
 		}
 	};
+
+	useEffect(() => {
+		if (!containerRef.current) return;
+		containerRef.current.scrollTo({
+			top: 0,
+			left: 0,
+			behavior: "smooth",
+		});
+	}, [currentPage]);
 
 	return (
 		<>
@@ -769,7 +781,7 @@ Output: svadlena-vyroba`,
 				>
 					<h1 className="main__title">Вакансії</h1>
 				</div>
-				<div className="container">
+				<div ref={containerRef} className="container">
 					<div
 						style={{
 							position: "sticky",
@@ -949,17 +961,11 @@ Output: svadlena-vyroba`,
 								Всього: {filteredVacancies.length}
 							</p>
 						</div>
-						<div style={{ display: "flex", gap: "5px" }}>
-							{Array.from({ length: totalPages }, (_, i) => (
-								<button
-									key={i}
-									onClick={() => setCurrentPage(i + 1)}
-									className={`pag-btn ${currentPage === i + 1 ? "pag-btn--active" : ""}`}
-								>
-									{i + 1}
-								</button>
-							))}
-						</div>
+						<Pagination
+							totalPages={totalPages}
+							currentPage={currentPage}
+							setCurrentPage={setCurrentPage}
+						/>
 					</div>
 				</div>
 			</main>
