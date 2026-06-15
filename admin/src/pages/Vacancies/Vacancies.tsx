@@ -399,8 +399,21 @@ Output: svadlena-vyroba`,
 					}}
 				>
 					<div className="input-container">
-						<label htmlFor="">ID</label>
+						<label htmlFor="title">Назва (Обов'язково)</label>
 						<input
+							id="title"
+							className="input"
+							type="text"
+							name="title"
+							onChange={(e) => handleForm(e.target.name, e.target.value)}
+							value={form.title}
+							placeholder="Наприклад: Працівниця на кухню в місті Колін"
+						/>
+					</div>
+					<div className="input-container">
+						<label htmlFor="id">ID (Обов'язково)</label>
+						<input
+							id="id"
 							className="input"
 							type="text"
 							name="id"
@@ -409,12 +422,14 @@ Output: svadlena-vyroba`,
 								setError(null);
 							}}
 							value={form.id}
+							placeholder="Спочатку заповніть поле Назва"
+							disabled={form.title === ""}
 						/>
 						<button
 							className="ai-btn"
 							type="button"
 							onClick={generateId}
-							disabled={!form.title}
+							disabled={form.title === ""}
 						>
 							<MagicIcon />
 							<span> {aiLoading ? "Зачекайте..." : "Згенерувати ID"}</span>
@@ -424,7 +439,18 @@ Output: svadlena-vyroba`,
 						</button>
 					</div>
 					<div className="input-container">
-						<label htmlFor="">Зображення</label>
+						<label htmlFor="salary">Заробітна плата (Обов'язково)</label>
+						<input
+							id="salary"
+							className="input"
+							type="number"
+							name="salary"
+							onChange={(e) => handleForm(e.target.name, e.target.value)}
+							value={form.salary}
+						/>
+					</div>
+					<div className="input-container">
+						<label htmlFor="img">Зображення</label>
 						{/* TODO: LEARN THIS */}
 						<ImageDropzone
 							onFileSelect={(file) => handleForm("img", file)}
@@ -434,9 +460,10 @@ Output: svadlena-vyroba`,
 						/>
 					</div>
 					<div className="input-container">
-						<label htmlFor="">Місто</label>
+						<label htmlFor="place">Місто (Обов'язково)</label>
 						<div className="input" style={{ display: "flex" }}>
 							<input
+								id="place"
 								style={{ width: "100%" }}
 								type="text"
 								name="place"
@@ -462,49 +489,34 @@ Output: svadlena-vyroba`,
 						</div>
 					</div>
 					<div className="input-container">
-						<label htmlFor="">Адреса</label>
+						<label htmlFor="address">Адреса</label>
 						<input
+							id="address"
 							className="input"
 							type="text"
 							name="address"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.address}
+							placeholder="Наприклад: Řešovská 852/10, 181 00 Praha 8"
 						/>
 					</div>
 					<div className="input-container">
-						<label htmlFor="">Адреса (ссилка)</label>
+						<label htmlFor="address-url">Адреса (Посилання)</label>
 						<input
+							id="address-url"
 							className="input"
 							type="text"
 							name="address_url"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.address_url}
+							placeholder="Наприклад: https://maps.app.goo.gl/5HZe2oFUz2cTk5AT8"
 						/>
 					</div>
+
 					<div className="input-container">
-						<label htmlFor="">Назва</label>
+						<label htmlFor="desc">Опис</label>
 						<input
-							className="input"
-							type="text"
-							name="title"
-							onChange={(e) => handleForm(e.target.name, e.target.value)}
-							value={form.title}
-							placeholder="Наприклад: Працівниця на кухню в місті Колін"
-						/>
-					</div>
-					<div className="input-container">
-						<label htmlFor="">Заробітна плата</label>
-						<input
-							className="input"
-							type="number"
-							name="salary"
-							onChange={(e) => handleForm(e.target.name, e.target.value)}
-							value={form.salary}
-						/>
-					</div>
-					<div className="input-container">
-						<label htmlFor="">Опис</label>
-						<input
+							id="desc"
 							className="input"
 							type="text"
 							name="description"
@@ -640,8 +652,9 @@ Output: svadlena-vyroba`,
 						</button>
 					</div>
 					<div className="input-container">
-						<label htmlFor="">Тип роботи</label>
+						<label htmlFor="job-type">Тип роботи</label>
 						<input
+							id="job-type"
 							className="input"
 							type="text"
 							name="job_type"
