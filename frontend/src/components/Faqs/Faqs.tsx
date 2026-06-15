@@ -1,9 +1,9 @@
 import { getTranslations } from "next-intl/server";
-import FaqClient from "./FaqClient";
+import FaqsClient from "./FaqsClient";
 import faqs from "@/data/faqs.json";
 import "./styles.scss";
 
-export default async function FAQ() {
+export default async function Faqs() {
 	const t = await getTranslations();
 
 	const faqsSchema = {
@@ -27,7 +27,7 @@ export default async function FAQ() {
 			></script>
 			<section className="faq">
 				<h2 className="faq__title">{t("faq.title")}</h2>
-				<FaqClient />
+				<FaqsClient />
 			</section>
 		</>
 	);

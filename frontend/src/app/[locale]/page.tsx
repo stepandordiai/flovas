@@ -7,9 +7,9 @@ import About from "@/components/home/About/About";
 import Contacts from "@/components/home/Contacts/Contacts";
 import WebApp from "@/components/home/WebApp/WebApp";
 import ScrollToTopBtn from "@/components/ScrollToTopBtn/ScrollToTopBtn";
-import FAQ from "@/components/FAQ/FAQ";
-import "./Home.scss";
 import { getVacancies } from "@/services/vacancies";
+import Faqs from "@/components/Faqs/Faqs";
+import "./Home.scss";
 
 export async function generateMetadata({
 	params,
@@ -50,7 +50,7 @@ export default async function Home({
 			<div className="home-inner">
 				<HomeClient vacancies={vacancies ?? []} />
 				<About />
-				<FAQ />
+				<Faqs />
 				<Contacts />
 				<WebApp locale={locale} />
 				<div className="scroll-to-top-btn-wrapper">
