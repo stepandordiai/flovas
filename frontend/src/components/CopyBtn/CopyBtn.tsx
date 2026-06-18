@@ -5,24 +5,30 @@ import { useState } from "react";
 import classNames from "classnames";
 import "./CopyBtn.scss";
 
-const CopyBtn = ({ value = "Скопіювати", txt = "" }) => {
+type CopyBtnProps = {
+	value: string;
+};
+
+export default function CopyBtn({ value }: CopyBtnProps) {
 	const t = useTranslations();
 
 	const [btnValueCopied, setBtnValueCopied] = useState(false);
 
-	const handleCopy = (value: string) => {
-		navigator.clipboard.writeText(value);
-
-		setBtnValueCopied(true);
-
-		setTimeout(() => {
-			setBtnValueCopied(false);
-		}, 2000);
+	// navigator.clipboard.writeText() is async
+	const handleCopy = async (value: string) => {
+		try {
+			await navigator.clipboard.writeText(value);
+			setBtnValueCopied(true);
+			setTimeout(() => setBtnValueCopied(false), 2000);
+		} catch (err) {
+			console.error("Copy failed:", err);
+		}
 	};
 
 	return (
 		<button
-			onClick={() => handleCopy(txt)}
+			type="button"
+			onClick={() => handleCopy(value)}
 			title={t("click_to_copy")}
 			className={classNames("copy-btn", {
 				"copy-btn--copied": btnValueCopied,
@@ -32,6 +38,4 @@ const CopyBtn = ({ value = "Скопіювати", txt = "" }) => {
 			{btnValueCopied ? t("copied") : value}
 		</button>
 	);
-};
-
-export default CopyBtn;
+}
