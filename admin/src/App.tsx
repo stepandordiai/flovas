@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	Navigate,
+} from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Sidebar from "./components/layout/Sidebar/Sidebar";
 import Leads from "./pages/Leads/Leads";
@@ -59,40 +64,51 @@ function App() {
 
 	// TODO: learn this
 	if (authLoading) return null;
-	if (!session) return <Login />;
 
 	return (
 		<Router>
 			<Routes>
 				<Route path="/reset-password" element={<ResetPassword />} />
 				<Route
+					path="/login"
+					element={!session ? <Login /> : <Navigate to="/" replace />}
+				/>
+				<Route
 					path="/*"
 					element={
-						<div className="layout">
-							<Sidebar />
-							<Routes>
-								<Route
-									path="/"
-									element={<Home leads={leads} vacancies={vacancies} />}
-								/>
-								<Route
-									path="/vacancies"
-									element={
-										<Vacancies
-											vacancies={vacancies}
-											setVacancies={setVacancies}
-											load={loadVacancies}
-										/>
-									}
-								/>
-								<Route
-									path="/leads"
-									element={
-										<Leads leads={leads} setLeads={setLeads} load={loadLeads} />
-									}
-								/>
-							</Routes>
-						</div>
+						!session ? (
+							<Navigate to="/login" replace />
+						) : (
+							<div className="layout">
+								<Sidebar />
+								<Routes>
+									<Route
+										path="/"
+										element={<Home leads={leads} vacancies={vacancies} />}
+									/>
+									<Route
+										path="/vacancies"
+										element={
+											<Vacancies
+												vacancies={vacancies}
+												setVacancies={setVacancies}
+												load={loadVacancies}
+											/>
+										}
+									/>
+									<Route
+										path="/leads"
+										element={
+											<Leads
+												leads={leads}
+												setLeads={setLeads}
+												load={loadLeads}
+											/>
+										}
+									/>
+								</Routes>
+							</div>
+						)
 					}
 				/>
 			</Routes>
