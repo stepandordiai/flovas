@@ -50,6 +50,13 @@ export default function ContactsClient() {
 				return;
 			}
 
+			// TODO: LEARN THIS
+			fetch("/api/notify-lead", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(contactsForm),
+			}).catch(() => {});
+
 			setSuccess(true);
 			setContactsForm(initContactsForm);
 			setTimeout(() => setSuccess(false), 3000);
