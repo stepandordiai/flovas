@@ -49,7 +49,7 @@ export default async function Gdpr() {
 						</a>
 					</p>
 					<p>
-						IČO: <CopyBtn />
+						IČO: <CopyBtn value="17430089" />
 					</p>
 				</div>
 				<p>{t("privacyPolicy.txt1")}</p>

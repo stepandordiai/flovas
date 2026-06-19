@@ -23,7 +23,10 @@ export default async function Contacts() {
 							Pod Hroby 271 Kolín IV
 						</a>
 						<p>IČO</p>
-						<CopyBtn value="17430089" />
+						<span>
+							<span>17430089 </span>
+							<CopyBtn value="17430089" />
+						</span>
 					</div>
 					<h3>
 						Підписуйтесь на наші соціальні мережі, щоб не пропустити нові

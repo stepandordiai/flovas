@@ -7,9 +7,10 @@ import "./CopyBtn.scss";
 
 type CopyBtnProps = {
 	value: string;
+	label?: string;
 };
 
-export default function CopyBtn({ value }: CopyBtnProps) {
+export default function CopyBtn({ value, label = "Скопіювати" }: CopyBtnProps) {
 	const t = useTranslations();
 
 	const [btnValueCopied, setBtnValueCopied] = useState(false);
@@ -35,7 +36,7 @@ export default function CopyBtn({ value }: CopyBtnProps) {
 			})}
 			disabled={btnValueCopied}
 		>
-			{btnValueCopied ? t("copied") : value}
+			{btnValueCopied ? t("copied") : label}
 		</button>
 	);
 }

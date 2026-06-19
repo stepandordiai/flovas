@@ -209,7 +209,7 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 								<a href={vacancy.address_url} target="_blank">
 									{vacancy.address}
 								</a>{" "}
-								<CopyBtn txt={vacancy.address} />
+								<CopyBtn value={vacancy.address} />
 							</div>
 						)}
 						<p className="vacancy-page__details-title">
