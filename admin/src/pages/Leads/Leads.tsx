@@ -52,7 +52,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 	const [currentPage, setCurrentPage] = useState(1);
 
 	// Supabase
-	// TODO: !
+	// TODO: LEARN THIS
 	const insertLead = async (data: Lead) => {
 		setError(null);
 		setFormLoading(true);
@@ -78,6 +78,13 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 				console.error("DB2:", errorF.message);
 				return false;
 			}
+
+			// notify telegram
+			fetch(`${import.meta.env.VITE_NOTIFY_URL}/api/notify-lead`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(rest),
+			}).catch(() => {});
 
 			return true;
 		} finally {
