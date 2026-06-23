@@ -5,6 +5,7 @@ import ImageDropzone from "../../components/ImgDropzone/ImgDropzone";
 import MagicIcon from "../../components/icons/MagicIcon";
 import Pagination from "../../components/Pagination/Pagination";
 import "./styles.scss";
+import Menu from "../../components/Menu/Menu";
 
 const EMPTY_FORM: VacancyForm = {
 	id: "",
@@ -786,14 +787,8 @@ Output: svadlena-vyroba`,
 				</div>
 			</div>
 			<main className="main">
-				<div
-					style={{
-						display: "flex",
-						justifyContent: "space-between",
-					}}
-				>
-					<h1 className="main__title">Вакансії</h1>
-				</div>
+				<Menu />
+				<h1 className="main__title">Вакансії</h1>
 				<div ref={containerRef} className="container">
 					<div
 						style={{

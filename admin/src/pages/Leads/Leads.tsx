@@ -5,6 +5,7 @@ import TrashIcon from "../../components/icons/TrashIcon";
 import type { Lead } from "../../interfaces/Lead";
 import Pagination from "../../components/Pagination/Pagination";
 import "./styles.scss";
+import Menu from "../../components/Menu/Menu";
 
 type LeadForm = Omit<Lead, "created_at">;
 
@@ -386,9 +387,8 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 			</div>
 			<div className="layout">
 				<main className="main">
-					<div style={{ display: "flex", justifyContent: "space-between" }}>
-						<h1 className="main__title">Ліди</h1>
-					</div>
+					<Menu />
+					<h1 className="main__title">Ліди</h1>
 					<div ref={containerRef} className="container">
 						<div
 							style={{

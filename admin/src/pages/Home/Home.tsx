@@ -1,6 +1,7 @@
 import type { Vacancy } from "../../interfaces/Vacancy";
 import type { Lead } from "../../interfaces/Lead";
 import Chart from "../../components/Chart/Chart";
+import Menu from "../../components/Menu/Menu";
 import "./Home.scss";
 
 type HomeProps = {
@@ -13,6 +14,7 @@ const Home = ({ leads, vacancies }: HomeProps) => {
 
 	return (
 		<main className="main">
+			<Menu />
 			<h1 className="main__title">Головна</h1>
 			<div className="home-inner">
 				<h2 style={{ fontSize: "1.5rem" }}>Ліди</h2>
