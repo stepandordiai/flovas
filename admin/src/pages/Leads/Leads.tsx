@@ -385,88 +385,102 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 					</button>
 				</div>
 			</div>
-			<div className="layout">
-				<main className="main">
-					<Menu />
-					<h1 className="main__title">Ліди</h1>
-					<div ref={containerRef} className="container">
-						<div
-							style={{
-								position: "sticky",
-								top: "0px",
-								padding: "10px 0",
-								background: "#fff",
-								display: "flex",
-								justifyContent: "space-between",
+			<main className="main">
+				<Menu />
+				<h1 className="main__title">Ліди</h1>
+				<div ref={containerRef} className="container">
+					<div
+						style={{
+							position: "sticky",
+							top: "0px",
+							padding: "10px 0",
+							background: "#fff",
+							display: "flex",
+							justifyContent: "space-between",
+						}}
+					>
+						<input
+							className="search-input"
+							onChange={(e) => setFilter(e.target.value)}
+							value={filter}
+							type="text"
+							placeholder="Пошук"
+						/>
+						<button
+							className="create-btn"
+							onClick={() => {
+								setIsNew(true);
+								setModalVisible(true);
 							}}
 						>
-							<input
-								className="search-input"
-								onChange={(e) => setFilter(e.target.value)}
-								value={filter}
-								type="text"
-								placeholder="Пошук"
-							/>
-							<button
-								className="create-btn"
-								onClick={() => {
-									setIsNew(true);
-									setModalVisible(true);
-								}}
-							>
-								Новий лід
-							</button>
-						</div>
-						<table>
-							<thead>
-								<tr>
-									<th style={{ width: "1%" }}>№</th>
-									<th>Ім'я</th>
-									<th>Номер телефону</th>
-									<th>Мессенджери</th>
-									<th>Стать</th>
-									<th>Адреса</th>
-									<th>Позиція</th>
-									<th>Повідомлення</th>
-									<th style={{ width: "1%" }}>Статус</th>
-									<th style={{ width: "1%" }}>Опції</th>
-								</tr>
-							</thead>
-							<tbody>
-								{filteredLeads
-									.slice((currentPage - 1) * 50, currentPage * 50)
-									.map((l, i) => {
-										const number = (currentPage - 1) * 50 + i + 1;
+							Новий лід
+						</button>
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th style={{ width: "1%" }}>№</th>
+								<th>Ім'я</th>
+								<th>Номер телефону</th>
+								<th>Мессенджери</th>
+								<th>Стать</th>
+								<th>Адреса</th>
+								<th>Позиція</th>
+								<th>Повідомлення</th>
+								<th style={{ width: "1%" }}>Статус</th>
+								<th style={{ width: "1%" }}>Опції</th>
+							</tr>
+						</thead>
+						<tbody>
+							{filteredLeads
+								.slice((currentPage - 1) * 50, currentPage * 50)
+								.map((l, i) => {
+									const number = (currentPage - 1) * 50 + i + 1;
 
-										const now = new Date();
+									const now = new Date();
 
-										const diffMs =
-											now.getTime() - new Date(l.created_at).getTime();
+									const diffMs =
+										now.getTime() - new Date(l.created_at).getTime();
 
-										const diffDays = diffMs / (1000 * 60 * 60 * 24);
+									const diffDays = diffMs / (1000 * 60 * 60 * 24);
 
-										return (
-											<tr key={l.id} className="leads-tr">
-												<td style={{ width: "1%" }}>{number}</td>
-												<td style={{ width: "1%", whiteSpace: "nowrap" }}>
-													{l.name}{" "}
-													{diffDays <= 3 && (
-														<span
-															style={{
-																background: "var(--sec-accent-clr)",
-																padding: "5px",
-															}}
-														>
-															Новий
-														</span>
-													)}
-												</td>
-												<td>{l.tel}</td>
-												<td>
-													<div style={{ display: "flex", gap: "5px" }}>
-														{l.messengers
-															.filter((m) => m.isAvailable)
-															.map((m, i) => (
+									return (
+										<tr key={l.id} className="leads-tr">
+											<td style={{ width: "1%" }}>{number}</td>
+											<td style={{ width: "1%", whiteSpace: "nowrap" }}>
+												{l.name}{" "}
+												{diffDays <= 3 && (
+													<span
+														style={{
+															background: "var(--sec-accent-clr)",
+															padding: "5px",
+														}}
+													>
+														Новий
+													</span>
+												)}
+											</td>
+											<td>{l.tel}</td>
+											<td>
+												<div style={{ display: "flex", gap: "5px" }}>
+													{l.messengers
+														.filter((m) => m.isAvailable)
+														.map((m, i) => (
+															<img
+																key={i}
+																src={`${m.name}.svg`}
+																width={20}
+																height={20}
+																alt={m.name}
+															/>
+														))}
+													{l.messengers
+														.filter((m) => !m.isAvailable)
+														.map((m, i) => (
+															<div
+																key={m.name}
+																style={{ position: "relative" }}
+															>
 																<img
 																	key={i}
 																	src={`${m.name}.svg`}
@@ -474,128 +488,110 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 																	height={20}
 																	alt={m.name}
 																/>
-															))}
-														{l.messengers
-															.filter((m) => !m.isAvailable)
-															.map((m, i) => (
-																<div
-																	key={m.name}
-																	style={{ position: "relative" }}
+																<span
+																	style={{ position: "absolute", inset: "0" }}
 																>
-																	<img
-																		key={i}
-																		src={`${m.name}.svg`}
-																		width={20}
-																		height={20}
-																		alt={m.name}
-																	/>
-																	<span
-																		style={{ position: "absolute", inset: "0" }}
+																	<svg
+																		xmlns="http://www.w3.org/2000/svg"
+																		width="100%"
+																		height="100%"
+																		fill="red"
+																		className="bi bi-x-lg"
+																		viewBox="0 0 16 16"
 																	>
-																		<svg
-																			xmlns="http://www.w3.org/2000/svg"
-																			width="100%"
-																			height="100%"
-																			fill="red"
-																			className="bi bi-x-lg"
-																			viewBox="0 0 16 16"
-																		>
-																			<path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
-																		</svg>
-																	</span>
-																</div>
-															))}
-													</div>
-												</td>
-												<td>{l.gender}</td>
-												<td>{l.address}</td>
-												<td>{l.position}</td>
-												<td style={{ maxWidth: "200px" }}>{l.message}</td>
-												<td style={{ width: "1%", whiteSpace: "nowrap" }}>
-													<select
-														className={`status-select ${l.status === "Знайшов роботу" ? "status-select--orange" : l.status === "Працює" ? "status-select--blue" : l.status === "Неактивний" ? "status-select--red" : ""}`}
-														name="status"
-														id="status"
-														onChange={(e) => handleStatus(l.id, e.target.value)}
-														value={l.status || ""}
+																		<path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+																	</svg>
+																</span>
+															</div>
+														))}
+												</div>
+											</td>
+											<td>{l.gender}</td>
+											<td>{l.address}</td>
+											<td>{l.position}</td>
+											<td style={{ maxWidth: "200px" }}>{l.message}</td>
+											<td style={{ width: "1%", whiteSpace: "nowrap" }}>
+												<select
+													className={`status-select ${l.status === "Знайшов роботу" ? "status-select--orange" : l.status === "Працює" ? "status-select--blue" : l.status === "Неактивний" ? "status-select--red" : ""}`}
+													name="status"
+													id="status"
+													onChange={(e) => handleStatus(l.id, e.target.value)}
+													value={l.status || ""}
+												>
+													<option value="Новий">Новий</option>
+													<option value="Знайшов роботу">Знайшов роботу</option>
+													<option value="Працює">Працює</option>
+													<option value="Неактивний">Неактивний</option>
+												</select>
+											</td>
+											<td style={{ width: "1%" }}>
+												<div style={{ display: "flex", gap: "5px" }}>
+													<button
+														className="update-btn"
+														onClick={() => {
+															setForm(l);
+															setModalVisible(true);
+															setIsNew(false);
+														}}
 													>
-														<option value="Новий">Новий</option>
-														<option value="Знайшов роботу">
-															Знайшов роботу
-														</option>
-														<option value="Працює">Працює</option>
-														<option value="Неактивний">Неактивний</option>
-													</select>
-												</td>
-												<td style={{ width: "1%" }}>
-													<div style={{ display: "flex", gap: "5px" }}>
-														<button
-															className="update-btn"
-															onClick={() => {
-																setForm(l);
-																setModalVisible(true);
-																setIsNew(false);
-															}}
-														>
-															<EditIcon size={20} />
-														</button>
-														<button
-															className="delete-btn"
-															onClick={() => {
-																(setDeleteModal(true), setIdToDelete(l.id));
-															}}
-														>
-															<TrashIcon size={20} />
-														</button>
-													</div>
-												</td>
-											</tr>
-										);
-									})}
-							</tbody>
-						</table>
-						<div
-							style={{
-								display: "flex",
-								justifyContent: "space-between",
-								alignItems: "center",
-								background: "white",
-								padding: "10px 0",
-								marginTop: "auto",
-							}}
-						>
-							<div style={{ display: "flex", gap: "5px" }}>
-								<p
-									style={{
-										background: "hsl(0, 0%, 95%)",
-										padding: "10px",
-										borderRadius: "20px",
-										fontWeight: "500",
-									}}
-								>
-									{(currentPage - 1) * 50 + 1} -{" "}
-									{Math.min(currentPage * 50, filteredLeads.length)}
-								</p>
-								<p
-									style={{
-										background: "hsl(0, 0%, 95%)",
-										padding: "10px",
-										borderRadius: "20px",
-										fontWeight: "500",
-									}}
-								>
-									Всього: {filteredLeads.length}
-								</p>
-							</div>
-							<Pagination
-								totalPages={totalPages}
-								currentPage={currentPage}
-								setCurrentPage={setCurrentPage}
-							/>
+														<EditIcon size={20} />
+													</button>
+													<button
+														className="delete-btn"
+														onClick={() => {
+															(setDeleteModal(true), setIdToDelete(l.id));
+														}}
+													>
+														<TrashIcon size={20} />
+													</button>
+												</div>
+											</td>
+										</tr>
+									);
+								})}
+						</tbody>
+					</table>
+					<div
+						style={{
+							display: "flex",
+							justifyContent: "space-between",
+							alignItems: "center",
+							background: "white",
+							padding: "10px 0",
+							marginTop: "auto",
+						}}
+					>
+						<div style={{ display: "flex", gap: "5px" }}>
+							<p
+								style={{
+									background: "hsl(0, 0%, 95%)",
+									padding: "10px",
+									borderRadius: "20px",
+									fontWeight: "500",
+								}}
+							>
+								{(currentPage - 1) * 50 + 1} -{" "}
+								{Math.min(currentPage * 50, filteredLeads.length)}
+							</p>
+							<p
+								style={{
+									background: "hsl(0, 0%, 95%)",
+									padding: "10px",
+									borderRadius: "20px",
+									fontWeight: "500",
+								}}
+							>
+								Всього: {filteredLeads.length}
+							</p>
 						</div>
+						<Pagination
+							totalPages={totalPages}
+							currentPage={currentPage}
+							setCurrentPage={setCurrentPage}
+						/>
 					</div>
-				</main>
-			</div>
+				</div>
+			</main>
 		</>
 	);
 };
