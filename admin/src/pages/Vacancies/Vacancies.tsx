@@ -16,7 +16,7 @@ const EMPTY_FORM: VacancyForm = {
 	title: "",
 	description: "",
 	benefits: [""],
-	salary: 0,
+	salary: "",
 	requirements: null as string[] | null,
 	responsibilities: null as string[] | null,
 	badges: null as string[] | null,
@@ -443,7 +443,7 @@ Output: svadlena-vyroba`,
 						<input
 							id="salary"
 							className="input"
-							type="number"
+							type="text"
 							name="salary"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.salary}

@@ -9,7 +9,7 @@ export interface Vacancy {
 	title: string;
 	description: string;
 	benefits: string[];
-	salary: number;
+	salary: string;
 	requirements: string[] | null;
 	responsibilities: string[] | null;
 	job_type: string;
