@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "@/i18n/navigation";
 import linksData from "@/data/links-data.json";
-import LngSelect from "../../common/LngSelect/LngSelect";
+import LngSelect from "@/components/common/LngSelect/LngSelect";
 import classNames from "classnames";
 import { Link } from "@/i18n/navigation";
 import { getVacancies } from "@/services/vacancies";
@@ -188,7 +188,7 @@ const Header = () => {
 					></span>
 				</button>
 				<Link href="/#uvod" className="header__logo">
-					{t("logoTitle")}
+					flovas
 				</Link>
 				<nav ref={navRef} className="header__nav">
 					{linksData.map((link, index) => {

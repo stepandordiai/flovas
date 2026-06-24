@@ -99,13 +99,11 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 	if (error) return <div>Error loading vacancies</div>;
 	if (!vacancies) return <div>No vacancies found</div>;
 
-	const vacancy: VacancyInterface = vacancies.find(
-		(vacancy) => vacancy.id === id,
-	);
+	const vacancy = vacancies.find((v) => v.id === id);
 
-	// const seoDesc = vacancy.benefits
-	// 	.map((item: string) => item.replace(/^\p{Emoji}\s*/u, "").trim())
-	// 	.join(" · ");
+	if (!vacancy) {
+		return notFound();
+	}
 
 	// TODO: learn this
 	const jsonLd = {
@@ -134,14 +132,10 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 			value: {
 				"@type": "QuantitativeValue",
 				value: vacancy.salary,
-				unitText: "MONTH",
+				unitText: "HOUR",
 			},
 		},
 	};
-
-	if (!vacancy) {
-		return notFound();
-	}
 
 	return (
 		<>
@@ -218,7 +212,7 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 						{vacancy.description && (
 							<>
 								<p className="vacancy-page__details-title">Опис:</p>
-								<p>{vacancy.description}</p>
+								<p style={{ whiteSpace: "pre-wrap" }}>{vacancy.description}</p>
 							</>
 						)}
 
