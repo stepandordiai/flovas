@@ -1,0 +1,73 @@
+.contact-us {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	row-gap: 10px;
+	scroll-margin-top: 125px;
+}
+
+.contact-us__heading {
+	font-size: clamp(1rem, 4vw, 1.25rem);
+	font-weight: 500;
+}
+
+.contact-us-form {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	flex-grow: 1;
+}
+
+.input-container {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+
+	&:nth-last-child(2) {
+		flex-grow: 1;
+	}
+}
+
+.label {
+	margin-left: 10px;
+}
+
+.contacts__input {
+	background: #fff;
+	border-radius: 20px;
+	padding: 10px;
+	border: 1px solid var(--bg-clr);
+	transition: box-shadow 0.3s;
+
+	&:focus {
+		box-shadow: inset 0 0 5px var(--bg-clr);
+	}
+
+	&--incorrect {
+		border: 1px solid rgb(255, 115, 115) !important;
+	}
+}
+
+.contacts-form__btn {
+	background: var(--sec-accent-clr);
+	align-self: flex-end;
+	padding: 10px;
+	border-radius: 20px;
+
+	&:hover {
+		background: #000;
+		color: #fff;
+	}
+}
+.contacts-form__btn--success,
+.contacts-form__btn--loading {
+	cursor: not-allowed;
+	color: #fff;
+	background: #000;
+}
+
+@media screen and (width <= 896px) {
+	.contact-us {
+		scroll-margin-top: 85px;
+	}
+}

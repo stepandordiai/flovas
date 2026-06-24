@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
@@ -8,9 +8,9 @@ import Image from "next/image";
 import CopyBtn from "@/components/CopyBtn/CopyBtn";
 import VacancyPageClient from "./VacancyPageClient";
 import { Link } from "@/i18n/navigation";
-import { VacancyInterface } from "@/interfaces/Vacancy";
 import getUpdatedDate from "@/utils/getUpdatedDate";
 import ClockIcon from "@/components/icons/ClockIcon";
+import ContactUsForm from "@/components/ContactUsForm/ContactUsForm";
 import "./VacancyPage.scss";
 
 export async function generateStaticParams() {
@@ -270,14 +270,10 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 								})}
 							</ul>
 						)}
-						<div style={{ display: "flex", gap: 5, alignSelf: "flex-end" }}>
-							<Link className="vacancy-page__link" href="/#kontakty">
-								{t("contacts_title")}
-							</Link>
-							<a className="vacancy-page__link" href="tel:+420777957290">
-								Дзвоніть зараз
-							</a>
-						</div>
+						<a className="vacancy-page__link" href="#contact-us">
+							{t("contacts_title")}
+						</a>
+						<ContactUsForm />
 					</div>
 				</div>
 			</main>

@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import socialsData from "@/data/socialsData";
-import CopyBtn from "../../CopyBtn/CopyBtn";
-import ContactsClient from "./ContactsClient";
+import CopyBtn from "@/components/CopyBtn/CopyBtn";
+import ContactUsForm from "@/components/ContactUsForm/ContactUsForm";
 import "./Contacts.scss";
 
 export default async function Contacts() {
@@ -56,11 +56,7 @@ export default async function Contacts() {
 						loading="lazy"
 					></iframe>
 				</div>
-				<div className="contacts-container">
-					<h3 className="contacts__details-title">{t("contacts.contactUs")}</h3>
-					<p>Заповніть форму, і ми зв’яжемося з вами найближчим часом.</p>
-					<ContactsClient />
-				</div>
+				<ContactUsForm />
 			</div>
 		</section>
 	);

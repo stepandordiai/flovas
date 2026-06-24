@@ -34,6 +34,9 @@
 }
 
 .vacancy-page__link {
+	position: sticky;
+	bottom: 10px;
+	align-self: flex-end;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -48,15 +51,6 @@
 	&:hover {
 		background: #000;
 		color: #fff;
-	}
-
-	&:first-child {
-		background: var(--accent-clr);
-
-		&:hover {
-			background: var(--sec-accent-clr);
-			color: #000;
-		}
 	}
 }
 
