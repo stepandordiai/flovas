@@ -516,13 +516,13 @@ Output: svadlena-vyroba`,
 
 					<div className="input-container">
 						<label htmlFor="desc">Опис</label>
-						<input
+						<textarea
 							id="desc"
-							className="input"
-							type="text"
+							className="textarea"
 							name="description"
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.description}
+							rows={10}
 						/>
 					</div>
 					<div className="input-container">

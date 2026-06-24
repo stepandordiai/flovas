@@ -300,6 +300,12 @@ form {
 	}
 }
 
+.textarea {
+	@extend .input;
+	height: auto;
+	resize: vertical;
+}
+
 .select {
 	width: 60px;
 	height: 30px;
