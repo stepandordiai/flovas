@@ -4,6 +4,17 @@
 	padding-top: 100px;
 }
 
+.hero__heading {
+	font-size: clamp(1.5rem, 4vw, 2rem);
+	font-weight: 600;
+}
+
+.hero__subheading {
+	font-size: clamp(1.125rem, 2vw, 1.5rem);
+	font-weight: 500;
+	width: 100%;
+}
+
 .home-inner {
 	display: flex;
 	align-items: center;
@@ -27,19 +38,23 @@
 	display: flex;
 	flex-direction: column;
 	gap: 25px;
+	text-align: center;
+	opacity: 0;
+	filter: blur(10px);
+	animation: animateLinkContainer 1s forwards;
 }
 
-.blur-char {
+.hero__subheading-span {
 	opacity: 0;
 	filter: blur(10px);
 	transition:
-		opacity 0.3s,
-		filter 0.3s;
-}
+		opacity 0.5s,
+		filter 0.5s;
 
-.blur-char--active {
-	opacity: 1 !important;
-	filter: blur(0) !important;
+	&--visible {
+		opacity: 1 !important;
+		filter: blur(0) !important;
+	}
 }
 
 .section__title {
@@ -48,45 +63,15 @@
 	font-weight: 500;
 }
 
-.home__rotate-wrapper {
-	border-radius: 30px;
-	overflow: hidden;
-}
-
-.home__rotate-container {
-	position: relative;
-	@include flex-center;
-	height: 60px;
-	background: var(--accent-clr);
-	font-size: clamp(1.5rem, 4vw, 2.5rem);
-	font-weight: 500;
-
-	span {
-		position: absolute;
-		height: 60px;
-		@include flex-center;
-		transform: translateY(60px);
-	}
-
-	span[data-show] {
-		transform: translateY(0);
-		transition: transform 0.5s;
-	}
-
-	span[data-up] {
-		transform: translateY(-60px);
-		transition: transform 0.5s;
-	}
-}
-
 .home__link-container {
 	display: flex;
+	flex-wrap: wrap;
 	border: 1px solid var(--bg-clr);
 	border-radius: 25px;
 	opacity: 0;
 	filter: blur(10px);
 	pointer-events: none;
-	animation: animateLinkContainer 1s 2s forwards;
+	animation: animateLinkContainer 1s forwards;
 }
 
 @keyframes animateLinkContainer {
@@ -106,6 +91,8 @@
 	@include grid-center;
 	text-decoration: none !important;
 	font-weight: 500;
+	white-space: nowrap;
+	flex: 1;
 
 	&:nth-child(2) {
 		background: var(--accent-clr);
@@ -226,6 +213,7 @@
 	padding: 0 10px;
 	background: var(--sec-accent-clr);
 	text-decoration: none !important;
+	font-weight: 500;
 
 	&:hover {
 		background: #000;

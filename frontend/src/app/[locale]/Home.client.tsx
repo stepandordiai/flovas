@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import Vacancy from "@/components/Vacancy/Vacancy";
 import { VacancyInterface } from "@/interfaces/Vacancy";
@@ -14,12 +14,27 @@ export default function HomeClient({
 }) {
 	const t = useTranslations();
 
+	const places = [...new Set(vacancies.map((v) => v.place))];
+
+	const [placeIndex, setPlaceIndex] = useState(0);
+	const [visible, setVisible] = useState(true);
+
 	// FIXME:
 	useEffect(() => {
-		document.querySelectorAll(".blur-char").forEach((char, index) => {
-			setTimeout(() => {
-				char.classList.add("blur-char--active");
-			}, index * 50);
+		const chars = document.querySelectorAll(".blur-char");
+
+		// Скинути анімацію
+		chars.forEach((char) => {
+			char.classList.remove("blur-char--active");
+		});
+
+		// Дати браузеру застосувати зміни
+		requestAnimationFrame(() => {
+			chars.forEach((char, index) => {
+				setTimeout(() => {
+					char.classList.add("blur-char--active");
+				}, index * 50);
+			});
 		});
 	}, []);
 
@@ -52,28 +67,37 @@ export default function HomeClient({
 		return () => clearInterval(interval);
 	}, [vacancies.length]);
 
+	useEffect(() => {
+		const interval = setInterval(() => {
+			// Почати приховування
+			setVisible(false);
+
+			// Після завершення анімації змінити текст
+			setTimeout(() => {
+				setPlaceIndex((prev) => (prev + 1) % places.length);
+				setVisible(true);
+			}, 500); // має дорівнювати тривалості transition
+		}, 3000);
+
+		return () => clearInterval(interval);
+	}, [places.length]);
+
 	return (
 		<div className="home-inner-container">
 			<section className="home-top" id="hero">
 				<div className="home-top-inner">
-					<h1 className="section__title" aria-label={t("home.title1")}>
-						{t("home.title1")
-							.split("")
-							.map((char, index) => {
-								return (
-									<span key={index} className="blur-char" aria-hidden="true">
-										{char}
-									</span>
-								);
-							})}
+					<h1 className="hero__heading">
+						Вакансії в Чехії для українців — офіційне працевлаштування та житло
 					</h1>
-					<div className="home__rotate-wrapper">
-						<div ref={rotateRef} className="home__rotate-container">
-							{[...new Set(vacancies.map((v) => v.place))].map((place, i) => (
-								<span key={i}>{place}</span>
-							))}
-						</div>
-					</div>
+					<p className="hero__subheading" aria-label={t("home.title1")}>
+						<span>{t("home.title1")}</span>
+						<br />
+						<span
+							className={`hero__subheading-span ${visible ? "hero__subheading-span--visible" : ""}`}
+						>
+							{places[placeIndex]}
+						</span>
+					</p>
 				</div>
 				<div className="home__link-container">
 					<a className="home__link" href="#kontakty">
@@ -81,7 +105,11 @@ export default function HomeClient({
 					</a>
 					<Link className="home__link" href="/prace">
 						Всі вакансії
-						<span className="home__link-vacancies-qty">{vacancies.length}</span>
+						{vacancies && (
+							<span className="home__link-vacancies-qty">
+								{vacancies.length}
+							</span>
+						)}
 					</Link>
 				</div>
 			</section>
