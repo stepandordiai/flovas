@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
-import vacancies from "@/data/vacancies.json";
 import { routing } from "@/i18n/routing";
 import { BASE_URL } from "@/lib/constants";
+import { getVacancies } from "@/services/vacancies";
 
 const pages = [
 	{
@@ -21,28 +21,43 @@ const pages = [
 	},
 ] as const;
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	const now = new Date();
 
-	const alternates = (path: string) => ({
-		...Object.fromEntries(
-			routing.locales.map((locale) => [locale, `${BASE_URL}/${locale}${path}`]),
-		),
-		"x-default": `${BASE_URL}/${routing.defaultLocale}${path}`,
-	});
+	const { data } = await getVacancies();
+	const vacancies = data ?? [];
 
+	// Helper to generate alternate language objects without trailing slashes
+	const getAlternates = (path: string) => {
+		const cleanPath = path ? `/${path}` : "";
+		return {
+			...Object.fromEntries(
+				routing.locales.map((locale) => [
+					locale,
+					`${BASE_URL}/${locale}${cleanPath}`,
+				]),
+			),
+			"x-default": `${BASE_URL}/${routing.defaultLocale}${cleanPath}`,
+		};
+	};
+
+	// 1. Static Pages
 	const localePages = routing.locales.flatMap((locale) =>
-		pages.map((page) => ({
-			url: `${BASE_URL}/${locale}/${page.path}`.replace(/\/$/, ""),
-			lastModified: now,
-			changeFrequency: page.changeFrequency,
-			priority: page.priority,
-			alternates: {
-				languages: alternates(page ? `/${page}` : ""),
-			},
-		})),
+		pages.map((page) => {
+			const cleanUrl = `${BASE_URL}/${locale}/${page.path}`.replace(/\/$/, "");
+			return {
+				url: cleanUrl,
+				lastModified: now,
+				changeFrequency: page.changeFrequency,
+				priority: page.priority,
+				alternates: {
+					languages: getAlternates(page.path),
+				},
+			};
+		}),
 	);
 
+	// 2. Dynamic Vacancy Pages
 	const vacanciesLocalePages = routing.locales.flatMap((locale) =>
 		vacancies.map((vacancy) => ({
 			url: `${BASE_URL}/${locale}/prace/${vacancy.id}`,
@@ -50,7 +65,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 			changeFrequency: "weekly" as const,
 			priority: 0.7,
 			alternates: {
-				languages: alternates(`/prace/${vacancy.id}`),
+				languages: getAlternates(`prace/${vacancy.id}`),
 			},
 		})),
 	);
