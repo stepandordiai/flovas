@@ -3,6 +3,7 @@ import logging
 import os
 import random
 import re
+import requests
 from datetime import datetime
 
 from dotenv import load_dotenv
@@ -32,37 +33,25 @@ GROUPS_TO_MONITOR = [
     "praceska",
     "praha_rabota_chat",
     "cz_job",
-    # Додай свої групи
+    "DZ_PracePraha",
+    "robota_chehia",
+    "CZ2023work",
+    "work_chehia",
+    "chehiya_pidtrymka"
 ]
 
 KEYWORDS = [
-    # Основні
-    "шукаю роботу", "резюме", "відгукнусь", "пошук роботи",
-    "готова працювати", "готовий працювати", "шукати роботу",
-    
-    # Додаткові популярні
-    "відкриті до пропозицій", "відкритий до пропозицій",
-    "в активному пошуку", "шукаю вакансію", "працюю віддалено",
-    "готов вийти", "готов приступити",
-    
-    # Варіанти написання
-    "роботу шукаю", "шукаю роботу в", "треба роботу",
-    
-    # Поширені фрази
-    "мені 18", "мені 20", "мені 25", "мені 30",  # якщо потрібно
-    "дівчина шукає", "хлопець шукає",
-
-    # Пряме формулювання пошуку
-    "шукаю підробіток", "потрібна робота", "потрібна підробота",
-    "розгляну вакансії", "розгляну пропозиції", "потрібен заробіток",
-
-    # Готовність
-    "можу вийти", "можу приступити", "готова вийти",
-    "шукаю на повний день", "шукаю на пів дня", "шукаю зміни",
-
-    # Типові для українців у Чехії
-    "шукаю роботу в чехії", "потрібна робота в чехії",
-    "шукаю роботу прага", "потрібне житло і робота",
+    "шукаю роботу",
+    "шукаю вакансії",
+    "роботу в чехії",
+    "вакансії", 
+    "шукати роботу",
+    "дівчина шукає",
+    "жінка шукає",
+    "35 років",
+    "нічні зміни",
+    "заводи не",
+    "поля не"
 ]
 
 # ========================= SUPABASE =========================
@@ -78,34 +67,29 @@ def extract_phone(text: str):
     if not text:
         return None
         
-    # Більш універсальні патерни
+# Дуже універсальний regex для чеських і українських номерів
     patterns = [
-        # Українські номери
-        r'(\+?38)?[\s(]*0\d{2}[\s)]*[\s.-]?\d{3}[\s.-]?\d{2}[\s.-]?\d{2}',
-        r'(\+?38)?[\s(]*0\d{2}[\s)]*[\s.-]?\d{3}[\s.-]?\d{4}',           # інший формат
-        # Чеські номери (+420)
-        r'(\+?420)?[\s(]*0?\d{3}[\s)]*[\s.-]?\d{3}[\s.-]?\d{3}',
-        # Загальний формат (будь-який номер з 9+ цифр)
-        r'(\+?\d{1,4})?[\s(]*\d{3,4}[\s).-]*\d{2,4}[\s.-]*\d{2,4}[\s.-]*\d{2,4}',
+        r'(\+?420)?[\s.-]*(\d{3})[\s.-]*(\d{3})[\s.-]*(\d{3})',   # Чехія +420
+        r'(\+?38)?0(\d{2})[\s.-]*(\d{3})[\s.-]*(\d{2})[\s.-]*(\d{2})',  # Україна
+        r'(\+?\d{1,4})[\s.-]*(\d{3,4})[\s.-]*(\d{2,4})[\s.-]*(\d{2,4})',  # Загальний
     ]
     
     text_clean = re.sub(r'\s+', ' ', text)  # прибираємо зайві пробіли
     
     for pattern in patterns:
-        matches = re.findall(pattern, text_clean)
-        if matches:
-            # Беремо найдовше співпадіння
-            best_match = max(matches, key=len) if isinstance(matches[0], str) else max((m[0] for m in matches), key=len)
-            # Очищаємо номер
-            cleaned = re.sub(r'[\s().-]', '', best_match)
-            if len(cleaned) >= 9:  # мінімальна довжина номера
-                return best_match.strip()
-    
+        match = re.search(pattern, text)
+        if match:
+            phone = match.group(0).strip()
+            # Очищаємо від зайвих символів
+            cleaned = re.sub(r'[\s().-]', '', phone)
+            if len(cleaned) >= 9:   # мінімальна довжина нормального номера
+                return phone
     return None
 
 def extract_name(text: str):
+  # Шукаємо ім'я або самопредставлення
     patterns = [
-        r'(?:Ім\'я|ПІБ|Name)[:\s]+([А-ЯІЇЄҐ][а-яіїєґ]+(?:\s+[А-ЯІЇЄҐ][а-яіїєґ]+){1,2})',
+        r'(?:Мене звати|Я|Дівчина|Жінка|Хлопець|Чоловік)[:\s]*([А-ЯІЇЄҐ][а-яіїєґ]+(?:\s+[А-ЯІЇЄҐ][а-яіїєґ]+){0,2})',
         r'^([А-ЯІЇЄҐ][а-яіїєґ]+(?:\s+[А-ЯІЇЄҐ][а-яіїєґ]+){1,2})',
     ]
     for pattern in patterns:
@@ -115,7 +99,7 @@ def extract_name(text: str):
     return None
 
 def extract_city(text: str):
-    cities = ["Прага", "Колін", "Високе Мито", "Пардубіце", "Курім", "Хвалетіце"]
+    cities = ["Брно", "Прага", "Мельник", "Прага-Схід", "Оломоуц", "Острава", "Пльзень", "Ліберець"]
     for city in cities:
         if city.lower() in text.lower():
             return city
@@ -135,11 +119,28 @@ def extract_gender(text: str):
 
 async def save_to_supabase(lead: dict):
     try:
+        # 1. Зберігаємо в Supabase
         response = supabase.table("leads").insert(lead).execute()
-        logging.info(f"✅ Лід збережено → {lead.get('name') or 'Без імені'}")
+        
+        # 2. Відправляємо notify в React-адмінку (жорстко)
+        notify_url = "https://www.flovas.cz"   # ← сюди твій сайт
+        
+        try:
+            requests.post(
+                f"{notify_url}/api/notify-lead",
+                headers={"Content-Type": "application/json"},
+                json=lead,
+                timeout=5
+            )
+            logging.info("📨 Сповіщення відправлено в адмінку")
+        except Exception as e:
+            logging.warning(f"Не вдалося відправити notify: {e}")
+        
+        logging.info(f"✅ Лід збережено → {lead.get('name', 'Без імені')}")
         return response
+        
     except Exception as e:
-        logging.error(f"❌ Помилка Supabase: {e}")
+        logging.error(f"❌ Помилка: {e}")
         return None
 
 @client.on(events.NewMessage(chats=GROUPS_TO_MONITOR))
@@ -185,8 +186,8 @@ async def handler(event):
 
 async def main():
     await client.start(phone=PHONE)
-    print("🚀 Бот запущений і повністю адаптований під твою таблицю!")
-    print(f"Моніторимо {len(GROUPS_TO_MONITOR)} груп")
+    print("🚀 Бот запущений!")
+    print(f"Моніторю {len(GROUPS_TO_MONITOR)} телеграм груп")
     await client.run_until_disconnected()
 
 if __name__ == '__main__':
