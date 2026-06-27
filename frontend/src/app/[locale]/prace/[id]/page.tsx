@@ -7,10 +7,10 @@ import Breadcrumbs from "@/components/common/Breadcrumbs/Breadcrumbs";
 import Image from "next/image";
 import CopyBtn from "@/components/CopyBtn/CopyBtn";
 import VacancyPageClient from "./VacancyPageClient";
-import { Link } from "@/i18n/navigation";
 import getUpdatedDate from "@/utils/getUpdatedDate";
 import ClockIcon from "@/components/icons/ClockIcon";
 import ContactUsForm from "@/components/ContactUsForm/ContactUsForm";
+import { BASE_URL } from "@/lib/constants";
 import "./VacancyPage.scss";
 
 export async function generateStaticParams() {
@@ -44,11 +44,6 @@ export async function generateMetadata({
 			title: "404",
 		};
 	}
-
-	// const seoDesc = vacancy.benefits
-	// 	.map((item: string) => item.replace(/^\p{Emoji}\s*/u, "").trim())
-	// 	.join(" · ")
-	// 	.slice(0, 160);
 
 	const page = "prace";
 	const languages = Object.fromEntries(
@@ -105,18 +100,37 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 		return notFound();
 	}
 
+	// validThrough — Google strongly recommends it
+	const validThrough = new Date(vacancy.updated_at);
+	validThrough.setDate(validThrough.getDate() + 60);
+
 	// TODO: learn this
+	// JobPosting
 	const jsonLd = {
 		"@context": "https://schema.org",
 		"@type": "JobPosting",
 		title: vacancy.title,
-		description: vacancy.description,
+		description: [
+			vacancy.description,
+			vacancy.benefits?.length
+				? `Що ми пропонуємо: ${vacancy.benefits.join(", ")}`
+				: "",
+			vacancy.responsibilities?.length
+				? `Обов'язки: ${vacancy.responsibilities.join(", ")}`
+				: "",
+			vacancy.requirements?.length
+				? `Вимоги: ${vacancy.requirements.join(", ")}`
+				: "",
+		]
+			.filter(Boolean)
+			.join(". "),
 		datePosted: vacancy.updated_at,
+		validThrough: validThrough.toISOString(),
 		employmentType: "FULL_TIME", // PART_TIME, CONTRACTOR, TEMPORARY, INTERN
 		hiringOrganization: {
 			"@type": "Organization",
 			name: "flovas",
-			url: `https://www.flovas.cz/${locale}`,
+			url: `${BASE_URL}/${locale}`,
 		},
 		jobLocation: {
 			"@type": "Place",
