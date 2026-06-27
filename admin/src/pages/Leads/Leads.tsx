@@ -313,14 +313,16 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 					</div>
 					<div className="input-container">
 						<label htmlFor="message">Повідомлення</label>
-						<input
+						<textarea
 							id="message"
-							className="input"
+							className="textarea"
+							rows={5}
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.message}
 							name="message"
-							type="text"
+							maxLength={600}
 						/>
+						<span className="input-indicator">{form.message.length} / 600</span>
 					</div>
 					<button className="form__submit-btn" type="submit">
 						{formLoading
