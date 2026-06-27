@@ -48,6 +48,12 @@
 	}
 }
 
+.input-indicator {
+	font-size: 0.75rem;
+	align-self: flex-end;
+	margin-right: 10px;
+}
+
 .contacts-form__btn {
 	background: var(--sec-accent-clr);
 	align-self: flex-end;

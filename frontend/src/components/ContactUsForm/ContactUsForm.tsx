@@ -143,8 +143,10 @@ export default function ContactUsForm() {
 						value={form.message}
 						className="contacts__input"
 						id="message"
-						rows={5}
+						rows={9}
+						maxLength={600}
 					></textarea>
+					<span className="input-indicator">{form.message.length} / 600</span>
 				</div>
 				<button
 					className={classNames("contacts-form__btn", {
