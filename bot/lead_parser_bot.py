@@ -179,17 +179,25 @@ async def handler(event):
         text = event.message.text.strip()
         text_lower = text.lower()
 
-        # 1. Перевіряємо, чи є хоча б одне ключове слово
+        # 1. Перевіряємо ключові слова
         if not any(kw in text_lower for kw in KEYWORDS):
             return
 
-        # 2. Перевіряємо чорний список (реклама, вакансії від агентств)
+        # 2. Перевіряємо чорний список
         if any(bad in text_lower for bad in BLACKLIST):
             logging.info(f"⛔ Ігноровано рекламу: {text[:80]}...")
             return
 
-        # Якщо дійшло сюди — це реальний лід від людини
-        logging.info("🔥 Знайдено реальний лід!")
+        # 3. Витягуємо дані
+        phone = extract_phone(text)
+
+        # === НОВА ПЕРЕВІРКА ===
+        if not phone:   # якщо телефону немає — пропускаємо
+            logging.info("⛔ Пропущено: немає телефону")
+            return
+
+        # Якщо дійшло сюди — це реальний лід з телефоном
+        logging.info(f"🔥 Знайдено реальний лід з телефоном: {phone}")
 
         chat = await event.get_chat()
         sender = await event.get_sender()
@@ -200,7 +208,7 @@ async def handler(event):
 
         lead = {
             "name": extract_name(text),
-            "tel": extract_phone(text),
+            "tel": phone,                    # гарантовано є телефон
             "address": extract_city(text),
             "position": extract_position(text),
             "message": text[:3000],
