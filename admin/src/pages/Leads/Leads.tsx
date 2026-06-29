@@ -4,12 +4,13 @@ import EditIcon from "../../components/icons/EditIcon";
 import TrashIcon from "../../components/icons/TrashIcon";
 import type { Lead } from "../../interfaces/Lead";
 import Pagination from "../../components/Pagination/Pagination";
-import "./styles.scss";
 import Menu from "../../components/Menu/Menu";
+import TelIcon from "../../components/icons/TelIcon";
+import DotsIcon from "../../components/icons/DotsIcon";
+import { trimValue } from "../../helpers/trimValue";
+import "./styles.scss";
 
-type LeadForm = Omit<Lead, "created_at">;
-
-const EMPTY_FORM: LeadForm = {
+const EMPTY_FORM: Lead = {
 	id: "",
 	name: "",
 	tel: "",
@@ -19,6 +20,8 @@ const EMPTY_FORM: LeadForm = {
 	status: "Новий",
 	messengers: [],
 	gender: "",
+	created_at: new Date(),
+	updated_at: new Date(),
 };
 
 type LeadsProps = {
@@ -36,6 +39,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 	const [deleteModal, setDeleteModal] = useState(false);
 	const [idToDelete, setIdToDelete] = useState("");
 	const [formLoading, setFormLoading] = useState(false);
+	const [editable, setEditable] = useState(false);
 
 	const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -59,9 +63,11 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 		setFormLoading(true);
 
 		try {
-			const { id, ...rest } = data;
+			const { id, tel, created_at, updated_at, ...rest } = data;
 
-			const { error } = await supabase.from("leads").insert([rest]);
+			const { error } = await supabase
+				.from("leads")
+				.insert([{ tel: trimValue(tel), ...rest }]);
 			const { error: errorF } = await supabaseF.from("leads").insert([rest]);
 
 			// exists in both — show error
@@ -98,8 +104,11 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 		setFormLoading(true);
 
 		try {
-			const { id: _, ...rest } = data;
-			const { error } = await supabase.from("leads").update(rest).eq("id", id);
+			const { id: _, tel, created_at, updated_at, ...rest } = data;
+			const { error } = await supabase
+				.from("leads")
+				.update({ tel: trimValue(tel), ...rest })
+				.eq("id", id);
 
 			if (error) {
 				if (error.code === "23505") setError("Лід з таким номером вже існує");
@@ -127,9 +136,8 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 		} else {
 			await updateLead(form.id, form);
 		}
-		setForm(EMPTY_FORM);
 		setIsNew(false);
-		setModalVisible(false);
+		setEditable(false);
 		await load();
 	};
 
@@ -137,6 +145,8 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 		deleteLead(idToDelete);
 		setIdToDelete("");
 		setDeleteModal(false);
+		setModalVisible(false);
+		setForm(EMPTY_FORM);
 	};
 
 	const toggleIsWorking = async (id: string, value: string) =>
@@ -148,8 +158,6 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 			prev.map((v) => (v.id === id ? { ...v, status: current } : v)),
 		);
 	};
-
-	// type Messenger = { name: string; isAvailable: boolean };
 
 	const handleMessenger = (value: string, checked: boolean) => {
 		const current = form.messengers ?? [];
@@ -177,30 +185,47 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 	return (
 		<>
 			<div className={`modal ${modalVisible ? "modal--visible" : ""}`}>
-				<div style={{ display: "flex", justifyContent: "space-between" }}>
-					<p className="form__title">
-						{isNew ? "Створити лід" : "Змінити лід"}
-					</p>
-					<button
-						className="close-btn"
-						onClick={() => {
-							setModalVisible(false);
-							setForm(EMPTY_FORM);
-						}}
+				<button
+					style={{ alignSelf: "flex-end", position: "sticky", top: "0px" }}
+					className="close-btn"
+					onClick={() => {
+						setModalVisible(false);
+						setForm(EMPTY_FORM);
+						setEditable(false);
+						setIsNew(false);
+					}}
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="16"
+						height="16"
+						fill="currentColor"
+						className="bi bi-x-lg"
+						viewBox="0 0 16 16"
 					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="16"
-							height="16"
-							fill="currentColor"
-							className="bi bi-x-lg"
-							viewBox="0 0 16 16"
-						>
-							<path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
-						</svg>
-					</button>
-				</div>
+						<path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+					</svg>
+				</button>
+				<p className="form__title">{isNew ? "Створити лід" : "Змінити лід"}</p>
 				{error && <p style={{ color: "red" }}>{error}</p>}
+				{!isNew && (
+					<div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+						<div>
+							<p className="form__label">Створено</p>
+							<p>
+								{new Date(form.created_at).toLocaleDateString()}{" "}
+								{new Date(form.created_at).toLocaleTimeString()}
+							</p>
+						</div>
+						<div>
+							<p className="form__label">Оновлено</p>
+							<p>
+								{new Date(form.updated_at).toLocaleDateString()}{" "}
+								{new Date(form.updated_at).toLocaleTimeString()}
+							</p>
+						</div>
+					</div>
+				)}
 				<form
 					onSubmit={(e) => {
 						e.preventDefault();
@@ -208,29 +233,37 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 					}}
 				>
 					<div className="input-container">
-						<label htmlFor="name">Імя</label>
+						<label className="form__label" htmlFor="name">
+							Імя
+						</label>
 						<input
 							id="name"
-							className="input"
+							className={`input ${!editable ? "input--disabled" : ""}`}
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.name}
 							name="name"
 							type="text"
+							disabled={!editable}
 						/>
 					</div>
 					<div className="input-container">
-						<label htmlFor="tel">Номер телефону</label>
+						<label className="form__label" htmlFor="tel">
+							Номер телефону
+						</label>
 						<input
 							id="tel"
-							className="input"
+							className={`input ${!editable ? "input--disabled" : ""}`}
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.tel}
 							name="tel"
-							type="text"
+							type="tel"
+							disabled={!editable}
 						/>
 					</div>
 					<div>
-						<label htmlFor="">Месенджери</label>
+						<label className="form__label" htmlFor="">
+							Месенджери
+						</label>
 						<div style={{ display: "flex", flexWrap: "wrap" }}>
 							{(["whatsapp", "telegram", "viber"] as const).map((name) => {
 								const messenger = form.messengers?.find((m) => m.name === name);
@@ -238,7 +271,10 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 
 								return (
 									<div key={name}>
-										<label style={{ textTransform: "capitalize" }}>
+										<label
+											className="form__label"
+											style={{ textTransform: "capitalize" }}
+										>
 											{name}
 										</label>
 										<div style={{ display: "flex" }}>
@@ -247,6 +283,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 													type="radio"
 													checked={isAvailable === true}
 													onChange={() => handleMessenger(name, true)}
+													disabled={!editable}
 												/>
 												Так
 											</label>
@@ -255,6 +292,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 													type="radio"
 													checked={isAvailable === false}
 													onChange={() => handleMessenger(name, false)}
+													disabled={!editable}
 												/>
 												Ні
 											</label>
@@ -265,7 +303,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 						</div>
 					</div>
 					<div className="input-container">
-						<label>Стать</label>
+						<label className="form__label">Стать</label>
 						<div style={{ display: "flex" }}>
 							<label>
 								<input
@@ -274,6 +312,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 									value="Жінка"
 									checked={form.gender === "Жінка"}
 									onChange={(e) => handleForm(e.target.name, e.target.value)}
+									disabled={!editable}
 								/>
 								Жінка
 							</label>
@@ -284,55 +323,115 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 									value="Чоловік"
 									checked={form.gender === "Чоловік"}
 									onChange={(e) => handleForm(e.target.name, e.target.value)}
+									disabled={!editable}
 								/>
 								Чоловік
 							</label>
 						</div>
 					</div>
 					<div className="input-container">
-						<label htmlFor="address">Адреса</label>
+						<label className="form__label" htmlFor="address">
+							Адреса
+						</label>
 						<input
 							id="address"
-							className="input"
+							className={`input ${!editable ? "input--disabled" : ""}`}
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.address}
 							name="address"
 							type="text"
+							disabled={!editable}
 						/>
 					</div>
 					<div className="input-container">
-						<label htmlFor="position">Позиція</label>
+						<label className="form__label" htmlFor="position">
+							Позиція
+						</label>
 						<input
 							id="position"
-							className="input"
+							className={`input ${!editable ? "input--disabled" : ""}`}
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.position}
 							name="position"
 							type="text"
+							disabled={!editable}
 						/>
 					</div>
-					<div className="input-container">
-						<label htmlFor="message">Повідомлення</label>
+					<div className={"input-container"}>
+						<label className="form__label" htmlFor="message">
+							Повідомлення
+						</label>
 						<textarea
 							id="message"
-							className="textarea"
+							className={`textarea ${!editable ? "textarea--disabled" : ""}`}
 							rows={5}
 							onChange={(e) => handleForm(e.target.name, e.target.value)}
 							value={form.message}
 							name="message"
 							maxLength={600}
+							disabled={!editable}
 						/>
 						<span className="input-indicator">{form.message.length} / 600</span>
 					</div>
-					<button className="form__submit-btn" type="submit">
-						{formLoading
-							? isNew
-								? "Створення..."
-								: "Збереження..."
-							: isNew
-								? "Створити"
-								: "Змінити"}
-					</button>
+					{!editable && !isNew && (
+						<div
+							style={{
+								display: "flex",
+								gap: "5px",
+								alignSelf: "flex-end",
+								position: "sticky",
+								bottom: "0px",
+							}}
+						>
+							<button
+								type="button"
+								className="update-btn"
+								onClick={() => setEditable(true)}
+							>
+								<EditIcon size={20} />
+							</button>
+							<button
+								type="button"
+								className="delete-btn"
+								onClick={() => {
+									(setDeleteModal(true), setIdToDelete(form.id));
+								}}
+							>
+								<TrashIcon size={20} />
+							</button>
+						</div>
+					)}
+
+					{(editable || isNew) && (
+						<div
+							style={{
+								alignSelf: "flex-end",
+								display: "flex",
+								gap: "5px",
+								position: "sticky",
+								bottom: "0px",
+							}}
+						>
+							{!isNew && (
+								<button
+									type="button"
+									className="form__cancel-btn"
+									onClick={() => setEditable(false)}
+								>
+									Скасувати
+								</button>
+							)}
+							<button className="form__submit-btn" type="submit">
+								{formLoading
+									? isNew
+										? "Створення..."
+										: "Збереження..."
+									: isNew
+										? "Створити"
+										: "Змінити"}
+							</button>
+						</div>
+					)}
 				</form>
 			</div>
 			<div
@@ -342,6 +441,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 					setIsNew(false);
 					setIdToDelete("");
 					setForm(EMPTY_FORM);
+					setEditable(false);
 				}}
 				className={`main-curtain ${modalVisible || deleteModal ? "main-curtain--visible" : ""}`}
 			></div>
@@ -413,6 +513,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 							onClick={() => {
 								setIsNew(true);
 								setModalVisible(true);
+								setEditable(true);
 							}}
 						>
 							Новий лід
@@ -423,7 +524,9 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 							<tr>
 								<th style={{ width: "1%" }}>№</th>
 								<th>Ім'я</th>
-								<th>Номер телефону</th>
+								<th>
+									<TelIcon />
+								</th>
 								<th>Мессенджери</th>
 								<th>Стать</th>
 								<th>Адреса</th>
@@ -447,20 +550,13 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 									const diffDays = diffMs / (1000 * 60 * 60 * 24);
 
 									return (
-										<tr key={l.id} className="leads-tr">
+										<tr
+											key={l.id}
+											className={diffDays <= 3 ? "leads-tr--new" : ""}
+										>
 											<td style={{ width: "1%" }}>{number}</td>
 											<td style={{ width: "1%", whiteSpace: "nowrap" }}>
-												{l.name}{" "}
-												{diffDays <= 3 && (
-													<span
-														style={{
-															background: "var(--sec-accent-clr)",
-															padding: "5px",
-														}}
-													>
-														Новий
-													</span>
-												)}
+												{l.name}
 											</td>
 											<td>{l.tel}</td>
 											<td>
@@ -527,7 +623,16 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 												</select>
 											</td>
 											<td style={{ width: "1%" }}>
-												<div style={{ display: "flex", gap: "5px" }}>
+												<button
+													className="update-btn"
+													onClick={() => {
+														setForm(l);
+														setModalVisible(true);
+													}}
+												>
+													<DotsIcon size={20} />
+												</button>
+												{/* <div style={{ display: "flex", gap: "5px" }}>
 													<button
 														className="update-btn"
 														onClick={() => {
@@ -546,7 +651,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 													>
 														<TrashIcon size={20} />
 													</button>
-												</div>
+												</div> */}
 											</td>
 										</tr>
 									);

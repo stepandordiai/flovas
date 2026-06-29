@@ -9,4 +9,5 @@ export interface Lead {
 	gender: string;
 	messengers: { name: string; isAvailable: boolean }[];
 	created_at: Date;
+	updated_at: Date;
 }
