@@ -90,7 +90,7 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 			fetch(`${import.meta.env.VITE_NOTIFY_URL}/api/notify-lead`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(rest),
+				body: JSON.stringify({ tel, ...rest }),
 			}).catch(() => {});
 
 			return true;
