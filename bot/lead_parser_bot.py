@@ -25,7 +25,6 @@ SUPABASE_KEY = os.getenv('SUPABASE_KEY')
 GROUPS_TO_MONITOR = [
     "work_praha",
     "help_praha",
-    "Czech_Republic_UA",
     "Pragafushki",
     "UA_inCzech",
     "Vova5621",
@@ -34,10 +33,19 @@ GROUPS_TO_MONITOR = [
     "praha_rabota_chat",
     "cz_job",
     "DZ_PracePraha",
+    "rabota_v_prague"
     "robota_chehia",
+    "robota4ka",
+    "rabotachehiya",
     "CZ2023work",
     "work_chehia",
-    "chehiya_pidtrymka"
+    "chehiya_pidtrymka",
+    "PragueBaraholka",
+    "ok_chat_czech",
+    "Praga_work",
+    "fushka_praga",
+    "RabotaBrnoOstravaOlomouc",
+    "UAPraga_1"
 ]
 
 KEYWORDS = [
