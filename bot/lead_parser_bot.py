@@ -33,7 +33,7 @@ GROUPS_TO_MONITOR = [
     "praha_rabota_chat",
     "cz_job",
     "DZ_PracePraha",
-    "rabota_v_prague"
+    "rabota_v_prague",
     "robota_chehia",
     "robota4ka",
     "rabotachehiya",
