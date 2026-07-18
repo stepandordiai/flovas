@@ -1,8 +1,10 @@
+const ORIGIN = "https://flovas-admin.netlify.app";
+
 // TODO: LEARN THIS
 export async function OPTIONS() {
 	return new Response(null, {
 		headers: {
-			"Access-Control-Allow-Origin": "https://flovas-admin.netlify.app",
+			"Access-Control-Allow-Origin": ORIGIN,
 			"Access-Control-Allow-Methods": "POST, OPTIONS",
 			"Access-Control-Allow-Headers": "Content-Type",
 		},
@@ -14,7 +16,8 @@ export async function POST(req: Request) {
 	const lead = await req.json();
 
 	const text =
-		`Новий лід 👨🏻\n\n` +
+		`🆕 Новий лід\n` +
+		`Джерело: ${lead.source}\n\n` +
 		`Імʼя: ${lead.name ?? "—"}\n` +
 		`Телефон: ${lead.tel ?? "—"}\n` +
 		`Адреса: ${lead.address ?? "—"}\n` +
@@ -45,7 +48,7 @@ export async function POST(req: Request) {
 		{ ok: true },
 		{
 			headers: {
-				"Access-Control-Allow-Origin": "https://flovas-admin.netlify.app",
+				"Access-Control-Allow-Origin": ORIGIN,
 			},
 		},
 	);

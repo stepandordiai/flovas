@@ -19,6 +19,7 @@ API_ID = int(os.getenv('API_ID'))
 API_HASH = os.getenv('API_HASH')
 PHONE = os.getenv('PHONE')
 
+# flovas
 SUPABASE_URL = os.getenv('SUPABASE_URL')
 SUPABASE_KEY = os.getenv('SUPABASE_KEY')
 
@@ -66,7 +67,6 @@ KEYWORDS = [
 
 ]
 
-# Слова, за наявності яких лід ІГНОРУЄТЬСЯ
 BLACKLIST = [
     "вакансії",
     "робота на курорті",
@@ -162,12 +162,9 @@ async def save_to_supabase(lead: dict):
         # 1. Зберігаємо в Supabase
         response = supabase.table("leads").insert(lead).execute()
         
-        # 2. Відправляємо notify в React-адмінку (жорстко)
-        notify_url = "https://www.flovas.cz"   # ← сюди твій сайт
-        
         try:
             requests.post(
-                f"{notify_url}/api/notify-lead",
+                f"https://www.flovas.cz/api/notify-lead",
                 headers={"Content-Type": "application/json"},
                 json=lead,
                 timeout=5
@@ -215,20 +212,16 @@ async def handler(event):
         chat = await event.get_chat()
         sender = await event.get_sender()
 
-        messengers = [
-            {"name": "telegram", "isAvailable": True}
-        ]
-
         lead = {
+            "source": "flovas (telegram bot)",
             "name": extract_name(text),
-            "tel": phone,                    # гарантовано є телефон
+            "tel": phone,
             "address": extract_city(text),
             "position": extract_position(text),
             # взяти перші 600 символів з тексту повідомлення
-            "message": text[:600],
             "gender": extract_gender(text),
-            "status": "Новий",
-            "messengers": messengers,
+            "message": text[:600],
+            "messengers": [{"name": "telegram", "isAvailable": True}],
         }
 
         await save_to_supabase(lead)

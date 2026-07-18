@@ -53,7 +53,7 @@ export default function ContactUsForm() {
 			fetch("/api/notify-lead", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(form),
+				body: JSON.stringify({ ...form, source: "flovas" }),
 			}).catch(() => {});
 
 			setSuccess(true);
