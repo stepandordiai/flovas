@@ -6,3 +6,13 @@ export const getVacancies = async () => {
 	// TODO: learn this
 	return { data: data as VacancyInterface[] | null, error };
 };
+
+export async function getVacancyById(id: string) {
+	const { data, error } = await supabase
+		.from("vacancies")
+		.select("*")
+		.eq("id", id)
+		.single();
+
+	return { data: data as VacancyInterface | null, error };
+}

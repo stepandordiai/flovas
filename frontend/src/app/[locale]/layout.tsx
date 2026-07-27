@@ -28,6 +28,12 @@ export async function generateMetadata({
 		metadataBase: new URL(BASE_URL),
 
 		// TODO: learn this
+		title: {
+			template: "%s | flovas",
+			default: "flovas",
+		},
+
+		// TODO: learn this
 		openGraph: {
 			title: t("logoTitle"),
 			description: t("home.meta.title"),

@@ -7,26 +7,27 @@ import CopyBtn from "@/components/CopyBtn/CopyBtn";
 import { Locale } from "@/interfaces/Locale";
 import styles from "./Gdpr.module.scss";
 
+const PAGE = "gdpr";
+
 export async function generateMetadata({
 	params,
 }: {
 	params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
 	const { locale } = await params;
-	const page = "gdpr";
 	const languages = Object.fromEntries(
-		routing.locales.map((l) => [l, `/${l}/${page}`]),
+		routing.locales.map((l) => [l, `/${l}/${PAGE}`]),
 	);
 
 	return {
-		title: `Zásady ochrany osobních údajů | flovas`,
+		title: `Zásady ochrany osobních údajů`,
 		description:
 			"Tyto zásady vysvětlují, jakým způsobem shromažďujeme, používáme a chráníme vaše osobní údaje v rámci zprostředkování zaměstnání a personální agendy.",
 		alternates: {
-			canonical: `/${locale}/${page}`,
+			canonical: `/${locale}/${PAGE}`,
 			languages: {
 				...languages,
-				"x-default": `/${routing.defaultLocale}/${page}`,
+				"x-default": `/${routing.defaultLocale}/${PAGE}`,
 			},
 		},
 	};

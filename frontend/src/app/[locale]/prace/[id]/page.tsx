@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
-import { getVacancies } from "@/services/vacancies";
+import { getVacancies, getVacancyById } from "@/services/vacancies";
 import Breadcrumbs from "@/components/common/Breadcrumbs/Breadcrumbs";
 import Image from "next/image";
 import CopyBtn from "@/components/CopyBtn/CopyBtn";
@@ -12,6 +12,8 @@ import ClockIcon from "@/components/icons/ClockIcon";
 import ContactUsForm from "@/components/ContactUsForm/ContactUsForm";
 import { BASE_URL } from "@/lib/constants";
 import "./VacancyPage.scss";
+
+const PAGE = "prace";
 
 export async function generateStaticParams() {
 	const { data: vacancies, error } = await getVacancies();
@@ -33,21 +35,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
 	const { locale, id } = await params;
 
-	const { data: vacancies, error } = await getVacancies();
+	const { data: vacancy, error } = await getVacancyById(id);
 
-	if (!vacancies || error) return {};
-
-	const vacancy = vacancies.find((vacancy) => vacancy.id === id);
-
-	if (!vacancy) {
+	if (!vacancy || error) {
 		return {
-			title: "404",
+			title: "Вакансія не знайдена",
+			// TODO: learn this
+			robots: { index: false, follow: false },
 		};
 	}
 
-	const page = "prace";
 	const languages = Object.fromEntries(
-		routing.locales.map((l) => [l, `/${l}/${page}/${id}`]),
+		routing.locales.map((l) => [l, `/${l}/${PAGE}/${id}`]),
 	);
 
 	return {
@@ -55,10 +54,10 @@ export async function generateMetadata({
 		description: vacancy.description,
 
 		alternates: {
-			canonical: `/${locale}/${page}/${id}`,
+			canonical: `/${locale}/${PAGE}/${id}`,
 			languages: {
 				...languages,
-				"x-default": `/${routing.defaultLocale}/${page}/${id}`,
+				"x-default": `/${routing.defaultLocale}/${PAGE}/${id}`,
 			},
 		},
 
@@ -66,7 +65,7 @@ export async function generateMetadata({
 		openGraph: {
 			title: vacancy.title,
 			description: vacancy.description,
-			url: `/${locale}/${page}/${id}`,
+			url: `/${locale}/${PAGE}/${id}`,
 			type: "website",
 			images: [
 				{
@@ -89,14 +88,9 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 
 	const t = await getTranslations({ locale });
 
-	const { data: vacancies, error } = await getVacancies();
+	const { data: vacancy, error } = await getVacancyById(id);
 
-	if (error) return <div>Error loading vacancies</div>;
-	if (!vacancies) return <div>No vacancies found</div>;
-
-	const vacancy = vacancies.find((v) => v.id === id);
-
-	if (!vacancy) {
+	if (error || !vacancy) {
 		return notFound();
 	}
 

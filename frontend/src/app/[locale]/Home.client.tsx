@@ -1,9 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "@/i18n/navigation";
-import Vacancy from "@/components/Vacancy/Vacancy";
 import { VacancyInterface } from "@/interfaces/Vacancy";
 import "./Home.scss";
 
@@ -12,8 +9,6 @@ export default function HomeClient({
 }: {
 	vacancies: VacancyInterface[];
 }) {
-	const t = useTranslations();
-
 	const places = [...new Set(vacancies.map((v) => v.place))];
 
 	const [placeIndex, setPlaceIndex] = useState(0);
@@ -23,12 +18,10 @@ export default function HomeClient({
 	useEffect(() => {
 		const chars = document.querySelectorAll(".blur-char");
 
-		// Скинути анімацію
 		chars.forEach((char) => {
 			char.classList.remove("blur-char--active");
 		});
 
-		// Дати браузеру застосувати зміни
 		requestAnimationFrame(() => {
 			chars.forEach((char, index) => {
 				setTimeout(() => {
@@ -69,10 +62,8 @@ export default function HomeClient({
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			// Почати приховування
 			setVisible(false);
 
-			// Після завершення анімації змінити текст
 			setTimeout(() => {
 				setPlaceIndex((prev) => (prev + 1) % places.length);
 				setVisible(true);
@@ -83,59 +74,10 @@ export default function HomeClient({
 	}, [places.length]);
 
 	return (
-		<div className="home-inner-container">
-			<section className="home-top" id="hero">
-				<div className="home-top-inner">
-					<h1 className="hero__heading">
-						Вакансії в Чехії для українців — офіційне працевлаштування та житло
-					</h1>
-					<p className="hero__subheading" aria-label={t("home.title1")}>
-						<span>{t("home.title1")}</span>
-						<br />
-						<span
-							className={`hero__subheading-span ${visible ? "hero__subheading-span--visible" : ""}`}
-						>
-							{places[placeIndex]}
-						</span>
-					</p>
-				</div>
-				<div className="home__link-container">
-					<a className="home__link" href="#kontakty">
-						{t("contact_us_title")}
-					</a>
-					<Link className="home__link" href="/prace">
-						Всі вакансії
-						{vacancies && (
-							<span className="home__link-vacancies-qty">
-								{vacancies.length}
-							</span>
-						)}
-					</Link>
-				</div>
-			</section>
-			<section className="vacancies" id="prace">
-				<h2 className="vacancies__title">{t("hotVacanciesTitle")} 🔥</h2>
-				<div className="vacancies-container">
-					{[...vacancies]
-						.sort(
-							(a, b) =>
-								new Date(b.updated_at).getTime() -
-								new Date(a.updated_at).getTime(),
-						)
-						.filter((vacancy) => vacancy.hot_vacancy)
-						.map((vacancy, index) => (
-							<Vacancy
-								key={vacancy.id}
-								vacancy={vacancy}
-								index={index}
-								priorityLength={3}
-							/>
-						))}
-				</div>
-				<Link className="vacancies__link" href="/prace">
-					Дивитись всі вакансії
-				</Link>
-			</section>
-		</div>
+		<span
+			className={`hero__subheading-span ${visible ? "hero__subheading-span--visible" : ""}`}
+		>
+			{places[placeIndex]}
+		</span>
 	);
 }

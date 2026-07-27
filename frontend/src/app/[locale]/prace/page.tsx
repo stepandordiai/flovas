@@ -6,6 +6,8 @@ import { getVacancies } from "@/services/vacancies";
 import { BASE_URL } from "@/lib/constants";
 import "./Vacancies.scss";
 
+const PAGE = "prace";
+
 export async function generateMetadata({
 	params,
 }: {
@@ -13,19 +15,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
 	const { locale } = await params;
 	const t = await getTranslations({ locale, namespace: "vacancies.meta" });
-	const page = "prace";
 	const languages = Object.fromEntries(
-		routing.locales.map((l) => [l, `/${l}/${page}`]),
+		routing.locales.map((l) => [l, `/${l}/${PAGE}`]),
 	);
 
 	return {
-		title: `${t("title")} | flovas`,
+		title: `${t("title")}`,
 		description: `${t("description")}`,
 		alternates: {
-			canonical: `/${locale}/${page}`,
+			canonical: `/${locale}/${PAGE}`,
 			languages: {
 				...languages,
-				"x-default": `/${routing.defaultLocale}/${page}`,
+				"x-default": `/${routing.defaultLocale}/${PAGE}`,
 			},
 		},
 	};
