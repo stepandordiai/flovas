@@ -12,7 +12,6 @@
 .hero__subheading {
 	font-size: clamp(1.125rem, 2vw, 1.5rem);
 	font-weight: 500;
-	width: 100%;
 }
 
 .home-inner {
@@ -45,6 +44,8 @@
 }
 
 .hero__subheading-span {
+	font-size: clamp(1.125rem, 2vw, 1.5rem);
+	font-weight: 500;
 	opacity: 0;
 	filter: blur(10px);
 	transition:

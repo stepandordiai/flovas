@@ -54,21 +54,16 @@ export default async function Home({
 				<div className="home-inner-container">
 					<section className="home-top" id="hero">
 						<div className="home-top-inner">
-							<h1 className="hero__heading">
-								Вакансії в Чехії для українців — офіційне працевлаштування та
-								житло
-							</h1>
-							<p className="hero__subheading" aria-label={t("home.title1")}>
-								<span>{t("home.title1")}</span>
-								<br />
-							</p>
+							<h1 className="hero__heading">{t("home.heading")}</h1>
+							<p className="hero__subheading">{t("home.subheading")}</p>
+							<HomeClient vacancies={vacancies ?? []} />
 						</div>
 						<div className="home__link-container">
 							<a className="home__link" href="#kontakty">
 								{t("contact_us_title")}
 							</a>
 							<Link className="home__link" href="/prace">
-								Всі вакансії
+								{t("home.allVacancies")}
 								{vacancies && (
 									<span className="home__link-vacancies-qty">
 										{vacancies.length}
@@ -101,7 +96,6 @@ export default async function Home({
 						</Link>
 					</section>
 				</div>
-				<HomeClient vacancies={vacancies ?? []} />
 				<About />
 				<Faqs />
 				<Contacts />
