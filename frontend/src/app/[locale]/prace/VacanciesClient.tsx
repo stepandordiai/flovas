@@ -8,48 +8,63 @@ import { useEffect, useState } from "react";
 import classNames from "classnames";
 import { createPortal } from "react-dom";
 import { VacancyInterface } from "@/interfaces/Vacancy";
+import { useRouter } from "next/navigation";
 
 export default function VacanciesClient({
 	vacancies,
+	places,
+	jobTypes,
+	initPlace,
+	initJobType,
 }: {
 	vacancies: VacancyInterface[];
+	places: string[];
+	jobTypes: string[];
+	initPlace?: string;
+	initJobType?: string;
 }) {
 	const t = useTranslations();
-	const [vacanciesFilter, setVacanciesFilter] = useState({
-		place: "",
-		job_type: "",
-	});
+	const router = useRouter();
 
-	const activeFiltersLength =
-		Object.values(vacanciesFilter).filter(Boolean).length;
+	const [vacanciesFilter, setVacanciesFilter] = useState({
+		place: initPlace ?? "",
+		job_type: initJobType ?? "",
+	});
+	const [filterVisible, setFilterVisible] = useState(false);
+	const [visibleLength, setVisibleLength] = useState(12);
 
 	const handleVacanciesFilter = (name: string, value: string) => {
 		setVacanciesFilter((prev) => ({ ...prev, [name]: value }));
 	};
 
-	// TODO: learn this
-	const [visibleLength, setVisibleLength] = useState(12);
+	// TODO: LEARN THIS
+	const handleSubmit = () => {
+		const query = new URLSearchParams();
+		if (vacanciesFilter.place.trim())
+			query.set("place", vacanciesFilter.place.trim());
+		if (vacanciesFilter.job_type.trim())
+			query.set("job_type", vacanciesFilter.job_type.trim());
 
-	const filteredVacancies = vacancies.filter((vacancy) => {
-		const filteredPlace = vacanciesFilter.place
-			? vacanciesFilter.place === vacancy.place
-			: true;
-		const filteredJobType = vacanciesFilter.job_type
-			? vacanciesFilter.job_type === vacancy.job_type
-			: true;
+		const queryString = query.toString();
+		router.push(`/prace${queryString ? `?${queryString}` : ""}`);
+	};
 
-		return filteredPlace && filteredJobType;
-	});
+	const handleReset = () => {
+		setVacanciesFilter({ place: "", job_type: "" });
+		router.push("/prace");
+	};
 
-	// FIXME:
-	const sortedFilteredVacancies = [
-		...filteredVacancies
+	const activeFiltersLength =
+		Object.values(vacanciesFilter).filter(Boolean).length;
+
+	const sortedVacancies = [
+		...vacancies
 			.filter((v) => v.is_active)
 			.sort(
 				(a, b) =>
 					new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
 			),
-		...filteredVacancies
+		...vacancies
 			.filter((v) => !v.is_active)
 			.sort(
 				(a, b) =>
@@ -57,11 +72,9 @@ export default function VacanciesClient({
 			),
 	];
 
-	const [filterVisible, setFilterVisible] = useState(false);
-
 	useEffect(() => {
 		window.scrollTo(0, 0);
-	}, [vacanciesFilter]);
+	}, [vacancies]);
 
 	const VacanciesModal = ({
 		filterVisible,
@@ -99,7 +112,7 @@ export default function VacanciesClient({
 								value={vacanciesFilter.place}
 							>
 								<option value="">Всі міста</option>
-								{uniquePlaces.map((place, i) => (
+								{places.map((place, i) => (
 									<option key={i} value={place}>
 										{place}
 									</option>
@@ -116,7 +129,7 @@ export default function VacanciesClient({
 								value={vacanciesFilter.job_type}
 							>
 								<option value="">Всі посади</option>
-								{uniqueJobTypes.map((jobType, i) => {
+								{jobTypes.map((jobType, i) => {
 									return (
 										<option key={i} value={jobType}>
 											{jobType}
@@ -142,12 +155,7 @@ export default function VacanciesClient({
 									padding: "0 12.5px",
 									marginTop: 10,
 								}}
-								onClick={() => {
-									setVacanciesFilter({
-										place: "",
-										job_type: "",
-									});
-								}}
+								onClick={handleReset}
 							>
 								Скинути фільтри{" "}
 								{activeFiltersLength > 0 && (
@@ -163,9 +171,9 @@ export default function VacanciesClient({
 									borderRadius: 25,
 									marginTop: 10,
 								}}
-								onClick={() => setFilterVisible(false)}
+								onClick={handleSubmit}
 							>
-								Показати результати ({filteredVacancies.length})
+								Показати результати
 							</button>
 						</div>
 					</div>
@@ -181,11 +189,6 @@ export default function VacanciesClient({
 		);
 	};
 
-	const uniquePlaces = [...new Set(vacancies.map((vacancy) => vacancy.place))];
-	const uniqueJobTypes = [
-		...new Set(vacancies.map((vacancy) => vacancy.job_type)),
-	];
-
 	return (
 		<>
 			<VacanciesModal
@@ -196,14 +199,15 @@ export default function VacanciesClient({
 				<div className="vacancies-filter-inner">
 					<p className="lng-select-banner__title">Фільтри</p>
 					<div>
-						<label htmlFor="">Місце роботи</label>
+						<label htmlFor="place">Місце роботи</label>
 						<select
+							id="place"
 							className="input"
 							onChange={(e) => handleVacanciesFilter("place", e.target.value)}
 							value={vacanciesFilter.place}
 						>
 							<option value="">Всі міста</option>
-							{uniquePlaces.map((place, i) => {
+							{places.map((place, i) => {
 								return (
 									<option key={i} value={place}>
 										{place}
@@ -213,8 +217,9 @@ export default function VacanciesClient({
 						</select>
 					</div>
 					<div>
-						<label htmlFor="">Посада</label>
+						<label htmlFor="jobType">Посада</label>
 						<select
+							id="jobType"
 							className="input"
 							onChange={(e) =>
 								handleVacanciesFilter("job_type", e.target.value)
@@ -222,7 +227,7 @@ export default function VacanciesClient({
 							value={vacanciesFilter.job_type}
 						>
 							<option value="">Всі посади</option>
-							{uniqueJobTypes.map((jobType, i) => {
+							{jobTypes.map((jobType, i) => {
 								return (
 									<option key={i} value={jobType}>
 										{jobType}
@@ -231,7 +236,6 @@ export default function VacanciesClient({
 							})}
 						</select>
 					</div>
-					<span>Знайдено вакансій: {filteredVacancies.length}</span>
 					<button
 						style={{
 							background: "#000",
@@ -240,40 +244,42 @@ export default function VacanciesClient({
 							borderRadius: 25,
 							marginTop: "auto",
 						}}
-						onClick={() => {
-							setVacanciesFilter({
-								place: "",
-								job_type: "",
-							});
-						}}
+						onClick={handleReset}
 					>
 						Скинути фільтри{" "}
 						{activeFiltersLength > 0 && <span>({activeFiltersLength})</span>}
+					</button>
+					<button
+						style={{
+							background: "var(--sec-accent-clr)",
+							color: "#000",
+							height: 50,
+							borderRadius: 25,
+						}}
+						onClick={handleSubmit}
+					>
+						Показати результати
 					</button>
 				</div>
 			</div>
 			<div style={{ width: "100%" }}>
 				<Breadcrumbs links={[{ label: t("vacancies_title") }]} />
 				<h1 className="vacancies-page__title">{t("vacancies_title")}</h1>
-				{filteredVacancies.length < 1 ? (
+				{vacancies.length < 1 ? (
 					<p>Вибраних вакансій нажаль немає.</p>
 				) : (
 					<div className="vacancies-page-container">
-						{/* TODO: learn this */}
-						{sortedFilteredVacancies
-							.slice(0, visibleLength)
-							.map((vacancy, index) => (
-								<Vacancy
-									key={vacancy.id}
-									vacancy={vacancy}
-									index={index}
-									priorityLength={4}
-								/>
-							))}
+						{sortedVacancies.slice(0, visibleLength).map((vacancy, index) => (
+							<Vacancy
+								key={vacancy.id}
+								vacancy={vacancy}
+								index={index}
+								priorityLength={4}
+							/>
+						))}
 					</div>
 				)}
-				{/* TODO: learn this */}
-				{filteredVacancies.length > visibleLength && (
+				{vacancies.length > visibleLength && (
 					<button
 						className="vacancies__btn"
 						onClick={() => setVisibleLength((prev) => prev + 8)}

@@ -87,7 +87,7 @@ export default async function Home({
 										key={vacancy.id}
 										vacancy={vacancy}
 										index={index}
-										priorityLength={3}
+										priorityLength={4}
 									/>
 								))}
 						</div>

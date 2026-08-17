@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import VacanciesClient from "./VacanciesClient";
-import { getVacancies } from "@/services/vacancies";
+import { getVacancies, getVacanciesFiltered } from "@/services/vacancies";
 import { BASE_URL } from "@/lib/constants";
 import "./Vacancies.scss";
 
@@ -32,15 +32,25 @@ export async function generateMetadata({
 	};
 }
 
+type VacanciesProps = {
+	params: Promise<{ locale: string }>;
+	searchParams: Promise<{ place?: string; job_type?: string }>;
+};
+
 export default async function Vacancies({
 	params,
-}: {
-	params: Promise<{ locale: string }>;
-}) {
+	searchParams,
+}: VacanciesProps) {
 	const { locale } = await params;
+	const { place, job_type } = await searchParams;
 	const t = await getTranslations({ locale });
 
-	const { data, error } = await getVacancies();
+	// TODO: LEARN THIS
+	const [{ data, error }, { places, jobTypes }] = await Promise.all([
+		getVacancies({ place, job_type }),
+		getVacanciesFiltered(),
+	]);
+
 	if (error) console.error("Failed to load vacancies:", error.message);
 	const vacancies = data ?? [];
 
@@ -66,7 +76,13 @@ export default async function Vacancies({
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
 			/>
 			<main className="main vacancies-page">
-				<VacanciesClient vacancies={vacancies} />
+				<VacanciesClient
+					vacancies={vacancies}
+					places={places}
+					jobTypes={jobTypes}
+					initPlace={place}
+					initJobType={job_type}
+				/>
 			</main>
 		</>
 	);

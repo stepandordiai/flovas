@@ -1,7 +1,8 @@
 import { getTranslations } from "next-intl/server";
-import { getVacancies } from "@/services/vacancies";
+import { getVacanciesFiltered } from "@/services/vacancies";
 import Image from "next/image";
 import "./About.scss";
+import { Link } from "@/i18n/navigation";
 
 const benefitsData = [
 	{ img: "/icons/czech.png", title: "about.our_advantages1" },
@@ -22,10 +23,7 @@ const benefitsData = [
 export default async function About() {
 	const t = await getTranslations();
 
-	const { data, error } = await getVacancies();
-	const vacancies = data ?? [];
-
-	console.log(error);
+	const { places, count } = await getVacanciesFiltered();
 
 	return (
 		<section className="about" id="o-nas">
@@ -33,7 +31,7 @@ export default async function About() {
 			<p className="about__desc">{t("about.desc")}</p>
 			<ul className="about-milestones">
 				<li>
-					<strong>{vacancies.length}</strong>
+					<strong>{count}</strong>
 					<span>Вакансій по всій Чехії</span>
 				</li>
 				<li>
@@ -49,15 +47,20 @@ export default async function About() {
 				{t("about.employment_place_title")}
 			</h3>
 			<div className="about__places-desc">
-				{[...new Set(vacancies.map((vacancy) => vacancy.place))].map(
-					(place, i) => {
-						return (
-							<div key={i} className="about__place">
-								{place}
-							</div>
-						);
-					},
-				)}
+				{places.map((place, i) => {
+					return (
+						<Link
+							key={i}
+							href={{
+								pathname: "/prace",
+								query: { place },
+							}}
+							className="about__place"
+						>
+							{place}
+						</Link>
+					);
+				})}
 			</div>
 			<h3 className="about__benefits-title">
 				{t("about.our_advantages_title")}
