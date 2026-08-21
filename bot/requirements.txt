@@ -1,4 +1,0 @@
-telethon
-supabase
-python-dotenv
-requests
