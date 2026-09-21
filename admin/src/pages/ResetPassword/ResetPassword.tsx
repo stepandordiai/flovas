@@ -19,7 +19,6 @@ const ResetPassword = () => {
 			});
 
 			if (error) throw error;
-			alert("Пароль успішно змінено!");
 			await supabase.auth.signOut();
 			navigate("/login", { replace: true });
 		} catch (error) {

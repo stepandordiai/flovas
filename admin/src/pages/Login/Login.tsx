@@ -12,22 +12,17 @@ const Login = () => {
 	// TODO: LEARN THIS
 	const handleAuth = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+
 		setAuthError("");
 		setAuthLoading(true);
 
 		try {
 			if (forgotPassword) {
-				if (!email) {
-					setAuthError("Введіть правильний електронний адрес");
-					return;
-				}
-
 				const { error } = await supabase.auth.resetPasswordForEmail(email, {
 					redirectTo: `${window.location.origin}/reset-password`,
 				});
 
 				if (error) throw error;
-				alert("Лист для відновлення пароля відправлено");
 				setForgotPassword(false);
 				return;
 			}
@@ -60,6 +55,7 @@ const Login = () => {
 						value={email}
 						type="email"
 						placeholder="example@gmail.com"
+						required
 					/>
 				</div>
 				{!forgotPassword && (
