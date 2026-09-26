@@ -29,10 +29,7 @@ export default async function Contacts() {
 							<CopyBtn value={COMPANY_CODE} />
 						</span>
 					</div>
-					<h3>
-						Підписуйтесь на наші соціальні мережі, щоб не пропустити нові
-						вакансії в Чехії.
-					</h3>
+					<h3>{t("contacts.socialsHeading")}</h3>
 					<div className="contacts__socials-container">
 						{socials.map((social, i) => {
 							const Icon = social.icon;

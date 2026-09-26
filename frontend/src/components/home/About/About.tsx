@@ -1,8 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import { getVacanciesFiltered } from "@/services/vacancies";
 import Image from "next/image";
-import "./About.scss";
 import { Link } from "@/i18n/navigation";
+import "./About.scss";
 
 const benefitsData = [
 	{ img: "/icons/czech.png", title: "about.our_advantages1" },
@@ -32,15 +32,15 @@ export default async function About() {
 			<ul className="about-milestones">
 				<li>
 					<strong>{count}</strong>
-					<span>Вакансій по всій Чехії</span>
+					<span>{t("about.vacanciesAcrossTheCzechRepublic")}</span>
 				</li>
 				<li>
 					<strong>20+</strong>
-					<span>Років досвіду</span>
+					<span>{t("about.yearsOfExperience")}</span>
 				</li>
 				<li>
 					<strong>1000+</strong>
-					<span>Українцям допомогли працевлаштуватись</span>
+					<span>{t("about.ukrainiansHelpedFindEmployment")}</span>
 				</li>
 			</ul>
 			<h3 className="about__places-title">

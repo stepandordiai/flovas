@@ -10,19 +10,21 @@ import { createPortal } from "react-dom";
 import { VacancyInterface } from "@/interfaces/Vacancy";
 import { useRouter } from "next/navigation";
 
+type VacanciesClientProps = {
+	vacancies: VacancyInterface[];
+	places: string[];
+	jobTypes: string[];
+	initPlace?: string;
+	initJobType?: string;
+};
+
 export default function VacanciesClient({
 	vacancies,
 	places,
 	jobTypes,
 	initPlace,
 	initJobType,
-}: {
-	vacancies: VacancyInterface[];
-	places: string[];
-	jobTypes: string[];
-	initPlace?: string;
-	initJobType?: string;
-}) {
+}: VacanciesClientProps) {
 	const t = useTranslations();
 	const router = useRouter();
 
@@ -156,6 +158,7 @@ export default function VacanciesClient({
 									marginTop: 10,
 								}}
 								onClick={handleReset}
+								disabled={activeFiltersLength === 0}
 							>
 								Скинути фільтри{" "}
 								{activeFiltersLength > 0 && (
@@ -197,16 +200,18 @@ export default function VacanciesClient({
 			/>
 			<div className="vacancies-filter">
 				<div className="vacancies-filter-inner">
-					<p className="lng-select-banner__title">Фільтри</p>
+					<p className="lng-select-banner__title">
+						{t("vacancies.filterHeading")}
+					</p>
 					<div>
-						<label htmlFor="place">Місце роботи</label>
+						<label htmlFor="place">{t("vacancies.workplace")}</label>
 						<select
 							id="place"
 							className="input"
 							onChange={(e) => handleVacanciesFilter("place", e.target.value)}
 							value={vacanciesFilter.place}
 						>
-							<option value="">Всі міста</option>
+							<option value="">{t("vacancies.allCities")}</option>
 							{places.map((place, i) => {
 								return (
 									<option key={i} value={place}>
@@ -217,7 +222,7 @@ export default function VacanciesClient({
 						</select>
 					</div>
 					<div>
-						<label htmlFor="jobType">Посада</label>
+						<label htmlFor="jobType">{t("vacancies.position")}</label>
 						<select
 							id="jobType"
 							className="input"
@@ -226,7 +231,7 @@ export default function VacanciesClient({
 							}
 							value={vacanciesFilter.job_type}
 						>
-							<option value="">Всі посади</option>
+							<option value="">{t("vacancies.allPositions")}</option>
 							{jobTypes.map((jobType, i) => {
 								return (
 									<option key={i} value={jobType}>
@@ -237,36 +242,30 @@ export default function VacanciesClient({
 						</select>
 					</div>
 					<button
-						style={{
-							background: "#000",
-							color: "#fff",
-							height: 50,
-							borderRadius: 25,
-							marginTop: "auto",
-						}}
+						className="vacancies__filter-secondary-btn"
+						style={{}}
 						onClick={handleReset}
+						disabled={activeFiltersLength === 0}
 					>
-						Скинути фільтри{" "}
+						{t("vacancies.resetFilters")}{" "}
 						{activeFiltersLength > 0 && <span>({activeFiltersLength})</span>}
 					</button>
 					<button
-						style={{
-							background: "var(--sec-accent-clr)",
-							color: "#000",
-							height: 50,
-							borderRadius: 25,
-						}}
+						className="vacancies__filter-primary-btn"
 						onClick={handleSubmit}
+						disabled={activeFiltersLength === 0}
 					>
-						Показати результати
+						{t("vacancies.showResults")}
 					</button>
 				</div>
 			</div>
 			<div style={{ width: "100%" }}>
 				<Breadcrumbs links={[{ label: t("vacancies_title") }]} />
 				<h1 className="vacancies-page__title">{t("vacancies_title")}</h1>
-				{vacancies.length < 1 ? (
-					<p>Вибраних вакансій нажаль немає.</p>
+				{!vacancies.length ? (
+					<p>
+						{t("vacancies.unfortunatelyThereAreNoSelectedVacanciesAvailable")}
+					</p>
 				) : (
 					<div className="vacancies-page-container">
 						{sortedVacancies.slice(0, visibleLength).map((vacancy, index) => (
@@ -284,7 +283,7 @@ export default function VacanciesClient({
 						className="vacancies__btn"
 						onClick={() => setVisibleLength((prev) => prev + 8)}
 					>
-						Показати більше
+						{t("vacancies.showMore")}
 					</button>
 				)}
 				<button onClick={() => setFilterVisible(true)} className="filter-btn">

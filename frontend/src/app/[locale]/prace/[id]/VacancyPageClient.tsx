@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import ShareIcon from "@/components/icons/ShareIcon";
 
 // TODO: learn this
@@ -12,10 +13,12 @@ const handleShare = async () => {
 };
 
 const VacancyPageClient = () => {
+	const t = useTranslations();
+
 	return (
 		<button className="share-btn" onClick={handleShare}>
 			<ShareIcon />
-			<span>Поділитись</span>
+			<span>{t("vacancy.shareVacancy")}</span>
 		</button>
 	);
 };

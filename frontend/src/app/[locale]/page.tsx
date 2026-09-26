@@ -92,14 +92,14 @@ export default async function Home({
 								))}
 						</div>
 						<Link className="vacancies__link" href="/prace">
-							Дивитись всі вакансії
+							{t("viewAllVacancies")}
 						</Link>
 					</section>
 				</div>
 				<About />
 				<Faqs />
 				<Contacts />
-				<WebApp locale={locale} />
+				<WebApp />
 				<div className="scroll-to-top-btn-wrapper">
 					<ScrollToTopBtn />
 				</div>

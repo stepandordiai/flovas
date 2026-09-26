@@ -16,6 +16,7 @@
 	"contact_info": "Contact information",
 	"vacancies_r_loading": "Vacancies are loading, please wait",
 	"click_to_copy": "Click to copy",
+	"copy": "Copy",
 	"copied": "Copied",
 	"sec": "sec",
 	"unavailable": "Jobs are temporarily unavailable. Please check back later",
@@ -26,6 +27,7 @@
 	"followUs": "Follow us",
 	"loading": "Please wait...",
 	"success": "Thank you! We will contact you shortly.",
+	"viewAllVacancies": "View all vacancies",
 
 	"home": {
 		"meta": {
@@ -43,7 +45,28 @@
 		"meta": {
 			"title": "Jobs in Czech Republic 2026 – warehouse, factory, cleaning vacancies",
 			"description": "Browse verified job vacancies in Czech Republic: warehouses, factories, cleaning jobs. Work for Ukrainians with accommodation and quick hiring process."
-		}
+		},
+		"filterHeading": "Filter",
+		"workplace": "Workplace",
+		"position": "Position",
+		"allCities": "All cities",
+		"allPositions": "All positions",
+		"resetFilters": "Reset filters",
+		"showResults": "Show results",
+		"unfortunatelyThereAreNoSelectedVacanciesAvailable": "Unfortunately, there are no selected vacancies available.",
+		"showMore": "Show more"
+	},
+
+	"vacancy": {
+		"shareVacancy": "Share vacancy",
+		"updated": "Updated",
+		"workplace": "Workplace",
+		"description": "Description",
+		"whatWeOffer": "What we offer",
+		"salary": "Salary",
+		"responsibilities": "Responsibilities",
+		"requirements": "Requirements",
+		"address": "Address"
 	},
 
 	"header": {
@@ -86,27 +109,39 @@
 		"our_advantages13": "We will help you with your move",
 		"goal_title": "Our goal",
 		"goal_desc": "To provide every client with stable employment, comfortable living conditions, and full legal support for a confident start in the Czech Republic.",
-		"employment_place_title": "We provide employment throughout the Czech Republic"
+		"employment_place_title": "We provide employment throughout the Czech Republic",
+		"vacanciesAcrossTheCzechRepublic": "vacancies across the Czech Republic",
+		"yearsOfExperience": "years of experience",
+		"ukrainiansHelpedFindEmployment": "Ukrainians helped find employment"
 	},
 
 	"contacts": {
-		"contactUs": "Contact Us",
 		"name": "First name",
 		"address": "In which city are you looking for a job?",
 		"position": "Which profession are you interested in?",
 		"message": "Message",
-		"mapHeading": "Our office in Kolín"
+		"mapHeading": "Our office in Kolín",
+		"socialsHeading": "Follow us on social media so you don't miss new job vacancies in the Czech Republic."
+	},
+
+	"contactUs": {
+		"heading": "Contact Us",
+		"description": "Fill out the form and we'll get back to you within 24 hours."
 	},
 
 	"web_app": {
-		"title": "flovas agency in your smartphone",
+		"heading": "flovas agency in your smartphone",
+		"subheading": "How to install the app on your phone",
 		"item_1_start": "Open",
 		"item_1_end": "in Safari or Chrome browser (Android)",
 		"item_2_start": "Click on the icon",
 		"item_2_end": "'Share' at the bottom of the window or three dots in the upper right corner (Android)",
 		"item_3": "Scroll down, select 'To Home Screen' and tap 'Add'",
 		"item_4_start": "Done! Web application",
-		"item_4_end": "will appear alongside other programs"
+		"item_4_end": "will appear alongside other programs",
+		"quickAndConvenientAccessToCurrentVacancies": "Quick and convenient access to current vacancies",
+		"noNeedToSpendTimeSearchingForVacanciesOnline": "No need to spend time searching for vacancies online",
+		"theAppIsAlwaysAtHandOnYourPhone": "The app is always at hand on your phone"
 	},
 
 	"tel_form_banner": {
@@ -114,30 +149,30 @@
 	},
 
 	"faq": {
-		"title": "Frequently asked questions",
+		"title": "Frequently Asked Questions",
 		"q": {
 			"1": "What jobs in the Czech Republic are currently available for Ukrainians?",
 			"2": "Is official employment available in the Czech Republic for Ukrainians?",
-			"3": "Is knowledge of the Czech language required to work in the Czech Republic?",
-			"4": "Is accommodation provided for jobs in the Czech Republic?",
-			"5": "What salary can Ukrainians expect when working in the Czech Republic?",
-			"6": "Do you help with preparing documents for work in the Czech Republic?",
+			"3": "Is knowledge of Czech required to work in the Czech Republic?",
+			"4": "Is housing provided with jobs in the Czech Republic?",
+			"5": "What is the salary for jobs in the Czech Republic for Ukrainians?",
+			"6": "Do you help with document processing for work in the Czech Republic?",
 			"7": "How many hours per week can you work in the Czech Republic?",
-			"8": "Are there jobs in the Czech Republic for couples?",
+			"8": "Are there jobs in the Czech Republic for married couples?",
 			"9": "How quickly can you leave for work in the Czech Republic?",
-			"10": "How can I apply for a job in the Czech Republic?"
+			"10": "How do I apply for a job in the Czech Republic?"
 		},
 		"a": {
-			"1": "We offer official jobs in the Czech Republic for Ukrainians in warehouses, manufacturing, logistics, the food industry, cleaning services, and caregiving. Vacancies are available throughout the Czech Republic — Prague, Brno, Plzeň, and other cities. There are opportunities for men, women, and couples.",
-			"2": "Yes, all our vacancies provide official employment in accordance with Czech legislation. Every employee receives an employment contract, official salary, and social insurance. We help prepare all the necessary documents.",
-			"3": "For most vacancies, knowledge of the Czech language is not required. We have many opportunities for candidates without language skills — especially in manufacturing, warehouses, and logistics. We also provide support in Ukrainian throughout the entire process.",
-			"4": "Yes, for most vacancies the employer or agency provides accommodation for employees. Living conditions depend on the specific vacancy and company. There are offers with free or partially paid accommodation.",
-			"5": "The salary level depends on the vacancy, number of working hours, and shifts. On average, wages range from 140 to 220 CZK per hour. Many vacancies also offer overtime opportunities and bonuses for night shifts.",
-			"6": "Yes, we fully support clients throughout the entire process: we help with work permits, registration, and preparation of the necessary documents. Our managers provide consultations in Ukrainian and answer all questions.",
-			"7": "On average, the working day lasts 8–12 hours, 5–6 days a week. Many vacancies also offer overtime opportunities. The exact schedule depends on the company and the selected position.",
-			"8": "Yes, we have special vacancies for couples with the possibility of living together and working at the same company. This is one of the most popular categories among Ukrainians looking for work in the Czech Republic.",
-			"9": "You can start working within just a few days after the vacancy is approved and the documents are prepared. The timing depends on the specific position and the readiness of the candidate’s documents.",
-			"10": "To apply, leave a request on our website or contact us by phone or messenger. Our manager will contact you, select current vacancies in the Czech Republic, and help with all the necessary documents."
+			"1": "We offer official jobs in the Czech Republic for Ukrainians in warehouses, manufacturing, logistics, the food industry, cleaning, and caregiving. Vacancies are available across the entire Czech Republic — Prague, Brno, Pilsen, and other cities. Offers are available for men, women, and married couples.",
+			"2": "Yes, all our vacancies include official employment in accordance with Czech law. Every worker receives an employment contract, an official salary, and social insurance. We help arrange all the necessary documents.",
+			"3": "For most positions, knowledge of Czech is not required. We have a large number of offers for candidates without language skills — especially in manufacturing, warehouses, and logistics. We also provide support in Ukrainian at every stage.",
+			"4": "Yes, for most vacancies the employer or agency provides housing for workers. Living conditions depend on the specific vacancy and company. Some offers include free or partially paid housing.",
+			"5": "The salary level depends on the position, number of working hours, and shifts. The average salary ranges from 140 to 220 CZK/hour. Many vacancies include the possibility of overtime and night shift bonuses.",
+			"6": "Yes, we fully support clients at every stage: we help with work permit processing, registration, and preparation of the necessary documents. Our managers consult in Ukrainian and answer all questions.",
+			"7": "On average, a working day is 8–12 hours, 5–6 days a week. Additional overtime hours are available for many vacancies. The specific schedule depends on the company and the chosen position.",
+			"8": "Yes, we have special vacancies for married couples with the possibility of living and working together at the same company. This is one of the most popular categories among Ukrainians looking for work in the Czech Republic.",
+			"9": "Starting work is possible within a few days after the vacancy is agreed upon and the documents are prepared. Timelines depend on the specific position and the candidate's document readiness.",
+			"10": "To apply, leave a request on our website or contact us by phone or messenger. Our manager will get in touch, select current vacancies in the Czech Republic, and help with all the documents."
 		}
 	},
 

@@ -70,8 +70,8 @@ export default function ContactUsForm() {
 
 	return (
 		<div className="contact-us" id="contact-us">
-			<h3 className="contact-us__heading">{t("contacts.contactUs")}</h3>
-			<p>Заповніть форму, і ми зв’яжемося з вами найближчим часом.</p>
+			<h3 className="contact-us__heading">{t("contactUs.heading")}</h3>
+			<p>{t("contactUs.description")}</p>
 			<form className="contact-us-form" onSubmit={createContactsLead}>
 				{error && <span style={{ color: "rgb(255, 115, 115)" }}>{error}</span>}
 				<div className="input-container">

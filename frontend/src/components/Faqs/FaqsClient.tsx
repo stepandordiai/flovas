@@ -3,8 +3,10 @@
 import { useState } from "react";
 import classNames from "classnames";
 import faqs from "@/data/faqs.json";
+import { useTranslations } from "next-intl";
 
 export default function FaqsClient() {
+	const t = useTranslations();
 	const [activeFaqIndex, setActiveFaqIndex] = useState(0);
 
 	return (
@@ -18,14 +20,14 @@ export default function FaqsClient() {
 						})}
 					>
 						<button className="faq__btn" onClick={() => setActiveFaqIndex(i)}>
-							{faq.q}
+							{t(faq.q)}
 						</button>
 						<div
 							className={classNames("faq-dd", {
 								"faq-dd--active": i === activeFaqIndex,
 							})}
 						>
-							<p>{faq.a}</p>
+							<p>{t(faq.a)}</p>
 						</div>
 					</div>
 				);

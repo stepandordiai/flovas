@@ -17,6 +17,7 @@
 	"vacancies_r_loading": "Úlohy sa načítavajú, čakajte prosím",
 	"click_to_copy": "Kliknite pre kopírovanie",
 	"copied": "Skopírované",
+	"copy": "Kopírovať",
 	"sec": "sek",
 	"unavailable": "Pracovné ponuky sú dočasne nedostupné. Skúste to znova neskôr",
 	"vacancies_r_empty": "Momentálne bohužiaľ nie sú k dispozícii žiadne voľné miesta. Odporúčame vám skontrolovať neskôr",
@@ -30,6 +31,7 @@
 	"followUs": "Sledujte nás",
 	"loading": "Počkajte, prosím...",
 	"success": "Ďakujeme! Budeme vás čoskoro kontaktovať.",
+	"viewAllVacancies": "Zobraziť všetky pracovné ponuky",
 
 	"home": {
 		"meta": {
@@ -47,7 +49,29 @@
 		"meta": {
 			"title": "Voľné pracovné miesta v Česku 2026 – sklady, výroba, upratovanie",
 			"description": "Ponuka práce v Česku: sklady, továrne, upratovanie. Overené pracovné ponuky pre Ukrajincov, možnosť ubytovania a rýchly nástup."
-		}
+		},
+
+		"filterHeading": "Filter",
+		"workplace": "Miesto výkonu práce",
+		"position": "Pozícia",
+		"allCities": "Všetky mestá",
+		"allPositions": "Všetky pozície",
+		"resetFilters": "Resetovať filtre",
+		"showResults": "Zobraziť výsledky",
+		"unfortunatelyThereAreNoSelectedVacanciesAvailable": "Bohužiaľ, žiadne vybrané ponuky nie sú k dispozícii.",
+		"showMore": "Zobraziť viac"
+	},
+
+	"vacancy": {
+		"shareVacancy": "Zdieľať ponuku",
+		"updated": "Aktualizováno",
+		"workLocation": "Miesto výkonu práce",
+		"description": "Popis",
+		"whatWeOffer": "Čo ponúkame",
+		"salary": "Mzda",
+		"responsibilities": "Náplň práce",
+		"requirements": "Požiadavky",
+		"address": "Adresa"
 	},
 
 	"header": {
@@ -90,27 +114,39 @@
 		"our_advantages13": "Pomôžeme vám s vaším sťahovaním",
 		"goal_title": "Náš cieľ",
 		"goal_desc": "Zabezpečiť každému klientovi stabilnú prácu, komfortné ubytovanie a plnú právnu podporu pre istý štart v Českej republike.",
-		"employment_place_title": "Zamestnávame po celom Česku"
+		"employment_place_title": "Zamestnávame po celom Česku",
+		"vacanciesAcrossTheCzechRepublic": "pracovných ponúk po celom Česku",
+		"yearsOfExperience": "rokov skúseností",
+		"ukrainiansHelpedFindEmployment": "Ukrajincom sme pomohli nájsť si prácu"
 	},
 
 	"contacts": {
-		"contactUs": "Kontaktujte nás",
 		"name": "Meno",
 		"address": "V ktorom meste hľadáte prácu?",
 		"position": "O akú profesiu máte záujem?",
 		"message": "Správa",
-		"mapHeading": "Naša kancelária v meste Kolín"
+		"mapHeading": "Naša kancelária v meste Kolín",
+		"socialsHeading": "Sledujte nás na sociálnych sieťach, aby ste nezmeškali nové pracovné ponuky v Česku."
+	},
+
+	"contactUs": {
+		"heading": "Kontaktujte nás",
+		"description": "Vyplňte formulár a my sa vám ozveme do 24 hodín."
 	},
 
 	"web_app": {
-		"title": "Agentúra flovas vo vašom smartfóne",
+		"heading": "Agentúra flovas vo vašom smartfóne",
+		"subheading": "Ako nainštalovať aplikáciu do telefónu",
 		"item_1_start": "Otvoriť",
 		"item_1_end": "v prehliadači Safari alebo Chrome (Android)",
 		"item_2_start": "Kliknite na ikonu",
 		"item_2_end": "„Zdieľať“ v dolnej časti okna alebo tri bodky v pravom hornom rohu (Android)",
 		"item_3": "Posuňte sa nadol, vyberte možnosť „Na domovskú obrazovku“ a klepnite na „Pridať“.",
 		"item_4_start": "Hotovo! Webová aplikácia",
-		"item_4_end": "sa objaví popri iných programoch"
+		"item_4_end": "sa objaví popri iných programoch",
+		"quickAndConvenientAccessToCurrentVacancies": "Rýchly a pohodlný prístup k aktuálnym pracovným ponukám",
+		"noNeedToSpendTimeSearchingForVacanciesOnline": "Nemusíte tráviť čas hľadaním pracovných ponúk na internete",
+		"theAppIsAlwaysAtHandOnYourPhone": "Aplikácia je vždy poruke vo vašom telefóne"
 	},
 
 	"tel_form_banner": {
@@ -121,27 +157,27 @@
 		"title": "Často kladené otázky",
 		"q": {
 			"1": "Aká práca v Česku je momentálne dostupná pre Ukrajincov?",
-			"2": "Je v Česku pre Ukrajincov dostupné oficiálne zamestnanie?",
-			"3": "Je na prácu v Česku potrebná čeština?",
-			"4": "Je pri práci v Česku zabezpečené ubytovanie?",
-			"5": "Aký plat môžu Ukrajinci očakávať pri práci v Česku?",
-			"6": "Pomáhate s vybavením dokumentov na prácu v Česku?",
-			"7": "Koľko hodín týždenne je možné pracovať v Česku?",
-			"8": "Je v Česku práca pre páry?",
+			"2": "Je v Česku pre Ukrajincov možné oficiálne zamestnanie?",
+			"3": "Je pre prácu v Česku potrebná znalosť češtiny?",
+			"4": "Poskytujete ubytovanie pri práci v Česku?",
+			"5": "Aký je plat pri práci v Česku pre Ukrajincov?",
+			"6": "Pomáhate s vybavením dokumentov pre prácu v Česku?",
+			"7": "Koľko hodín týždenne je možné v Česku pracovať?",
+			"8": "Je v Česku práca aj pre manželské páry?",
 			"9": "Ako rýchlo je možné vycestovať za prácou do Česka?",
 			"10": "Ako podať žiadosť o prácu v Česku?"
 		},
 		"a": {
-			"1": "Ponúkame oficiálnu prácu v Česku pre Ukrajincov v skladoch, výrobe, logistike, potravinárstve, upratovaní a starostlivosti o ľudí. Voľné pracovné miesta sú po celom Česku — Praha, Brno, Plzeň a ďalšie mestá. Ponuky sú pre mužov, ženy aj páry.",
-			"2": "Áno, všetky naše pracovné ponuky zahŕňajú oficiálne zamestnanie v súlade s českou legislatívou. Každý zamestnanec dostáva pracovnú zmluvu, oficiálnu mzdu a sociálne poistenie. Pomáhame s vybavením všetkých potrebných dokumentov.",
-			"3": "Pre väčšinu pracovných pozícií nie je znalosť češtiny povinná. Máme veľa ponúk pre kandidátov bez znalosti jazyka — najmä vo výrobe, skladoch a logistike. Poskytujeme tiež podporu v ukrajinčine počas celého procesu.",
-			"4": "Áno, pri väčšine pracovných pozícií zamestnávateľ alebo agentúra poskytuje pracovníkom ubytovanie. Podmienky bývania závisia od konkrétnej pracovnej ponuky a podniku. K dispozícii sú ponuky s bezplatným alebo čiastočne hradeným ubytovaním.",
-			"5": "Výška mzdy závisí od pracovnej pozície, počtu odpracovaných hodín a zmien. Priemerná mzda sa pohybuje od 140 do 220 Kč za hodinu. Mnohé pracovné pozície ponúkajú možnosť nadčasov a príplatkov za nočné zmeny.",
-			"6": "Áno, klientov plne sprevádzame počas celého procesu: pomáhame s vybavením pracovného povolenia, registráciou a prípravou potrebných dokumentov. Naši manažéri komunikujú v ukrajinčine a odpovedajú na všetky otázky.",
-			"7": "Priemerný pracovný deň trvá 8–12 hodín, 5–6 dní v týždni. Pri mnohých pracovných pozíciách sú dostupné nadčasy. Konkrétny pracovný čas závisí od podniku a vybranej pracovnej ponuky.",
-			"8": "Áno, máme špeciálne pracovné ponuky pre páry s možnosťou spoločného bývania a práce v jednom podniku. Je to jedna z najobľúbenejších kategórií medzi Ukrajincami, ktorí hľadajú prácu v Česku.",
-			"9": "Nástup do práce je možný už v priebehu niekoľkých dní po schválení pracovnej ponuky a príprave dokumentov. Termíny závisia od konkrétnej pozície a pripravenosti dokumentov kandidáta.",
-			"10": "Ak chcete podať žiadosť, zanechajte dopyt na našej webovej stránke alebo nás kontaktujte telefonicky či cez messengery. Náš manažér vás bude kontaktovať, vyberie aktuálne pracovné ponuky v Česku a pomôže so všetkými dokumentmi."
+			"1": "Ponúkame oficiálnu prácu v Česku pre Ukrajincov v skladoch, výrobe, logistike, potravinárskom priemysle, upratovaní a starostlivosti o ľudí. Voľné miesta sú po celom Česku — Praha, Brno, Plzeň a ďalšie mestá. K dispozícii sú ponuky pre mužov, ženy aj manželské páry.",
+			"2": "Áno, všetky naše ponuky zahŕňajú oficiálne zamestnanie v súlade s českou legislatívou. Každý pracovník dostane pracovnú zmluvu, oficiálnu mzdu a sociálne poistenie. Pomôžeme s vybavením všetkých potrebných dokumentov.",
+			"3": "Pre väčšinu pozícií nie je znalosť češtiny potrebná. Máme veľké množstvo ponúk pre kandidátov bez znalosti jazyka — najmä vo výrobe, skladoch a logistike. Zabezpečujeme aj podporu v ukrajinčine vo všetkých fázach.",
+			"4": "Áno, pri väčšine ponúk poskytuje zamestnávateľ alebo agentúra ubytovanie pre pracovníkov. Podmienky bývania sa líšia podľa konkrétnej pozície a podniku. K dispozícii sú ponuky s bezplatným alebo čiastočne hradeným ubytovaním.",
+			"5": "Výška mzdy závisí od pozície, počtu odpracovaných hodín a zmien. Priemerná mzda sa pohybuje od 140 do 220 Kč/hod. Mnohé ponuky zahŕňajú možnosť nadčasov a príplatky za nočné zmeny.",
+			"6": "Áno, klientov sprevádzame vo všetkých fázach: pomáhame s vybavením pracovného povolenia, registráciou aj prípravou potrebných dokumentov. Naši manažéri poskytujú konzultácie v ukrajinčine a odpovedia na všetky otázky.",
+			"7": "Pracovný deň zvyčajne trvá 8–12 hodín, 5–6 dní v týždni. Pri mnohých pozíciách sú dostupné aj dodatočné nadčasové hodiny. Konkrétny rozvrh závisí od podniku a zvolenej pozície.",
+			"8": "Áno, máme špeciálne ponuky pre manželské páry s možnosťou spoločného bývania a práce v tom istom podniku. Ide o jednu z najobľúbenejších kategórií medzi Ukrajincami hľadajúcimi prácu v Česku.",
+			"9": "Nástup do práce je možný už niekoľko dní po odsúhlasení pozície a príprave dokumentov. Termíny závisia od konkrétnej pozície a pripravenosti dokumentov kandidáta.",
+			"10": "Ak chcete podať žiadosť, zanechajte dopyt na našej stránke alebo nás kontaktujte telefonicky či cez messengery. Náš manažér sa vám ozve, vyberie aktuálne ponuky práce v Česku a pomôže so všetkými dokumentmi."
 		}
 	},
 

@@ -10,7 +10,7 @@ type CopyBtnProps = {
 	label?: string;
 };
 
-export default function CopyBtn({ value, label = "Скопіювати" }: CopyBtnProps) {
+export default function CopyBtn({ value, label }: CopyBtnProps) {
 	const t = useTranslations();
 
 	const [btnValueCopied, setBtnValueCopied] = useState(false);

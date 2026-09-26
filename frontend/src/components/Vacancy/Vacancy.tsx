@@ -42,7 +42,7 @@ const Vacancy = ({ vacancy, index, priorityLength }: VacancyProps) => {
 					<span>{t(is_active ? "active_vacancy" : "inactive_vacancy")}</span>
 				</p>
 				<div className="vacancy-salary">
-					<span style={{ fontSize: "1rem" }}>Заробітна плата</span>
+					<span style={{ fontSize: "1rem" }}>{t("vacancy.salary")}</span>
 					<span style={{ fontSize: "1.5rem" }}>
 						<strong>{salary}</strong> Kč/год
 					</span>
@@ -66,7 +66,10 @@ const Vacancy = ({ vacancy, index, priorityLength }: VacancyProps) => {
 			</div>
 			<div className="vacancy__details">
 				<span className="vacancy__date">
-					<ClockIcon /> <span>Оновлено {getUpdatedDate(updated_at)}</span>
+					<ClockIcon />{" "}
+					<span>
+						{t("vacancy.updated")} {getUpdatedDate(updated_at)}
+					</span>
 				</span>
 				<span className="vacancy__place">
 					<GeoIcon /> {place}

@@ -196,35 +196,43 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 								}}
 							>
 								<ClockIcon />{" "}
-								<span>Оновлено {getUpdatedDate(vacancy.updated_at)}</span>
+								<span>
+									{t("vacancy.updated")} {getUpdatedDate(vacancy.updated_at)}
+								</span>
 							</p>
 							<VacancyPageClient />
 						</div>
 						<h1 className="vacancy__title">{vacancy.title}</h1>
 
 						<p className="vacancy-page__details-title">
-							Місто: {vacancy.place}
+							{t("vacancy.workLocation")}: {vacancy.place}
 						</p>
 						{vacancy.address && (
 							<div>
-								<span className="vacancy-page__details-title">Адреса: </span>
+								<span className="vacancy-page__details-title">
+									{t("vacancy.address")}:{" "}
+								</span>
 								<a href={vacancy.address_url} target="_blank">
 									{vacancy.address}
 								</a>{" "}
-								<CopyBtn value={vacancy.address} />
+								<CopyBtn value={vacancy.address} label={t("copy")} />
 							</div>
 						)}
 						<p className="vacancy-page__details-title">
-							Заробітна плата: {vacancy.salary} Kč/год
+							{t("vacancy.salary")}: {vacancy.salary} Kč/год
 						</p>
 						{vacancy.description && (
 							<>
-								<p className="vacancy-page__details-title">Опис:</p>
+								<p className="vacancy-page__details-title">
+									{t("vacancy.description")}:
+								</p>
 								<p style={{ whiteSpace: "pre-wrap" }}>{vacancy.description}</p>
 							</>
 						)}
 
-						<p className="vacancy-page__details-title">Що ми пропонуємо:</p>
+						<p className="vacancy-page__details-title">
+							{t("vacancy.whatWeOffer")}:
+						</p>
 						<ul className="vacancy-page-list">
 							{vacancy.benefits.map((el, i) => {
 								return <li key={i}>{el}</li>;
@@ -233,7 +241,9 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 						{vacancy.responsibilities &&
 							vacancy.responsibilities.length > 0 && (
 								<>
-									<p className="vacancy-page__details-title">Обов'язки:</p>
+									<p className="vacancy-page__details-title">
+										{t("vacancy.responsibilities")}:
+									</p>
 									<ul className="vacancy-page-list">
 										{vacancy.responsibilities.map((el, i) => {
 											return <li key={i}>{el}</li>;
@@ -243,7 +253,9 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 							)}
 						{vacancy.requirements && vacancy.requirements.length > 0 && (
 							<>
-								<p className="vacancy-page__details-title">Вимоги:</p>
+								<p className="vacancy-page__details-title">
+									{t("vacancy.requirements")}:
+								</p>
 								<ul className="vacancy-page-list">
 									{vacancy.requirements.map((el, i) => {
 										return <li key={i}>{el}</li>;
