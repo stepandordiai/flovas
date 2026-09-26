@@ -1,9 +1,10 @@
 import { getTranslations } from "next-intl/server";
 import linksData from "@/data/links-data.json";
-import socialsData from "@/data/socialsData";
+import { socials } from "@/data/socialsData";
 import { Link } from "@/i18n/navigation";
 import { CSSProperties } from "react";
 import "./Footer.scss";
+import { EMAIL, TEL } from "@/lib/constants";
 
 const Footer = async () => {
 	const t = await getTranslations();
@@ -30,8 +31,8 @@ const Footer = async () => {
 					<div className="footer__nav">
 						<p className="footer__nav-title">{t("contact_us_title")}</p>
 						<div className="footer__nav-list">
-							<a href="tel:+420777957290">+420 777 957 290</a>
-							<a href="mailto:info@neresen.cz">info@neresen.cz</a>
+							<a href={`tel:${TEL}`}>{TEL}</a>
+							<a href={`mailto:${EMAIL}`}>{EMAIL}</a>
 						</div>
 					</div>
 					<div className="footer__nav">
@@ -48,7 +49,7 @@ const Footer = async () => {
 					<div className="footer__nav">
 						<p className="footer__nav-title">{t("followUs")}</p>
 						<div className="footer__nav-list">
-							{socialsData.map((social, i) => {
+							{socials.map((social, i) => {
 								const Icon = social.icon;
 								return (
 									<a

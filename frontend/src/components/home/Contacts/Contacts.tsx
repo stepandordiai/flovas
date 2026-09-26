@@ -1,7 +1,8 @@
 import { getTranslations } from "next-intl/server";
-import socialsData from "@/data/socialsData";
+import { socials } from "@/data/socialsData";
 import CopyBtn from "@/components/CopyBtn/CopyBtn";
 import ContactUsForm from "@/components/ContactUsForm/ContactUsForm";
+import { COMPANY_CODE, EMAIL, TEL } from "@/lib/constants";
 import "./Contacts.scss";
 
 export default async function Contacts() {
@@ -15,17 +16,17 @@ export default async function Contacts() {
 					<h3 className="contacts__details-title">{t("contact_info")}</h3>
 					<div className="contacts__details-container">
 						<p>{t("tel")}</p>
-						<a href="tel:+420777957290">+420 777 957 290</a>
+						<a href={`tel:${TEL}`}>{TEL}</a>
 						<p>Email</p>
-						<a href="mailto:info@neresen.cz">info@neresen.cz</a>
+						<a href={`mailto:${EMAIL}`}>{EMAIL}</a>
 						<p>{t("address")}</p>
 						<a href="https://maps.app.goo.gl/BfeYpMKrLn5XpkmCA">
 							Pod Hroby 271 Kolín IV
 						</a>
 						<p>IČO</p>
 						<span>
-							<span>17430089 </span>
-							<CopyBtn value="17430089" />
+							<span>{COMPANY_CODE} </span>
+							<CopyBtn value={COMPANY_CODE} />
 						</span>
 					</div>
 					<h3>
@@ -33,7 +34,7 @@ export default async function Contacts() {
 						вакансії в Чехії.
 					</h3>
 					<div className="contacts__socials-container">
-						{socialsData.map((social, i) => {
+						{socials.map((social, i) => {
 							const Icon = social.icon;
 							return (
 								<a
@@ -48,7 +49,7 @@ export default async function Contacts() {
 							);
 						})}
 					</div>
-					<h3>{t("map_title")}</h3>
+					<h3>{t("contacts.mapHeading")}</h3>
 					<iframe
 						className="map"
 						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d329.5935177795711!2d15.214144089939822!3d50.02410476646222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470c1551f5cf6ff7%3A0xf2d6322ddcdffd0!2sflovas%20s.r.o.!5e1!3m2!1sen!2scz!4v1752502315664!5m2!1sen!2scz"

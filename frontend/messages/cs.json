@@ -14,7 +14,6 @@
 	"address": "Adresa",
 	"close": "zavřít",
 	"contact_info": "Kontaktní údaje",
-	"map_title": "Naši kancelář najdete v Kolíně",
 	"vacancies_r_loading": "Volná místa se načítají, čekejte prosím",
 	"click_to_copy": "Kliknutím zkopírujete",
 	"copied": "Zkopírováno",
@@ -95,7 +94,8 @@
 		"name": "Jméno",
 		"address": "Ve kterém městě hledáte práci?",
 		"position": "O jakou profesi máte zájem?",
-		"message": "Zpráva"
+		"message": "Zpráva",
+		"mapHeading": "Naše kancelář ve městě Kolín"
 	},
 
 	"web_app": {

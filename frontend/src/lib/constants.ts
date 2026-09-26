@@ -1,1 +1,10 @@
 export const BASE_URL = "https://www.flovas.cz";
+export const TEL = "+420773802165";
+export const EMAIL = "info@neresen.cz";
+export const FACEBOOK_URL = "https://www.facebook.com/flovas.agency/";
+export const INSTAGRAM_URL = "https://www.instagram.com/flovas.cz/";
+export const TIKTOK_URL = "https://www.tiktok.com/@flovas.cz";
+export const TELEGRAM_URL = "https://t.me/flovas_agency";
+export const WHATSAPP_URL = `https://api.whatsapp.com/send/?phone=${TEL.replace("+", "")}&text&type=phone_number&app_absent=0`;
+export const VIBER_URL = `viber://chat?number=${TEL}`;
+export const COMPANY_CODE = "17430089";

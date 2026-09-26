@@ -1,23 +1,22 @@
 import FacebookIcon from "@/components/icons/FacebookIcon";
 import InstagramIcon from "@/components/icons/InstagramIcon";
 import TiktokIcon from "@/components/icons/TiktokIcon";
+import { FACEBOOK_URL, INSTAGRAM_URL, TIKTOK_URL } from "@/lib/constants";
 
-const socialsData = [
+export const socials = [
 	{
 		title: "Facebook",
-		url: "https://www.facebook.com/flovas.agency/",
+		url: FACEBOOK_URL,
 		icon: FacebookIcon,
 	},
 	{
 		title: "Instagram",
-		url: "https://www.instagram.com/flovas.cz/",
+		url: INSTAGRAM_URL,
 		icon: InstagramIcon,
 	},
 	{
 		title: "TikTok",
-		url: "https://www.tiktok.com/@flovas.cz",
+		url: TIKTOK_URL,
 		icon: TiktokIcon,
 	},
 ];
-
-export default socialsData;

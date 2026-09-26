@@ -14,7 +14,6 @@
 	"address": "Address",
 	"close": "close",
 	"contact_info": "Contact information",
-	"map_title": "You can find our office in Kolin",
 	"vacancies_r_loading": "Vacancies are loading, please wait",
 	"click_to_copy": "Click to copy",
 	"copied": "Copied",
@@ -95,7 +94,8 @@
 		"name": "First name",
 		"address": "In which city are you looking for a job?",
 		"position": "Which profession are you interested in?",
-		"message": "Message"
+		"message": "Message",
+		"mapHeading": "Our office in Kolín"
 	},
 
 	"web_app": {
