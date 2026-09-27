@@ -26,7 +26,7 @@ export default async function Contacts() {
 						<p>IČO</p>
 						<span>
 							<span>{COMPANY_CODE} </span>
-							<CopyBtn value={COMPANY_CODE} />
+							<CopyBtn value={COMPANY_CODE} label={t("copy")} />
 						</span>
 					</div>
 					<h3>{t("contacts.socialsHeading")}</h3>

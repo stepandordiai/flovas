@@ -68,7 +68,7 @@ const Footer = async () => {
 					<div className="footer__nav">
 						<p className="footer__nav-title">FLOVAS s.r.o.</p>
 						<div className="footer__nav-list">
-							<Link href="/gdpr">Zásady ochrany osobních údajů</Link>
+							<Link href="/privacy-policy">{t("privacyPolicyTitle")}</Link>
 						</div>
 					</div>
 				</div>

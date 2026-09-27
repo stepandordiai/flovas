@@ -4,6 +4,7 @@
 	"choose_lng_title": "Choose your preferred language",
 	"home_title": "Home",
 	"vacancies_title": "Jobs",
+	"privacyPolicyTitle": "Privacy Policy",
 	"hotVacanciesTitle": "Hot Jobs",
 	"about_title": "About us",
 	"contacts_title": "Contacts",
@@ -177,41 +178,90 @@
 	},
 
 	"privacyPolicy": {
-		"title": "Privacy Policy (GDPR)",
-		"company": "Company:",
-		"address": "Registered address:",
-		"txt1": "These policies explain how we collect, use and protect your personal data in the context of employment mediation and personnel administration.",
-		"txt2": "Who is the controller of your data?",
-		"txt3": "The controller of personal data is FLOVAS s.r.o. We are responsible for ensuring that your data is processed lawfully, transparently and securely in accordance with EU Regulation 2016/679 (GDPR).",
-		"txt4": "What data do we collect?",
-		"txt5": "For the purposes of finding a suitable job position and entering into an employment relationship, we process in particular:",
-		"txt6": "Identification data: first name, surname, date of birth, nationality.",
-		"txt7": "Contact data: phone number, email, residential address.",
-		"txt8": "Professional data: CV, information about education, previous work experience and skills.",
-		"txt9": "Documents: copies of visas, residence permits, passport data (necessary for lawful employee registration).",
-		"txt10": "Purpose and legal basis of processing",
-		"txt11": "We process your data on the basis of the following legal grounds:",
-		"txt12": "Performance of a contract or measures taken prior to entering into a contract: in order to mediate work and conclude a contract.",
-		"txt13": "Compliance with a legal obligation: reporting to authorities (Labour Office, CSSZ, health insurance companies) and tax administration.",
-		"txt14": "Consent: for retention in the applicant database for future job offers.",
-		"txt15": "Legitimate interest: to protect our rights in the event of legal disputes.",
-		"txt16": "To whom do we transfer your data?",
-		"txt17": "Your data may be provided to:",
-		"txt18": "Employers (clients): potential companies you are applying to.",
-		"txt19": "State authorities: Labour Office of the Czech Republic, Customs Administration, health insurance companies and social security administration.",
-		"txt20": "Processors: external accounting and payroll companies or IT service providers.",
-		"txt21": "Data retention period",
-		"txt22": "For the duration of the selection process for a specific position.",
-		"txt23": "For the duration of the employment relationship and subsequently for 10 years (in accordance with archiving periods set by Czech law).",
-		"txt24": "3 years based on your consent (for the purposes of future offers), unless you withdraw your consent earlier.",
-		"txt25": "Your rights",
-		"txt26": "You have the right to:",
-		"txt27": "Request access to your personal data.",
-		"txt28": "Rectification of incomplete or incorrect data.",
-		"txt29": "Erasure of data (\"right to be forgotten\").",
-		"txt30": "Withdraw your consent to processing at any time.",
-		"txt31": "Lodge a complaint with the Office for Personal Data Protection (UOOU).",
-		"contact": "Contact",
-		"txt32": "If you have any questions regarding GDPR, you can contact us:"
+		"meta": {
+			"title": "Privacy Policy",
+			"description": "Information about how FLOVAS s.r.o. processes, stores and protects the personal data of website visitors and job applicants in accordance with the GDPR."
+		},
+
+		"heading": "Privacy Policy (GDPR)",
+		"description": "This Privacy Policy explains how FLOVAS s.r.o. collects, uses, stores and protects the personal data you provide through the website",
+
+		"item1": {
+			"heading": "Who is the controller of your personal data?",
+			"txt1": "The controller of your personal data is FLOVAS s.r.o.",
+			"txt2": "FLOVAS s.r.o. determines the purposes and means of processing personal data and is responsible for processing it in accordance with applicable law, in particular Regulation (EU) 2016/679 of the European Parliament and of the Council (\"GDPR\")."
+		},
+
+		"item2": {
+			"heading": "What personal data do we collect?",
+			"txt1": "Through the contact forms on our website, we may collect the following personal data:",
+			"txt2": "first and last name;",
+			"txt3": "telephone number;",
+			"txt4": "preferred city for employment;",
+			"txt5": "preferred profession or field of work;",
+			"txt6": "a message or other information that you voluntarily provide in the message text.",
+			"txt7": "We process only the personal data that is necessary for the relevant purpose."
+		},
+
+		"item3": {
+			"heading": "What do we use your personal data for?",
+			"txt1": "We use the personal data you provide for:",
+			"txt2": "contacting you in response to your inquiry or message.",
+			"txt3": "processing your employment-related inquiry.",
+			"txt4": "providing information about available employment opportunities based on your stated preferences regarding the city and profession.",
+			"txt5": "further communication with you when necessary to discuss your inquiry or employment opportunities."
+		},
+
+		"item4": {
+			"heading": "What is the legal basis for processing your data?",
+			"txt1": "We process personal data on the basis of:",
+			"txt2": "your consent – when you voluntarily provide us with your personal data through the contact form;",
+			"txt3": "taking steps at your request prior to entering into a contract – if your inquiry concerns potential employment or cooperation;",
+			"txt4": "our legitimate interest – for properly handling received inquiries, maintaining communication and protecting our legitimate rights."
+		},
+
+		"item5": {
+			"heading": "Do we share your personal data with third parties?",
+			"txt1": "We do not sell, publish or share your personal data with third parties for their own purposes.",
+			"txt2": "The data you provide is stored in the internal database of FLOVAS s.r.o. and is used by authorized employees of the company solely for contacting you, processing your inquiry and providing information about employment opportunities.",
+			"txt3": "Your personal data is not shared with employers, other companies or other third parties without your prior consent.",
+			"txt4": "In cases required by law, personal data may be provided to the competent government authorities where such disclosure is legally required."
+		},
+
+		"item6": {
+			"heading": "How long do we retain your personal data?",
+			"txt1": "We retain personal data only for as long as necessary to achieve the purposes for which it was collected.",
+			"txt2": "Data provided through the contact form may be stored in the internal database of FLOVAS s.r.o. to enable further communication with you regarding your inquiry and relevant employment opportunities.",
+			"txt3": "If you no longer wish us to retain your personal data, you may contact us using the contact details provided below and request its deletion, provided there are no legal grounds for continued retention.",
+			"txt4": "Once the purpose of processing has been fulfilled or the necessary retention period has expired, personal data will be deleted or securely destroyed."
+		},
+
+		"item7": {
+			"heading": "Your rights",
+			"txt1": "Under the GDPR, you have the right to:",
+			"txt2": "access your personal data;",
+			"txt3": "request the correction of inaccurate or incomplete data;",
+			"txt4": "request the deletion of your personal data where the conditions of the GDPR are met;",
+			"txt5": "request restriction of the processing of your personal data;",
+			"txt6": "object to certain types of processing of your personal data;",
+			"txt7": "withdraw your consent at any time where processing is based on consent;",
+			"txt8": "where applicable, receive your personal data in a structured, commonly used and machine-readable format;",
+			"txt9": "lodge a complaint with the competent data protection supervisory authority."
+		},
+
+		"item8": {
+			"heading": "Right to lodge a complaint",
+			"txt1": "If you believe that the processing of your personal data violates the GDPR, you have the right to lodge a complaint with the data protection supervisory authority.",
+			"txt2": "In the Czech Republic, this authority is:",
+			"txt3": "Úřad pro ochranu osobních údajů (ÚOOÚ)",
+			"txt4": "Pplk. Sochora 27",
+			"txt5": "170 00 Prague 7",
+			"txt6": "Czech Republic"
+		},
+
+		"item9": {
+			"heading": "Contact",
+			"txt1": "If you have any questions regarding the processing of your personal data or wish to exercise your rights under the GDPR, you can contact us:"
+		}
 	}
 }

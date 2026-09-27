@@ -7,7 +7,7 @@ import "./CopyBtn.scss";
 
 type CopyBtnProps = {
 	value: string;
-	label?: string;
+	label: string;
 };
 
 export default function CopyBtn({ value, label }: CopyBtnProps) {

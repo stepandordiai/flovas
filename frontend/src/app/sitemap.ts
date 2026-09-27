@@ -15,9 +15,9 @@ const pages = [
 		changeFrequency: "weekly",
 	},
 	{
-		path: "gdpr",
+		path: "privacy-policy",
 		priority: 0.1,
-		changeFrequency: "never",
+		changeFrequency: "yearly",
 	},
 ] as const;
 

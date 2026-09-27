@@ -4,6 +4,7 @@
 	"choose_lng_title": "Vyberte si preferovaný jazyk",
 	"home_title": "Domov",
 	"vacancies_title": "Pracovné ponuky",
+	"privacyPolicyTitle": "Zásady ochrany osobných údajov",
 	"hotVacanciesTitle": "Aktuálne pozície",
 	"about_title": "O nás",
 	"contacts_title": "Kontakty",
@@ -182,41 +183,90 @@
 	},
 
 	"privacyPolicy": {
-		"title": "Zásady ochrany osobných údajov (GDPR)",
-		"company": "Spoločnosť:",
-		"address": "Sídlo:",
-		"txt1": "Tieto zásady vysvetľujú, ako zhromažďujeme, používame a chránime vaše osobné údaje v rámci sprostredkovania zamestnania a personálnej agendy.",
-		"txt2": "Kto je správcom vašich údajov?",
-		"txt3": "Správcom osobných údajov je spoločnosť FLOVAS s.r.o. Zodpovedáme za to, aby vaše údaje boli spracúvané zákonne, transparentne a bezpečne v súlade s nariadením EÚ 2016/679 (GDPR).",
-		"txt4": "Aké údaje zhromažďujeme?",
-		"txt5": "Na účely nájdenia vhodnej pracovnej pozície a uzatvorenia pracovnoprávneho vzťahu spracúvame najmä:",
-		"txt6": "Identifikačné údaje: meno, priezvisko, dátum narodenia, štátna príslušnosť.",
-		"txt7": "Kontaktné údaje: telefónne číslo, e-mail, adresa bydliska.",
-		"txt8": "Profesijné údaje: životopis (CV), informácie o vzdelaní, predchádzajúcich pracovných skúsenostiach a zručnostiach.",
-		"txt9": "Doklady: kópie víz, povolenia na pobyt, údaje z pasu (nevyhnutné pre zákonnú registráciu zamestnanca).",
-		"txt10": "Účel a právny základ spracovania",
-		"txt11": "Vaše údaje spracúvame na základe týchto právnych titulov:",
-		"txt12": "Plnenie zmluvy alebo opatrenia pred uzatvorením zmluvy: aby sme vám mohli sprostredkovať prácu a uzatvoriť zmluvu.",
-		"txt13": "Plnenie zákonnej povinnosti: hlásenia úradom (Úrad práce, sociálne poistenie, zdravotné poisťovne) a daňová agenda.",
-		"txt14": "Súhlas: na uchovanie v databáze uchádzačov pre budúce pracovné ponuky.",
-		"txt15": "Oprávnený záujem: na ochranu našich práv v prípade právnych sporov.",
-		"txt16": "Komu poskytujeme vaše údaje?",
-		"txt17": "Vaše údaje môžu byť poskytnuté:",
-		"txt18": "Zamestnávateľom (klientom): potenciálnym firmám, u ktorých sa uchádzate o prácu.",
-		"txt19": "Štátnym orgánom: Úrad práce, colná správa, zdravotné poisťovne a sociálne zabezpečenie.",
-		"txt20": "Sprostredkovateľom: externým účtovným a mzdovým firmám alebo poskytovateľom IT služieb.",
-		"txt21": "Doba uchovávania údajov",
-		"txt22": "Počas výberového konania na konkrétnu pozíciu.",
-		"txt23": "Počas trvania pracovného pomeru a následne 10 rokov (podľa legislatívy ČR).",
-		"txt24": "3 roky na základe vášho súhlasu (pre budúce pracovné ponuky), ak súhlas neodvoláte skôr.",
-		"txt25": "Vaše práva",
-		"txt26": "Máte právo:",
-		"txt27": "Požadovať prístup k svojim osobným údajom.",
-		"txt28": "Na opravu neúplných alebo nesprávnych údajov.",
-		"txt29": "Na výmaz údajov („právo byť zabudnutý“).",
-		"txt30": "Kedykoľvek odvolať svoj súhlas so spracovaním.",
-		"txt31": "Podať sťažnosť na úrad na ochranu osobných údajov.",
-		"contact": "Kontakt",
-		"txt32": "V prípade otázok ohľadom GDPR nás môžete kontaktovať:"
+		"meta": {
+			"title": "Zásady ochrany osobných údajov",
+			"description": "Informácie o tom, ako spoločnosť FLOVAS s.r.o. spracúva, uchováva a chráni osobné údaje návštevníkov a uchádzačov o zamestnanie v súlade s GDPR."
+		},
+
+		"heading": "Zásady ochrany osobných údajov (GDPR)",
+		"description": "Tieto zásady ochrany osobných údajov vysvetľujú, ako spoločnosť FLOVAS s.r.o. zhromažďuje, používa, uchováva a chráni osobné údaje, ktoré nám poskytnete prostredníctvom webovej stránky",
+
+		"item1": {
+			"heading": "Kto je prevádzkovateľom vašich osobných údajov?",
+			"txt1": "Prevádzkovateľom osobných údajov je spoločnosť FLOVAS s.r.o.",
+			"txt2": "FLOVAS s.r.o. určuje účely a spôsoby spracúvania osobných údajov a zodpovedá za ich spracúvanie v súlade s platnými právnymi predpismi, najmä s nariadením Európskeho parlamentu a Rady (EÚ) 2016/679 („GDPR“)."
+		},
+
+		"item2": {
+			"heading": "Aké osobné údaje zhromažďujeme?",
+			"txt1": "Prostredníctvom kontaktných formulárov na našej webovej stránke môžeme zhromažďovať tieto osobné údaje:",
+			"txt2": "meno a priezvisko;",
+			"txt3": "telefónne číslo;",
+			"txt4": "preferované mesto zamestnania;",
+			"txt5": "požadovaná profesia alebo pracovná oblasť;",
+			"txt6": "správa alebo iné informácie, ktoré nám dobrovoľne poskytnete v texte správy.",
+			"txt7": "Spracúvame iba osobné údaje, ktoré sú nevyhnutné na príslušný účel."
+		},
+
+		"item3": {
+			"heading": "Na čo používame vaše osobné údaje?",
+			"txt1": "Vami poskytnuté osobné údaje používame na:",
+			"txt2": "kontaktovanie vás v reakcii na vašu žiadosť alebo správu.",
+			"txt3": "spracovanie vašej žiadosti týkajúcej sa zamestnania.",
+			"txt4": "poskytovanie informácií o dostupných pracovných príležitostiach podľa vašich uvedených preferencií týkajúcich sa mesta a profesie.",
+			"txt5": "ďalší kontakt s vami, ak je to potrebné na prerokovanie vašej žiadosti alebo pracovných príležitostí."
+		},
+
+		"item4": {
+			"heading": "Na akom právnom základe spracúvame vaše údaje?",
+			"txt1": "Osobné údaje spracúvame na základe:",
+			"txt2": "vášho súhlasu – ak nám svoje osobné údaje dobrovoľne zašlete prostredníctvom kontaktného formulára;",
+			"txt3": "vykonania opatrení na vašu žiadosť pred uzatvorením zmluvy – ak sa vaša žiadosť týka možného zamestnania alebo spolupráce;",
+			"txt4": "nášho oprávneného záujmu – na riadne vybavenie prijatých žiadostí, udržiavanie komunikácie a ochranu našich oprávnených práv."
+		},
+
+		"item5": {
+			"heading": "Odovzdávame vaše osobné údaje tretím stranám?",
+			"txt1": "Vaše osobné údaje nepredávame, nezverejňujeme ani neposkytujeme tretím stranám na ich vlastné účely.",
+			"txt2": "Vami poskytnuté údaje sú uchovávané v internej databáze spoločnosti FLOVAS s.r.o. a používajú ich oprávnení zamestnanci spoločnosti výlučne na účely kontaktovania vás, spracovania vašej žiadosti a poskytovania informácií o pracovných príležitostiach.",
+			"txt3": "Vaše osobné údaje neposkytujeme zamestnávateľom, iným spoločnostiam ani iným tretím stranám bez vášho predchádzajúceho súhlasu.",
+			"txt4": "V prípadoch stanovených právnymi predpismi môžu byť osobné údaje poskytnuté príslušným štátnym orgánom, ak je takéto poskytnutie právne povinné."
+		},
+
+		"item6": {
+			"heading": "Ako dlho uchovávame vaše osobné údaje?",
+			"txt1": "Osobné údaje uchovávame iba počas obdobia potrebného na dosiahnutie účelov, na ktoré boli zhromaždené.",
+			"txt2": "Údaje poskytnuté prostredníctvom kontaktného formulára môžu byť uchovávané v internej databáze spoločnosti FLOVAS s.r.o. s cieľom umožniť ďalší kontakt s vami v súvislosti s vašou žiadosťou a relevantnými pracovnými príležitosťami.",
+			"txt3": "Ak si už neželáte, aby sme vaše osobné údaje uchovávali, môžete nás kontaktovať prostredníctvom kontaktných údajov uvedených nižšie a požiadať o ich vymazanie, ak neexistujú zákonné dôvody na ich ďalšie uchovávanie.",
+			"txt4": "Po splnení účelu spracúvania alebo uplynutí nevyhnutnej doby uchovávania budú osobné údaje vymazané alebo bezpečne zlikvidované."
+		},
+
+		"item7": {
+			"heading": "Vaše práva",
+			"txt1": "Podľa GDPR máte právo:",
+			"txt2": "na prístup k svojim osobným údajom;",
+			"txt3": "požadovať opravu nepresných alebo neúplných údajov;",
+			"txt4": "požadovať vymazanie svojich osobných údajov, ak sú splnené podmienky GDPR;",
+			"txt5": "požadovať obmedzenie spracúvania svojich osobných údajov;",
+			"txt6": "namietať proti určitým spôsobom spracúvania osobných údajov;",
+			"txt7": "kedykoľvek odvolať svoj súhlas, ak je spracúvanie založené na súhlase;",
+			"txt8": "v príslušných prípadoch získať svoje osobné údaje v štruktúrovanom, bežne používanom a strojovo čitateľnom formáte;",
+			"txt9": "podať sťažnosť príslušnému dozornému orgánu pre ochranu osobných údajov."
+		},
+
+		"item8": {
+			"heading": "Právo podať sťažnosť",
+			"txt1": "Ak sa domnievate, že spracúvanie vašich osobných údajov porušuje GDPR, máte právo podať sťažnosť dozornému orgánu pre ochranu osobných údajov.",
+			"txt2": "V Českej republike je týmto orgánom:",
+			"txt3": "Úřad pro ochranu osobních údajů (ÚOOÚ)",
+			"txt4": "Pplk. Sochora 27",
+			"txt5": "170 00 Praha 7",
+			"txt6": "Česká republika"
+		},
+
+		"item9": {
+			"heading": "Kontakt",
+			"txt1": "Ak máte otázky týkajúce sa spracúvania vašich osobných údajov alebo chcete uplatniť svoje práva podľa GDPR, môžete nás kontaktovať:"
+		}
 	}
 }
