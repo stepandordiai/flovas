@@ -1,23 +1,22 @@
 import { getTranslations } from "next-intl/server";
 import { getVacanciesFiltered } from "@/services/vacancies";
-import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import "./About.scss";
 
-const benefitsData = [
-	{ img: "/icons/czech.png", title: "about.our_advantages1" },
-	{ img: "/icons/people.png", title: "about.our_advantages2" },
-	{ img: "/icons/money.png", title: "about.our_advantages3" },
-	{ img: "/icons/accommodation.png", title: "about.our_advantages4" },
-	{ img: "/icons/hiring.png", title: "about.our_advantages5" },
-	{ img: "/icons/documents.png", title: "about.our_advantages6" },
-	{ img: "/icons/insurance.png", title: "about.our_advantages7" },
-	{ img: "/icons/free.png", title: "about.our_advantages8" },
-	{ img: "/icons/hour.png", title: "about.our_advantages9" },
-	{ img: "/icons/bus.png", title: "about.our_advantages10" },
-	{ img: "/icons/support.png", title: "about.our_advantages11" },
-	{ img: "/icons/misunderstanding.png", title: "about.our_advantages12" },
-	{ img: "/icons/moving.png", title: "about.our_advantages13" },
+const benefits = [
+	"about.our_advantages1",
+	"about.our_advantages2",
+	"about.our_advantages3",
+	"about.our_advantages4",
+	"about.our_advantages5",
+	"about.our_advantages6",
+	"about.our_advantages7",
+	"about.our_advantages8",
+	"about.our_advantages9",
+	"about.our_advantages10",
+	"about.our_advantages11",
+	"about.our_advantages12",
+	"about.our_advantages13",
 ];
 
 export default async function About() {
@@ -66,11 +65,11 @@ export default async function About() {
 				{t("about.our_advantages_title")}
 			</h3>
 			<ul className="about__benefits-list">
-				{benefitsData.map((benefit, index) => {
+				{benefits.map((benefit, index) => {
 					return (
 						<li key={index} className="about__benefits-item">
-							<Image src={benefit.img} width={50} height={50} alt="" />
-							<span>{t(benefit.title)}</span>
+							<span>{index + 1}</span>
+							<span>{t(benefit)}</span>
 						</li>
 					);
 				})}

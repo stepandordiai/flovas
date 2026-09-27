@@ -69,10 +69,24 @@
 	flex-direction: column;
 	text-align: center;
 	gap: 10px;
-	min-height: 150px;
+	min-height: 120px;
+	border-radius: 20px;
 
-	span {
+	span:nth-child(1) {
+		background: var(--sec-accent-clr);
+		padding: 10px;
+		display: grid;
+		place-items: center;
+		border-radius: 20px;
 		font-weight: 500;
+		font-size: 1.5rem;
+		line-height: 1;
+		width: 44px;
+	}
+
+	span:nth-child(2) {
+		// font-weight: 500;
+		font-size: 1.125rem;
 	}
 }
 
