@@ -132,7 +132,8 @@
 
 	"contactUs": {
 		"heading": "Kontaktujte nás",
-		"description": "Vyplňte formulár a my sa vám ozveme do 24 hodín."
+		"description": "Vyplňte formulár a my sa vám ozveme do 24 hodín.",
+		"privacyPolicyConsent": "Odoslaním tohto formulára súhlasíte so spracovaním poskytnutých osobných údajov v súlade s našimi Zásadami ochrany osobných údajov."
 	},
 
 	"web_app": {

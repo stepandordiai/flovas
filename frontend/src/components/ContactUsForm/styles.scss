@@ -4,6 +4,9 @@
 	flex-direction: column;
 	row-gap: 10px;
 	scroll-margin-top: 125px;
+	background: var(--accent-clr);
+	padding: 25px;
+	border-radius: 20px;
 }
 
 .contact-us__heading {
@@ -30,6 +33,7 @@
 
 .label {
 	margin-left: 10px;
+	font-weight: 500;
 }
 
 .contacts__input {
@@ -56,24 +60,25 @@
 
 .contacts-form__btn {
 	background: var(--sec-accent-clr);
-	align-self: flex-end;
-	padding: 10px;
-	border-radius: 20px;
+	border-radius: 25px;
+	height: 50px;
 
 	&:hover {
 		background: #000;
 		color: #fff;
 	}
-}
-.contacts-form__btn--success,
-.contacts-form__btn--loading {
-	cursor: not-allowed;
-	color: #fff;
-	background: #000;
+
+	// TODO: learn this
+	&:disabled {
+		cursor: not-allowed;
+		color: #fff;
+		background: #000;
+	}
 }
 
 @media screen and (width <= 896px) {
 	.contact-us {
 		scroll-margin-top: 85px;
+		padding: 10px;
 	}
 }

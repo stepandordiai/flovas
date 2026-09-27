@@ -13,13 +13,13 @@
 
 .contacts__inner {
 	display: flex;
-	gap: 25px;
-	background: var(--accent-clr);
-	padding: 25px;
-	border-radius: 20px;
+	gap: 10px;
 }
 
 .contacts-container {
+	background: var(--accent-clr);
+	padding: 25px;
+	border-radius: 20px;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -68,7 +68,7 @@
 		padding: 0 10px 25px;
 	}
 
-	.contacts__inner {
+	.contacts-container {
 		padding: 10px;
 	}
 

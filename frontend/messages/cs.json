@@ -127,7 +127,8 @@
 
 	"contactUs": {
 		"heading": "Kontaktujte nás",
-		"description": "Vyplňte formulář a my se vám ozveme do 24 hodin."
+		"description": "Vyplňte formulář a my se vám ozveme do 24 hodin.",
+		"privacyPolicyConsent": "Odesláním tohoto formuláře souhlasíte se zpracováním poskytnutých osobních údajů v souladu s našimi Zásadami ochrany osobních údajů."
 	},
 
 	"web_app": {

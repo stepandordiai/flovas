@@ -5,6 +5,7 @@ import { isValidTel } from "@/utils/validators";
 import { useState } from "react";
 import classNames from "classnames";
 import { supabase, supabaseF } from "@/lib/supabase";
+import { Link } from "@/i18n/navigation";
 import "./styles.scss";
 
 const INIT_FORM = {
@@ -23,13 +24,12 @@ export default function ContactUsForm() {
 	const [success, setSuccess] = useState(false);
 	const [form, setForm] = useState(INIT_FORM);
 
-	// TODO: !
-	const createContactsLead = async (e: React.FormEvent) => {
+	const createLead = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setError(null);
 
 		if (!isValidTel(form.tel)) {
-			setError("Некорректний номер телефону");
+			setError("Введено некоректний номер телефону");
 			return;
 		}
 
@@ -64,7 +64,7 @@ export default function ContactUsForm() {
 		}
 	};
 
-	const handleContactsForm = (name: string, value: string) => {
+	const handleForm = (name: string, value: string) => {
 		setForm((prev) => ({ ...prev, [name]: value }));
 	};
 
@@ -72,14 +72,14 @@ export default function ContactUsForm() {
 		<div className="contact-us" id="contact-us">
 			<h3 className="contact-us__heading">{t("contactUs.heading")}</h3>
 			<p>{t("contactUs.description")}</p>
-			<form className="contact-us-form" onSubmit={createContactsLead}>
-				{error && <span style={{ color: "rgb(255, 115, 115)" }}>{error}</span>}
+			<form className="contact-us-form" onSubmit={createLead}>
+				{error && <p style={{ color: "rgb(255, 115, 115)" }}>{error}</p>}
 				<div className="input-container">
 					<label className="label" htmlFor="name">
 						{t("contacts.name")}
 					</label>
 					<input
-						onChange={(e) => handleContactsForm(e.target.name, e.target.value)}
+						onChange={(e) => handleForm(e.target.name, e.target.value)}
 						name="name"
 						value={form.name}
 						className="contacts__input"
@@ -94,7 +94,7 @@ export default function ContactUsForm() {
 						<span style={{ color: "rgb(255, 115, 115)" }}>*</span>
 					</label>
 					<input
-						onChange={(e) => handleContactsForm(e.target.name, e.target.value)}
+						onChange={(e) => handleForm(e.target.name, e.target.value)}
 						name="tel"
 						value={form.tel}
 						className={classNames("contacts__input", {
@@ -112,7 +112,7 @@ export default function ContactUsForm() {
 						{t("contacts.address")}
 					</label>
 					<input
-						onChange={(e) => handleContactsForm(e.target.name, e.target.value)}
+						onChange={(e) => handleForm(e.target.name, e.target.value)}
 						name="address"
 						value={form.address}
 						className="contacts__input"
@@ -125,7 +125,7 @@ export default function ContactUsForm() {
 						{t("contacts.position")}
 					</label>
 					<input
-						onChange={(e) => handleContactsForm(e.target.name, e.target.value)}
+						onChange={(e) => handleForm(e.target.name, e.target.value)}
 						name="position"
 						value={form.position}
 						className="contacts__input"
@@ -138,7 +138,7 @@ export default function ContactUsForm() {
 						{t("contacts.message")}
 					</label>
 					<textarea
-						onChange={(e) => handleContactsForm(e.target.name, e.target.value)}
+						onChange={(e) => handleForm(e.target.name, e.target.value)}
 						name="message"
 						value={form.message}
 						className="contacts__input"
@@ -149,15 +149,16 @@ export default function ContactUsForm() {
 					<span className="input-indicator">{form.message.length} / 600</span>
 				</div>
 				<button
-					className={classNames("contacts-form__btn", {
-						"contacts-form__btn--loading": loading,
-						"contacts-form__btn--success": success,
-					})}
+					className="contacts-form__btn"
 					type="submit"
 					disabled={loading || success}
 				>
 					{loading ? t("loading") : success ? t("success") : t("send")}
 				</button>
+				<p>
+					{t("contactUs.privacyPolicyConsent")}{" "}
+					<Link href="/privacy-policy">{t("privacyPolicyTitle")}</Link>
+				</p>
 			</form>
 		</div>
 	);

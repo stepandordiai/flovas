@@ -45,7 +45,7 @@ export default async function PrivacyPolicy() {
 				<h1 className={styles["gdpr__title"]}>{t("heading")}</h1>
 				<div>
 					<p>FLOVAS s.r.o.</p>
-					<p>Sídlo: Pod Hroby 271 Kolín IV</p>
+					<p>Sídlo: Jaselská 722, Kolín IV, 280 02 Kolín</p>
 					<p>IČO: {COMPANY_CODE}</p>
 					<p>E-mail: {EMAIL}</p>
 					<p>Telefon: {TEL}</p>
@@ -131,7 +131,7 @@ export default async function PrivacyPolicy() {
 						<p>{t("item9.txt1")}</p>
 						<div>
 							<p>FLOVAS s.r.o.</p>
-							<p>Sídlo: Pod Hroby 271 Kolín IV</p>
+							<p>Sídlo: Jaselská 722, Kolín IV, 280 02 Kolín</p>
 							<p>IČO: {COMPANY_CODE}</p>
 							<p>E-mail: {EMAIL}</p>
 							<p>Telefon: {TEL}</p>

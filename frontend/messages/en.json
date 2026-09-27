@@ -127,7 +127,8 @@
 
 	"contactUs": {
 		"heading": "Contact Us",
-		"description": "Fill out the form and we'll get back to you within 24 hours."
+		"description": "Fill out the form and we'll get back to you within 24 hours.",
+		"privacyPolicyConsent": "By submitting this form, you agree to the processing of the personal data you provide in accordance with our Privacy Policy."
 	},
 
 	"web_app": {
