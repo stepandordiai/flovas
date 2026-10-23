@@ -23,9 +23,7 @@ const WebApp = async () => {
 							{t("web_app.item_1_end")}
 						</li>
 						<li>
-							{t("web_app.item_2_start")}{" "}
-							<img width={20} height={20} src="/icons/share.svg" alt="" />{" "}
-							{t("web_app.item_2_end")}
+							{t("web_app.item_2_start")} {t("web_app.item_2_end")}
 						</li>
 						<li>{t("web_app.item_3")}</li>
 						<li>

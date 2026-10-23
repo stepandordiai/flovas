@@ -6,6 +6,7 @@ import { useState } from "react";
 import classNames from "classnames";
 import { supabase, supabaseF } from "@/lib/supabase";
 import { Link } from "@/i18n/navigation";
+import { TEL } from "@/lib/constants";
 import "./styles.scss";
 
 const INIT_FORM = {
@@ -24,32 +25,37 @@ export default function ContactUsForm() {
 	const [success, setSuccess] = useState(false);
 	const [form, setForm] = useState(INIT_FORM);
 
+	// TODO: LEARN THIS
 	const createLead = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setError(null);
 
 		if (!isValidTel(form.tel)) {
-			setError("Введено некоректний номер телефону");
+			setError(t("contactUs.error_phone", { tel: TEL }));
 			return;
 		}
 
 		setLoading(true);
 
 		try {
-			const { error } = await supabase.from("leads").insert([form]);
-			const { error: errorF } = await supabaseF.from("leads").insert([form]);
+			const [main, second] = await Promise.all([
+				supabase.from("leads").insert([form]),
+				supabaseF.from("leads").insert([form]),
+			]);
 
-			// handle unexpected errors
-			// TODO: 23505 - supabase dublicate
-			if (
-				(error && error.code !== "23505") ||
-				(errorF && errorF.code !== "23505")
-			) {
-				setError("Помилка при створенні ліда");
+			// 23505 = duplicate tel, so the lead already exists there, which is fine
+			const isOk = (error: { code?: string } | null) =>
+				!error || error.code === "23505";
+
+			if (!isOk(main.error)) console.error("DB1 failed:", main.error);
+			if (!isOk(second.error)) console.error("DB2 failed:", second.error);
+
+			// show an error only if BOTH databases failed
+			if (!isOk(main.error) && !isOk(second.error)) {
+				setError(t("contactUs.error_submit", { tel: TEL }));
 				return;
 			}
 
-			// TODO: LEARN THIS
 			fetch("/api/notify-lead", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
