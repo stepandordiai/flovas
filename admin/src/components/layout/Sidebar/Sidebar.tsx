@@ -50,16 +50,6 @@ const Sidebar = () => {
 			<button className="logout-btn" onClick={handleLogout}>
 				Вийти
 			</button>
-			<p>
-				by{" "}
-				<a
-					href="https://www.heeeyooo.com/en"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					heeeyooo studio
-				</a>
-			</p>
 		</aside>
 	);
 };

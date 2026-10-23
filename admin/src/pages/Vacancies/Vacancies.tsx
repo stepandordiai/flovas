@@ -4,8 +4,9 @@ import type { Vacancy, VacancyForm } from "../../interfaces/Vacancy";
 import ImageDropzone from "../../components/ImgDropzone/ImgDropzone";
 import MagicIcon from "../../components/icons/MagicIcon";
 import Pagination from "../../components/Pagination/Pagination";
-import "./styles.scss";
 import Menu from "../../components/Menu/Menu";
+import Modal from "../../components/Modal/Modal";
+import "./styles.scss";
 
 const EMPTY_FORM: VacancyForm = {
 	id: "",
@@ -31,6 +32,35 @@ type LeadsProps = {
 	load: () => Promise<void>;
 	setVacancies: React.Dispatch<React.SetStateAction<Vacancy[]>>;
 };
+
+const SLUG_PROMPT = `
+You convert job vacancy titles (Ukrainian or Czech) into Czech URL slugs.
+
+STEPS:
+1. Translate the job title into natural Czech (use the standard Czech job name).
+2. If the title mentions a city (in parentheses or after "в місті"), keep it as the last part of the slug. Do not translate city names, only transliterate them to their Czech spelling.
+3. Convert to a slug.
+
+SLUG RULES:
+- Lowercase a-z, digits 0-9 and hyphens only
+- Words separated by exactly one hyphen
+- Remove all diacritics (á→a, č→c, ď→d, é/ě→e, í→i, ň→n, ó→o, ř→r, š→s, ť→t, ú/ů→u, ý→y, ž→z)
+- No spaces, quotes, parentheses, dots or other symbols
+- Maximum 5 words, keep only the words needed to understand the job
+- Do not add a city if the title has none
+
+OUTPUT: only the slug on a single line. No explanation, no quotes.
+
+EXAMPLES:
+Прибирання в будинку для літніх людей (Nepomuk) → uklizecka-domov-seniori-nepomuk
+Прибирання в будинку для літніх людей в місті Непомук → uklizecka-domov-seniori-nepomuk
+Робітник на склад (Plzeň) → skladnik-plzen
+Údržbář budov (Praha 4) → udrzbar-budov-praha-4
+Помічник кухаря (Brno) → pomocnik-kuchare-brno
+Швачка на виробництві → svadlena-vyroba
+Пакувальник кукурудзяних пластівців (Прага) → pakovac-cerealii-praha
+Водій навантажувача (Хвалетіце) → ridic-vzv-chvaletice
+`.trim();
 
 const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 	const [formVisible, setFormVisible] = useState(false);
@@ -119,32 +149,6 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 		setForm(EMPTY_FORM);
 		setIsNew(false);
 		return true;
-	};
-
-	// TODO: learn this
-	const deleteOne = async (id: string) => {
-		// 1. Get the vacancy to extract image filename
-		const { data: vacancy } = await supabase
-			.from("vacancies")
-			.select("img")
-			.eq("id", id)
-			.single();
-
-		// 2. Delete the image from storage if it exists
-		if (vacancy?.img) {
-			const fileName = vacancy.img.split("/").pop(); // extracts "1779959644976-665rad.png"
-			if (fileName) {
-				const { error: storageError } = await supabase.storage
-					.from("vacancies")
-					.remove([fileName]);
-				if (storageError)
-					console.error("Storage delete error:", storageError.message);
-			}
-		}
-
-		const { error } = await supabase.from("vacancies").delete().eq("id", id);
-		if (error) console.error("Delete error:", error.message);
-		else load();
 	};
 
 	const updateVacancy = async (id: string, data: Partial<VacancyForm>) => {
@@ -282,12 +286,41 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 		...new Set(vacancies.flatMap((v) => v.badges?.map((b) => b) ?? [])),
 	];
 
-	const handleDelete = () => {
+	// TODO: learn this
+	const deleteOne = async (id: string) => {
+		// 1. Get the vacancy to extract image filename
+		const { data: vacancy } = await supabase
+			.from("vacancies")
+			.select("img")
+			.eq("id", id)
+			.single();
+
+		// 2. Delete the image from storage if it exists
+		if (vacancy?.img) {
+			const fileName = vacancy.img.split("/").pop(); // extracts "1779959644976-665rad.png"
+			if (fileName) {
+				const { error: storageError } = await supabase.storage
+					.from("vacancies")
+					.remove([fileName]);
+				if (storageError)
+					console.error("Storage delete error:", storageError.message);
+			}
+		}
+
+		const { error } = await supabase.from("vacancies").delete().eq("id", id);
+		if (error) console.error("Delete error:", error.message);
+		else load();
+	};
+
+	const handleDelete = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
 		deleteOne(idToDelete);
 		setIdToDelete("");
 		setDeleteModal(false);
 	};
 
+	// TODO: LEARN THIS
 	const generateId = async () => {
 		if (!form.title) return;
 
@@ -303,53 +336,45 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 						Authorization: `Bearer ${import.meta.env.VITE_GROQ_API_KEY}`,
 					},
 					body: JSON.stringify({
-						model: "llama-3.3-70b-versatile",
+						model: "openai/gpt-oss-120b",
+						reasoning_effort: "low",
+						temperature: 0,
+						max_completion_tokens: 1000, // was 100, reasoning eats this budget
 						messages: [
-							{
-								role: "system",
-								content: `You convert Ukrainian or Czech job titles into Czech URL slugs.
-
-OUTPUT FORMAT (strict):
-- Return ONLY the slug, nothing else
-- No quotes, no explanation, no prefix, no newline before/after
-- Lowercase ASCII only
-- Words separated by single hyphens
-- No diacritics (á→a, č→c, ě→e, í→i, ň→n, ř→r, š→s, ť→t, ú→u, ů→u, ý→y, ž→z)
-- Max 5 words
-- Translate Ukrainian terms to Czech first, then slugify
-- Keep city/location in parentheses as the last word(s)
-- Strip filler words (v, na, pro, do, the, a) unless needed for meaning
-
-EXAMPLES:
-Input: "Прибирання в будинку для літніх людей (Nepomuk)"
-Output: uklizecka-domov-pro-seniory-nepomuk
-
-Input: "Робітник на склад (Plzeň)"
-Output: skladnik-plzen
-
-Input: "Údržbář budov (Praha 4)"
-Output: udrzbar-budov-praha-4
-
-Input: "Помічник кухаря (Brno)"
-Output: pomocnik-kuchare-brno
-
-Input: "Швачка на виробництві"
-Output: svadlena-vyroba`,
-							},
-							{
-								role: "user",
-								content: form.title,
-							},
+							{ role: "system", content: SLUG_PROMPT }, // move the prompt to a const
+							{ role: "user", content: form.title },
 						],
 					}),
 				},
 			);
 
 			const data = await res.json();
-			const slug = data.choices[0].message.content.trim();
+
+			if (!res.ok) {
+				console.error("Groq error:", res.status, data.error?.message);
+				return;
+			}
+
+			const choice = data.choices?.[0];
+			console.log("Groq response:", choice); // check finish_reason and content here
+
+			const raw: string = choice?.message?.content ?? "";
+
+			const slug = raw
+				.normalize("NFD")
+				.replace(/[\u0300-\u036f]/g, "")
+				.toLowerCase()
+				.replace(/[^a-z0-9]+/g, "-")
+				.replace(/^-+|-+$/g, "");
+
+			if (!slug) {
+				console.error("Empty slug. finish_reason:", choice?.finish_reason);
+				return;
+			}
+
 			handleForm("id", slug);
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		} finally {
 			setAiLoading(false);
 		}
@@ -366,426 +391,452 @@ Output: svadlena-vyroba`,
 
 	return (
 		<>
-			<div
-				ref={modal}
-				className={`modal ${formVisible ? "modal--visible" : ""}`}
+			<Modal
+				onClose={() => {
+					setFormVisible(false);
+					setForm(EMPTY_FORM);
+				}}
+				open={formVisible}
 			>
-				<button
-					className="close-btn modal-close-btn"
-					onClick={() => {
-						setFormVisible(false);
-						setForm(EMPTY_FORM);
-						setIsNew(false);
-					}}
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="16"
-						height="16"
-						fill="currentColor"
-						className="bi bi-x-lg"
-						viewBox="0 0 16 16"
-					>
-						<path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
-					</svg>
-				</button>
-				<p style={{ fontSize: "1.5rem", fontWeight: "600" }}>
-					{isNew ? "Створити вакансію" : "Змінити вакансію"}
-				</p>
-				{error && <strong style={{ color: "red" }}>{error}</strong>}
 				<form
 					onSubmit={(e) => {
 						e.preventDefault();
 						handleSave(form);
 					}}
+					className="modal__form"
 				>
-					<div className="input-container">
-						<label htmlFor="title">Назва (Обов'язково)</label>
-						<input
-							id="title"
-							className="input"
-							type="text"
-							name="title"
-							onChange={(e) => handleForm(e.target.name, e.target.value)}
-							value={form.title}
-							placeholder="Наприклад: Працівниця на кухню в місті Колін"
-						/>
-					</div>
-					<div className="input-container">
-						<label htmlFor="id">ID (Обов'язково)</label>
-						<input
-							id="id"
-							className="input"
-							type="text"
-							name="id"
-							onChange={(e) => {
-								handleForm(e.target.name, e.target.value);
-								setError(null);
-							}}
-							value={form.id}
-							placeholder="Спочатку заповніть поле Назва"
-							disabled={form.title === ""}
-						/>
-						<button
-							className="ai-btn"
-							type="button"
-							onClick={generateId}
-							disabled={form.title === ""}
+					<button
+						className="close-btn modal-close-btn"
+						onClick={() => {
+							setFormVisible(false);
+							setForm(EMPTY_FORM);
+							setIsNew(false);
+						}}
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="16"
+							height="16"
+							fill="currentColor"
+							className="bi bi-x-lg"
+							viewBox="0 0 16 16"
 						>
-							<MagicIcon />
-							<span> {aiLoading ? "Зачекайте..." : "Згенерувати ID"}</span>
-							<div className="hoverEffect">
-								<div></div>
-							</div>
-						</button>
-					</div>
-					<div className="input-container">
-						<label htmlFor="salary">Заробітна плата (Обов'язково)</label>
-						<input
-							id="salary"
-							className="input"
-							type="text"
-							name="salary"
-							onChange={(e) => handleForm(e.target.name, e.target.value)}
-							value={form.salary}
-						/>
-					</div>
-					<div className="input-container">
-						<label htmlFor="img">Зображення</label>
-						{/* TODO: LEARN THIS */}
-						<ImageDropzone
-							onFileSelect={(file) => handleForm("img", file)}
-							previewUrl={
-								form.img ? URL.createObjectURL(form.img) : form.current_img
-							}
-						/>
-					</div>
-					<div className="input-container">
-						<label htmlFor="place">Місто (Обов'язково)</label>
-						<div className="input" style={{ display: "flex" }}>
+							<path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+						</svg>
+					</button>
+					<p style={{ fontSize: "1.5rem", fontWeight: "600" }}>
+						{isNew ? "Створити вакансію" : "Змінити вакансію"}
+					</p>
+					{error && <strong style={{ color: "red" }}>{error}</strong>}
+					<div>
+						<div className="input-container">
+							<label htmlFor="title">Назва (Обов'язково)</label>
 							<input
-								id="place"
-								style={{ width: "100%" }}
+								id="title"
+								className="input"
 								type="text"
-								name="place"
+								name="title"
 								onChange={(e) => handleForm(e.target.name, e.target.value)}
-								value={form.place}
-								placeholder="Вкажіть місто або виберіть з списку"
+								value={form.title}
+								placeholder="Наприклад: Працівниця на кухню в місті Колін"
+								required
 							/>
-							<select
-								name="place"
-								onChange={(e) => handleForm(e.target.name, e.target.value)}
-								value={""}
-								id=""
-							>
-								<option value=""></option>
-								{uniqueVacanciesPlaces.map((p, i) => {
-									return (
-										<option key={i} value={p}>
-											{p}
-										</option>
-									);
-								})}
-							</select>
 						</div>
-					</div>
-					<div className="input-container">
-						<label htmlFor="address">Адреса</label>
-						<input
-							id="address"
-							className="input"
-							type="text"
-							name="address"
-							onChange={(e) => handleForm(e.target.name, e.target.value)}
-							value={form.address}
-							placeholder="Наприклад: Řešovská 852/10, 181 00 Praha 8"
-						/>
-					</div>
-					<div className="input-container">
-						<label htmlFor="address-url">Адреса (Посилання)</label>
-						<input
-							id="address-url"
-							className="input"
-							type="text"
-							name="address_url"
-							onChange={(e) => handleForm(e.target.name, e.target.value)}
-							value={form.address_url}
-							placeholder="Наприклад: https://maps.app.goo.gl/5HZe2oFUz2cTk5AT8"
-						/>
-					</div>
+						<div className="input-container">
+							<label htmlFor="id">ID (Обов'язково)</label>
+							<input
+								id="id"
+								className="input"
+								type="text"
+								name="id"
+								onChange={(e) => {
+									handleForm(e.target.name, e.target.value);
+									setError(null);
+								}}
+								value={form.id}
+								placeholder="Спочатку заповніть поле Назва"
+								required
+							/>
+							<button
+								className="ai-btn"
+								type="button"
+								onClick={generateId}
+								disabled={form.title === ""}
+							>
+								<MagicIcon />
+								<span> {aiLoading ? "Зачекайте..." : "Згенерувати ID"}</span>
+								<div className="hoverEffect">
+									<div></div>
+								</div>
+							</button>
+						</div>
+						<div className="input-container">
+							<label htmlFor="salary">Заробітна плата (Обов'язково)</label>
+							<input
+								id="salary"
+								className="input"
+								type="text"
+								name="salary"
+								onChange={(e) => handleForm(e.target.name, e.target.value)}
+								value={form.salary}
+								required
+							/>
+						</div>
+						<div className="input-container">
+							<label htmlFor="img">Зображення</label>
+							{/* TODO: LEARN THIS */}
+							<ImageDropzone
+								onFileSelect={(file) => handleForm("img", file)}
+								previewUrl={
+									form.img ? URL.createObjectURL(form.img) : form.current_img
+								}
+							/>
+						</div>
+						<div className="input-container">
+							<label htmlFor="place">Місто (Обов'язково)</label>
+							<div className="input" style={{ display: "flex" }}>
+								<input
+									id="place"
+									style={{ width: "100%" }}
+									type="text"
+									name="place"
+									onChange={(e) => handleForm(e.target.name, e.target.value)}
+									value={form.place}
+									placeholder="Вкажіть місто або виберіть з списку"
+									required
+								/>
+								<select
+									name="place"
+									onChange={(e) => handleForm(e.target.name, e.target.value)}
+									value={""}
+									id=""
+								>
+									<option value=""></option>
+									{uniqueVacanciesPlaces.map((p, i) => {
+										return (
+											<option key={i} value={p}>
+												{p}
+											</option>
+										);
+									})}
+								</select>
+							</div>
+						</div>
+						<div className="input-container">
+							<label htmlFor="address">Адреса</label>
+							<input
+								id="address"
+								className="input"
+								type="text"
+								name="address"
+								onChange={(e) => handleForm(e.target.name, e.target.value)}
+								value={form.address}
+								placeholder="Наприклад: Řešovská 852/10, 181 00 Praha 8"
+							/>
+						</div>
+						<div className="input-container">
+							<label htmlFor="address-url">Адреса (Посилання)</label>
+							<input
+								id="address-url"
+								className="input"
+								type="text"
+								name="address_url"
+								onChange={(e) => handleForm(e.target.name, e.target.value)}
+								value={form.address_url}
+								placeholder="Наприклад: https://maps.app.goo.gl/5HZe2oFUz2cTk5AT8"
+							/>
+						</div>
 
-					<div className="input-container">
-						<label htmlFor="desc">Опис</label>
-						<textarea
-							id="desc"
-							className="textarea"
-							name="description"
-							onChange={(e) => handleForm(e.target.name, e.target.value)}
-							value={form.description}
-							rows={10}
-						/>
-					</div>
-					<div className="input-container">
-						<label>Переваги</label>
-						{form.benefits.map((item, i) => (
-							<div key={i} style={{ display: "flex", gap: 8 }}>
-								<input
-									className="input"
-									style={{ width: "100%" }}
-									type="text"
-									value={item}
-									onChange={(e) => {
-										const next = [...form.benefits] as string[];
-										next[i] = e.target.value;
-										handleForm("benefits", next);
-									}}
-									placeholder={`Вкажіть опис ${i + 1}`}
-								/>
-								<button
-									className="delete-btn"
-									type="button"
-									onClick={() =>
-										handleForm(
-											"benefits",
-											form.benefits.filter((_, idx) => idx !== i),
-										)
-									}
-								>
-									✕
-								</button>
-							</div>
-						))}
-						<button
-							className="update-btn"
-							style={{ margin: "0 auto" }}
-							type="button"
-							onClick={() => handleForm("benefits", [...form.benefits, ""])}
-						>
-							+
-						</button>
-					</div>
-
-					<div className="input-container">
-						<label>Вимоги</label>
-						{(form.requirements ?? [""]).map((item, i) => (
-							<div key={i} style={{ display: "flex", gap: 8 }}>
-								<input
-									className="input"
-									style={{ width: "100%" }}
-									type="text"
-									value={item}
-									onChange={(e) => {
-										const next = [...(form.requirements ?? [])] as string[];
-										next[i] = e.target.value;
-										handleForm("requirements", next);
-									}}
-									placeholder={`Вкажіть вимогу ${i + 1}`}
-								/>
-								<button
-									className="delete-btn"
-									type="button"
-									onClick={() =>
-										handleForm(
-											"requirements",
-											(form.requirements ?? []).filter((_, idx) => idx !== i),
-										)
-									}
-								>
-									✕
-								</button>
-							</div>
-						))}
-						<button
-							className="update-btn"
-							style={{ margin: "0 auto" }}
-							type="button"
-							onClick={() =>
-								handleForm("requirements", [...(form.requirements ?? []), ""])
-							}
-						>
-							+
-						</button>
-					</div>
-					<div className="input-container">
-						<label>Обов'язки</label>
-						{(form.responsibilities ?? [""]).map((item, i) => (
-							<div key={i} style={{ display: "flex", gap: 8 }}>
-								<input
-									className="input"
-									style={{ width: "100%" }}
-									type="text"
-									value={item}
-									onChange={(e) => {
-										const next = [...(form.responsibilities ?? [])] as string[];
-										next[i] = e.target.value;
-										handleForm("responsibilities", next);
-									}}
-									placeholder={`Вкажіть обов'язок ${i + 1}`}
-								/>
-								<button
-									className="delete-btn"
-									type="button"
-									onClick={() =>
-										handleForm(
-											"responsibilities",
-											(form.responsibilities ?? []).filter(
-												(_, idx) => idx !== i,
-											),
-										)
-									}
-								>
-									✕
-								</button>
-							</div>
-						))}
-						<button
-							className="update-btn"
-							style={{ margin: "0 auto" }}
-							type="button"
-							onClick={() =>
-								handleForm("responsibilities", [
-									...(form.responsibilities ?? []),
-									"",
-								])
-							}
-						>
-							+
-						</button>
-					</div>
-					<div className="input-container">
-						<label htmlFor="job-type">Тип роботи</label>
-						<input
-							id="job-type"
-							className="input"
-							type="text"
-							name="job_type"
-							onChange={(e) => handleForm(e.target.name, e.target.value)}
-							value={form.job_type}
-							placeholder="Наприклад: Доглядання"
-						/>
-					</div>
-					<div className="input-container">
-						<label>Ключові слова</label>
-						{(form.badges ?? [""]).map((item, i) => (
-							<div key={i} style={{ display: "flex", gap: 8 }}>
-								<div className="input" style={{ display: "flex" }}>
+						<div className="input-container">
+							<label htmlFor="desc">Опис</label>
+							<textarea
+								id="desc"
+								className="textarea"
+								name="description"
+								onChange={(e) => handleForm(e.target.name, e.target.value)}
+								value={form.description}
+								rows={10}
+							/>
+						</div>
+						<div className="input-container">
+							<label>Переваги</label>
+							{form.benefits.map((item, i) => (
+								<div key={i} style={{ display: "flex", gap: 8 }}>
 									<input
+										className="input"
 										style={{ width: "100%" }}
 										type="text"
 										value={item}
 										onChange={(e) => {
-											const next = [...(form.badges ?? [])] as string[];
+											const next = [...form.benefits] as string[];
 											next[i] = e.target.value;
-											handleForm("badges", next);
+											handleForm("benefits", next);
 										}}
-										placeholder={`Вкажіть ключове слово пов'язане з вакансією або виберіть з списку`}
+										placeholder={`Вкажіть опис ${i + 1}`}
 									/>
-									<select
-										className="select"
-										name="badges"
-										onChange={(e) => {
-											const next = [...(form.badges ?? [])] as string[];
-											next[i] = e.target.value;
-											handleForm("badges", next);
-										}}
-										value={""}
-										id=""
-									>
-										<option value=""></option>
-										{uniqueVacanciesBadges
-											.filter(
-												(p) =>
-													// TODO: learn this
-													!form.badges?.includes(p) || form.badges[i] === p,
+									<button
+										className="delete-btn"
+										type="button"
+										onClick={() =>
+											handleForm(
+												"benefits",
+												form.benefits.filter((_, idx) => idx !== i),
 											)
-											.map((p, i) => {
-												return (
-													<option key={i} value={p}>
-														{p}
-													</option>
-												);
-											})}
-									</select>
+										}
+									>
+										✕
+									</button>
 								</div>
-								<button
-									className="delete-btn"
-									type="button"
-									onClick={() =>
-										handleForm(
-											"badges",
-											(form.badges ?? []).filter((_, idx) => idx !== i),
-										)
-									}
-								>
-									✕
-								</button>
-							</div>
-						))}
-						<button
-							className="update-btn"
-							style={{ margin: "0 auto" }}
-							type="button"
-							onClick={() => handleForm("badges", [...(form.badges ?? []), ""])}
-						>
-							+
+							))}
+							<button
+								className="update-btn"
+								style={{ margin: "0 auto" }}
+								type="button"
+								onClick={() => handleForm("benefits", [...form.benefits, ""])}
+							>
+								+
+							</button>
+						</div>
+
+						<div className="input-container">
+							<label>Вимоги</label>
+							{(form.requirements ?? [""]).map((item, i) => (
+								<div key={i} style={{ display: "flex", gap: 8 }}>
+									<input
+										className="input"
+										style={{ width: "100%" }}
+										type="text"
+										value={item}
+										onChange={(e) => {
+											const next = [...(form.requirements ?? [])] as string[];
+											next[i] = e.target.value;
+											handleForm("requirements", next);
+										}}
+										placeholder={`Вкажіть вимогу ${i + 1}`}
+									/>
+									<button
+										className="delete-btn"
+										type="button"
+										onClick={() =>
+											handleForm(
+												"requirements",
+												(form.requirements ?? []).filter((_, idx) => idx !== i),
+											)
+										}
+									>
+										✕
+									</button>
+								</div>
+							))}
+							<button
+								className="update-btn"
+								style={{ margin: "0 auto" }}
+								type="button"
+								onClick={() =>
+									handleForm("requirements", [...(form.requirements ?? []), ""])
+								}
+							>
+								+
+							</button>
+						</div>
+						<div className="input-container">
+							<label>Обов'язки</label>
+							{(form.responsibilities ?? [""]).map((item, i) => (
+								<div key={i} style={{ display: "flex", gap: 8 }}>
+									<input
+										className="input"
+										style={{ width: "100%" }}
+										type="text"
+										value={item}
+										onChange={(e) => {
+											const next = [
+												...(form.responsibilities ?? []),
+											] as string[];
+											next[i] = e.target.value;
+											handleForm("responsibilities", next);
+										}}
+										placeholder={`Вкажіть обов'язок ${i + 1}`}
+									/>
+									<button
+										className="delete-btn"
+										type="button"
+										onClick={() =>
+											handleForm(
+												"responsibilities",
+												(form.responsibilities ?? []).filter(
+													(_, idx) => idx !== i,
+												),
+											)
+										}
+									>
+										✕
+									</button>
+								</div>
+							))}
+							<button
+								className="update-btn"
+								style={{ margin: "0 auto" }}
+								type="button"
+								onClick={() =>
+									handleForm("responsibilities", [
+										...(form.responsibilities ?? []),
+										"",
+									])
+								}
+							>
+								+
+							</button>
+						</div>
+						<div className="input-container">
+							<label htmlFor="job-type">Тип роботи</label>
+							<input
+								id="job-type"
+								className="input"
+								type="text"
+								name="job_type"
+								onChange={(e) => handleForm(e.target.name, e.target.value)}
+								value={form.job_type}
+								placeholder="Наприклад: Доглядання"
+							/>
+						</div>
+						<div className="input-container">
+							<label>Ключові слова</label>
+							{(form.badges ?? [""]).map((item, i) => (
+								<div key={i} style={{ display: "flex", gap: 8 }}>
+									<div className="input" style={{ display: "flex" }}>
+										<input
+											style={{ width: "100%" }}
+											type="text"
+											value={item}
+											onChange={(e) => {
+												const next = [...(form.badges ?? [])] as string[];
+												next[i] = e.target.value;
+												handleForm("badges", next);
+											}}
+											placeholder={`Вкажіть ключове слово пов'язане з вакансією або виберіть з списку`}
+										/>
+										<select
+											className="select"
+											name="badges"
+											onChange={(e) => {
+												const next = [...(form.badges ?? [])] as string[];
+												next[i] = e.target.value;
+												handleForm("badges", next);
+											}}
+											value={""}
+											id=""
+										>
+											<option value=""></option>
+											{uniqueVacanciesBadges
+												.filter(
+													(p) =>
+														// TODO: learn this
+														!form.badges?.includes(p) || form.badges[i] === p,
+												)
+												.map((p, i) => {
+													return (
+														<option key={i} value={p}>
+															{p}
+														</option>
+													);
+												})}
+										</select>
+									</div>
+									<button
+										className="delete-btn"
+										type="button"
+										onClick={() =>
+											handleForm(
+												"badges",
+												(form.badges ?? []).filter((_, idx) => idx !== i),
+											)
+										}
+									>
+										✕
+									</button>
+								</div>
+							))}
+							<button
+								className="update-btn"
+								style={{ margin: "0 auto" }}
+								type="button"
+								onClick={() =>
+									handleForm("badges", [...(form.badges ?? []), ""])
+								}
+							>
+								+
+							</button>
+						</div>
+						<button className="submit-btn" type="submit">
+							{loading
+								? isNew
+									? "Створення..."
+									: "Збереження..."
+								: isNew
+									? "Створити вакансію"
+									: "Змінити вакансію"}
 						</button>
 					</div>
-					<button className="submit-btn" type="submit">
-						{loading
-							? isNew
-								? "Створення..."
-								: "Збереження..."
-							: isNew
-								? "Створити вакансію"
-								: "Змінити вакансію"}
-					</button>
 				</form>
-			</div>
-			<div
-				className={`curtain ${formVisible || deleteModal ? "curtain--visible" : ""}`}
-			></div>
-			<div
-				className={`delete-modal ${deleteModal ? "delete-modal--visible" : ""}`}
+			</Modal>
+			<Modal
+				onClose={() => {
+					setDeleteModal(false);
+					setIdToDelete("");
+				}}
+				open={deleteModal}
 			>
-				<strong>Ви точно хочете видалити цей запис?</strong>
-				<div
-					style={{
-						display: "grid",
-						gridTemplateColumns: "repeat(2, 1fr)",
-						gap: "10px",
-					}}
+				<form
+					onSubmit={handleDelete}
+					className={`delete-modal ${deleteModal ? "delete-modal--visible" : ""}`}
 				>
-					<button
-						onClick={() => {
-							setIdToDelete("");
-							setDeleteModal(false);
-						}}
+					<>
+						Ви точно хочете видалити цю вакансію?
+						<br />
+						<strong>
+							{vacancies.find((vacancy) => vacancy.id === idToDelete)?.title}
+						</strong>
+					</>
+					<div
 						style={{
-							height: "40px",
-							padding: "0 10px",
-							borderRadius: "20px",
-							background: "#000",
-							color: "#fff",
-							fontWeight: 600,
+							display: "grid",
+							gridTemplateColumns: "repeat(2, 1fr)",
+							gap: "10px",
 						}}
 					>
-						Скасувати
-					</button>
-					<button
-						style={{
-							height: "40px",
-							padding: "0 10px",
-							borderRadius: "20px",
-							background: "rgb(222, 92, 77)",
-							color: "#fff",
-							fontWeight: 600,
-						}}
-						onClick={() => handleDelete()}
-					>
-						Підтвердити
-					</button>
-				</div>
-			</div>
+						<button
+							onClick={() => {
+								setIdToDelete("");
+								setDeleteModal(false);
+							}}
+							style={{
+								height: "40px",
+								padding: "0 10px",
+								borderRadius: "20px",
+								background: "#000",
+								color: "#fff",
+								fontWeight: 600,
+							}}
+						>
+							Скасувати
+						</button>
+						<button
+							type="submit"
+							style={{
+								height: "40px",
+								padding: "0 10px",
+								borderRadius: "20px",
+								background: "rgb(222, 92, 77)",
+								color: "#fff",
+								fontWeight: 600,
+							}}
+						>
+							Підтвердити
+						</button>
+					</div>
+				</form>
+			</Modal>
+
 			<main className="main">
 				<Menu />
 				<h1 className="main__title">Вакансії</h1>

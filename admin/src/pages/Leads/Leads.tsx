@@ -8,6 +8,7 @@ import Menu from "../../components/Menu/Menu";
 import TelIcon from "../../components/icons/TelIcon";
 import DotsIcon from "../../components/icons/DotsIcon";
 import { trimValue } from "../../helpers/trimValue";
+import Modal from "../../components/Modal/Modal";
 import "./styles.scss";
 
 const EMPTY_FORM: Lead = {
@@ -184,309 +185,314 @@ const Leads = ({ leads, setLeads, load }: LeadsProps) => {
 
 	return (
 		<>
-			<div className={`modal ${modalVisible ? "modal--visible" : ""}`}>
-				<button
-					style={{ alignSelf: "flex-end", position: "sticky", top: "0px" }}
-					className="close-btn"
-					onClick={() => {
-						setModalVisible(false);
-						setForm(EMPTY_FORM);
-						setEditable(false);
-						setIsNew(false);
-					}}
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="16"
-						height="16"
-						fill="currentColor"
-						className="bi bi-x-lg"
-						viewBox="0 0 16 16"
-					>
-						<path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
-					</svg>
-				</button>
-				<p className="form__title">{isNew ? "Створити лід" : "Змінити лід"}</p>
-				{error && <p style={{ color: "red" }}>{error}</p>}
-				{!isNew && (
-					<div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-						<div>
-							<p className="form__label">Створено</p>
-							<p>
-								{new Date(form.created_at).toLocaleDateString()}{" "}
-								{new Date(form.created_at).toLocaleTimeString()}
-							</p>
-						</div>
-						<div>
-							<p className="form__label">Оновлено</p>
-							<p>
-								{new Date(form.updated_at).toLocaleDateString()}{" "}
-								{new Date(form.updated_at).toLocaleTimeString()}
-							</p>
-						</div>
-					</div>
-				)}
-				<form
-					onSubmit={(e) => {
-						e.preventDefault();
-						handleSave(form);
-					}}
-				>
-					<div className="input-container">
-						<label className="form__label" htmlFor="name">
-							Імя
-						</label>
-						<input
-							id="name"
-							className={`input ${!editable ? "input--disabled" : ""}`}
-							onChange={(e) => handleForm(e.target.name, e.target.value)}
-							value={form.name}
-							name="name"
-							type="text"
-							disabled={!editable}
-						/>
-					</div>
-					<div className="input-container">
-						<label className="form__label" htmlFor="tel">
-							Номер телефону
-						</label>
-						<input
-							id="tel"
-							className={`input ${!editable ? "input--disabled" : ""}`}
-							onChange={(e) => handleForm(e.target.name, e.target.value)}
-							value={form.tel}
-							name="tel"
-							type="tel"
-							disabled={!editable}
-						/>
-					</div>
-					<div>
-						<label className="form__label" htmlFor="">
-							Месенджери
-						</label>
-						<div style={{ display: "flex", flexWrap: "wrap" }}>
-							{(["whatsapp", "telegram", "viber"] as const).map((name) => {
-								const messenger = form.messengers?.find((m) => m.name === name);
-								const isAvailable = messenger?.isAvailable;
-
-								return (
-									<div key={name}>
-										<label
-											className="form__label"
-											style={{ textTransform: "capitalize" }}
-										>
-											{name}
-										</label>
-										<div style={{ display: "flex" }}>
-											<label>
-												<input
-													type="radio"
-													checked={isAvailable === true}
-													onChange={() => handleMessenger(name, true)}
-													disabled={!editable}
-												/>
-												Так
-											</label>
-											<label>
-												<input
-													type="radio"
-													checked={isAvailable === false}
-													onChange={() => handleMessenger(name, false)}
-													disabled={!editable}
-												/>
-												Ні
-											</label>
-										</div>
-									</div>
-								);
-							})}
-						</div>
-					</div>
-					<div className="input-container">
-						<label className="form__label">Стать</label>
-						<div style={{ display: "flex" }}>
-							<label>
-								<input
-									type="radio"
-									name="gender"
-									value="Жінка"
-									checked={form.gender === "Жінка"}
-									onChange={(e) => handleForm(e.target.name, e.target.value)}
-									disabled={!editable}
-								/>
-								Жінка
-							</label>
-							<label>
-								<input
-									type="radio"
-									name="gender"
-									value="Чоловік"
-									checked={form.gender === "Чоловік"}
-									onChange={(e) => handleForm(e.target.name, e.target.value)}
-									disabled={!editable}
-								/>
-								Чоловік
-							</label>
-						</div>
-					</div>
-					<div className="input-container">
-						<label className="form__label" htmlFor="address">
-							Адреса
-						</label>
-						<input
-							id="address"
-							className={`input ${!editable ? "input--disabled" : ""}`}
-							onChange={(e) => handleForm(e.target.name, e.target.value)}
-							value={form.address}
-							name="address"
-							type="text"
-							disabled={!editable}
-						/>
-					</div>
-					<div className="input-container">
-						<label className="form__label" htmlFor="position">
-							Позиція
-						</label>
-						<input
-							id="position"
-							className={`input ${!editable ? "input--disabled" : ""}`}
-							onChange={(e) => handleForm(e.target.name, e.target.value)}
-							value={form.position}
-							name="position"
-							type="text"
-							disabled={!editable}
-						/>
-					</div>
-					<div className={"input-container"}>
-						<label className="form__label" htmlFor="message">
-							Повідомлення
-						</label>
-						<textarea
-							id="message"
-							className={`textarea ${!editable ? "textarea--disabled" : ""}`}
-							rows={5}
-							onChange={(e) => handleForm(e.target.name, e.target.value)}
-							value={form.message}
-							name="message"
-							maxLength={600}
-							disabled={!editable}
-						/>
-						<span className="input-indicator">{form.message.length} / 600</span>
-					</div>
-					{!editable && !isNew && (
-						<div
-							style={{
-								display: "flex",
-								gap: "5px",
-								alignSelf: "flex-end",
-								position: "sticky",
-								bottom: "0px",
-							}}
-						>
-							<button
-								type="button"
-								className="update-btn"
-								onClick={() => setEditable(true)}
-							>
-								<EditIcon size={20} />
-							</button>
-							<button
-								type="button"
-								className="delete-btn"
-								onClick={() => {
-									(setDeleteModal(true), setIdToDelete(form.id));
-								}}
-							>
-								<TrashIcon size={20} />
-							</button>
-						</div>
-					)}
-
-					{(editable || isNew) && (
-						<div
-							style={{
-								alignSelf: "flex-end",
-								display: "flex",
-								gap: "5px",
-								position: "sticky",
-								bottom: "0px",
-							}}
-						>
-							{!isNew && (
-								<button
-									type="button"
-									className="form__cancel-btn"
-									onClick={() => setEditable(false)}
-								>
-									Скасувати
-								</button>
-							)}
-							<button className="form__submit-btn" type="submit">
-								{formLoading
-									? isNew
-										? "Створення..."
-										: "Збереження..."
-									: isNew
-										? "Створити"
-										: "Змінити"}
-							</button>
-						</div>
-					)}
-				</form>
-			</div>
-			<div
-				onClick={() => {
+			<Modal
+				onClose={() => {
 					setModalVisible(false);
-					setDeleteModal(false);
-					setIsNew(false);
-					setIdToDelete("");
 					setForm(EMPTY_FORM);
 					setEditable(false);
+					setIsNew(false);
 				}}
-				className={`main-curtain ${modalVisible || deleteModal ? "main-curtain--visible" : ""}`}
-			></div>
-			<div
-				className={`delete-modal ${deleteModal ? "delete-modal--visible" : ""}`}
+				open={modalVisible}
 			>
-				<strong>Ви точно хочете видалити цей запис?</strong>
-				<div
-					style={{
-						display: "grid",
-						gridTemplateColumns: "repeat(2, 1fr)",
-						gap: "10px",
-					}}
-				>
+				<div className="modal__form">
 					<button
+						style={{ alignSelf: "flex-end", position: "sticky", top: "0px" }}
+						className="close-btn"
 						onClick={() => {
-							setIdToDelete("");
-							setDeleteModal(false);
-						}}
-						style={{
-							height: "40px",
-							padding: "0 10px",
-							borderRadius: "20px",
-							background: "#000",
-							color: "#fff",
-							fontWeight: 600,
+							setModalVisible(false);
+							setForm(EMPTY_FORM);
+							setEditable(false);
+							setIsNew(false);
 						}}
 					>
-						Скасувати
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="16"
+							height="16"
+							fill="currentColor"
+							className="bi bi-x-lg"
+							viewBox="0 0 16 16"
+						>
+							<path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+						</svg>
 					</button>
-					<button
-						style={{
-							height: "40px",
-							padding: "0 10px",
-							borderRadius: "20px",
-							background: "rgb(222, 92, 77)",
-							color: "#fff",
-							fontWeight: 600,
+					<p className="form__title">
+						{isNew ? "Створити лід" : "Змінити лід"}
+					</p>
+					{error && <p style={{ color: "red" }}>{error}</p>}
+					{!isNew && (
+						<div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+							<div>
+								<p className="form__label">Створено</p>
+								<p>
+									{new Date(form.created_at).toLocaleDateString()}{" "}
+									{new Date(form.created_at).toLocaleTimeString()}
+								</p>
+							</div>
+							<div>
+								<p className="form__label">Оновлено</p>
+								<p>
+									{new Date(form.updated_at).toLocaleDateString()}{" "}
+									{new Date(form.updated_at).toLocaleTimeString()}
+								</p>
+							</div>
+						</div>
+					)}
+					<form
+						onSubmit={(e) => {
+							e.preventDefault();
+							handleSave(form);
 						}}
-						onClick={() => handleDelete()}
 					>
-						Підтвердити
-					</button>
+						<div className="input-container">
+							<label className="form__label" htmlFor="name">
+								Імя
+							</label>
+							<input
+								id="name"
+								className={`input ${!editable ? "input--disabled" : ""}`}
+								onChange={(e) => handleForm(e.target.name, e.target.value)}
+								value={form.name}
+								name="name"
+								type="text"
+								disabled={!editable}
+							/>
+						</div>
+						<div className="input-container">
+							<label className="form__label" htmlFor="tel">
+								Номер телефону
+							</label>
+							<input
+								id="tel"
+								className={`input ${!editable ? "input--disabled" : ""}`}
+								onChange={(e) => handleForm(e.target.name, e.target.value)}
+								value={form.tel}
+								name="tel"
+								type="tel"
+								disabled={!editable}
+							/>
+						</div>
+						<div>
+							<label className="form__label" htmlFor="">
+								Месенджери
+							</label>
+							<div style={{ display: "flex", flexWrap: "wrap" }}>
+								{(["whatsapp", "telegram", "viber"] as const).map((name) => {
+									const messenger = form.messengers?.find(
+										(m) => m.name === name,
+									);
+									const isAvailable = messenger?.isAvailable;
+
+									return (
+										<div key={name}>
+											<label
+												className="form__label"
+												style={{ textTransform: "capitalize" }}
+											>
+												{name}
+											</label>
+											<div style={{ display: "flex" }}>
+												<label>
+													<input
+														type="radio"
+														checked={isAvailable === true}
+														onChange={() => handleMessenger(name, true)}
+														disabled={!editable}
+													/>
+													Так
+												</label>
+												<label>
+													<input
+														type="radio"
+														checked={isAvailable === false}
+														onChange={() => handleMessenger(name, false)}
+														disabled={!editable}
+													/>
+													Ні
+												</label>
+											</div>
+										</div>
+									);
+								})}
+							</div>
+						</div>
+						<div className="input-container">
+							<label className="form__label">Стать</label>
+							<div style={{ display: "flex" }}>
+								<label>
+									<input
+										type="radio"
+										name="gender"
+										value="Жінка"
+										checked={form.gender === "Жінка"}
+										onChange={(e) => handleForm(e.target.name, e.target.value)}
+										disabled={!editable}
+									/>
+									Жінка
+								</label>
+								<label>
+									<input
+										type="radio"
+										name="gender"
+										value="Чоловік"
+										checked={form.gender === "Чоловік"}
+										onChange={(e) => handleForm(e.target.name, e.target.value)}
+										disabled={!editable}
+									/>
+									Чоловік
+								</label>
+							</div>
+						</div>
+						<div className="input-container">
+							<label className="form__label" htmlFor="address">
+								Адреса
+							</label>
+							<input
+								id="address"
+								className={`input ${!editable ? "input--disabled" : ""}`}
+								onChange={(e) => handleForm(e.target.name, e.target.value)}
+								value={form.address}
+								name="address"
+								type="text"
+								disabled={!editable}
+							/>
+						</div>
+						<div className="input-container">
+							<label className="form__label" htmlFor="position">
+								Позиція
+							</label>
+							<input
+								id="position"
+								className={`input ${!editable ? "input--disabled" : ""}`}
+								onChange={(e) => handleForm(e.target.name, e.target.value)}
+								value={form.position}
+								name="position"
+								type="text"
+								disabled={!editable}
+							/>
+						</div>
+						<div className={"input-container"}>
+							<label className="form__label" htmlFor="message">
+								Повідомлення
+							</label>
+							<textarea
+								id="message"
+								className={`textarea ${!editable ? "textarea--disabled" : ""}`}
+								rows={5}
+								onChange={(e) => handleForm(e.target.name, e.target.value)}
+								value={form.message}
+								name="message"
+								maxLength={600}
+								disabled={!editable}
+							/>
+							<span className="input-indicator">
+								{form.message.length} / 600
+							</span>
+						</div>
+						{!editable && !isNew && (
+							<div
+								style={{
+									display: "flex",
+									gap: "5px",
+									alignSelf: "flex-end",
+									position: "sticky",
+									bottom: "0px",
+								}}
+							>
+								<button
+									type="button"
+									className="update-btn"
+									onClick={() => setEditable(true)}
+								>
+									<EditIcon size={20} />
+								</button>
+								<button
+									type="button"
+									className="delete-btn"
+									onClick={() => {
+										(setDeleteModal(true), setIdToDelete(form.id));
+									}}
+								>
+									<TrashIcon size={20} />
+								</button>
+							</div>
+						)}
+
+						{(editable || isNew) && (
+							<div
+								style={{
+									alignSelf: "flex-end",
+									display: "flex",
+									gap: "5px",
+									position: "sticky",
+									bottom: "0px",
+								}}
+							>
+								{!isNew && (
+									<button
+										type="button"
+										className="form__cancel-btn"
+										onClick={() => setEditable(false)}
+									>
+										Скасувати
+									</button>
+								)}
+								<button className="form__submit-btn" type="submit">
+									{formLoading
+										? isNew
+											? "Створення..."
+											: "Збереження..."
+										: isNew
+											? "Створити"
+											: "Змінити"}
+								</button>
+							</div>
+						)}
+					</form>
 				</div>
-			</div>
+			</Modal>
+			<Modal onClose={() => setDeleteModal(false)} open={deleteModal}>
+				<div className={`modal__form : ""}`}>
+					<strong>Ви точно хочете видалити цей запис?</strong>
+					<div
+						style={{
+							display: "grid",
+							gridTemplateColumns: "repeat(2, 1fr)",
+							gap: "10px",
+						}}
+					>
+						<button
+							onClick={() => {
+								setIdToDelete("");
+								setDeleteModal(false);
+							}}
+							style={{
+								height: "40px",
+								padding: "0 10px",
+								borderRadius: "20px",
+								background: "#000",
+								color: "#fff",
+								fontWeight: 600,
+							}}
+						>
+							Скасувати
+						</button>
+						<button
+							style={{
+								height: "40px",
+								padding: "0 10px",
+								borderRadius: "20px",
+								background: "rgb(222, 92, 77)",
+								color: "#fff",
+								fontWeight: 600,
+							}}
+							onClick={() => handleDelete()}
+						>
+							Підтвердити
+						</button>
+					</div>
+				</div>
+			</Modal>
 			<main className="main">
 				<Menu />
 				<h1 className="main__title">Ліди</h1>
