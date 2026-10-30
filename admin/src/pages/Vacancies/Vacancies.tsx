@@ -10,6 +10,8 @@ import "./styles.scss";
 
 const EMPTY_FORM: VacancyForm = {
 	id: "",
+	meta_title: "",
+	meta_description: "",
 	img: null,
 	is_active: true,
 	place: "",
@@ -429,6 +431,30 @@ const Vacancies = ({ vacancies, setVacancies, load }: LeadsProps) => {
 					</p>
 					{error && <strong style={{ color: "red" }}>{error}</strong>}
 					<div>
+						<div className="input-container">
+							<label htmlFor="title">Meta title (Обов'язково)</label>
+							<input
+								id="title"
+								className="input"
+								type="text"
+								name="meta_title"
+								onChange={(e) => handleForm(e.target.name, e.target.value)}
+								value={form.meta_title}
+								required
+							/>
+						</div>
+						<div className="input-container">
+							<label htmlFor="title">Meta description (Обов'язково)</label>
+							<input
+								id="title"
+								className="input"
+								type="text"
+								name="meta_description"
+								onChange={(e) => handleForm(e.target.name, e.target.value)}
+								value={form.meta_description}
+								required
+							/>
+						</div>
 						<div className="input-container">
 							<label htmlFor="title">Назва (Обов'язково)</label>
 							<input

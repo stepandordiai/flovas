@@ -50,8 +50,8 @@ export async function generateMetadata({
 	);
 
 	return {
-		title: vacancy.title,
-		description: vacancy.description,
+		title: vacancy.meta_title,
+		description: vacancy.meta_description,
 
 		alternates: {
 			canonical: `/${locale}/${PAGE}/${id}`,
@@ -63,8 +63,8 @@ export async function generateMetadata({
 
 		// TODO: learn this
 		openGraph: {
-			title: vacancy.title,
-			description: vacancy.description,
+			title: vacancy.meta_title,
+			description: vacancy.meta_description,
 			url: `/${locale}/${PAGE}/${id}`,
 			type: "website",
 			images: [

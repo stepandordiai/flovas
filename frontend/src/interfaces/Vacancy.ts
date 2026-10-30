@@ -1,5 +1,7 @@
 export interface VacancyInterface {
 	id: string;
+	meta_title: string;
+	meta_description: string;
 	img?: string;
 	is_active: boolean;
 	updated_at: string;

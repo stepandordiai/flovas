@@ -1,5 +1,7 @@
 export interface Vacancy {
 	id: string;
+	meta_title: string;
+	meta_description: string;
 	// URL from Supabase Storage
 	img: string | null;
 	is_active: boolean;
