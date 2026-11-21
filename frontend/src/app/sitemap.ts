@@ -8,22 +8,23 @@ const pages = [
 		path: "",
 		priority: 1,
 		changeFrequency: "weekly",
+		lastModified: "2026-11-21",
 	},
 	{
 		path: "prace",
 		priority: 0.8,
 		changeFrequency: "weekly",
+		lastModified: "2026-11-21",
 	},
 	{
 		path: "privacy-policy",
 		priority: 0.1,
 		changeFrequency: "yearly",
+		lastModified: "2026-11-21",
 	},
 ] as const;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-	const now = new Date();
-
 	const { data } = await getVacancies();
 	const vacancies = data ?? [];
 
@@ -41,13 +42,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		};
 	};
 
-	// 1. Static Pages
 	const localePages = routing.locales.flatMap((locale) =>
 		pages.map((page) => {
 			const cleanUrl = `${BASE_URL}/${locale}/${page.path}`.replace(/\/$/, "");
 			return {
 				url: cleanUrl,
-				lastModified: now,
+				lastModified: page.lastModified,
 				changeFrequency: page.changeFrequency,
 				priority: page.priority,
 				alternates: {
@@ -57,12 +57,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		}),
 	);
 
-	// 2. Dynamic Vacancy Pages
 	const vacanciesLocalePages = routing.locales.flatMap((locale) =>
 		vacancies.map((vacancy) => ({
 			url: `${BASE_URL}/${locale}/prace/${vacancy.id}`,
-			lastModified: now,
-			changeFrequency: "weekly" as const,
+			lastModified: vacancy.updated_at ?? vacancy.created_at,
+			changeFrequency: "monthly" as const,
 			priority: 0.7,
 			alternates: {
 				languages: getAlternates(`prace/${vacancy.id}`),

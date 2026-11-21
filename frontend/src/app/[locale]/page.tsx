@@ -11,6 +11,13 @@ import { getVacancies } from "@/services/vacancies";
 import Faqs from "@/components/Faqs/Faqs";
 import { Link } from "@/i18n/navigation";
 import Vacancy from "@/components/Vacancy/Vacancy";
+import {
+	BASE_URL,
+	EMAIL,
+	FACEBOOK_URL,
+	INSTAGRAM_URL,
+	TIKTOK_URL,
+} from "@/lib/constants";
 import "./Home.scss";
 
 export async function generateMetadata({
@@ -48,62 +55,108 @@ export default async function Home({
 
 	const { data: vacancies } = await getVacancies();
 
+	// TODO: learn this
+	const jsonLd = {
+		"@context": "https://schema.org",
+		"@graph": [
+			{
+				"@type": "WebSite",
+				"@id": `${BASE_URL}/#website`,
+				name: "flovas",
+				url: BASE_URL,
+				inLanguage: routing.locales,
+				publisher: { "@id": `${BASE_URL}/#organization` },
+			},
+			{
+				"@type": "EmploymentAgency",
+				"@id": `${BASE_URL}/#organization`,
+				name: "flovas",
+				url: BASE_URL,
+				logo: `${BASE_URL}/flovas-og-c.png`,
+				description: t("home.meta.description"),
+				email: EMAIL,
+				telephone: "+420777957290",
+				areaServed: { "@type": "Country", name: "Czechia" },
+				address: {
+					"@type": "PostalAddress",
+					streetAddress: "Pod Hroby 271",
+					addressLocality: "Kolín",
+					addressCountry: "CZ",
+				},
+				contactPoint: {
+					"@type": "ContactPoint",
+					telephone: "+420777957290",
+					email: EMAIL,
+					contactType: "customer service",
+					availableLanguage: ["uk", "cs"],
+				},
+				sameAs: [FACEBOOK_URL, INSTAGRAM_URL, TIKTOK_URL],
+			},
+		],
+	};
+
 	return (
-		<main className="main home" id="uvod">
-			<div className="home-inner">
-				<div className="home-inner-container">
-					<section className="home-top" id="hero">
-						<div className="home-top-inner">
-							<h1 className="hero__heading">{t("home.heading")}</h1>
-							<p className="hero__subheading">{t("home.subheading")}</p>
-							<HomeClient vacancies={vacancies ?? []} />
-						</div>
-						<div className="home__link-container">
-							<a className="home__link" href="#kontakty">
-								{t("contact_us_title")}
-							</a>
-							<Link className="home__link" href="/prace">
-								{t("home.allVacancies")}
-								{vacancies && (
-									<span className="home__link-vacancies-qty">
-										{vacancies.length}
-									</span>
-								)}
+		<>
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+			/>
+			<main className="main home" id="uvod">
+				<div className="home-inner">
+					<div className="home-inner-container">
+						<section className="home-top" id="hero">
+							<div className="home-top-inner">
+								<h1 className="hero__heading">{t("home.heading")}</h1>
+								<p className="hero__subheading">{t("home.subheading")}</p>
+								<HomeClient vacancies={vacancies ?? []} />
+							</div>
+							<div className="home__link-container">
+								<a className="home__link" href="#kontakty">
+									{t("contact_us_title")}
+								</a>
+								<Link className="home__link" href="/prace">
+									{t("home.allVacancies")}
+									{vacancies && (
+										<span className="home__link-vacancies-qty">
+											{vacancies.length}
+										</span>
+									)}
+								</Link>
+							</div>
+						</section>
+						<section className="vacancies" id="prace">
+							<h2 className="vacancies__title">{t("hotVacanciesTitle")} 🔥</h2>
+							<div className="vacancies-container">
+								{[...(vacancies ?? [])]
+									.sort(
+										(a, b) =>
+											new Date(b.updated_at).getTime() -
+											new Date(a.updated_at).getTime(),
+									)
+									.filter((vacancy) => vacancy.hot_vacancy)
+									.map((vacancy, index) => (
+										<Vacancy
+											key={vacancy.id}
+											vacancy={vacancy}
+											index={index}
+											priorityLength={4}
+										/>
+									))}
+							</div>
+							<Link className="vacancies__link" href="/prace">
+								{t("viewAllVacancies")}
 							</Link>
-						</div>
-					</section>
-					<section className="vacancies" id="prace">
-						<h2 className="vacancies__title">{t("hotVacanciesTitle")} 🔥</h2>
-						<div className="vacancies-container">
-							{[...(vacancies ?? [])]
-								.sort(
-									(a, b) =>
-										new Date(b.updated_at).getTime() -
-										new Date(a.updated_at).getTime(),
-								)
-								.filter((vacancy) => vacancy.hot_vacancy)
-								.map((vacancy, index) => (
-									<Vacancy
-										key={vacancy.id}
-										vacancy={vacancy}
-										index={index}
-										priorityLength={4}
-									/>
-								))}
-						</div>
-						<Link className="vacancies__link" href="/prace">
-							{t("viewAllVacancies")}
-						</Link>
-					</section>
+						</section>
+					</div>
+					<About />
+					<Faqs />
+					<Contacts />
+					<WebApp />
+					<div className="scroll-to-top-btn-wrapper">
+						<ScrollToTopBtn />
+					</div>
 				</div>
-				<About />
-				<Faqs />
-				<Contacts />
-				<WebApp />
-				<div className="scroll-to-top-btn-wrapper">
-					<ScrollToTopBtn />
-				</div>
-			</div>
-		</main>
+			</main>
+		</>
 	);
 }

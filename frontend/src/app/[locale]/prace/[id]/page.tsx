@@ -99,7 +99,6 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 	validThrough.setDate(validThrough.getDate() + 60);
 
 	// TODO: learn this
-	// JobPosting
 	const jsonLd = {
 		"@context": "https://schema.org",
 		"@type": "JobPosting",
@@ -123,8 +122,9 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 		employmentType: "FULL_TIME", // PART_TIME, CONTRACTOR, TEMPORARY, INTERN
 		hiringOrganization: {
 			"@type": "Organization",
+			"@id": `${BASE_URL}/#organization`,
 			name: "flovas",
-			url: `${BASE_URL}/${locale}`,
+			sameAs: BASE_URL,
 		},
 		jobLocation: {
 			"@type": "Place",
@@ -149,7 +149,9 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 		<>
 			<script
 				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+				dangerouslySetInnerHTML={{
+					__html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+				}}
 			/>
 			<main className="main vacancy-page">
 				<Breadcrumbs
