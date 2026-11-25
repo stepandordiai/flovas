@@ -59,6 +59,7 @@ const Vacancy = ({ vacancy, index, priorityLength }: VacancyProps) => {
 						height={440}
 						alt={title}
 						priority={index < priorityLength}
+						unoptimized
 					/>
 				) : (
 					<div className="vacancy__no-img"></div>

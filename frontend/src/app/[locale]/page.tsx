@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/interfaces/Locale";
 import HomeClient from "./Home.client";
@@ -19,6 +19,8 @@ import {
 	TIKTOK_URL,
 } from "@/lib/constants";
 import "./Home.scss";
+
+export const revalidate = 3600;
 
 export async function generateMetadata({
 	params,
@@ -51,6 +53,8 @@ export default async function Home({
 	params: Promise<{ locale: string }>;
 }) {
 	const { locale } = await params;
+
+	setRequestLocale(locale);
 	const t = await getTranslations({ locale });
 
 	const { data: vacancies } = await getVacancies();

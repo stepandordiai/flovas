@@ -3,12 +3,17 @@
 import { useTranslations } from "next-intl";
 import ShareIcon from "@/components/icons/ShareIcon";
 
-// TODO: learn this
+// TODO: LEARN THIS
 const handleShare = async () => {
-	if (navigator.share) {
-		await navigator.share({ url: window.location.href });
-	} else {
-		// desktop fallback — do nothing, hide the button, or show a tooltip
+	try {
+		if (navigator.share) {
+			await navigator.share({ url: window.location.href });
+		} else {
+			await navigator.clipboard.writeText(window.location.href);
+			// optionally show a "Link copied" toast
+		}
+	} catch {
+		// user closed the share sheet; nothing to do
 	}
 };
 

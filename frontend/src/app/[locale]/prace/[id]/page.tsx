@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { getVacancies, getVacancyById } from "@/services/vacancies";
@@ -12,6 +12,9 @@ import ClockIcon from "@/components/icons/ClockIcon";
 import ContactUsForm from "@/components/ContactUsForm/ContactUsForm";
 import { BASE_URL } from "@/lib/constants";
 import "./VacancyPage.scss";
+
+// TODO: LEARN THIS
+export const revalidate = 3600;
 
 const PAGE = "prace";
 
@@ -86,13 +89,14 @@ type VacancyPageProps = {
 export default async function VacancyPage({ params }: VacancyPageProps) {
 	const { id, locale } = await params;
 
+	// TODO: LEARN THIS
+	setRequestLocale(locale);
+
 	const t = await getTranslations({ locale });
 
 	const { data: vacancy, error } = await getVacancyById(id);
 
-	if (error || !vacancy) {
-		return notFound();
-	}
+	if (error || !vacancy) return notFound();
 
 	// validThrough — Google strongly recommends it
 	const validThrough = new Date(vacancy.updated_at);
@@ -170,6 +174,8 @@ export default async function VacancyPage({ params }: VacancyPageProps) {
 							height={500}
 							alt={vacancy.title}
 							priority
+							// TODO: LEARN THIS
+							unoptimized
 						/>
 					) : (
 						<div className="vacancy-page__no-img"></div>

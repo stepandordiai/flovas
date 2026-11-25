@@ -6,6 +6,8 @@ import { getVacancies, getVacanciesFiltered } from "@/services/vacancies";
 import { BASE_URL } from "@/lib/constants";
 import "./Vacancies.scss";
 
+export const revalidate = 3600;
+
 const PAGE = "prace";
 
 export async function generateMetadata({
@@ -46,13 +48,19 @@ export default async function Vacancies({
 	const t = await getTranslations({ locale });
 
 	// TODO: LEARN THIS
-	const [{ data, error }, { places, jobTypes }] = await Promise.all([
-		getVacancies({ place, job_type }),
-		getVacanciesFiltered(),
-	]);
+	// const [{ data, error }, { places, jobTypes }] = await Promise.all([
+	// 	getVacancies({ place, job_type }),
+	// 	getVacanciesFiltered(),
+	// ]);
+	const { data, error } = await getVacancies(); // all vacancies, no filters
 
 	if (error) console.error("Failed to load vacancies:", error.message);
 	const vacancies = data ?? [];
+
+	// TODO: LEARN THIS
+	// the filter options come from the same data, so there's no second query
+	const places = [...new Set(vacancies.map((v) => v.place))];
+	const jobTypes = [...new Set(vacancies.map((v) => v.job_type))];
 
 	// TODO: learn this
 	// ItemList

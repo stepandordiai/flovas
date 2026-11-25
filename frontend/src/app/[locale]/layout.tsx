@@ -1,6 +1,6 @@
 import { Montserrat } from "next/font/google";
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
@@ -49,6 +49,14 @@ export async function generateMetadata({
 	};
 }
 
+// TODO: LEARN THIS
+export function generateStaticParams() {
+	return routing.locales.map((locale) => ({ locale }));
+}
+
+// TODO: LEARN THIS
+export const dynamicParams = false;
+
 type LocaleLayoutProps = {
 	children: React.ReactNode;
 	params: Promise<{ locale: string }>;
@@ -60,11 +68,10 @@ export default async function LocaleLayout({
 }: Readonly<LocaleLayoutProps>) {
 	const { locale } = await params;
 
-	if (!hasLocale(routing.locales, locale)) {
-		notFound();
-	}
+	if (!hasLocale(routing.locales, locale)) notFound();
 
-	const t = await getTranslations({ locale });
+	// TODO: LEARN THIS
+	setRequestLocale(locale);
 
 	return (
 		<html lang={locale}>

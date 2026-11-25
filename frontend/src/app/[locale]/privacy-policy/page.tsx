@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import Breadcrumbs from "@/components/common/Breadcrumbs/Breadcrumbs";
 import ScrollToTopBtn from "@/components/ScrollToTopBtn/ScrollToTopBtn";
@@ -35,7 +35,16 @@ export async function generateMetadata({
 	};
 }
 
-export default async function PrivacyPolicy() {
+export default async function PrivacyPolicy({
+	params,
+}: {
+	params: Promise<{ locale: string }>;
+}) {
+	const { locale } = await params;
+
+	// TODO: LEARN THIS
+	setRequestLocale(locale);
+
 	const t = await getTranslations("privacyPolicy");
 
 	return (
